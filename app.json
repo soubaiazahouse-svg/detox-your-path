@@ -47,11 +47,6 @@
         }
       ]
     ],
-    "extra": {
-      "eas": {
-        "projectId": "aza-house-audio"
-      }
-    },
     "owner": "azasou86"
   }
 }

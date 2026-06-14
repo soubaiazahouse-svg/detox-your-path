@@ -1,0 +1,392 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+  SafeAreaView,
+  Animated,
+  Easing,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { useAudio } from '../context/AudioContext';
+import { useLanguage } from '../context/LanguageContext';
+import MiniPlayer from '../components/MiniPlayer';
+import { TRACKS } from '../constants/tracks';
+import { colors, gradients } from '../constants/colors';
+
+const DURATIONS = [5, 10, 15, 20, 30];
+
+const BREATH_PHASES = [
+  { label: 'inhale', duration: 4000 },
+  { label: 'hold', duration: 4000 },
+  { label: 'exhale', duration: 4000 },
+];
+
+export default function MeditateScreen() {
+  const { t, language, isRTL } = useLanguage();
+  const { playTrack, currentTrack } = useAudio();
+  const navigation = useNavigation();
+
+  const [selectedDuration, setSelectedDuration] = useState(10);
+  const [isSessionActive, setIsSessionActive] = useState(false);
+  const [breathPhase, setBreathPhase] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(0);
+
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const breathInterval = useRef(null);
+  const countdownInterval = useRef(null);
+
+  const calmTracks = TRACKS.filter((t) => ['peace', 'relax', 'balance'].includes(t.category));
+
+  const startBreathAnimation = (phaseIdx) => {
+    const phase = BREATH_PHASES[phaseIdx];
+    const isExpand = phase.label === 'inhale';
+
+    Animated.timing(scaleAnim, {
+      toValue: isExpand ? 1.4 : 1,
+      duration: phase.duration - 200,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const startSession = () => {
+    setIsSessionActive(true);
+    setSecondsLeft(selectedDuration * 60);
+    setBreathPhase(0);
+    startBreathAnimation(0);
+
+    // Breath cycle
+    let phaseIdx = 0;
+    breathInterval.current = setInterval(() => {
+      phaseIdx = (phaseIdx + 1) % BREATH_PHASES.length;
+      setBreathPhase(phaseIdx);
+      startBreathAnimation(phaseIdx);
+    }, 4000);
+
+    // Countdown
+    countdownInterval.current = setInterval(() => {
+      setSecondsLeft((s) => {
+        if (s <= 1) {
+          endSession();
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+
+    // Play calming track
+    const randomTrack = calmTracks[Math.floor(Math.random() * calmTracks.length)];
+    playTrack(randomTrack, calmTracks);
+  };
+
+  const endSession = () => {
+    setIsSessionActive(false);
+    clearInterval(breathInterval.current);
+    clearInterval(countdownInterval.current);
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    return () => {
+      clearInterval(breathInterval.current);
+      clearInterval(countdownInterval.current);
+    };
+  }, []);
+
+  const formatTime = (s) => {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  };
+
+  const phaseLabel = () => {
+    const phase = BREATH_PHASES[breathPhase];
+    return t[phase.label] || phase.label;
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.background} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={[styles.header, isRTL && { alignItems: 'flex-end' }]}>
+          <Text style={styles.title}>{t.meditate}</Text>
+          <Text style={styles.subtitle}>{t.meditateSubtitle}</Text>
+        </View>
+
+        {/* Breath circle */}
+        <View style={styles.circleSection}>
+          <Animated.View style={[styles.breathOuter, { transform: [{ scale: scaleAnim }] }]}>
+            <LinearGradient
+              colors={isSessionActive ? gradients.primary : ['#1e2347', '#14173a']}
+              style={styles.breathCircle}
+            >
+              {isSessionActive ? (
+                <View style={{ alignItems: 'center' }}>
+                  <Text style={styles.breathLabel}>{phaseLabel()}</Text>
+                  <Text style={styles.countdown}>{formatTime(secondsLeft)}</Text>
+                </View>
+              ) : (
+                <Text style={styles.circleEmoji}>🧘</Text>
+              )}
+            </LinearGradient>
+          </Animated.View>
+
+          {isSessionActive && (
+            <Text style={styles.breathPhaseHint}>
+              {t[BREATH_PHASES[breathPhase].label]}...
+            </Text>
+          )}
+        </View>
+
+        {!isSessionActive ? (
+          <>
+            {/* Duration */}
+            <View style={[styles.sectionHeader, isRTL && { alignItems: 'flex-end' }]}>
+              <Text style={styles.sectionTitle}>{t.selectDuration}</Text>
+            </View>
+            <View style={styles.durationRow}>
+              {DURATIONS.map((d) => (
+                <TouchableOpacity
+                  key={d}
+                  style={[styles.durationChip, selectedDuration === d && styles.durationChipActive]}
+                  onPress={() => setSelectedDuration(d)}
+                >
+                  <Text style={[styles.durationNum, selectedDuration === d && styles.durationNumActive]}>
+                    {d}
+                  </Text>
+                  <Text style={[styles.durationUnit, selectedDuration === d && styles.durationUnitActive]}>
+                    {t.minutes}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            {/* Calm tracks */}
+            <View style={[styles.sectionHeader, isRTL && { alignItems: 'flex-end' }]}>
+              <Text style={styles.sectionTitle}>{t.featuredTracks || 'Calm Tracks'}</Text>
+            </View>
+            {calmTracks.map((track) => (
+              <TouchableOpacity
+                key={track.id}
+                style={[styles.calmTrack, isRTL && styles.rtlRow]}
+                onPress={() => {
+                  playTrack(track, calmTracks);
+                  navigation.navigate('FullPlayer');
+                }}
+              >
+                <Text style={styles.calmEmoji}>{track.emoji}</Text>
+                <View style={[styles.calmInfo, isRTL && { alignItems: 'flex-end' }]}>
+                  <Text style={styles.calmTitle}>
+                    {language === 'ar' ? track.titleAr : track.title}
+                  </Text>
+                  <Text style={styles.calmDesc} numberOfLines={1}>
+                    {language === 'ar' ? track.descriptionAr : track.description}
+                  </Text>
+                </View>
+                <Ionicons name="play-circle-outline" size={30} color={colors.primary} />
+              </TouchableOpacity>
+            ))}
+
+            {/* Start button */}
+            <TouchableOpacity onPress={startSession} style={styles.startWrap}>
+              <LinearGradient colors={gradients.primary} style={styles.startBtn}>
+                <Ionicons name="leaf" size={20} color={colors.text} />
+                <Text style={styles.startText}>{t.startSession}</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity style={styles.endWrap} onPress={endSession}>
+            <View style={styles.endBtn}>
+              <Text style={styles.endText}>End Session</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+
+        <View style={{ height: currentTrack ? 80 : 32 }} />
+      </ScrollView>
+
+      <MiniPlayer />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  header: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 16,
+  },
+  title: {
+    color: colors.text,
+    fontSize: 28,
+    fontWeight: '800',
+  },
+  subtitle: {
+    color: colors.textSecondary,
+    fontSize: 14,
+    marginTop: 4,
+  },
+  circleSection: {
+    alignItems: 'center',
+    paddingVertical: 32,
+  },
+  breathOuter: {
+    borderRadius: 130,
+    overflow: 'hidden',
+    elevation: 16,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.4,
+    shadowRadius: 24,
+  },
+  breathCircle: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleEmoji: {
+    fontSize: 72,
+  },
+  breathLabel: {
+    color: colors.text,
+    fontSize: 18,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  countdown: {
+    color: colors.text,
+    fontSize: 32,
+    fontWeight: '900',
+  },
+  breathPhaseHint: {
+    color: colors.textSecondary,
+    fontSize: 16,
+    marginTop: 16,
+    fontStyle: 'italic',
+  },
+  sectionHeader: {
+    paddingHorizontal: 20,
+    marginBottom: 14,
+  },
+  sectionTitle: {
+    color: colors.text,
+    fontSize: 17,
+    fontWeight: '700',
+  },
+  durationRow: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    gap: 10,
+    marginBottom: 28,
+  },
+  durationChip: {
+    flex: 1,
+    backgroundColor: colors.surface,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingVertical: 14,
+    alignItems: 'center',
+  },
+  durationChipActive: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+  },
+  durationNum: {
+    color: colors.textMuted,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  durationNumActive: {
+    color: colors.text,
+  },
+  durationUnit: {
+    color: colors.textMuted,
+    fontSize: 10,
+    marginTop: 2,
+  },
+  durationUnitActive: {
+    color: 'rgba(255,255,255,0.7)',
+  },
+  calmTrack: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    gap: 14,
+  },
+  rtlRow: {
+    flexDirection: 'row-reverse',
+  },
+  calmEmoji: {
+    fontSize: 32,
+    width: 44,
+    textAlign: 'center',
+  },
+  calmInfo: {
+    flex: 1,
+  },
+  calmTitle: {
+    color: colors.text,
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  calmDesc: {
+    color: colors.textMuted,
+    fontSize: 12,
+    marginTop: 2,
+  },
+  startWrap: {
+    marginHorizontal: 20,
+    marginTop: 24,
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  startBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 18,
+    gap: 10,
+  },
+  startText: {
+    color: colors.text,
+    fontSize: 17,
+    fontWeight: '700',
+  },
+  endWrap: {
+    marginHorizontal: 20,
+    marginTop: 24,
+  },
+  endBtn: {
+    backgroundColor: colors.surface,
+    borderRadius: 16,
+    paddingVertical: 18,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  endText: {
+    color: colors.textSecondary,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});

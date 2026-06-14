@@ -39,6 +39,11 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
+      - name: Initialize EAS project
+        run: eas init --slug aza-house --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
       - name: Build Android APK
         run: |
           PROFILE="${{ github.event.inputs.profile || 'preview' }}"

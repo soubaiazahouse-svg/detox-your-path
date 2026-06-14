@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرآة الأنماط الخفية — اعزيزة السباعي</title>
+<meta name="description" content="اكتشف النمط النفسي العميق الذي يتحكم في حياتك — اختبار مبني على علم النفس الكلينيكي">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f6ff;--blue:#1a3a6b;--mid:#1a6abf;--light:#2a8ad4;--text:#0d2144;--text2:#2a4a7a;--text3:#5a7a9a;--border:rgba(26,106,191,0.18);--white:#ffffff}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:linear-gradient(160deg,#e8f2ff 0%,#f0f6ff 50%,#e4eeff 100%);color:var(--text);min-height:100vh;overflow-x:hidden}
+.back-btn{position:fixed;top:20px;left:20px;z-index:100;background:white;border:1px solid var(--border);color:var(--mid);padding:10px 20px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:8px;box-shadow:0 2px 12px rgba(26,106,191,0.1);transition:all 0.3s}
+.back-btn:hover{background:var(--bg);border-color:var(--mid)}
+.hero{text-align:center;padding:80px 20px 40px}
+.hero-icon{font-size:64px;margin-bottom:20px;display:block;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-badge{display:inline-block;background:rgba(26,106,191,0.1);border:1px solid rgba(26,106,191,0.25);color:var(--mid);padding:6px 20px;border-radius:50px;font-size:13px;letter-spacing:2px;margin-bottom:20px}
+.hero h1{font-family:'Amiri',serif;font-size:clamp(2rem,6vw,3.2rem);color:var(--text);margin-bottom:16px;line-height:1.3}
+.hero h1 span{color:var(--mid)}
+.hero p{color:var(--text3);font-size:1.05rem;max-width:580px;margin:0 auto 30px;line-height:2}
+.hero-divider{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--mid),transparent);margin:0 auto 40px}
+.start-btn{display:inline-block;background:linear-gradient(135deg,var(--mid),var(--light));color:white;padding:16px 48px;border-radius:50px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:1.1rem;cursor:pointer;border:none;box-shadow:0 4px 24px rgba(26,106,191,0.3);transition:all 0.3s;margin-bottom:16px}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(26,106,191,0.4)}
+.hero-note{color:var(--text3);font-size:0.88rem}
+.quiz-wrapper{max-width:700px;margin:0 auto;padding:0 16px 80px;display:none}
+.progress-wrap{margin-bottom:28px}
+.progress-top{display:flex;justify-content:space-between;margin-bottom:10px}
+.progress-label{font-size:13px;color:var(--text3)}
+.progress-label span{font-weight:700;color:var(--mid)}
+.progress-bar{background:rgba(26,106,191,0.1);border-radius:20px;height:6px;overflow:hidden}
+.progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--mid),var(--light));transition:width 0.5s ease}
+.q-card{background:white;border:1px solid var(--border);border-radius:24px;padding:2.2rem;box-shadow:0 8px 40px rgba(26,106,191,0.1);animation:slideIn 0.4s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.q-num{font-size:11px;color:var(--mid);letter-spacing:2px;margin-bottom:14px;text-transform:uppercase}
+.q-text{font-family:'Amiri',serif;font-size:clamp(1.2rem,3vw,1.45rem);color:var(--text);margin-bottom:28px;line-height:1.9}
+.options{display:flex;flex-direction:column;gap:12px}
+.opt-btn{padding:16px 20px;border:1.5px solid var(--border);border-radius:14px;cursor:pointer;font-size:0.93rem;color:var(--text);background:var(--bg);text-align:right;transition:all 0.22s;line-height:1.8;font-family:'Tajawal',sans-serif;width:100%}
+.opt-btn:hover{background:#ddeeff;border-color:var(--mid);color:var(--blue);transform:translateX(-4px)}
+.opt-btn.selected{background:rgba(26,106,191,0.12);border-color:var(--mid);color:var(--blue)}
+.loading-screen{text-align:center;padding:80px 20px;display:none}
+.loading-icon{font-size:64px;animation:pulse 1.5s ease-in-out infinite;display:block;margin-bottom:24px}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:0.7}}
+.loading-text{font-family:'Amiri',serif;font-size:1.4rem;color:var(--text);margin-bottom:8px}
+.loading-sub{color:var(--text3);font-size:0.95rem;margin-bottom:24px}
+.loading-bar-wrap{max-width:300px;margin:0 auto}
+.result-screen{display:none;padding:20px 0 80px}
+.result-wrap{max-width:700px;margin:0 auto;padding:0 16px}
+.result-header{text-align:center;padding:30px 20px 10px}
+.result-icon{font-size:80px;display:block;margin-bottom:16px;animation:bounceIn 0.8s ease}
+@keyframes bounceIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+.result-name{font-family:'Amiri',serif;font-size:clamp(1.8rem,5vw,2.6rem);color:var(--blue);margin-bottom:10px}
+.result-tagline{color:var(--mid);font-size:1.05rem;font-style:italic;margin-bottom:30px}
+.rcard{background:white;border:1px solid var(--border);border-radius:24px;padding:2.2rem;margin-bottom:20px;box-shadow:0 4px 24px rgba(26,106,191,0.08);animation:slideIn 0.5s ease both}
+.rtitle{font-family:'Amiri',serif;font-size:1.25rem;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.rtext{color:var(--text2);line-height:2.1;font-size:0.97rem}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{background:rgba(26,106,191,0.07);border:1px solid rgba(26,106,191,0.18);color:var(--text2);padding:6px 14px;border-radius:20px;font-size:13px}
+.origin-box{background:linear-gradient(135deg,#e8f2ff,#f0f6ff);border-right:4px solid var(--mid);border-radius:0 20px 20px 0;padding:20px 24px;margin-bottom:20px;animation:slideIn 0.6s ease both}
+.hcard{background:white;border:1px solid var(--border);border-radius:24px;padding:2.2rem;margin-bottom:20px;animation:slideIn 0.7s ease both;box-shadow:0 4px 24px rgba(26,106,191,0.08)}
+.hstep{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(26,106,191,0.08)}
+.hstep:last-child{border-bottom:none}
+.hnum{background:linear-gradient(135deg,var(--mid),var(--light));color:white;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.htext{color:var(--text2);line-height:1.9;font-size:0.94rem}
+.htext strong{color:var(--blue)}
+.cta-card{background:linear-gradient(135deg,var(--mid),var(--light));border-radius:24px;padding:2.5rem;margin-bottom:20px;text-align:center;color:white;animation:slideIn 0.8s ease both}
+.cta-card h3{font-family:'Amiri',serif;font-size:1.7rem;margin-bottom:12px}
+.cta-card p{opacity:0.9;line-height:1.9;margin-bottom:24px;font-size:0.95rem}
+.cbtn{display:inline-block;background:white;color:var(--mid);padding:14px 32px;border-radius:50px;font-weight:700;font-size:0.95rem;text-decoration:none;transition:all 0.3s;font-family:'Tajawal',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);margin:6px}
+.cbtn:hover{transform:translateY(-2px)}
+.cbtn.sec{background:rgba(255,255,255,0.2);color:white;border:1px solid rgba(255,255,255,0.4)}
+.retry{display:block;margin:0 auto 40px;background:transparent;border:1.5px solid var(--border);color:var(--text3);padding:12px 32px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:0.95rem;cursor:pointer;transition:all 0.3s}
+.retry:hover{border-color:var(--mid);color:var(--mid)}
+@media(max-width:500px){.q-card,.rcard,.hcard{padding:1.6rem}}
+</style>
+</head>
+<body>
+<a href="/game.html" class="back-btn">← العودة للألعاب</a>
+
+<div class="hero" id="heroSection">
+  <span class="hero-icon">🌊</span>
+  <div class="hero-badge">✦ علم النفس الكلينيكي ✦</div>
+  <h1>مرآة <span>الأنماط الخفية</span></h1>
+  <p>نمطات نفسية عميقة تتشكل في طفولتك وتتحكم في قراراتك وعلاقاتك دون أن تدري — اكتشف نمطك الأساسي الآن</p>
+  <div class="hero-divider"></div>
+  <button class="start-btn" onclick="startQuiz()">🔍 اكتشف نمطك الخفي</button>
+  <p class="hero-note">٣٥ سؤال كلينيكي • نتيجة واحدة دقيقة • مجاني تماماً</p>
+</div>
+
+<div class="quiz-wrapper" id="quizSection">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">السؤال <span id="qNum">1</span> من <span id="qTotal">35</span></span>
+      <span class="progress-label" id="pct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="questionCard"></div>
+</div>
+
+<div class="loading-screen" id="loadingSection">
+  <span class="loading-icon">🌊</span>
+  <p class="loading-text">جاري تحليل نمطاتك العميقة...</p>
+  <p class="loading-sub">نغوص في طبقات لا وعيك لنكشف الجذر الحقيقي</p>
+  <div class="loading-bar-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="loadingBar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="result-screen" id="resultSection"></div>
+
+<script>
+const Q=[
+  {t:"في أعماقك، ما الجملة التي تصف شعورك الحقيقي تجاه نفسك؟",o:[
+    {t:"أشعر أن في داخلي شيئاً معيباً لو عرفه الناس لرفضوني",w:[4,0,0,0,0,1,0]},
+    {t:"أشعر أنني قد أُترك إذا لم أكن مثالياً",w:[1,4,0,0,0,1,0]},
+    {t:"أشعر أن احتياجاتي لا تستحق الاهتمام",w:[1,0,4,0,0,0,0]},
+    {t:"أشعر أنني أستحق أكثر مما يعطيني الآخرون",w:[0,0,0,4,0,0,0]}]},
+  {t:"عندما تُحقق نجاحاً كبيراً، كيف تشعر في الداخل؟",o:[
+    {t:"أنتظر اكتشاف أنني لا أستحقه — إنه مجرد حظ",w:[4,0,0,0,0,0,0]},
+    {t:"أخاف أن يتوقع الناس مني أكثر فأخذلهم",w:[2,1,1,0,0,1,0]},
+    {t:"أفرح به لكن أشعر بالذنب لأن آخرين لم ينجحوا",w:[1,0,2,0,0,1,0]},
+    {t:"أفرح وأحتفل — أنا أستحق هذا",w:[0,0,0,1,0,0,0]}]},
+  {t:"كيف تتعامل مع إخفاء جوانب معينة من شخصيتك؟",o:[
+    {t:"أخفي أجزاء كثيرة من نفسي خوفاً من الحكم عليّ",w:[4,1,0,0,0,1,0]},
+    {t:"أخفي ضعفي لأنني أخاف أن يستغله الناس",w:[1,0,0,0,0,0,4]},
+    {t:"أخفي احتياجاتي لأنها تثقل على الآخرين",w:[1,0,4,0,0,0,0]},
+    {t:"لا أخفي شيئاً — أنا مرتاح مع نفسي",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما الذي يحدث داخلك عندما يمدحك شخص بصدق؟",o:[
+    {t:"أشك في صدقه — ربما يريد شيئاً مني",w:[1,0,0,0,0,0,4]},
+    {t:"لا أصدقه — يمدح ما يراه من الخارج لا حقيقتي",w:[4,0,0,0,0,0,1]},
+    {t:"أشعر بارتياح لأنني نجحت في إرضائه",w:[0,0,3,0,0,0,0]},
+    {t:"أقبله بشكر طبيعي وأستمتع به",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما أكثر موقف يجعلك تشعر بالعار الشديد؟",o:[
+    {t:"أن يرى أحد ضعفي أو خطئي أمام الآخرين",w:[4,0,0,0,0,2,0]},
+    {t:"أن يتركني شخص أحبه أمام الناس",w:[1,4,0,0,0,0,0]},
+    {t:"أن أقول لا وأخيب ظن أحد",w:[0,0,4,0,0,1,0]},
+    {t:"أن لا أحصل على ما أستحقه",w:[0,0,0,4,0,0,0]}]},
+  {t:"عندما يتأخر شخص عزيز في الرد على رسالتك، ماذا يحدث داخلك؟",o:[
+    {t:"أبدأ أتخيل أنه غاضب مني أو يبتعد",w:[0,4,0,0,0,0,0]},
+    {t:"أتساءل إذا كان يكذب عليّ أو يتجاهلني عمداً",w:[0,1,0,0,0,0,4]},
+    {t:"أقلق أنه ربما محتاج مساعدة ولا أستطيع مساعدته",w:[0,1,3,0,0,0,0]},
+    {t:"لا أفكر فيه — ربما انشغل",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تصف علاقتك بالوداع والفراق حتى المؤقت؟",o:[
+    {t:"كل وداع يحمل في داخلي خوفاً أنه الأخير",w:[0,4,0,0,0,0,0]},
+    {t:"الفراق يذكرني أن الناس لا يبقون ولا يُوثق بهم",w:[0,2,0,0,0,0,3]},
+    {t:"أحاول إنهاء الفراق سريعاً قبل أن يشعر الآخر بأنني ثقيل",w:[0,1,3,0,0,0,0]},
+    {t:"الفراق المؤقت طبيعي ولا يؤثر عليّ كثيراً",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما الذي يجعلك تتعلق بشخص ما بشكل مكثف؟",o:[
+    {t:"الخوف من أن أفقده يجعلني أحتاجه أكثر مما أريده",w:[0,4,0,0,0,0,0]},
+    {t:"أتعلق بمن يثبت لي أنه لن يخونني بالأفعال",w:[0,1,0,0,0,0,4]},
+    {t:"أتعلق بمن يحتاجني — أشعر بقيمتي حين أكون مفيداً",w:[0,0,3,0,0,0,1]},
+    {t:"أتعلق بشكل طبيعي ومتوازن",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتصرف عندما تشعر أن علاقة ما تبتعد؟",o:[
+    {t:"أزيد من اهتمامي وحضوري حتى لا يتركني",w:[0,4,0,0,0,0,0]},
+    {t:"أبتعد أنا أولاً قبل أن يبتعد هو",w:[0,2,0,0,0,0,3]},
+    {t:"أحاول بذل مزيد من الجهد لإرضائه",w:[0,1,4,0,0,0,0]},
+    {t:"أتحدث معه بصراحة عما أشعر به",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما أعمق خوف لديك في العلاقات؟",o:[
+    {t:"أن أُترك وحيداً في النهاية مهما فعلت",w:[0,4,0,0,0,0,0]},
+    {t:"أن يكتشفوا عيوبي ويرفضوني",w:[4,0,0,0,0,0,0]},
+    {t:"أن أكون عبئاً على من أحبهم",w:[0,0,4,0,0,0,0]},
+    {t:"أن يخونني من أثق به",w:[0,0,0,0,0,0,4]}]},
+  {t:"عندما تكون بين رغبتك ورغبة شخص تحبه، ماذا يحدث؟",o:[
+    {t:"أتنازل عن رغبتي تلقائياً — راحته تريحني",w:[0,0,4,0,0,0,0]},
+    {t:"أتنازل خوفاً من غضبه أو بعده",w:[0,2,3,0,0,0,0]},
+    {t:"أتنازل لأنني أشعر أن رغبتي أقل أهمية",w:[1,0,3,0,0,0,0]},
+    {t:"أتفاوض للوصول لحل يرضينا معاً",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تشعر عند قول 'لا' لطلب شخص يهمك؟",o:[
+    {t:"ذنب شديد يلاحقني لفترة طويلة",w:[0,0,4,0,0,1,0]},
+    {t:"قلق أنه سيغضب ويبتعد",w:[0,3,2,0,0,0,0]},
+    {t:"أقولها بصعوبة ثم أجد طريقة للتعويض",w:[0,0,3,0,0,1,0]},
+    {t:"أقولها بهدوء إذا كنت غير قادر فعلاً",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما الذي يجعلك تشعر بقيمتك الحقيقية؟",o:[
+    {t:"حين أكون مفيداً للآخرين ومحتاجاً منهم",w:[0,0,4,0,0,0,0]},
+    {t:"حين يثبت لي شخص أنه يقدّرني ولن يتركني",w:[0,3,1,0,0,0,0]},
+    {t:"حين أحقق معيار الكمال الذي أضعه لنفسي",w:[2,0,0,0,0,3,0]},
+    {t:"قيمتي تأتي من داخلي لا من الخارج",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع وقتك وطاقتك؟",o:[
+    {t:"معظم وقتي وطاقتي تذهب للآخرين وأهمل نفسي",w:[0,0,4,0,0,0,0]},
+    {t:"أعطي كثيراً خوفاً من أن يعتبروني أنانياً",w:[0,1,3,0,0,1,0]},
+    {t:"أعطي لأنني أخاف ما يحدث إذا لم أعطِ",w:[0,2,3,0,0,0,0]},
+    {t:"أوازن بين عطائي لنفسي وللآخرين",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما الجملة التي تصف طريقة تعاملك مع احتياجاتك؟",o:[
+    {t:"احتياجاتي تأتي في آخر القائمة دائماً",w:[0,0,4,0,0,0,0]},
+    {t:"أعبّر عن احتياجاتي لكن بصعوبة وخجل",w:[1,0,2,0,0,1,0]},
+    {t:"أخفي احتياجاتي لأنها ستُستغل",w:[0,0,1,0,0,0,4]},
+    {t:"أعبّر عن احتياجاتي بوضوح وبدون ذنب",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تشعر عندما تُعامَل مثل أي شخص عادي؟",o:[
+    {t:"أشعر بإهانة — أنا أستحق معاملة مختلفة",w:[0,0,0,4,0,0,0]},
+    {t:"أشعر بعدم الرؤية وأن أحداً لا يقدّر ما أقدمه",w:[1,0,1,2,0,1,0]},
+    {t:"أقبله لكن داخلياً أشعر بالمرارة",w:[0,0,0,3,0,1,0]},
+    {t:"أقبله بشكل طبيعي — أنا إنسان مثل الجميع",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما رأيك في القواعد والقوانين العامة؟",o:[
+    {t:"بعض القواعد لا تنطبق عليّ — وضعي مختلف",w:[0,0,0,4,0,0,0]},
+    {t:"أطبّقها لكن أشعر أحياناً أنها ظالمة لي",w:[0,0,0,2,0,2,0]},
+    {t:"أطبّقها حتى لو آذتني خوفاً من الحكم عليّ",w:[0,0,1,0,0,2,0]},
+    {t:"أطبّقها بشكل طبيعي كجزء من الحياة",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع الانتقاد حتى البناء منه؟",o:[
+    {t:"أشعر بغضب داخلي — من هو ليقيّمني؟",w:[0,0,0,4,0,0,0]},
+    {t:"أشعر بالانهيار — هذا يعني أنني معيب",w:[4,0,0,0,0,1,0]},
+    {t:"أقبله ظاهرياً لكن أظل أفكر فيه أياماً",w:[1,0,0,2,0,2,0]},
+    {t:"أأخذ منه ما ينفع وأتجاوز الباقي",w:[0,0,0,0,0,0,0]}]},
+  {t:"في مجموعة أو اجتماع، كيف تشعر إذا لم تكن محور الاهتمام؟",o:[
+    {t:"أشعر بعدم الراحة — أريد أن يُسمع صوتي ويُرى رأيي",w:[0,0,0,4,0,0,0]},
+    {t:"أنسحب داخلياً وأشعر أنني غير مرئي",w:[1,1,0,1,0,0,0]},
+    {t:"أحاول تقديم المزيد لأستحق الاهتمام",w:[0,0,2,2,0,1,0]},
+    {t:"لا يهمني — أشارك حين يكون لديّ ما يستحق",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع الانتظار؟",o:[
+    {t:"الانتظار يزعجني — وقتي أثمن من أن يُهدر",w:[0,0,0,3,1,0,0]},
+    {t:"الانتظار يجعلني أفكر في أسوأ الاحتمالات",w:[0,3,0,0,0,0,1]},
+    {t:"أنتظر بصبر لأنني لا أريد أن أزعج أحداً",w:[0,0,3,0,0,0,0]},
+    {t:"أنتظر بصبر معقول وأشغل نفسي",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع الأهداف التي تحتاج وقتاً طويلاً؟",o:[
+    {t:"أبدأ بحماس وأفقد الاهتمام حين تتأخر النتائج",w:[0,0,0,0,4,0,0]},
+    {t:"أخاف أن لا أستطيع الاستمرار فلا أبدأ",w:[0,0,0,0,2,0,0]},
+    {t:"أستمر لكن مع شعور دائم بأنني مقصّر",w:[0,0,0,0,1,3,0]},
+    {t:"أضع خطة واضحة وأسير عليها بانتظام",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع المشاعر الصعبة كالحزن والغضب؟",o:[
+    {t:"أريد التخلص منها فوراً بأي طريقة — لا أتحمل بقاءها",w:[0,0,0,0,4,0,0]},
+    {t:"أكبتها وأخفيها حتى لا أُحرج نفسي",w:[1,0,0,0,0,3,0]},
+    {t:"أخشى إظهارها فيعتبرني الناس ضعيفاً",w:[2,0,0,0,0,2,0]},
+    {t:"أسمح لنفسي بالشعور بها وأعالجها بوعي",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما علاقتك بالمتعة الفورية مقابل الفائدة البعيدة؟",o:[
+    {t:"صعب جداً أن أقاوم ما يريحني الآن حتى لو ضرّني لاحقاً",w:[0,0,0,0,4,0,0]},
+    {t:"أحرم نفسي من المتعة كعقوبة على تقصيري",w:[0,0,0,0,0,4,0]},
+    {t:"أستمتع لكن مع شعور بالذنب دائماً",w:[1,0,1,0,1,2,0]},
+    {t:"أوازن بين المتعة الحالية والمصلحة البعيدة",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تصف قدرتك على الالتزام بقرارات اتخذتها؟",o:[
+    {t:"أقرر بقوة ثم أجد نفسي منحرفاً بعد أيام",w:[0,0,0,0,4,0,0]},
+    {t:"ألتزم بصرامة شديدة وأعاقب نفسي عند الانحراف",w:[0,0,0,0,0,4,0]},
+    {t:"ألتزم خوفاً من حكم الآخرين لا لأنني أريد",w:[0,0,2,0,0,1,0]},
+    {t:"ألتزم بمرونة وأعود لمساري حين أنحرف",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما الذي يحدث حين تواجه موقفاً محبطاً؟",o:[
+    {t:"أنفجر أو أنسحب فوراً — لا أتحمل الإحباط",w:[0,0,0,0,4,0,0]},
+    {t:"أكبته ثم يظهر في وقت غير مناسب",w:[0,0,0,0,1,2,0]},
+    {t:"أحمّل نفسي المسؤولية وأعاقبها",w:[0,0,0,0,0,4,0]},
+    {t:"أتوقف، أتنفس، وأجد طريقة للتعامل معه",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع أخطائك؟",o:[
+    {t:"أعذّب نفسي لفترة طويلة — الخطأ لا يُغفر",w:[0,0,0,0,0,4,0]},
+    {t:"أخجل منه وأخفيه خوفاً من حكم الآخرين",w:[3,0,0,0,0,1,0]},
+    {t:"أشعر بالذنب لأنني أخذلت من أهتم برأيهم",w:[0,0,2,0,0,2,0]},
+    {t:"أعترف بالخطأ وأتعلم منه وأتجاوزه",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف يبدو صوت الناقد الداخلي لديك؟",o:[
+    {t:"قاسٍ جداً — لا يرحم ولا يتوقف",w:[1,0,0,0,0,4,0]},
+    {t:"يذكّرني دائماً أنني لست كافياً",w:[4,0,0,0,0,1,0]},
+    {t:"يقول إنني سأُخذل أو سيُخذلني الآخرون",w:[0,1,0,0,0,0,4]},
+    {t:"موجود لكنني أستطيع التعامل معه بوعي",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما علاقتك بمعايير الكمال التي تضعها لنفسك؟",o:[
+    {t:"معاييري عالية جداً وأعاقب نفسي حين لا أصلها",w:[0,0,0,0,0,4,0]},
+    {t:"معاييري عالية لأنني أخاف حكم الناس إذا أخفقت",w:[2,0,0,0,0,2,0]},
+    {t:"معاييري عالية لأثبت قيمتي لمن أهتم لرأيهم",w:[1,0,2,0,0,2,0]},
+    {t:"معاييري واقعية وأقبل أنني لست مثالياً",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع الراحة والترفيه؟",o:[
+    {t:"أشعر بالذنب حين أرتاح — هناك دائماً ما يجب فعله",w:[0,0,0,0,0,4,0]},
+    {t:"أرتاح لكن بشرط أن أكون قد 'استحقيت' الراحة",w:[0,0,1,0,0,3,0]},
+    {t:"الترفيه يشعرني أنني أهرب من مسؤولياتي",w:[0,0,0,0,0,3,0]},
+    {t:"الراحة حق أساسي وأعطيها لنفسي بدون ذنب",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تنظر لمن يرتكب أخطاء أمامك؟",o:[
+    {t:"أجد صعوبة في تقبّل أخطاء الآخرين كما أجد صعوبة مع نفسي",w:[0,0,0,0,0,4,0]},
+    {t:"أتسامح معهم أكثر مما أتسامح مع نفسي",w:[0,0,1,0,0,3,0]},
+    {t:"أشعر بالتعالي أحياناً — أنا لا أرتكب هذه الأخطاء",w:[0,0,0,3,0,1,0]},
+    {t:"أتعامل مع أخطاء الجميع بتفهم ومنطقية",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تشعر عند الانفتاح على شخص جديد؟",o:[
+    {t:"أراقب وأختبر قبل أن أثق — الناس يخذلون في النهاية",w:[0,0,0,0,0,0,4]},
+    {t:"أنفتح سريعاً ثم أندم حين يتركني",w:[0,3,0,0,0,0,1]},
+    {t:"أنفتح لأجعله يحبني لا لأنني أثق به حقاً",w:[0,0,2,0,0,0,2]},
+    {t:"أنفتح تدريجياً بشكل طبيعي ومريح",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما الذي يحدث داخلك حين يتصرف شخص بطريقة غامضة؟",o:[
+    {t:"أفترض أن له نية خفية أو يريد إيذائي",w:[0,0,0,0,0,0,4]},
+    {t:"أقلق أنه يبتعد أو سيتركني",w:[0,4,0,0,0,0,1]},
+    {t:"أحاول أن أفعل ما يُرضيه لأتجنب المشكلة",w:[0,0,3,0,0,0,1]},
+    {t:"أسأله مباشرة عما يشغله",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما علاقتك بالسرية وإخبار الناس بأمورك الشخصية؟",o:[
+    {t:"أبقي معظم أموري لنفسي — المعلومات تُستخدم ضدك",w:[0,0,0,0,0,0,4]},
+    {t:"أخفي معيبي تحديداً خوفاً من الرفض",w:[4,0,0,0,0,0,1]},
+    {t:"أشارك لكن فقط ما يجعلهم يقبلونني",w:[1,0,2,0,0,0,1]},
+    {t:"أشارك بشكل طبيعي حسب درجة العلاقة",w:[0,0,0,0,0,0,0]}]},
+  {t:"كيف تتعامل مع وعود الآخرين؟",o:[
+    {t:"لا أثق بالوعود حتى أرى الأفعال — الكلام رخيص",w:[0,0,0,0,0,0,4]},
+    {t:"أصدقها ثم أنكسر حين لا تتحقق",w:[0,3,0,0,0,0,1]},
+    {t:"أتمسك بها وأذكّر بها لأنني أحتاج التأكيد",w:[0,3,0,0,0,0,1]},
+    {t:"أقدّرها وأعطي الشخص مساحة للوفاء بها",w:[0,0,0,0,0,0,0]}]},
+  {t:"ما أكثر شيء يصعب عليك في العلاقات؟",o:[
+    {t:"الثقة الحقيقية — أظل دائماً على حذر",w:[0,0,0,0,0,0,4]},
+    {t:"الاطمئنان أنهم لن يتركوني",w:[0,4,0,0,0,0,0]},
+    {t:"وضع حدود — أخاف أن يعتبروني أنانياً",w:[0,0,4,0,0,0,0]},
+    {t:"قبول نفسي كما أنا أمامهم",w:[4,0,0,0,0,0,0]}]}
+];
+
+const S=[
+  {icon:"💔",name:"نمط النقص والعار",tagline:"في أعماقي شيء معيب يجعلني غير مستحق للحب",origin:"يتشكل هذا النمط حين يتلقى الطفل رسائل — صريحة أو ضمنية — بأنه ناقص أو معيب أو مختلف بطريقة سلبية. قد يكون ذلك عبر النقد المستمر، المقارنة بالآخرين، الرفض العاطفي، أو الإهانة المتكررة. الطفل يستنتج: 'أنا السبب — في داخلي شيء خاطئ.'",desc:"تعيش باستمرار مع شعور خفي أنك ناقص في جوهرك — وأنك لو كُشفت حقيقتك سيرفضك الجميع. هذا يجعلك تبني أقنعة محكمة، تتجنب الحميمية الحقيقية، وتسعى للكمال كطريقة لإخفاء 'العيب' الذي تظن أنه يسكنك.",signs:["الشعور بأنك غير مستحق للحب رغم النجاح","صعوبة قبول المدح والإطراء","الخوف من الانكشاف والحميمية الحقيقية","السعي للكمال كدرع لإخفاء الضعف","الحديث الداخلي القاسي والناقد المستمر"],healing:[{t:"كشف الرسائل المبكرة",d:"اسأل نفسك: من علّمني أنني ناقص؟ في أي موقف بالذات؟ تحديد المصدر يبدأ في نزع قوته."},{t:"تمييز الشعور عن الحقيقة",d:"الشعور بالنقص ليس دليلاً على وجوده. العقل الكلينيكي يفصل بين التجربة الذاتية والواقع الموضوعي."},{t:"الانكشاف التدريجي الآمن",d:"اكشف شيئاً صغيراً تخجل منه لشخص آمن. اختبر ماذا يحدث حقاً حين يُرى جانبك 'المعيب'."},{t:"إعادة تأطير السرد الذاتي",d:"كل ما اعتبرته عيباً هو في الغالب جرح لم يُعالَج بعد — والجروح تُشفى، لكنها ليست هويتك."}]},
+  {icon:"🌑",name:"نمط الهجر",tagline:"كل من أحبه سيتركني في النهاية",origin:"يتشكل هذا النمط عند فقدان مبكر — وفاة، طلاق، غياب عاطفي، أو تقلب في الحضور. الطفل يتعلم أن الحب غير مضمون وأن من نحبهم يختفون. فيكرّس حياته للحفاظ على من يحب أو يبتعد أولاً قبل أن يُترك.",desc:"تعيش في حالة يقظة مستمرة على علاقاتك — تبحث عن إشارات البعد، تفسّر الصمت كرفض، وتتعلق بشدة بمن تحب أو تبتعد دفاعياً. الاستقرار العاطفي يبدو بعيداً لأن توقع الفقدان يسبق الفقدان دائماً.",signs:["قلق مستمر على فقدان العلاقات المهمة","التفسير السلبي لأي تغيير في سلوك الآخرين","التعلق المكثف أو الانسحاب الدفاعي","صعوبة الشعور بالاستقرار حتى في العلاقات الجيدة","اختبارات متكررة لمن تحب: هل ستبقى؟"],healing:[{t:"تمييز الماضي عن الحاضر",d:"حين تشعر بالخوف من الهجر، اسأل: هل هذا يحدث الآن فعلاً أم أنني أعيش ذاكرة قديمة؟"},{t:"بناء الأمان الداخلي",d:"الأمان الحقيقي لا يأتي من ضمان بقاء الآخرين — بل من قدرتك على الصمود حتى لو غادروا."},{t:"الحزن على الفقدان القديم",d:"كثير من نمط الهجر يأتي من فقدانات لم تُحزن عليها كفاية. السماح لنفسك بالحزن خطوة شفاء."},{t:"التواصل المباشر بدل القلق",d:"بدل تخيل ما يحدث، تواصل مباشرة مع من تخشى فقدانه. الحوار الحقيقي يكسر دوامة التوقعات."}]},
+  {icon:"🫂",name:"نمط الاستسلام",tagline:"احتياجاتي لا تهم — ما يهم هو إرضاء الآخرين",origin:"يتشكل حين يتعلم الطفل أن الحب مشروط بالطاعة والإرضاء. أن التعبير عن الاحتياجات يُزعج أو يُبعد. فيتعلم: 'كي أُحبَّ يجب أن أكون مفيداً وغير مزعج'. يصبح العطاء الأداة الوحيدة المعروفة لكسب القبول.",desc:"تضع احتياجات الآخرين فوق احتياجاتك تلقائياً — ليس دائماً من قوة أو حب حقيقي، بل من خوف عميق من الرفض أو الإحساس بالذنب. تجد صعوبة شديدة في قول لا، وتشعر بالذنب حين تهتم بنفسك.",signs:["صعوبة شديدة في قول لا والحفاظ على الحدود","شعور بالذنب عند الاهتمام بالنفس","الإرهاق المستمر من العطاء بلا حدود","تأجيل احتياجاتك الشخصية باستمرار","الشعور بالقيمة فقط حين تكون مفيداً"],healing:[{t:"تمييز العطاء الحر من الاستسلام",d:"العطاء من القوة يُسعدك. الاستسلام من الخوف يُنهكك. لاحظ كيف تشعر بعد كل عطاء."},{t:"إعادة تعريف الحب",d:"الحب الحقيقي لا يشترط التضحية بنفسك. من يحبك يريد احتياجاتك أن تُلبَّى أيضاً."},{t:"التدرج في وضع الحدود",d:"ابدأ بحد صغير آمن. لاحظ أن العالم لم ينهار. كرر. كل 'لا' ناجحة تبني ثقتك بنفسك."},{t:"استكشاف احتياجاتك الحقيقية",d:"اسأل نفسك يومياً: ماذا أحتاج الآن؟ ليس ماذا يحتاج الآخرون — ماذا أحتاج أنا؟"}]},
+  {icon:"👑",name:"نمط العظمة والاستحقاق",tagline:"أنا استثناء وأستحق معاملة مختلفة",origin:"يتشكل إما من دلال مفرط بلا حدود واضحة، أو كتعويض عن نقص عميق. الطفل الذي لم يتعلم أن للآخرين حقوقاً مساوية، أو الذي استخدم التفوق كدرع لإخفاء جرح داخلي عميق.",desc:"تشعر باستمرار أنك تستحق معاملة خاصة تختلف عن غيرك. قد يظهر هذا كغضب من القواعد العامة، صعوبة في تقبّل الانتقاد، أو شعور بالإهانة حين تُعامَل 'كأي أحد'. أحياناً يخفي هذا النمط شعوراً عميقاً بالنقص يحاول التفوق أن يعوّضه.",signs:["صعوبة في تقبّل القواعد والقيود العامة","الشعور بالإهانة من المعاملة العادية","توقع امتيازات ومعاملة خاصة","صعوبة في الاستماع للانتقاد بهدوء","الشعور بالغضب حين لا تُحقَّق التوقعات"],healing:[{t:"الفصل بين القيمة والامتيازات",d:"قيمتك كإنسان لا تُقاس بما تحصل عليه من امتيازات. استكشف: من أنا بدون هذه الامتيازات؟"},{t:"استكشاف الجرح تحت التفوق",d:"غالباً تحت شعور الاستحقاق جرح قديم من نقص أو رفض. ما الذي يحاول التفوق أن يحميك منه؟"},{t:"تطوير التعاطف مع الآخرين",d:"تمرين يومي: ابحث عن شيء واحد مشترك بينك وبين شخص تختلف معه. الإنسانية المشتركة تلين القلب."},{t:"ممارسة التواضع الفعّال",d:"التواضع الحقيقي ليس انتقاص الذات — بل رؤية نفسك بدقة مع رؤية الآخرين بعدالة."}]},
+  {icon:"⚡",name:"نمط الضبط الذاتي المنخفض",tagline:"لا أتحمل الانزعاج والانتظار — أريده الآن",origin:"يتشكل حين ينشأ الطفل في بيئة بلا حدود واضحة ومنتظمة، أو حين يتعلم أن المشاعر الصعبة خطيرة يجب الهروب منها فوراً. يفتقر لتجربة الانتظار المريح وتحمّل الإحباط كجزء طبيعي من الحياة.",desc:"تجد صعوبة في تحمّل الانزعاج، الانتظار، أو الاستمرار حين تتأخر النتائج. تبحث عن الراحة الفورية حتى لو كانت على حساب مصلحتك البعيدة. الأهداف الكبيرة تبدأ بحماس وتنتهي باستسلام حين تصبح صعبة.",signs:["صعوبة الاستمرار حين يقل الحماس","البحث عن المتعة الفورية على حساب المصلحة البعيدة","صعوبة تحمّل المشاعر الصعبة دون تصريف فوري","الاندفاع في القرارات ثم الندم","ترك الأشياء قبل اكتمالها"],healing:[{t:"تدريب تحمّل الإحباط تدريجياً",d:"ابدأ بمواقف صغيرة: انتظر دقيقتين إضافيتين، أكمل مهمة صغيرة حتى نهايتها. كل نجاح صغير يبني العضلة."},{t:"التمييز بين الحاجة والرغبة",d:"حين تريد شيئاً فوراً، اسأل: هل هذه حاجة حقيقية أم رغبة لتجنب انزعاج؟ التمييز يمنحك خياراً."},{t:"تعلّم الجلوس مع المشاعر الصعبة",d:"المشاعر الصعبة لا تقتل — هي موجات تمر. تدرّب على الجلوس مع الانزعاج بدون تصريف فوري."},{t:"ربط الحاضر بالمستقبل",d:"اجعل النتيجة البعيدة حاضرة في ذهنك. تخيّل نفسك بعد ستة أشهر لو استمررت — ما الذي ستكون عليه؟"}]},
+  {icon:"⚖️",name:"نمط العقاب والصرامة",tagline:"لا مكان للخطأ — يجب أن أكون مثالياً",origin:"يتشكل في بيئة تتسم بمعايير عالية جداً ومرونة منخفضة جداً. حيث الخطأ يعاقَب عليه بشدة وليس فرصة للتعلم. الطفل يتعلم: 'الخطأ خطر — يجب تجنبه بأي ثمن'. فيحوّل العقوبة الخارجية إلى صوت داخلي لا يهدأ.",desc:"تعيش مع ناقد داخلي لا يرحم. تضع معايير عالية على نفسك وتعاقبها حين لا تصل. تجد صعوبة في الراحة والاستمتاع لأنها تبدو 'غير مكتسبة'. أحياناً تمتد هذه الصرامة للآخرين أيضاً.",signs:["حوار داخلي قاسٍ لا يتوقف عند الأخطاء","صعوبة الغفران للذات وللآخرين","الشعور بالذنب عند الراحة أو المتعة","معايير كمالية غير واقعية","صعوبة الاحتفال بالإنجازات قبل الوصول للمثالية"],healing:[{t:"تعلّم الرحمة الذاتية",d:"حين تخطئ، اسأل: كيف سأتحدث مع صديق عزيز لو أخطأ بنفس الطريقة؟ تحدث مع نفسك بنفس الطريقة."},{t:"إعادة تعريف الخطأ",d:"الخطأ ليس دليل ضعف — هو جزء ضروري من التعلم. بلا أخطاء لا نمو حقيقي."},{t:"برمجة الراحة كضرورة",d:"الراحة ليست مكافأة تُكسَب — هي وقود ضروري للاستمرار. جدوِل الراحة كما تجدول العمل."},{t:"استكشاف مصدر المعايير العالية",d:"اسأل: من وضع هذه المعايير؟ هل هي معاييري الحقيقية أم معايير ورثتها خوفاً من العقاب؟"}]},
+  {icon:"🔒",name:"نمط انعدام الثقة والإساءة",tagline:"الناس في نهاية المطاف سيؤذونني أو يخذلونني",origin:"يتشكل من خبرات مبكرة فيها خيانة، إساءة، استغلال، أو عدم أمان متكرر. قد يكون الأذى جسدياً أو عاطفياً أو كليهما. يتعلم الطفل: 'من المفترض أن يحمونني آذوني — إذن لا أحد آمن حقاً'.",desc:"تعيش في حالة يقظة دفاعية مستمرة. تشك في نوايا الناس حتى من تحبهم. تبني جداراً عالياً يحميك لكنه يمنعك من العلاقات الحقيقية. تفضل الوحدة أحياناً على خطر الأذى — لأن الأذى بدا دائماً أشد من الوحدة.",signs:["يقظة مستمرة لنوايا الآخرين وسلوكهم","صعوبة الثقة حتى مع الأدلة الإيجابية","تفسير التصرفات الغامضة بالسوء دائماً","الحفاظ على مسافة عاطفية كحماية","صعوبة طلب المساعدة أو الانفتاح"],healing:[{t:"التمييز بين الحذر والخوف المزمن",d:"الحذر الصحي يحميك — الخوف المزمن يسجنك. الفرق: الحذر يستجيب للأدلة الحقيقية، الخوف يستجيب للذاكرة القديمة."},{t:"معالجة الصدمات القديمة",d:"انعدام الثقة غالباً مرتبط بصدمات لم تُعالَج. العمل مع متخصص على هذه الصدمات هو الطريق الأعمق."},{t:"التجارب التدريجية مع الثقة",d:"ابدأ بثقة صغيرة — شارك شيئاً بسيطاً مع شخص آمن. راقب ما يحدث. ابنِ على الخبرات الإيجابية."},{t:"اختبار الأدلة بموضوعية",d:"حين تشك في نية شخص، اسأل: ما الأدلة الفعلية الداعمة لهذا الشك؟ وما الأدلة المعارضة له؟"}]}
+];
+
+let scores=[0,0,0,0,0,0,0],currentQ=0;
+
+function startQuiz(){
+  document.getElementById('heroSection').style.display='none';
+  document.getElementById('quizSection').style.display='block';
+  document.getElementById('qTotal').textContent=Q.length;
+  renderQ();
+}
+
+function renderQ(){
+  const q=Q[currentQ],total=Q.length,pct=Math.round((currentQ/total)*100);
+  document.getElementById('qNum').textContent=currentQ+1;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('pct').textContent=pct+'%';
+  document.getElementById('questionCard').innerHTML=`
+    <div class="q-card">
+      <div class="q-num">✦ سؤال ${currentQ+1} من ${total}</div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${q.o.map((o,i)=>`<button class="opt-btn" onclick="answer(${i})">${o.t}</button>`).join('')}</div>
+    </div>`;
+}
+
+function answer(idx){
+  Q[currentQ].o[idx].w.forEach((v,i)=>{scores[i]+=v;});
+  document.querySelectorAll('.opt-btn')[idx].classList.add('selected');
+  setTimeout(()=>{currentQ++;if(currentQ<Q.length)renderQ();else showLoading();},350);
+}
+
+function showLoading(){
+  document.getElementById('quizSection').style.display='none';
+  document.getElementById('loadingSection').style.display='block';
+  const msgs=['جاري تحليل نمطاتك العميقة...','نفحص طبقات اللاوعي...','نربط الأنماط بجذورها...','لحظات أخيرة قبل الكشف...'];
+  let p=0,mi=0;
+  const bar=document.getElementById('loadingBar');
+  const iv=setInterval(()=>{
+    p+=Math.random()*6+2;if(p>95)p=95;bar.style.width=p+'%';
+    if(p>25&&mi<1){mi=1;document.querySelector('.loading-text').textContent=msgs[1];}
+    if(p>55&&mi<2){mi=2;document.querySelector('.loading-text').textContent=msgs[2];}
+    if(p>80&&mi<3){mi=3;document.querySelector('.loading-text').textContent=msgs[3];}
+  },200);
+  setTimeout(()=>{clearInterval(iv);bar.style.width='100%';setTimeout(showResult,600);},5000);
+}
+
+function showResult(){
+  document.getElementById('loadingSection').style.display='none';
+  const rs=document.getElementById('resultSection');
+  rs.style.display='block';
+  const idx=scores.indexOf(Math.max(...scores));
+  const s=S[idx];
+  rs.innerHTML=`
+    <div class="result-wrap">
+      <div class="result-header">
+        <span class="result-icon">${s.icon}</span>
+        <div class="result-name">${s.name}</div>
+        <div class="result-tagline">"${s.tagline}"</div>
+      </div>
+      <div class="rcard" style="animation-delay:0.2s">
+        <div class="rtitle">🔍 ما هو نمطك؟</div>
+        <p class="rtext">${s.desc}</p>
+        <div class="tags">${s.signs.map(sg=>`<span class="tag">${sg}</span>`).join('')}</div>
+      </div>
+      <div class="origin-box" style="animation-delay:0.3s">
+        <div class="rtitle" style="margin-bottom:12px">🌱 كيف تشكّل هذا النمط؟</div>
+        <p style="color:var(--text2);line-height:2;font-size:0.95rem">${s.origin}</p>
+      </div>
+      <div class="hcard" style="animation-delay:0.4s">
+        <div class="rtitle">✨ خطوات الشفاء الكلينيكي</div>
+        ${s.healing.map((h,i)=>`
+          <div class="hstep">
+            <div class="hnum">${i+1}</div>
+            <div class="htext"><strong>${h.t}:</strong> ${h.d}</div>
+          </div>`).join('')}
+      </div>
+      <div class="cta-card" style="animation-delay:0.5s">
+        <h3>الفهم هو البداية — التحول هو الهدف</h3>
+        <p>منهج ممكنون مصمم للعمل على هذه النمطات من جذورها. ليس مجرد فهم — بل تحرر حقيقي ودائم.</p>
+        <a href="https://t.me/Azahouse1" target="_blank" class="cbtn">✦ ابدأ رحلة التحرر</a>
+        <a href="/wounds.html" class="cbtn sec">🪬 اكتشف جروحك السبعة أيضاً</a>
+      </div>
+      <button class="retry" onclick="resetQuiz()">🔄 أعد الاختبار</button>
+    </div>`;
+  rs.scrollIntoView({behavior:'smooth'});
+}
+
+function resetQuiz(){
+  scores=[0,0,0,0,0,0,0];currentQ=0;
+  document.getElementById('resultSection').style.display='none';
+  document.getElementById('resultSection').innerHTML='';
+  document.getElementById('heroSection').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

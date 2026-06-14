@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مقالات ورسائل اللحظة — اعزيزة السباعي</title>
+<meta name="description" content="مقالات ورسائل نورانية من اعزيزة السباعي — توصيات وتعاليم روحية لرفع الوعي والتمكين الشامل في منهج ممكنون">
+<meta name="keywords" content="اعزيزة السباعي, منهج ممكنون, رسائل اللحظة, وعي, تطوير ذاتي, توصيات روحية, AZA HOUSE">
+<meta name="author" content="اعزيزة السباعي">
+<meta property="og:title" content="مقالات ورسائل اللحظة — اعزيزة السباعي">
+<meta property="og:description" content="رسائل نورانية وتوصيات روحية من اعزيزة السباعي لرفع الوعي والتمكين الشامل">
+<meta property="og:url" content="https://azizasoubai.com/articles.html">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1a3a6b;
+  --mid: #1a6abf;
+  --light: #2a8ad4;
+  --bg: #f0f6ff;
+  --bg2: #e4effc;
+  --white: #ffffff;
+  --text: #0d2144;
+  --text2: #2a4a7a;
+  --text3: #5a7a9a;
+  --border: rgba(26,106,191,0.18);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: linear-gradient(160deg, #e8f2ff 0%, #f0f6ff 50%, #e4eeff 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--mid);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(26,106,191,0.1);
+  transition: all 0.3s;
+}
+.back-btn:hover { background: var(--bg); border-color: var(--mid); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px 50px;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(26,106,191,0.1);
+  border: 1px solid rgba(26,106,191,0.25);
+  color: var(--mid);
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.hero h1 span { color: var(--mid); }
+.hero p {
+  color: var(--text3);
+  font-size: 1.05rem;
+  max-width: 560px;
+  margin: 0 auto 30px;
+  line-height: 2;
+}
+.hero-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--mid), transparent);
+  margin: 0 auto;
+}
+
+/* ARTICLES GRID */
+.articles-wrap {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px 80px;
+}
+
+.article-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 24px rgba(26,106,191,0.07);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.article-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--mid), var(--light));
+  border-radius: 0 24px 24px 0;
+}
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(26,106,191,0.12);
+  border-color: rgba(26,106,191,0.3);
+}
+.article-tag {
+  display: inline-block;
+  background: rgba(26,106,191,0.08);
+  border: 1px solid rgba(26,106,191,0.2);
+  color: var(--mid);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.article-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.article-body {
+  color: var(--text2);
+  line-height: 2.1;
+  font-size: 1rem;
+  white-space: pre-line;
+}
+.article-body p {
+  margin-bottom: 14px;
+}
+.article-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.article-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.author-avatar {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--mid), var(--light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.author-name {
+  font-size: 0.9rem;
+  color: var(--text2);
+  font-weight: 600;
+}
+.author-title {
+  font-size: 0.78rem;
+  color: var(--text3);
+}
+.article-hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hashtag {
+  color: var(--mid);
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+/* SUBSCRIBE BOX */
+.subscribe-box {
+  background: linear-gradient(135deg, var(--mid), var(--light));
+  border-radius: 24px;
+  padding: 2.5rem;
+  text-align: center;
+  color: white;
+  margin: 0 20px 60px;
+  max-width: 860px;
+  margin: 0 auto 60px;
+}
+.subscribe-box h3 {
+  font-family: 'Amiri', serif;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+.subscribe-box p {
+  opacity: 0.9;
+  line-height: 1.9;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+.subscribe-btn {
+  display: inline-block;
+  background: white;
+  color: var(--mid);
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  margin: 6px;
+}
+.subscribe-btn:hover { transform: translateY(-2px); }
+.subscribe-btn.secondary {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 13px;
+}
+.footer a { color: var(--mid); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .article-card { padding: 1.8rem; }
+  .subscribe-box { padding: 2rem 1.5rem; margin: 0 16px 60px; }
+}
+</style>
+</head>
+<body>
+
+<a href="/" class="back-btn">← العودة للموقع</a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✦ رسائل اللحظة ✦</div>
+  <h1>مقالات <span>اعزيزة السباعي</span></h1>
+  <p>رسائل نورانية وتوصيات روحية لرفع الوعي والتمكين الشامل — من قلب منهج ممكنون إلى روحك</p>
+  <div class="hero-divider"></div>
+</div>
+
+<!-- ARTICLES -->
+<div class="articles-wrap">
+
+  <!-- Article 1 -->
+  <article class="article-card">
+    <div class="article-tag">✦ توصيات المرحلة</div>
+    <h2 class="article-title">الاتزان الداخلي في زمن الأحداث العالمية — كيف تكون مراقباً لا متفاعلاً</h2>
+    <div class="article-body">
+      <p>الفترة هذه مطلوب منا جميعاً الاتزان الداخلي وعدم التفاعل القوي، لا بتردد أعلى ولا بتردد أسفل، في أي موضوع يحصل مع العالم الخارجي، وخصوصاً الأحداث العالمية المقبلة. يعني حاول قدر المستطاع تكون في منطقة المراقب.</p>
+
+      <p><strong>منطقة المراقب تجعلك تتحكم في مصير عالمك الخاص.</strong></p>
+
+      <p>حاول أن تقوم برفع مستوى التخاطر الذهني لديك بأن تقوم بتمارين سهلة وبسيطة متوفرة بكثرة عبر محركات البحث في الإنترنت. كلما أصبحت متمرساً في التخاطر قم برفع مستوى التمارين.</p>
+
+      <p>قم بفسخ جميع أنواع العقود التي ربطتها بدون إدراك وبدون وعي منك مع الكينونات الظلامية. يمكنك أن تنطق الجملة أو تكتبها، لكن دائماً أفضل النطق المسموع.</p>
+
+      <p>هذه التوصيات ليست مجرد كلام — هي خطوات عملية تحميك وترفع اهتزازك في وقت يحتاج فيه العالم لأناس واعين ومتوازنين.</p>
+    </div>
+    <div class="article-footer">
+      <div class="article-author">
+        <div class="author-avatar">أع</div>
+        <div>
+          <div class="author-name">اعزيزة السباعي</div>
+          <div class="author-title">معلمة وعي • AZA HOUSE</div>
+        </div>
+      </div>
+      <div class="article-hashtags">
+        <span class="hashtag">#توصيات_المرحلة</span>
+        <span class="hashtag">#اعمق</span>
+        <span class="hashtag">#اعزيزة_السباعي</span>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(26,106,191,0.12);">
+      <h4 style="font-family:Amiri,serif;font-size:1.1rem;color:#1a3a6b;margin-bottom:16px;">💬 التعليقات</h4>
+      <div id="comments-article1" style="margin-bottom:20px;"></div>
+      <div style="background:#f0f6ff;border-radius:16px;padding:20px;">
+        <input type="text" id="name-article1" placeholder="اسمك" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;">
+        <textarea id="text-article1" placeholder="اكتب تعليقك..." rows="3" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;resize:none;"></textarea>
+        <button onclick="addArticleComment('article1')" style="background:linear-gradient(135deg,#1a6abf,#2a8ad4);color:white;padding:10px 28px;border-radius:50px;border:none;font-family:Tajawal,sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">إرسال</button>
+        <span id="status-article1" style="margin-right:12px;font-size:0.85rem;color:#1a6abf;"></span>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(26,106,191,0.12);">
+      <h4 style="font-family:Amiri,serif;font-size:1.1rem;color:#1a3a6b;margin-bottom:16px;">💬 التعليقات</h4>
+      <div id="comments-article2" style="margin-bottom:20px;"></div>
+      <div style="background:#f0f6ff;border-radius:16px;padding:20px;">
+        <input type="text" id="name-article2" placeholder="اسمك" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;">
+        <textarea id="text-article2" placeholder="اكتب تعليقك..." rows="3" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;resize:none;"></textarea>
+        <button onclick="addArticleComment('article2')" style="background:linear-gradient(135deg,#1a6abf,#2a8ad4);color:white;padding:10px 28px;border-radius:50px;border:none;font-family:Tajawal,sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">إرسال</button>
+        <span id="status-article2" style="margin-right:12px;font-size:0.85rem;color:#1a6abf;"></span>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(26,106,191,0.12);">
+      <h4 style="font-family:Amiri,serif;font-size:1.1rem;color:#1a3a6b;margin-bottom:16px;">💬 التعليقات</h4>
+      <div id="comments-article3" style="margin-bottom:20px;"></div>
+      <div style="background:#f0f6ff;border-radius:16px;padding:20px;">
+        <input type="text" id="name-article3" placeholder="اسمك" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;">
+        <textarea id="text-article3" placeholder="اكتب تعليقك..." rows="3" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;resize:none;"></textarea>
+        <button onclick="addArticleComment('article3')" style="background:linear-gradient(135deg,#1a6abf,#2a8ad4);color:white;padding:10px 28px;border-radius:50px;border:none;font-family:Tajawal,sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">إرسال</button>
+        <span id="status-article3" style="margin-right:12px;font-size:0.85rem;color:#1a6abf;"></span>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(26,106,191,0.12);">
+      <h4 style="font-family:Amiri,serif;font-size:1.1rem;color:#1a3a6b;margin-bottom:16px;">💬 التعليقات</h4>
+      <div id="comments-article4" style="margin-bottom:20px;"></div>
+      <div style="background:#f0f6ff;border-radius:16px;padding:20px;">
+        <input type="text" id="name-article4" placeholder="اسمك" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;">
+        <textarea id="text-article4" placeholder="اكتب تعليقك..." rows="3" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;resize:none;"></textarea>
+        <button onclick="addArticleComment('article4')" style="background:linear-gradient(135deg,#1a6abf,#2a8ad4);color:white;padding:10px 28px;border-radius:50px;border:none;font-family:Tajawal,sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">إرسال</button>
+        <span id="status-article4" style="margin-right:12px;font-size:0.85rem;color:#1a6abf;"></span>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(26,106,191,0.12);">
+      <h4 style="font-family:Amiri,serif;font-size:1.1rem;color:#1a3a6b;margin-bottom:16px;">💬 التعليقات</h4>
+      <div id="comments-article5" style="margin-bottom:20px;"></div>
+      <div style="background:#f0f6ff;border-radius:16px;padding:20px;">
+        <input type="text" id="name-article5" placeholder="اسمك" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;">
+        <textarea id="text-article5" placeholder="اكتب تعليقك..." rows="3" style="width:100%;padding:10px 16px;border:1px solid rgba(26,106,191,0.2);border-radius:10px;font-family:Tajawal,sans-serif;font-size:0.9rem;margin-bottom:10px;outline:none;text-align:right;color:#1a3a6b;resize:none;"></textarea>
+        <button onclick="addArticleComment('article5')" style="background:linear-gradient(135deg,#1a6abf,#2a8ad4);color:white;padding:10px 28px;border-radius:50px;border:none;font-family:Tajawal,sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">إرسال</button>
+        <span id="status-article5" style="margin-right:12px;font-size:0.85rem;color:#1a6abf;"></span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 2 -->
+  <article class="article-card">
+    <div class="article-tag">✦ رسالة من أبعاد</div>
+    <h2 class="article-title">حماية طاقتك في زمن الاستهدافات — دليلك العملي للتوازن والحصانة الروحية</h2>
+    <div class="article-body">
+      <p>هذه الفترة سيتأثر فيها الكثيرون. استهدافات مختلفة ومتنوعة تصيب أجسادك — الأجساد الفكرية والعاطفية أكثر المتأثرين، وطبعاً الجسد المادي مرافق لهم. ترددات اهتزازية تسعى لبث الاضطرابات الشعورية والعقلية، وغرسات في الأبعاد النجمية عبر الأحلام.</p>
+
+      <p>حسناً، ماذا يمكننا أن نطلب منكم عمله لاستعادة اتزانكم الداخلي والاتصال بسلامكم الحقيقي؟</p>
+
+      <p><strong>أولاً:</strong> لا تستجب للمحفزات العاطفية التي تصدر من المحيطين بك. الغرباء عنك سيصدرون تصرفات مربكة وأحياناً فوضوية — لا تعطيهم رد فعل، لا تغذيهم.</p>
+
+      <p><strong>ثانياً:</strong> قم بفك الارتباط النفسي بجميع هذا العالم المادي بكل ما فيه، واستعد ارتباطك الحقيقي بالخلاق العظيم سبحانه واستشعره أكثر.</p>
+
+      <p><strong>ثالثاً:</strong> حول دفة القيادة لنفسك وقل بصوت عالٍ ثلاث مرات: "أتحصن باسم ربي الحفيظ العليم من كل سوء وتلاعب واستغلال لوجودي بجميع أجزاءه، وألغي كل سيطرة خفية أو إسقاط خارجي للاستحواذ."</p>
+
+      <p><strong>رابعاً:</strong> ثق في حدسك.</p>
+
+      <p><strong>خامساً:</strong> املأ العالم المحيط بك بهجة ومحبة وتشجيعاً وابتسامة — ارفع اهتزاز الأرض.</p>
+
+      <p><strong>سادساً:</strong> الحق لا يحتاج أحداً ليؤمن به، بينما الوهم يتغذى على إيمان الآخرين به. لذلك لا تجادل أحداً بما عندك.</p>
+
+      <p><strong>سابعاً:</strong> عزز اتصالك مع الأرواح التي ترفعك وترتقي بك.</p>
+    </div>
+    <div class="article-footer">
+      <div class="article-author">
+        <div class="author-avatar">أع</div>
+        <div>
+          <div class="author-name">اعزيزة السباعي</div>
+          <div class="author-title">معلمة وعي • AZA HOUSE</div>
+        </div>
+      </div>
+      <div class="article-hashtags">
+        <span class="hashtag">#توصيات_المرحلة</span>
+        <span class="hashtag">#رسالة_من_أبعاد</span>
+        <span class="hashtag">#اعزيزة_السباعي</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 3 -->
+  <article class="article-card">
+    <div class="article-tag">✦ رسالة اللحظة</div>
+    <h2 class="article-title">توقف عن التلهف — فن الامتنان وسر جذب ما تستحق</h2>
+    <div class="article-body">
+      <p>مازلت تقول: هل من مزيد؟ متلهفاً طامعاً أحياناً، يائساً وبائساً أحياناً أخرى. فقط تتلهف للمزيد — من أي شيء، من كل شيء. ألم تمل هذا الأسلوب؟</p>
+
+      <p>ومن لهفتك أصبحت تراقب الآخرين وتقارن نفسك بهم، تظن واهياً أنهم أفضل منك لأنهم يمتلكون كذا أو لديهم كذا.</p>
+
+      <p><strong>مهلاً، لحظة — توقف، التقط أنفاسك، اهدأ.</strong></p>
+
+      <p>وارجع لك ولكل ما عندك، ولما مضى من عمرك. وتذكر أن تجربة نفسك هذه هي فردية تخصك وحدك، وما الآخرين إلا ضيوف وزوار لك في رحلتك.</p>
+
+      <p>وقبل أن تطلب المزيد، قم وابدأ بالامتنان والشكر لكل نعماء وبأس، ولكل ما قد أُعطيت بخيره وشره. اشكر كل خير وتعلم الدرس من كل شر.</p>
+
+      <p>ولا تنتظر القادم لك — عندها ما هو لك سيجد طريقه إليك بكل لطف وطمأنينة.</p>
+    </div>
+    <div class="article-footer">
+      <div class="article-author">
+        <div class="author-avatar">أع</div>
+        <div>
+          <div class="author-name">اعزيزة السباعي</div>
+          <div class="author-title">معلمة وعي • AZA HOUSE</div>
+        </div>
+      </div>
+      <div class="article-hashtags">
+        <span class="hashtag">#رسالة_اللحظة</span>
+        <span class="hashtag">#اعزيزة_السباعي</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 4 -->
+  <article class="article-card">
+    <div class="article-tag">✦ رسالة اللحظة</div>
+    <h2 class="article-title">الفراغ الداخلي — كيف تحمي نفسك من الهاوية وتملأ روحك بالنور</h2>
+    <div class="article-body">
+      <p>حرّك بدنك بعمل تحبه، واشغل عقلك بفكر ينفعك. لا تسمح للفراغ أن يملأك إذا لم تكن مستعداً له.</p>
+
+      <p>والاستعداد هنا أقصد به الاتصال الروحي والامتلاء بمصدرك. لأن الفراغ إذا ملأك وأنت غير مستعد سيأخذك معه إلى الهاوية.</p>
+
+      <p>يجعلك تنغمس في دور الضحية أكثر، وفي الحزن أكثر، وفي المشاعر السفلية أكثر. وهكذا تصبح مصدراً للغذاء وجاذباً للكينونات الظلامية والشبكة الحاكمة.</p>
+
+      <p><strong>الحل بسيط وعملي:</strong> لا تترك نفسك فارغاً. احرك جسدك، اشغل عقلك بما ينفع، واملأ روحك بالاتصال بمصدرك الأعلى. هذا هو درعك الحقيقي في هذا الزمن.</p>
+    </div>
+    <div class="article-footer">
+      <div class="article-author">
+        <div class="author-avatar">أع</div>
+        <div>
+          <div class="author-name">اعزيزة السباعي</div>
+          <div class="author-title">معلمة وعي • AZA HOUSE</div>
+        </div>
+      </div>
+      <div class="article-hashtags">
+        <span class="hashtag">#رسالة_اللحظة</span>
+        <span class="hashtag">#اعزيزة_السباعي</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 5 -->
+  <article class="article-card">
+    <div class="article-tag">✦ رسالة اللحظة</div>
+    <h2 class="article-title">ألم الجسد ليس دائماً ألم النفس — فن التمييز بين الجسدي والنفسي</h2>
+    <div class="article-body">
+      <p>مازلت تقول وتؤكد أن كل ألم جسدي هو بالضرورة انعكاس لألم نفسي؟</p>
+
+      <p>حسناً، دعني أوسّع لك المنظور قليلاً.</p>
+
+      <p>ليس بالضرورة أن يكون مصدر ألمك الجسدي هو ألم نفسي أصابك. فمثلاً في أحيان كثيرة قد يكون سبب ألم كتفك هو وسادتك غير المريحة!</p>
+
+      <p>نعم، هناك رابط عميق ومثبت علمياً بين الجسد والنفس — وهذا حقيقي ومهم. لكن أن نحول كل ألم جسدي إلى رمز نفسي بدون تمحيص هو أيضاً نوع من اللاوعي.</p>
+
+      <p>التوازن والوعي يعني: تفحص الأسباب المادية أولاً، ثم انظر للبعد النفسي والطاقي. لا تقفز مباشرة لأي طرف دون الآخر. هذا هو التكامل الحقيقي بين الجسد والعقل والروح.</p>
+    </div>
+    <div class="article-footer">
+      <div class="article-author">
+        <div class="author-avatar">أع</div>
+        <div>
+          <div class="author-name">اعزيزة السباعي</div>
+          <div class="author-title">معلمة وعي • AZA HOUSE</div>
+        </div>
+      </div>
+      <div class="article-hashtags">
+        <span class="hashtag">#رسالة_اللحظة</span>
+        <span class="hashtag">#اعزيزة_السباعي</span>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- SUBSCRIBE -->
+<div class="subscribe-box" style="max-width:860px;margin:0 auto 60px;padding:2.5rem;">
+  <h3>انضم لقناة طريق النور</h3>
+  <p>استقبل رسائل اللحظة والتوصيات الروحية مباشرة على تيليغرام — كن أول من يقرأ كل جديد</p>
+  <a href="https://t.me/nourway" target="_blank" class="subscribe-btn">✦ انضم للقناة الآن</a>
+  <a href="/#courses" class="subscribe-btn secondary">اكتشف منهج ممكنون</a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>© 2026 <a href="/">اعزيزة السباعي</a> — AZA HOUSE · جميع الحقوق محفوظة</p>
+</div>
+
+
+<!-- Firebase Comments Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, orderBy, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7EFcyN3pbjiPkiUalBRoawCWYUuWT5bo",
+    authDomain: "azizasoubai-7bf63.firebaseapp.com",
+    projectId: "azizasoubai-7bf63",
+    storageBucket: "azizasoubai-7bf63.firebasestorage.app",
+    messagingSenderId: "1037302885413",
+    appId: "1:1037302885413:web:41056f2b9416648ddf63cc"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function loadComments(articleId) {
+    const container = document.getElementById('comments-' + articleId);
+    if (!container) return;
+    container.innerHTML = '<div style="color:#8aaaca;font-size:0.9rem;text-align:center;padding:10px;">جاري تحميل التعليقات...</div>';
+    try {
+      const q = query(collection(db, 'article_comments'), where('articleId', '==', articleId), orderBy('timestamp', 'desc'));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        container.innerHTML = '<div style="color:#8aaaca;font-size:0.9rem;text-align:center;padding:10px;">كن أول من يعلق! 😊</div>';
+        return;
+      }
+      container.innerHTML = '';
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const date = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleDateString('ar-SA') : '';
+        const div = document.createElement('div');
+        div.style.cssText = 'background:#f0f6ff;border-radius:14px;padding:16px 20px;margin-bottom:12px;border-right:3px solid #1a6abf;';
+        div.innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span style="font-weight:700;color:#1a3a6b;font-family:Tajawal,sans-serif;">${data.name}</span><span style="color:#8aaaca;font-size:0.78rem;">${date}</span></div><p style="color:#2a4a7a;line-height:1.8;font-size:0.92rem;">${data.text}</p>`;
+        container.appendChild(div);
+      });
+    } catch(e) {
+      container.innerHTML = '<div style="color:#8aaaca;font-size:0.9rem;text-align:center;padding:10px;">تعذر تحميل التعليقات</div>';
+    }
+  }
+
+  window.addArticleComment = async function(articleId) {
+    const name = document.getElementById('name-' + articleId).value.trim();
+    const text = document.getElementById('text-' + articleId).value.trim();
+    const status = document.getElementById('status-' + articleId);
+    if (!name || !text) { status.textContent = '⚠️ يرجى كتابة اسمك وتعليقك'; return; }
+    status.textContent = '⏳ جاري الإرسال...';
+    try {
+      await addDoc(collection(db, 'article_comments'), {
+        articleId, name, text, timestamp: serverTimestamp()
+      });
+      document.getElementById('name-' + articleId).value = '';
+      document.getElementById('text-' + articleId).value = '';
+      status.textContent = '✅ تم إرسال تعليقك!';
+      loadComments(articleId);
+    } catch(e) {
+      status.textContent = '❌ حدث خطأ، حاولي مرة أخرى';
+    }
+  };
+
+  // Load all comments on page load
+  const articles = ['article1','article2','article3','article4','article5'];
+  articles.forEach(id => loadComments(id));
+</script>
+
+</body>
+</html>

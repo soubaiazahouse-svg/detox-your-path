@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خريطة الجروح السبعة — اعزيزة السباعي</title>
+<meta name="description" content="اكتشف جرحك الأساسي من الجروح السبعة — اختبار نفسي عميق مع اعزيزة السباعي">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f6ff;
+  --bg2: #e4effc;
+  --blue: #1a3a6b;
+  --mid: #1a6abf;
+  --light: #2a8ad4;
+  --text: #0d2144;
+  --text2: #2a4a7a;
+  --text3: #5a7a9a;
+  --border: rgba(26,106,191,0.18);
+  --white: #ffffff;
+  --card: rgba(255,255,255,0.95);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: linear-gradient(160deg, #e8f2ff 0%, #f0f6ff 50%, #e4eeff 100%);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--mid);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(26,106,191,0.1);
+  transition: all 0.3s;
+}
+.back-btn:hover { background: var(--bg); border-color: var(--mid); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px 40px;
+  position: relative;
+}
+.hero-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  display: block;
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.hero-badge {
+  display: inline-block;
+  background: rgba(26,106,191,0.1);
+  border: 1px solid rgba(26,106,191,0.25);
+  color: var(--mid);
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.hero h1 span { color: var(--mid); }
+.hero p {
+  color: var(--text3);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto 30px;
+  line-height: 2;
+}
+.hero-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--mid), transparent);
+  margin: 0 auto 50px;
+}
+.start-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--mid), var(--light));
+  color: white;
+  padding: 16px 48px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 24px rgba(26,106,191,0.3);
+  transition: all 0.3s;
+  margin-bottom: 16px;
+}
+.start-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(26,106,191,0.4); }
+.hero-note { color: var(--text3); font-size: 0.88rem; }
+
+/* QUIZ WRAPPER */
+.quiz-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+  display: none;
+}
+
+/* PROGRESS */
+.progress-wrap {
+  margin-bottom: 28px;
+}
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-label { font-size: 13px; color: var(--text3); }
+.progress-label span { font-weight: 700; color: var(--mid); }
+.progress-bar {
+  background: rgba(26,106,191,0.1);
+  border-radius: 20px;
+  height: 6px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, var(--mid), var(--light));
+  transition: width 0.5s ease;
+}
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.2rem;
+  box-shadow: 0 8px 40px rgba(26,106,191,0.1);
+  animation: slideIn 0.4s ease;
+}
+@keyframes slideIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+.q-num {
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.q-text {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  color: var(--text);
+  margin-bottom: 28px;
+  line-height: 1.9;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.opt-btn {
+  padding: 16px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--bg);
+  text-align: right;
+  transition: all 0.22s;
+  line-height: 1.7;
+  font-family: 'Tajawal', sans-serif;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.opt-btn:hover { background: #ddeeff; border-color: var(--mid); color: var(--blue); transform: translateX(-4px); }
+.opt-btn.selected { background: rgba(26,106,191,0.12); border-color: var(--mid); color: var(--blue); }
+.opt-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* LOADING */
+.loading-screen {
+  text-align: center;
+  padding: 60px 20px;
+  display: none;
+}
+.loading-screen .hero-icon { animation: spin 2s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.loading-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.loading-sub { color: var(--text3); font-size: 0.95rem; }
+.loading-bar-wrap { max-width: 300px; margin: 24px auto 0; }
+
+/* RESULT */
+.result-screen {
+  display: none;
+  padding: 20px 0 80px;
+}
+.result-hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+.wound-icon { font-size: 72px; margin-bottom: 20px; display: block; animation: bounce 1s ease; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.wound-name {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.wound-subtitle {
+  color: var(--mid);
+  font-size: 1.05rem;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 0 16px 24px;
+  box-shadow: 0 8px 40px rgba(26,106,191,0.1);
+  animation: slideIn 0.6s ease;
+}
+.result-section-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--blue);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.result-text {
+  color: var(--text2);
+  line-height: 2;
+  font-size: 0.97rem;
+  margin-bottom: 0;
+}
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.result-tag {
+  background: rgba(26,106,191,0.08);
+  border: 1px solid rgba(26,106,191,0.2);
+  color: var(--mid);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+.heal-card {
+  background: linear-gradient(135deg, #e8f2ff, #f0f6ff);
+  border: 1px solid rgba(26,106,191,0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 0 16px 24px;
+  animation: slideIn 0.8s ease;
+}
+.heal-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(26,106,191,0.1);
+}
+.heal-step:last-child { border-bottom: none; }
+.heal-num {
+  background: var(--mid);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.heal-text { color: var(--text2); line-height: 1.9; font-size: 0.95rem; }
+.cta-card {
+  background: linear-gradient(135deg, var(--mid), var(--light));
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 0 16px 24px;
+  text-align: center;
+  color: white;
+  animation: slideIn 1s ease;
+}
+.cta-card h3 { font-family: 'Amiri', serif; font-size: 1.6rem; margin-bottom: 12px; }
+.cta-card p { opacity: 0.9; line-height: 1.9; margin-bottom: 24px; font-size: 0.95rem; }
+.cta-btn {
+  display: inline-block;
+  background: white;
+  color: var(--mid);
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.retry-btn {
+  display: block;
+  margin: 0 auto 0;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text3);
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.retry-btn:hover { border-color: var(--mid); color: var(--mid); }
+
+@media (max-width: 500px) {
+  .q-card { padding: 1.5rem; }
+  .result-card, .heal-card, .cta-card { margin: 0 8px 20px; padding: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<a href="/game.html" class="back-btn">← العودة للألعاب</a>
+
+<!-- HERO -->
+<div class="hero" id="heroSection">
+  <span class="hero-icon">🪬</span>
+  <div class="hero-badge">✦ اختبار نفسي عميق ✦</div>
+  <h1>خريطة <span>الجروح السبعة</span></h1>
+  <p>كل إنسان يحمل جرحاً أساسياً من طفولته — يتحكم في قراراته ويرسم علاقاته دون أن يشعر. اكتشف جرحك الآن.</p>
+  <div class="hero-divider"></div>
+  <button class="start-btn" onclick="startQuiz()">🔍 ابدأ الاكتشاف</button>
+  <p class="hero-note">٢١ سؤال • النتيجة في النهاية فقط • مجاني تماماً</p>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-wrapper" id="quizSection">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">السؤال <span id="qNum">1</span> من <span id="qTotal">21</span></span>
+      <span class="progress-label" id="pct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="questionCard"></div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loadingSection">
+  <span class="hero-icon">🪬</span>
+  <p class="loading-text">جاري تحليل إجاباتك...</p>
+  <p class="loading-sub">نكشف لك جرحك الأساسي</p>
+  <div class="loading-bar-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="loadingBar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result-screen" id="resultSection"></div>
+
+<script>
+const questions = [
+  { text: "عندما يرفضك شخص ما أو ينتقدك، ماذا تشعر في الداخل؟", options: [
+    { text: "أشعر أنني لست كافياً وأستحق الرفض", w: [3,0,0,0,0,0,0] },
+    { text: "أخاف أن يتركني وحيداً", w: [0,3,0,0,0,0,0] },
+    { text: "أشعر بالخجل والإذلال الشديد", w: [0,0,3,0,0,0,0] },
+    { text: "أفقد الثقة به فوراً ولا أصدق نواياه", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر بظلم شديد وعدم عدالة", w: [0,0,0,0,3,0,0] },
+    { text: "أسارع لإصلاح الأمر وإرضائه", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر أنني مختلف وغريب عن الجميع", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "في علاقاتك الحميمة، ما الذي يقلقك أكثر؟", options: [
+    { text: "أن يكتشفوا عيوبي الحقيقية ويرفضوني", w: [3,1,1,0,0,0,0] },
+    { text: "أن يتركوني أو يبتعدوا عني يوماً ما", w: [1,3,0,0,0,0,0] },
+    { text: "أن يحكموا عليّ أو يشعرني بالخزي", w: [1,0,3,0,0,0,0] },
+    { text: "أن يخونوني أو يستغلوا ثقتي", w: [0,0,0,3,1,0,0] },
+    { text: "ألا يعاملوني بعدالة وإنصاف", w: [0,0,0,1,3,0,0] },
+    { text: "أن أخذلهم أو لا أكون بمستوى توقعاتهم", w: [0,0,0,0,0,3,1] },
+    { text: "أن لا يفهموني حقاً أو يقبلوا اختلافي", w: [1,0,0,0,0,0,3] }
+  ]},
+  { text: "كيف تتعامل عادةً مع الصراعات والخلافات؟", options: [
+    { text: "أتراجع وأعتقد أنني المخطئ دائماً", w: [3,0,1,0,0,1,0] },
+    { text: "أتمسك بالشخص خوفاً من خسارته", w: [0,3,0,0,0,1,0] },
+    { text: "أصمت وأحمل الألم بداخلي خجلاً", w: [0,0,3,0,0,0,0] },
+    { text: "أبتعد فوراً لأنني لا أثق بالآخر", w: [0,0,0,3,0,0,0] },
+    { text: "أدافع عن نفسي بقوة لأن الأمر غير عادل", w: [0,0,0,0,3,0,0] },
+    { text: "أحاول إرضاء الجميع وتجنب المواجهة", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر أن أحداً لن يفهم وجهة نظري", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "عندما تتذكر طفولتك، ما الشعور الأكثر حضوراً؟", options: [
+    { text: "أنني لم أكن مقبولاً كما أنا", w: [3,0,0,0,0,0,1] },
+    { text: "أنني كنت وحيداً أو محتاجاً لمزيد من الاهتمام", w: [0,3,0,0,0,0,0] },
+    { text: "أنني كنت أشعر بالخزي والنقص أمام الآخرين", w: [0,0,3,1,0,0,0] },
+    { text: "أن أحداً خانني أو كذب عليّ", w: [0,0,0,3,0,0,0] },
+    { text: "أنني كنت أُعامَل بظلم أو تمييز", w: [0,0,0,0,3,0,0] },
+    { text: "أنني كنت أتحمل مسؤوليات فوق طاقتي", w: [0,0,0,0,0,3,0] },
+    { text: "أنني كنت غريباً ومختلفاً عن الآخرين", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الجملة التي تقولها لنفسك في لحظات الضعف؟", options: [
+    { text: "أنا لا أستحق الحب", w: [3,0,0,0,0,0,0] },
+    { text: "سأبقى وحيداً في النهاية", w: [0,3,0,0,0,0,0] },
+    { text: "أنا مشكلة وعبء على الآخرين", w: [0,0,3,0,0,0,0] },
+    { text: "لا أحد يمكن الوثوق به حقاً", w: [0,0,0,3,0,0,0] },
+    { text: "الحياة غير عادلة ولن تتغير", w: [0,0,0,0,3,0,0] },
+    { text: "يجب أن أكون أفضل وأقوى", w: [0,0,0,0,0,3,0] },
+    { text: "لا أحد يفهمني أو يشبهني", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "كيف يبدو إنجازاتك ونجاحاتك في عينيك؟", options: [
+    { text: "لا أصدقها — دائماً أشعر أنني لم أبذل كافياً", w: [3,0,0,0,1,0,0] },
+    { text: "أخاف أن يبتعد من أحبهم إذا نجحت", w: [0,3,0,0,0,0,0] },
+    { text: "أشعر بالخجل من الاعتراف بها أمام الآخرين", w: [0,0,3,0,0,0,0] },
+    { text: "أشك في نوايا من يمدحني عليها", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر أنها أقل مما أستحق مقارنة بجهدي", w: [0,0,0,0,3,0,0] },
+    { text: "لا أرتاح حتى أحقق المزيد", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر أن أحداً لن يقدر اختلاف طريقتي", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الذي يصعب عليك فعله في علاقاتك؟", options: [
+    { text: "طلب الحب والاهتمام بصراحة", w: [3,1,0,0,0,0,0] },
+    { text: "البقاء هادئاً عندما يبتعد شخص مؤقتاً", w: [0,3,0,0,0,0,0] },
+    { text: "الاعتراف باحتياجاتي دون خجل", w: [0,0,3,0,0,0,0] },
+    { text: "الثقة بالطرف الآخر مجدداً بعد خلاف", w: [0,0,0,3,0,0,0] },
+    { text: "قبول أن بعض الأمور ليست عادلة", w: [0,0,0,0,3,0,0] },
+    { text: "قول لا ووضع حدود واضحة", w: [0,0,0,0,0,3,0] },
+    { text: "الشعور بأنني منتمٍ حقاً لمن حولي", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "عندما تحب شخصاً، ما الذي تخشاه أكثر؟", options: [
+    { text: "أن يرى عيوبي ويكره ما يراه", w: [3,0,1,0,0,0,0] },
+    { text: "أن يتركني يوماً ما", w: [0,3,0,0,0,0,0] },
+    { text: "أن أكون عبئاً عليه", w: [0,0,3,0,0,0,0] },
+    { text: "أن يخونني أو يستغل مشاعري", w: [0,0,0,3,0,0,0] },
+    { text: "أن يأخذ حقوقي أو لا يعاملني بإنصاف", w: [0,0,0,0,3,0,0] },
+    { text: "أن لا أكون بمستوى توقعاته", w: [0,0,0,0,0,3,0] },
+    { text: "أن لا يفهم عالمي الداخلي", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "كيف تتصرف عندما تحتاج للمساعدة؟", options: [
+    { text: "أتردد كثيراً خوفاً من الرفض", w: [3,0,0,0,0,0,0] },
+    { text: "أطلبها بإلحاح لأنني أخاف أن أُترك وحيداً", w: [0,3,0,0,0,0,0] },
+    { text: "أخجل من الطلب وأحاول الاكتفاء بنفسي", w: [0,0,3,0,0,0,0] },
+    { text: "أتحاشى الطلب لأنني لا أثق بردود الأفعال", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر بالغضب إن لم يتطوع أحد للمساعدة", w: [0,0,0,0,3,0,0] },
+    { text: "أساعد الآخرين أولاً آملاً أن يبادلوني", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر أن أحداً لن يفهم ما أحتاجه حقاً", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما نوع الحلم المتكرر أو الكابوس الذي يزورك؟", options: [
+    { text: "أن أُترك أو أُنبذ من مجموعة", w: [3,1,0,0,0,0,0] },
+    { text: "أن يتركني من أحبهم دون سبب", w: [0,3,0,0,0,0,0] },
+    { text: "أن أظهر في موقف محرج أمام الجميع", w: [0,0,3,0,0,0,0] },
+    { text: "أن يخونني أحد قريب مني", w: [0,0,0,3,0,0,0] },
+    { text: "أن أُعامَل بظلم ولا يسمعني أحد", w: [0,0,0,0,3,0,0] },
+    { text: "أن أفشل أو أخذل من أعتمد عليّ", w: [0,0,0,0,0,3,0] },
+    { text: "أن أكون في مكان غريب لا أنتمي إليه", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "كيف يبدو صوت الناقد الداخلي لديك؟", options: [
+    { text: "أنت لست جيداً بما يكفي", w: [3,0,0,0,0,0,0] },
+    { text: "ستبقى وحيداً دائماً", w: [0,3,0,0,0,0,0] },
+    { text: "أنت مشكلة ولا تستحق الاهتمام", w: [0,0,3,0,0,0,0] },
+    { text: "لا تثق بأحد — سيخذلونك", w: [0,0,0,3,0,0,0] },
+    { text: "الحياة ضدك ولن تنصفك", w: [0,0,0,0,3,0,0] },
+    { text: "يجب أن تكون أقوى وأكثر", w: [0,0,0,0,0,3,0] },
+    { text: "أنت مختلف ولن يفهمك أحد", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الذي يجعلك تشعر بالقيمة والتقدير؟", options: [
+    { text: "عندما يقبلني الناس كما أنا دون شروط", w: [3,0,0,0,0,0,0] },
+    { text: "عندما يكون من أحبهم بجانبي دائماً", w: [0,3,0,0,0,0,0] },
+    { text: "عندما أشعر أنني لست عبئاً", w: [0,0,3,0,0,0,0] },
+    { text: "عندما يثبت لي الناس أنهم صادقون", w: [0,0,0,3,0,0,0] },
+    { text: "عندما يُعترف بجهدي ويُعامَل بعدل", w: [0,0,0,0,3,0,0] },
+    { text: "عندما أنجح وأكون مفيداً للآخرين", w: [0,0,0,0,0,3,0] },
+    { text: "عندما يفهمني أحد ويقبل اختلافي", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "في لحظة الغضب الشديد، ماذا يحدث معك؟", options: [
+    { text: "أوجه الغضب لنفسي وأعاقبها", w: [3,0,0,0,0,0,0] },
+    { text: "أخاف أن يبتعد الشخص وأتراجع سريعاً", w: [0,3,0,0,0,0,0] },
+    { text: "أصمت وأحمل الألم خجلاً من ردة فعلي", w: [0,0,3,0,0,0,0] },
+    { text: "أقرر قطع العلاقة لأنني لا أثق بعد الآن", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر بالحقد لأن الأمر غير عادل تماماً", w: [0,0,0,0,3,0,0] },
+    { text: "أكتم الغضب وأستمر في الإرضاء", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر أن أحداً لن يفهم سبب غضبي", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الصفة التي يصفك بها من يعرفك جيداً؟", options: [
+    { text: "يسعى للكمال ويشك في نفسه كثيراً", w: [3,0,0,0,0,0,0] },
+    { text: "يحتاج لطمأنة مستمرة وحضور دائم", w: [0,3,0,0,0,0,0] },
+    { text: "حساس جداً ويصعب عليه الاعتراف بالضعف", w: [0,0,3,0,0,0,0] },
+    { text: "صعب الثقة ويبقى على حذر دائماً", w: [0,0,0,3,0,0,0] },
+    { text: "يشعر بالظلم كثيراً ويدافع عن حقوقه", w: [0,0,0,0,3,0,0] },
+    { text: "يضع الآخرين قبل نفسه دائماً", w: [0,0,0,0,0,3,0] },
+    { text: "منطوٍ قليلاً وعالمه الداخلي غني جداً", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "كيف تستجيب لمدح الآخرين لك؟", options: [
+    { text: "أشعر أنهم لا يرون حقيقتي", w: [3,0,0,0,0,0,0] },
+    { text: "أتمسك به بشدة لأنني أحتاجه", w: [0,3,0,0,0,0,0] },
+    { text: "أشعر بالحرج ولا أعرف كيف أتقبله", w: [0,0,3,0,0,0,0] },
+    { text: "أتساءل عن نيتهم من وراء المدح", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر أنه أقل مما أستحق", w: [0,0,0,0,3,0,0] },
+    { text: "أشعر بالراحة لأنني نجحت في إرضائهم", w: [0,0,0,0,0,3,0] },
+    { text: "أتساءل إن كانوا يفهمونني فعلاً", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما نمط علاقاتك العاطفية في الغالب؟", options: [
+    { text: "أبحث عن القبول المستمر وأخاف الرفض", w: [3,1,0,0,0,0,0] },
+    { text: "أتعلق بشدة وأخاف الفراق", w: [0,3,0,0,0,0,0] },
+    { text: "أخفي احتياجاتي وأشعر بعدم الاستحقاق", w: [0,0,3,0,0,0,0] },
+    { text: "أبني جدراناً وأحتاج وقتاً طويلاً للثقة", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر بالظلم ويصعب علي المسامحة", w: [0,0,0,1,3,0,0] },
+    { text: "أعطي كثيراً وأنسى احتياجاتي", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر بالوحدة حتى وسط الناس", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الذي يستنزف طاقتك أكثر في حياتك اليومية؟", options: [
+    { text: "المقارنة بالآخرين والشعور بالقصور", w: [3,0,0,0,0,0,0] },
+    { text: "القلق على من أحبهم وخوف الفقدان", w: [0,3,0,0,0,0,0] },
+    { text: "إخفاء مشاعري وتجنب الظهور بضعف", w: [0,0,3,0,0,0,0] },
+    { text: "الحذر الدائم وصعوبة الانفتاح", w: [0,0,0,3,0,0,0] },
+    { text: "الشعور بأن الأمور لا تسير بعدالة", w: [0,0,0,0,3,0,0] },
+    { text: "إرضاء الجميع وتلبية احتياجاتهم", w: [0,0,0,0,0,3,0] },
+    { text: "الشعور بأنني لا أنتمي لأي مكان تماماً", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الذي يجعلك تشعر بالأمان الحقيقي؟", options: [
+    { text: "أن يقبلني شخص رغم معرفته لعيوبي", w: [3,0,0,0,0,0,0] },
+    { text: "أن أعلم أن من أحبهم لن يتركوني", w: [0,3,0,0,0,0,0] },
+    { text: "أن أكون مفيداً ولا أكون عبئاً", w: [0,0,3,0,0,0,0] },
+    { text: "أن أرى أفعالاً تثبت الوفاء لا مجرد كلام", w: [0,0,0,3,0,0,0] },
+    { text: "أن يُعترف بحقوقي ويُعامَل بإنصاف", w: [0,0,0,0,3,0,0] },
+    { text: "أن أكون منتجاً ومفيداً ومحبوباً", w: [0,0,0,0,0,3,0] },
+    { text: "أن أجد من يفهم طريقتي في رؤية العالم", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "كيف تصف علاقتك بجسدك ومشاعرك الداخلية؟", options: [
+    { text: "أنتقد جسدي كثيراً ولا أرضى عنه", w: [3,0,1,0,0,0,0] },
+    { text: "أشعر بقلق جسدي عندما يبتعد من أحبهم", w: [0,3,0,0,0,0,0] },
+    { text: "أخجل من مشاعري وأحاول إخفاءها", w: [0,0,3,0,0,0,0] },
+    { text: "أبقي مشاعري محاطة بجدران حماية", w: [0,0,0,3,0,0,0] },
+    { text: "أشعر بتوتر جسدي عندما أرى ظلماً", w: [0,0,0,0,3,0,0] },
+    { text: "أتجاهل تعب جسدي لأكون متاحاً للآخرين", w: [0,0,0,0,0,3,0] },
+    { text: "أشعر أن مشاعري معقدة لن يفهمها أحد", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الذي تتمنى لو قاله لك أحد في طفولتك؟", options: [
+    { text: "أنت كافٍ تماماً وأنا فخور بك", w: [3,0,0,0,0,0,0] },
+    { text: "لن أتركك أبداً — أنا هنا دائماً", w: [0,3,0,0,0,0,0] },
+    { text: "مشاعرك طبيعية ولست عبئاً", w: [0,0,3,0,0,0,0] },
+    { text: "يمكنك الوثوق بي — لن أخذلك", w: [0,0,0,3,0,0,0] },
+    { text: "أرى جهدك وأنت تستحق أكثر", w: [0,0,0,0,3,0,0] },
+    { text: "احتياجاتك مهمة وأنت لا تحتاج لكسب حبي", w: [0,0,0,0,0,3,0] },
+    { text: "اختلافك هدية وأنت تنتمي هنا", w: [0,0,0,0,0,0,3] }
+  ]},
+  { text: "ما الشعور الذي يصف بشكل أدق ما تحمله؟", options: [
+    { text: "الشعور بأنني لست كافياً رغم كل ما أبذل", w: [3,0,0,0,0,0,0] },
+    { text: "الخوف العميق من الوحدة والفقدان", w: [0,3,0,0,0,0,0] },
+    { text: "الخجل من الظهور أو الاحتياج", w: [0,0,3,0,0,0,0] },
+    { text: "صعوبة الثقة والانفتاح على الآخرين", w: [0,0,0,3,0,0,0] },
+    { text: "الإحساس المستمر بالظلم وعدم الإنصاف", w: [0,0,0,0,3,0,0] },
+    { text: "الإرهاق من العطاء المستمر دون حدود", w: [0,0,0,0,0,3,0] },
+    { text: "الشعور بالغربة حتى وسط من أحبهم", w: [0,0,0,0,0,0,3] }
+  ]}
+];
+
+const wounds = [
+  {
+    id: 0,
+    icon: "💔",
+    name: "جرح الرفض",
+    subtitle: "أنا لست كافياً",
+    color: "#c0392b",
+    desc: "جرح الرفض يجعل الإنسان يشعر في أعماقه أنه غير مستحق للحب والقبول كما هو. يتجلى في السعي المستمر للكمال، والتردد في إظهار الضعف، والخوف الدائم من اكتشاف الآخرين لعيوبه الحقيقية. هذا الجرح كثيراً ما يعود لرسائل تلقاها الطفل — مباشرة أو ضمنياً — تقول إن قيمته مشروطة بأدائه أو سلوكه.",
+    signs: ["السعي للكمال كدرع حماية", "صعوبة قبول المدح والتقدير", "الانتقاد الذاتي القاسي", "التردد في إظهار الاحتياج"],
+    healing: [
+      { step: "أعد كتابة الرسالة الداخلية", text: "ابدأ يومياً بجملة واحدة تقولها لنفسك: 'أنا كافٍ كما أنا الآن، وحبي لنفسي لا يحتاج إذناً من أحد.'" },
+      { step: "اكشف عيوبك لشخص آمن", text: "شارك شيئاً تخجل منه مع شخص تثق به. اكتشف بنفسك أن القبول الحقيقي موجود حتى مع الاعتراف بالضعف." },
+      { step: "فصل القيمة عن الإنجاز", text: "لاحظ متى تقيس نفسك بما تفعله لا بما أنت عليه. ذكّر نفسك أن قيمتك ذاتية وثابتة." },
+      { step: "استكشف المنهج", text: "دورة التكامل — الأجساد السبعة في منهج ممكنون تعمل مباشرة على جذر هذا الجرح." }
+    ]
+  },
+  {
+    id: 1,
+    icon: "🌑",
+    name: "جرح الهجر",
+    subtitle: "سأبقى وحيداً في النهاية",
+    color: "#2c3e50",
+    desc: "جرح الهجر يخلق خوفاً عميقاً من الفقدان والوحدة. يجعل الإنسان يتعلق بشدة بمن يحب، ويقلق من أي ابتعاد مؤقت، ويعيش في توقع مستمر لأن يُترك. غالباً يعود لتجربة فقدان مبكرة — فقد شخص محبوب، أو غياب أحد الوالدين جسدياً أو عاطفياً في الطفولة.",
+    signs: ["التعلق الشديد والغيرة المفرطة", "القلق من أي تغيير في العلاقة", "صعوبة قضاء وقت وحيداً بشكل مريح", "الإلحاح في طلب التطمينات المستمرة"],
+    healing: [
+      { step: "بناء علاقة صحية مع الوحدة", text: "خصص ١٥ دقيقة يومياً لتكون مع نفسك بوعي. الوحدة الاختيارية تختلف تماماً عن الهجر القسري." },
+      { step: "التمييز بين الحاضر والماضي", text: "عندما تشعر بالقلق من ابتعاد شخص، اسأل نفسك: هل هذا ما يحدث الآن فعلاً أم هو خوف قديم يتحدث؟" },
+      { step: "الانتماء لنفسك أولاً", text: "ابنِ علاقة قوية مع ذاتك — حين تصبح مصدر أمانك الأول، تتحرر من ثقل الخوف من الهجر." },
+      { step: "استكشف المنهج", text: "دورة مفاتيح الوضوح لعلاقات الروح في منهج ممكنون تتناول هذا الجرح بعمق." }
+    ]
+  },
+  {
+    id: 2,
+    icon: "😶",
+    name: "جرح الإذلال",
+    subtitle: "أنا عبء ومشكلة",
+    color: "#8e44ad",
+    desc: "جرح الإذلال يجعل الإنسان يشعر بالخزي من احتياجاته ومشاعره وجسده. يجعله يخفي ضعفه، يصعب عليه طلب المساعدة، ويشعر بأنه يُحرج الآخرين بمجرد وجوده. غالباً يعود لبيئة تعلّم فيها الطفل أن يخجل من مشاعره أو احتياجاته أو جسده.",
+    signs: ["صعوبة شديدة في طلب المساعدة", "الشعور الدائم بأنك عبء على الآخرين", "الانتقاد القاسي للجسد والمظهر", "إخفاء المشاعر والاحتياجات"],
+    healing: [
+      { step: "إعادة تعريف الاحتياج", text: "تذكر: الاحتياج ليس ضعفاً — هو إنسانية. كل إنسان يحتاج. الشجاعة الحقيقية هي في الاعتراف بذلك." },
+      { step: "تمرين الرعاية الذاتية اليومية", text: "افعل شيئاً واحداً يومياً يقول 'أنا أستحق الرعاية' — حمام دافئ، وجبة جيدة، استراحة حقيقية." },
+      { step: "إعادة تدريب الصوت الداخلي", text: "عندما يظهر الصوت الناقد، اسأله: هل هذا صحيح فعلاً؟ هل سأقول هذا لشخص أحبه؟" },
+      { step: "استكشف المنهج", text: "تأمل تفتيت الصدمات في منهج ممكنون يعمل مباشرة على تحرير هذه البرمجة العميقة." }
+    ]
+  },
+  {
+    id: 3,
+    icon: "🔒",
+    name: "جرح الخيانة",
+    subtitle: "لا أحد يمكن الوثوق به",
+    color: "#e67e22",
+    desc: "جرح الخيانة يبني جداراً دفاعياً حول القلب. يجعل الإنسان يبقى على حذر دائم، يصعب عليه الانفتاح، ويشكك في نوايا الآخرين حتى أقربهم. غالباً يعود لتجربة خيانة ثقة مؤلمة في مرحلة مبكرة من الحياة — كذب، وعد مكسور، أو تخلٍّ في لحظة ضعف.",
+    signs: ["بناء جدران حماية عالية في العلاقات", "التشكيك في نوايا الآخرين حتى القريبين", "صعوبة التسامح بعد الأذى", "الحساسية الشديدة تجاه الكذب والوعود"],
+    healing: [
+      { step: "التمييز بين الحذر والخوف", text: "الحذر الصحي يحميك — الخوف من الجميع يسجنك. تعلّم تمييز الأشخاص الجديرين بالثقة بدلاً من إغلاق الباب أمام الجميع." },
+      { step: "الشفاء من الخيانات الماضية", text: "اكتب عن تجارب الخيانة التي لم تُعالَج. التعبير عنها خطوة أساسية لتحرير قلبك من ثقلها." },
+      { step: "بناء الثقة تدريجياً", text: "ابدأ بمشاركة أشياء صغيرة مع أشخاص آمنين، ولاحظ النتيجة. الثقة تُبنى بالتجربة التدريجية." },
+      { step: "استكشف المنهج", text: "دورة خيمياء الروح في منهج ممكنون تتناول تحويل جروح الخيانة إلى حكمة وقوة." }
+    ]
+  },
+  {
+    id: 4,
+    icon: "⚖️",
+    name: "جرح الظلم",
+    subtitle: "العالم لا ينصفني",
+    color: "#16a085",
+    desc: "جرح الظلم يجعل الإنسان يشعر باستمرار أنه لا يحصل على ما يستحقه رغم جهده وعطائه. يتجلى في صعوبة قبول المواقف غير العادلة، والشعور بالغضب من التمييز، والدفاع المستمر عن الحقوق. غالباً يعود لبيئة طفولة تعلّم فيها الطفل أن الجهد لا يُكافأ وأن القواعد لا تُطبَّق بالتساوي.",
+    signs: ["الحساسية الشديدة تجاه أي تمييز", "صعوبة القبول بالخسارة أو الإخفاق", "الشعور المستمر بعدم التقدير رغم الجهد", "الغضب السريع من المواقف غير العادلة"],
+    healing: [
+      { step: "تحرير الغضب المكبوت", text: "الغضب من الظلم طبيعي — لكن حمله لسنوات يضرك أنت. ابحث عن طريقة صحية للتعبير عنه وتحريره." },
+      { step: "قبول ما لا تملك تغييره", text: "بعض الأمور غير عادلة فعلاً — لكن قبولها لا يعني الرضا بالذل. يعني تحرير طاقتك للأمور التي تملكها." },
+      { step: "التركيز على عدلك مع نفسك", text: "اسأل: هل أنا عادل مع نفسي؟ هل أعطيني ما أستحق من راحة وتقدير واهتمام؟" },
+      { step: "استكشف المنهج", text: "دورة الاتزان الثلاثي في منهج ممكنون تساعدك على إيجاد التوازن الحقيقي بين العطاء والأخذ." }
+    ]
+  },
+  {
+    id: 5,
+    icon: "🫂",
+    name: "جرح العبودية",
+    subtitle: "أنا موجود لأرضي الآخرين",
+    color: "#27ae60",
+    desc: "جرح العبودية يجعل الإنسان يضع احتياجات الآخرين دائماً فوق احتياجاته. يصعب عليه قول لا، يشعر بالذنب عند الاهتمام بنفسه، ويعطي بلا حدود حتى يصل للإرهاق. غالباً يعود لبيئة تعلّم فيها أن الحب يُكتسب بالعطاء والإرضاء، وأن وضع حدود يعني الأنانية.",
+    signs: ["صعوبة شديدة في قول لا", "الشعور بالذنب عند الاهتمام بالنفس", "الإرهاق المستمر من العطاء بلا حدود", "تأجيل احتياجاته لآخر القائمة دائماً"],
+    healing: [
+      { step: "تعلّم فن الحدود الصحية", text: "الحدود ليست جداراً — هي احترام لنفسك وللعلاقة. ابدأ بحد صغير واحد هذا الأسبوع وانظر ماذا يحدث." },
+      { step: "إعادة تعريف الحب", text: "الحب الحقيقي لا يتطلب التضحية بنفسك. أنت لا تحتاج لكسب حق الوجود والحب — أنت تستحقه بطبيعتك." },
+      { step: "الاهتمام بنفسك أولاً", text: "مثل أقنعة الطائرة — ضع أقنعتك أولاً. لن تستطيع إعطاء الآخرين من فراغ. رعاية نفسك هي أساس رعاية الآخرين." },
+      { step: "استكشف المنهج", text: "دورة صناعة الواقع في منهج ممكنون تعلمك كيف تكون مصدر طاقتك بدلاً من أن تستنزفها في إرضاء الآخرين." }
+    ]
+  },
+  {
+    id: 6,
+    icon: "🌌",
+    name: "جرح النبذ",
+    subtitle: "أنا مختلف ولا أنتمي",
+    color: "#1a6abf",
+    desc: "جرح النبذ يجعل الإنسان يشعر بالغربة والاختلاف حتى وسط من يحب. يؤمن في أعماقه أنه لا ينتمي لأي مكان تماماً، وأن اختلافه يُبعده عن الآخرين. غالباً يعود لطفولة لم يُقبل فيها اختلافه — كان مختلفاً في طريقة تفكيره أو شعوره أو رؤيته للعالم ولم يجد من يفهمه.",
+    signs: ["الشعور بالغربة حتى وسط الأحباء", "صعوبة الانتماء لأي مجموعة بشكل كامل", "الشعور بأن أحداً لا يفهمه حقاً", "عالم داخلي غني جداً لكن صعب التعبير عنه"],
+    healing: [
+      { step: "إعادة تعريف الاختلاف", text: "اختلافك ليس عيباً — هو هديتك للعالم. الأشخاص الذين غيّروا التاريخ كانوا مختلفين عن زمانهم." },
+      { step: "البحث عن قبيلتك الحقيقية", text: "لست مختلفاً عن الجميع — أنت مختلف عن البعض ومشابه لأناس لم تلتقِ بهم بعد. ابحث عن من يشاركونك عمق رؤيتك." },
+      { step: "تعلّم التعبير عن عالمك الداخلي", text: "سواء بالكتابة أو الفن أو الحوار — تعلّم كيف تُترجم عمقك الداخلي لكلمات يفهمها الآخرون." },
+      { step: "استكشف المنهج", text: "مجتمع ممكنون هو قبيلتك — أناس يفهمون عمق رحلتك الروحية ويشاركونك هذا الطريق." }
+    ]
+  }
+];
+
+let scores = [0,0,0,0,0,0,0];
+let currentQ = 0;
+
+function startQuiz() {
+  document.getElementById('heroSection').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  document.getElementById('qTotal').textContent = questions.length;
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[currentQ];
+  const total = questions.length;
+  const pct = Math.round((currentQ/total)*100);
+  document.getElementById('qNum').textContent = currentQ+1;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('pct').textContent = pct+'%';
+
+  const icons = ['🌱','🌿','✨','💫','🔮','🌊','⚡','🪬','💙','🌙','🔥','🌸','🦋','🌺','💎','🌈','⭐','🕊️','🌻','💜','🎯'];
+  const card = document.getElementById('questionCard');
+  card.innerHTML = `
+    <div class="q-card">
+      <div class="q-num">✦ سؤال ${currentQ+1} من ${total}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.options.map((o,i)=>`
+          <button class="opt-btn" onclick="answer(${i})">
+            <span class="opt-icon">${icons[i] || '•'}</span>
+            <span>${o.text}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+}
+
+function answer(idx) {
+  const q = questions[currentQ];
+  q.options[idx].w.forEach((v,i)=>{ scores[i]+=v; });
+  document.querySelectorAll('.opt-btn')[idx].classList.add('selected');
+  setTimeout(()=>{
+    currentQ++;
+    if(currentQ < questions.length) { renderQ(); }
+    else { showLoading(); }
+  }, 400);
+}
+
+function showLoading() {
+  document.getElementById('quizSection').style.display = 'none';
+  document.getElementById('loadingSection').style.display = 'block';
+  let p = 0;
+  const bar = document.getElementById('loadingBar');
+  const msgs = ['جاري تحليل إجاباتك...','نرسم خريطة روحك...','نكشف جرحك الأساسي...','لحظات أخيرة...'];
+  let mi = 0;
+  const iv = setInterval(()=>{
+    p += Math.random()*8+3;
+    if(p>95) p=95;
+    bar.style.width=p+'%';
+    if(p>25&&mi<1){mi=1;document.querySelector('.loading-text').textContent=msgs[1];}
+    if(p>55&&mi<2){mi=2;document.querySelector('.loading-text').textContent=msgs[2];}
+    if(p>80&&mi<3){mi=3;document.querySelector('.loading-text').textContent=msgs[3];}
+  },200);
+  setTimeout(()=>{
+    clearInterval(iv);
+    bar.style.width='100%';
+    setTimeout(()=>showResult(),600);
+  },4000);
+}
+
+function showResult() {
+  document.getElementById('loadingSection').style.display = 'none';
+  const maxScore = Math.max(...scores);
+  const woundIdx = scores.indexOf(maxScore);
+  const w = wounds[woundIdx];
+  const rs = document.getElementById('resultSection');
+  rs.style.display = 'block';
+  rs.innerHTML = `
+    <div class="result-hero">
+      <span class="wound-icon">${w.icon}</span>
+      <div class="wound-name">${w.name}</div>
+      <div class="wound-subtitle">"${w.subtitle}"</div>
+    </div>
+
+    <div class="result-card" style="max-width:700px;margin:0 auto 24px;">
+      <div class="result-section-title">🔍 ما هو جرحك؟</div>
+      <p class="result-text">${w.desc}</p>
+      <div class="result-tags">
+        ${w.signs.map(s=>`<span class="result-tag">${s}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="heal-card" style="max-width:700px;margin:0 auto 24px;">
+      <div class="result-section-title" style="margin-bottom:20px;">✨ خطوات الشفاء</div>
+      ${w.healing.map((h,i)=>`
+        <div class="heal-step">
+          <div class="heal-num">${i+1}</div>
+          <div class="heal-text"><strong>${h.step}:</strong> ${h.text}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="cta-card" style="max-width:700px;margin:0 auto 24px;">
+      <h3>رحلة الشفاء الحقيقية تبدأ هنا</h3>
+      <p>منهج ممكنون مصمم خصيصاً للعمل على الجذور العميقة لهذه الجروح — ليس فقط للتعامل مع الأعراض، بل لتحويل الجرح إلى قوة حقيقية.</p>
+      <a href="https://t.me/Azahouse1" target="_blank" class="cta-btn">✦ ابدأ رحلة الشفاء مع ممكنون</a>
+    </div>
+
+    <div style="text-align:center;padding:0 16px 40px;">
+      <button class="retry-btn" onclick="resetQuiz()">🔄 أعد الاختبار</button>
+    </div>`;
+
+  rs.scrollIntoView({behavior:'smooth'});
+}
+
+function resetQuiz() {
+  scores = [0,0,0,0,0,0,0];
+  currentQ = 0;
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('resultSection').innerHTML = '';
+  document.getElementById('heroSection').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

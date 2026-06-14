@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - claude/aza-audio-playback-eas-lsyo27
-      - main
   workflow_dispatch:
     inputs:
       profile:
@@ -21,8 +20,10 @@ jobs:
     name: Build Android APK
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout app branch
         uses: actions/checkout@v4
+        with:
+          ref: claude/aza-audio-playback-eas-lsyo27
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,23 +40,18 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Initialize EAS project (first run only)
-        run: |
-          eas project:info 2>/dev/null || eas init --id aza-house-audio --force
+      - name: Initialize EAS project
+        run: eas init --slug aza-house --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android APK
         run: |
           PROFILE="${{ github.event.inputs.profile || 'preview' }}"
-          echo "Building profile: $PROFILE"
-          eas build --platform android --profile "$PROFILE" --non-interactive --no-wait
+          echo "Building with profile: $PROFILE"
+          eas build --platform android --profile "$PROFILE" --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Build queued
-        run: |
-          echo ""
-          echo "✅ EAS Build queued successfully!"
-          echo "📱 Check build status at: https://expo.dev/accounts/azasou86/projects/aza-house/builds"
-          echo ""
+      - name: Done
+        run: echo "Build queued! Check https://expo.dev/accounts/azasou86/projects"

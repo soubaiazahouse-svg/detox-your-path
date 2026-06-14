@@ -88,7 +88,7 @@ function MainTabs() {
   );
 }
 
-export default function Navigation() {
+export default function Navigation({ navRef }) {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -100,7 +100,7 @@ export default function Navigation() {
   }
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navRef}>
       <Stack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
         {!user ? (
           <>

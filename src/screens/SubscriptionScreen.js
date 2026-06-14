@@ -13,6 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../context/LanguageContext';
+import { useSubscription } from '../context/SubscriptionContext';
 import { colors, gradients } from '../constants/colors';
 
 const FEATURES = [
@@ -26,6 +27,7 @@ const FEATURES = [
 export default function SubscriptionScreen() {
   const navigation = useNavigation();
   const { t, isRTL } = useLanguage();
+  const { isSubscribed, activateSubscription } = useSubscription();
   const [plan, setPlan] = useState('annual');
 
   const handleSubscribe = () => {
@@ -36,8 +38,12 @@ export default function SubscriptionScreen() {
         { text: t.cancel, style: 'cancel' },
         {
           text: t.subscribe,
-          onPress: () => {
-            Alert.alert('Coming Soon', 'In-app purchases will be available soon!');
+          onPress: async () => {
+            // Activate subscription (replace with real payment when ready)
+            await activateSubscription();
+            Alert.alert('✅ Subscribed!', 'You now have full access to all AZA tracks.', [
+              { text: 'OK', onPress: () => navigation.goBack() },
+            ]);
           },
         },
       ]

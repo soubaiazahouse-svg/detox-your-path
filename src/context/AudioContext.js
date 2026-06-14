@@ -12,7 +12,9 @@ import { getTrackUrl } from '../constants/tracks';
 
 const AudioContext = createContext(null);
 
-export const AudioProvider = ({ children }) => {
+const PREVIEW_LIMIT_MS = 30000; // 30 seconds free preview
+
+export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }) => {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,8 +25,11 @@ export const AudioProvider = ({ children }) => {
   const [queueIndex, setQueueIndex] = useState(0);
   const [isRepeat, setIsRepeat] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
+  const [isPreviewEnded, setIsPreviewEnded] = useState(false);
 
   const audioInitRef = useRef(false);
+  const isSubscribedRef = useRef(isSubscribed);
+  isSubscribedRef.current = isSubscribed;
 
   const ensureAudioInit = async () => {
     if (!audioInitRef.current) {
@@ -49,6 +54,14 @@ export const AudioProvider = ({ children }) => {
     setDurationMillis(status.durationMillis ?? 0);
     setError(null);
 
+    // Enforce 30-second preview for non-subscribers
+    if (!isSubscribedRef.current && status.positionMillis >= PREVIEW_LIMIT_MS && status.isPlaying) {
+      pauseSound();
+      setIsPreviewEnded(true);
+      if (onSubscriptionRequired) onSubscriptionRequired();
+      return;
+    }
+
     if (status.didJustFinish) {
       if (isRepeat) {
         seekTo(0);
@@ -62,6 +75,7 @@ export const AudioProvider = ({ children }) => {
     try {
       setError(null);
       setIsLoading(true);
+      setIsPreviewEnded(false);
       setCurrentTrack(track);
 
       if (trackQueue) {
@@ -81,23 +95,25 @@ export const AudioProvider = ({ children }) => {
   }, [onPlaybackStatusUpdate]);
 
   const togglePlayPause = useCallback(async () => {
+    if (isPreviewEnded && !isSubscribedRef.current) {
+      if (onSubscriptionRequired) onSubscriptionRequired();
+      return;
+    }
     if (isPlaying) {
       await pauseSound();
     } else {
       await resumeSound();
     }
-  }, [isPlaying]);
+  }, [isPlaying, isPreviewEnded]);
 
   const handleNext = useCallback(async () => {
     if (!queue.length) return;
-
     let nextIdx;
     if (isShuffle) {
       nextIdx = Math.floor(Math.random() * queue.length);
     } else {
       nextIdx = (queueIndex + 1) % queue.length;
     }
-
     const nextTrack = queue[nextIdx];
     if (nextTrack) {
       setQueueIndex(nextIdx);
@@ -107,13 +123,10 @@ export const AudioProvider = ({ children }) => {
 
   const handlePrev = useCallback(async () => {
     if (!queue.length) return;
-
-    // If more than 3s in, restart current track
     if (positionMillis > 3000) {
       await seekTo(0);
       return;
     }
-
     const prevIdx = queueIndex === 0 ? queue.length - 1 : queueIndex - 1;
     const prevTrack = queue[prevIdx];
     if (prevTrack) {
@@ -123,6 +136,10 @@ export const AudioProvider = ({ children }) => {
   }, [queue, queueIndex, positionMillis, playTrack]);
 
   const handleSeek = useCallback(async (millis) => {
+    if (!isSubscribedRef.current && millis > PREVIEW_LIMIT_MS) {
+      if (onSubscriptionRequired) onSubscriptionRequired();
+      return;
+    }
     await seekTo(millis);
     setPositionMillis(millis);
   }, []);
@@ -133,6 +150,7 @@ export const AudioProvider = ({ children }) => {
     setIsPlaying(false);
     setPositionMillis(0);
     setDurationMillis(0);
+    setIsPreviewEnded(false);
   }, []);
 
   const toggleRepeat = () => setIsRepeat((v) => !v);
@@ -152,6 +170,7 @@ export const AudioProvider = ({ children }) => {
         error,
         isRepeat,
         isShuffle,
+        isPreviewEnded,
         queue,
         playTrack,
         togglePlayPause,
@@ -163,6 +182,7 @@ export const AudioProvider = ({ children }) => {
         toggleShuffle,
         positionStr: formatDuration(positionMillis),
         durationStr: formatDuration(durationMillis),
+        previewLimitStr: formatDuration(PREVIEW_LIMIT_MS),
       }}
     >
       {children}

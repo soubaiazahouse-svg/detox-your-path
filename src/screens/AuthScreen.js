@@ -44,19 +44,45 @@ export default function AuthScreen() {
       if (mode === 'login') {
         const { error } = await signIn({ email: email.trim(), password });
         if (error) {
-          Alert.alert('Error', t.loginError);
+          const msg = error.message?.toLowerCase() || '';
+          if (msg.includes('email not confirmed')) {
+            Alert.alert(
+              language === 'ar' ? 'تأكيد الإيميل' : 'Email Not Confirmed',
+              language === 'ar'
+                ? 'يرجى فتح بريدك الإلكتروني والضغط على رابط التأكيد أولاً.'
+                : 'Please check your email and click the confirmation link first.',
+            );
+          } else if (msg.includes('invalid login')) {
+            Alert.alert('Error', t.loginError);
+          } else {
+            Alert.alert('Error', error.message || t.loginError);
+          }
         }
-        // AuthContext picks up the new session automatically
       } else {
-        const { error } = await signUp({ email: email.trim(), password, fullName });
+        const { data, error } = await signUp({ email: email.trim(), password, fullName });
         if (error) {
-          Alert.alert('Error', t.signupError);
-        } else {
+          const msg = error.message?.toLowerCase() || '';
+          if (msg.includes('already registered') || msg.includes('already been registered')) {
+            Alert.alert(
+              language === 'ar' ? 'حساب موجود' : 'Account Exists',
+              language === 'ar'
+                ? 'هذا الإيميل مسجّل بالفعل. حاول تسجيل الدخول.'
+                : 'This email is already registered. Try logging in.',
+              [{ text: 'OK', onPress: () => setMode('login') }]
+            );
+          } else {
+            Alert.alert('Error', error.message || t.signupError);
+          }
+        } else if (data?.user && !data.user.confirmed_at) {
           Alert.alert(
-            'Account Created',
-            'Please check your email to confirm your account, then login.',
+            language === 'ar' ? 'تحقق من إيميلك' : 'Check Your Email',
+            language === 'ar'
+              ? 'تم إرسال رابط تأكيد لبريدك. افتحه ثم سجّل الدخول.\n\nأو اطلب من المسؤول تعطيل تأكيد الإيميل.'
+              : 'A confirmation link was sent to your email. Open it then login.\n\nOr disable email confirmation in Supabase dashboard.',
             [{ text: 'OK', onPress: () => setMode('login') }]
           );
+        } else {
+          // Email confirmation disabled — user is automatically signed in
         }
       }
     } catch (err) {

@@ -34,11 +34,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
 
       - name: Initialize EAS project
         run: eas init --slug aza-house --non-interactive
@@ -54,4 +51,4 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Done
-        run: echo "Build queued! Check https://expo.dev/accounts/azasou86/projects"
+        run: echo "✅ Build queued! Check https://expo.dev/accounts/azasou86/projects"

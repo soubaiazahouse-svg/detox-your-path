@@ -37,18 +37,13 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Initialize EAS project
-        run: eas init --slug aza-house --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
       - name: Build Android APK
         run: |
           PROFILE="${{ github.event.inputs.profile || 'preview' }}"
           echo "Building with profile: $PROFILE"
-          eas build --platform android --profile "$PROFILE" --non-interactive
+          eas build --platform android --profile "$PROFILE" --non-interactive --no-wait
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Done
-        run: echo "✅ Build queued! Check https://expo.dev/accounts/azasou86/projects"
+        run: echo "✅ Build queued on Expo servers! Check https://expo.dev/accounts/azasou86/projects"

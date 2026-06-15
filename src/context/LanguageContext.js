@@ -7,13 +7,15 @@ const LanguageContext = createContext(null);
 const LANG_KEY = '@aza_language';
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('ar');
   const t = strings[language];
   const isRTL = language === 'ar';
 
   useEffect(() => {
     AsyncStorage.getItem(LANG_KEY).then((stored) => {
-      if (stored) setLanguage(stored);
+      const lang = stored || 'ar';
+      setLanguage(lang);
+      I18nManager.forceRTL(lang === 'ar');
     });
   }, []);
 

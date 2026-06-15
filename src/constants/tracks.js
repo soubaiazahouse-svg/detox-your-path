@@ -155,6 +155,8 @@ export const CATEGORIES = [
   { id: 'mindful', label: 'Mindful', labelAr: 'يقظة' },
 ];
 
+const GITHUB_AUDIO = 'https://raw.githubusercontent.com/soubaiazahouse-svg/detox-your-path/claude/aza-audio-playback-eas-lsyo27/guided-audio/';
+
 export const GUIDED_SESSIONS = [
   {
     id: 'g1',
@@ -162,10 +164,10 @@ export const GUIDED_SESSIONS = [
     titleAr: 'رحلة النوم',
     description: 'A guided journey into deep restful sleep',
     descriptionAr: 'رحلة صوتية موجهة نحو نوم عميق ومريح',
-    file: 'guided-sleep.mp3',
+    file: `${GITHUB_AUDIO}guided-sleep.mp3`,
     emoji: '🌙',
-    duration: '20 min',
-    durationAr: '٢٠ دقيقة',
+    duration: '11 min',
+    durationAr: '١١ دقيقة',
     color: ['#1a1d38', '#0d0f24'],
   },
   {
@@ -174,12 +176,13 @@ export const GUIDED_SESSIONS = [
     titleAr: 'يقظة الصباح',
     description: 'Activate your mind and body for a powerful day',
     descriptionAr: 'نشّط عقلك وجسدك ليوم مليء بالطاقة',
-    file: 'guided-wake.mp3',
+    file: `${GITHUB_AUDIO}guided-wake.mp3`,
     emoji: '☀️',
-    duration: '15 min',
-    durationAr: '١٥ دقيقة',
+    duration: '28 min',
+    durationAr: '٢٨ دقيقة',
     color: ['#2d1b00', '#1a0a00'],
   },
 ];
 
-export const getTrackUrl = (file) => `${R2_BASE_URL}${file}`;
+export const getTrackUrl = (file) =>
+  file.startsWith('http') ? file : `${R2_BASE_URL}${file}`;

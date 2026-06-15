@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   Modal,
   ScrollView,
+  Share,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -48,6 +49,15 @@ export default function FullPlayerScreen() {
 
   const [showTimerModal, setShowTimerModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const handleShare = async () => {
+    if (!currentTrack) return;
+    const trackName = language === 'ar' ? currentTrack.titleAr : currentTrack.title;
+    const message = language === 'ar'
+      ? `🎵 أستمع الآن إلى "${trackName}" (${currentTrack.hz}) في تطبيق AZA للشفاء بالصوت`
+      : `🎵 Listening to "${trackName}" (${currentTrack.hz}) on AZA Sound Healing`;
+    try { await Share.share({ message }); } catch {}
+  };
 
   if (!currentTrack) {
     return (
@@ -194,7 +204,7 @@ export default function FullPlayerScreen() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.bottomBtn}>
+        <TouchableOpacity style={styles.bottomBtn} onPress={handleShare}>
           <Ionicons name="share-outline" size={24} color={colors.textMuted} />
         </TouchableOpacity>
       </View>

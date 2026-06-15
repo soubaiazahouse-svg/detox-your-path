@@ -125,6 +125,32 @@ export const strings = {
     frequencyBenefits: 'Benefits',
     knowYourFrequency: 'Know Your Frequency',
 
+    // Mood Check-in
+    howAreYou: 'How are you feeling?',
+    moodAnxious: 'Anxious',
+    moodTired: 'Tired',
+    moodUnfocused: 'Unfocused',
+    moodSad: 'Sad',
+    moodCalm: 'Calm',
+    moodRecommended: 'Recommended for you',
+
+    // Streak & Stats
+    dayStreak: 'day streak',
+    thisWeek: 'This week',
+    keepItUp: 'Keep it up!',
+
+    // Weekly Challenge
+    weeklyChallenge: 'Weekly Challenge',
+    challengeGoal: 'Listen 5 days this week',
+    challengeDone: 'Challenge Complete! 🎉',
+    daysOf: 'days of 5',
+
+    // Guided Sessions
+    guidedSessions: 'Guided Sessions',
+    guidedSub: 'Arabic voice-guided audio journeys',
+    startGuided: 'Play',
+    guidedComingSoon: 'Coming Soon',
+
     // Navigation
     home: 'Home',
     music2: 'Music',
@@ -257,6 +283,32 @@ export const strings = {
     frequency: 'التردد',
     frequencyBenefits: 'الفوائد',
     knowYourFrequency: 'تعرف على ترددك',
+
+    // Mood Check-in
+    howAreYou: 'كيف حالك الآن؟',
+    moodAnxious: 'قلق',
+    moodTired: 'متعب',
+    moodUnfocused: 'بدون تركيز',
+    moodSad: 'حزين',
+    moodCalm: 'هادئ',
+    moodRecommended: 'مقترح لك',
+
+    // Streak & Stats
+    dayStreak: 'يوم متواصل',
+    thisWeek: 'هذا الأسبوع',
+    keepItUp: 'استمر هكذا!',
+
+    // Weekly Challenge
+    weeklyChallenge: 'تحدي الأسبوع',
+    challengeGoal: 'استمع ٥ أيام هذا الأسبوع',
+    challengeDone: 'اكتمل التحدي! 🎉',
+    daysOf: 'أيام من ٥',
+
+    // Guided Sessions
+    guidedSessions: 'الجلسات الموجهة',
+    guidedSub: 'جلسات صوتية موجهة باللغة العربية',
+    startGuided: 'تشغيل',
+    guidedComingSoon: 'قريباً',
 
     // Navigation
     home: 'الرئيسية',

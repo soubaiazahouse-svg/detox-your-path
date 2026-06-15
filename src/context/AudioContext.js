@@ -14,7 +14,7 @@ const AudioContext = createContext(null);
 
 const PREVIEW_LIMIT_MS = 30000; // 30 seconds free preview
 
-export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }) => {
+export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired, onTrackPlay }) => {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -123,6 +123,7 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }
       await ensureAudioInit();
       const uri = getTrackUrl(track.file);
       await loadAndPlayTrack(uri, onPlaybackStatusUpdate);
+      if (onTrackPlay) onTrackPlay(track.id);
     } catch (err) {
       setError(err.message);
       setIsLoading(false);

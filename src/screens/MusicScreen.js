@@ -9,13 +9,14 @@ import {
   StatusBar,
   SafeAreaView,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAudio } from '../context/AudioContext';
 import { useLanguage } from '../context/LanguageContext';
 import MiniPlayer from '../components/MiniPlayer';
 import { TRACKS, CATEGORIES } from '../constants/tracks';
-import { colors } from '../constants/colors';
+import { colors, gradients } from '../constants/colors';
 
 export default function MusicScreen() {
   const { t, language, isRTL } = useLanguage();
@@ -55,9 +56,12 @@ export default function MusicScreen() {
         activeOpacity={0.8}
       >
         <View style={[styles.trackRow, isRTL && styles.rtlRow]}>
-          <View style={[styles.emojiWrap, isActive && styles.emojiWrapActive]}>
+          <LinearGradient
+            colors={isActive ? gradients.primary : (item.trackColor || [colors.surfaceLight, colors.surfaceLight])}
+            style={styles.emojiWrap}
+          >
             <Text style={styles.emoji}>{item.emoji}</Text>
-          </View>
+          </LinearGradient>
           <View style={[styles.trackInfo, isRTL && { alignItems: 'flex-end' }]}>
             <Text style={[styles.trackTitle, isActive && styles.trackTitleActive]}>
               {title}
@@ -249,13 +253,9 @@ const styles = StyleSheet.create({
   emojiWrap: {
     width: 52,
     height: 52,
-    backgroundColor: colors.surfaceLight,
     borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  emojiWrapActive: {
-    backgroundColor: `${colors.primary}33`,
   },
   emoji: {
     fontSize: 26,

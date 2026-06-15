@@ -169,7 +169,7 @@ export default function HomeScreen() {
                     onPress={() => handlePlay(track)}
                   >
                     <LinearGradient
-                      colors={currentTrack?.id === track.id ? gradients.primary : ['#1a1d38', '#14173a']}
+                      colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || ['#1a1d38', '#14173a'])}
                       style={styles.moodTrackInner}
                     >
                       <Text style={styles.moodTrackEmoji}>{track.emoji}</Text>
@@ -238,7 +238,7 @@ export default function HomeScreen() {
           {timeRec.tracks.map((track) => (
             <TouchableOpacity key={track.id} style={styles.recCard} onPress={() => handlePlay(track)} activeOpacity={0.85}>
               <LinearGradient
-                colors={currentTrack?.id === track.id ? gradients.primary : gradients.card}
+                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
                 style={styles.recCardInner}
               >
                 <Text style={styles.recEmoji}>{track.emoji}</Text>
@@ -264,7 +264,7 @@ export default function HomeScreen() {
           {featuredTracks.map((track) => (
             <TouchableOpacity key={track.id} style={styles.trackCard} onPress={() => handlePlay(track)} activeOpacity={0.85}>
               <LinearGradient
-                colors={currentTrack?.id === track.id ? gradients.primary : gradients.card}
+                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
                 style={styles.trackCardInner}
               >
                 <Text style={styles.trackEmoji}>{track.emoji}</Text>
@@ -291,12 +291,18 @@ export default function HomeScreen() {
             activeOpacity={0.8}
           >
             <View style={[styles.listItemContent, isRTL && styles.rtlRow]}>
-              <View style={[styles.listEmoji, currentTrack?.id === track.id && styles.listEmojiActive]}>
+              <LinearGradient
+                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || [colors.surfaceLight, colors.surfaceLight])}
+                style={styles.listEmoji}
+              >
                 <Text style={styles.listEmojiText}>{track.emoji}</Text>
-              </View>
+              </LinearGradient>
               <View style={[styles.listText, isRTL && { alignItems: 'flex-end' }]}>
                 <Text style={styles.listTitle}>
                   {language === 'ar' ? track.titleAr : track.title}
+                </Text>
+                <Text style={[styles.listDesc, isRTL && { textAlign: 'right' }]} numberOfLines={1}>
+                  {language === 'ar' ? track.descriptionAr : track.description}
                 </Text>
                 <View style={[styles.hzBadge, isRTL && { alignSelf: 'flex-end' }]}>
                   <Text style={styles.hzBadgeText}>{track.hz}</Text>
@@ -403,11 +409,11 @@ const styles = StyleSheet.create({
   listItem: { marginHorizontal: 20, marginBottom: 10, backgroundColor: colors.surface, borderRadius: 16, borderWidth: 1, borderColor: colors.border },
   listItemActive: { borderColor: colors.primary, backgroundColor: colors.surfaceLight },
   listItemContent: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 14 },
-  listEmoji: { width: 48, height: 48, borderRadius: 12, backgroundColor: colors.surfaceLight, justifyContent: 'center', alignItems: 'center' },
-  listEmojiActive: { backgroundColor: `${colors.primary}33` },
+  listEmoji: { width: 50, height: 50, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
   listEmojiText: { fontSize: 24 },
   listText: { flex: 1 },
-  listTitle: { color: colors.text, fontSize: 15, fontWeight: '600', marginBottom: 4 },
+  listTitle: { color: colors.text, fontSize: 15, fontWeight: '600', marginBottom: 2 },
+  listDesc: { color: colors.textMuted, fontSize: 11, lineHeight: 15, marginBottom: 5 },
   hzBadge: { alignSelf: 'flex-start', backgroundColor: `${colors.accent}22`, borderRadius: 6, paddingHorizontal: 8, paddingVertical: 2, borderWidth: 1, borderColor: `${colors.accent}44` },
   hzBadgeText: { color: colors.accent, fontSize: 10, fontWeight: '700', letterSpacing: 0.5 },
 });

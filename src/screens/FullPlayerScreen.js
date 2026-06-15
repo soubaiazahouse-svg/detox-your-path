@@ -10,6 +10,7 @@ import {
   Modal,
   ScrollView,
   Share,
+  Linking,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -54,9 +55,23 @@ export default function FullPlayerScreen() {
     if (!currentTrack) return;
     const trackName = language === 'ar' ? currentTrack.titleAr : currentTrack.title;
     const message = language === 'ar'
-      ? `🎵 أستمع الآن إلى "${trackName}" (${currentTrack.hz}) في تطبيق AZA للشفاء بالصوت`
-      : `🎵 Listening to "${trackName}" (${currentTrack.hz}) on AZA Sound Healing`;
+      ? `🎵 "${trackName}" (${currentTrack.hz}) — استمع معي في تطبيق AZA للشفاء بالصوت ✨`
+      : `🎵 "${trackName}" (${currentTrack.hz}) — Listen with me on AZA Sound Healing ✨`;
     try { await Share.share({ message }); } catch {}
+  };
+
+  const handleWhatsAppShare = async () => {
+    if (!currentTrack) return;
+    const trackName = language === 'ar' ? currentTrack.titleAr : currentTrack.title;
+    const desc = language === 'ar' ? currentTrack.descriptionAr : currentTrack.description;
+    const message = language === 'ar'
+      ? `🎵 "${trackName}" — ${desc}\n(${currentTrack.hz}) في تطبيق AZA للشفاء بالصوت ✨`
+      : `🎵 "${trackName}" — ${desc}\n(${currentTrack.hz}) on AZA Sound Healing ✨`;
+    try {
+      await Linking.openURL(`whatsapp://send?text=${encodeURIComponent(message)}`);
+    } catch {
+      try { await Share.share({ message }); } catch {}
+    }
   };
 
   if (!currentTrack) {
@@ -99,7 +114,7 @@ export default function FullPlayerScreen() {
       {/* Album art */}
       <View style={styles.artSection}>
         <LinearGradient
-          colors={isPlaying ? gradients.primary : ['#1a1d38', '#0d0f24']}
+          colors={currentTrack.trackColor || (isPlaying ? gradients.primary : ['#1a1d38', '#0d0f24'])}
           style={styles.artCircle}
         >
           <Text style={styles.artEmoji}>{currentTrack.emoji}</Text>
@@ -126,6 +141,9 @@ export default function FullPlayerScreen() {
         <View style={styles.hzPill}>
           <Text style={styles.hzText}>{currentTrack.hz}</Text>
         </View>
+        <Text style={[styles.trackDescription, isRTL && { textAlign: 'right' }]} numberOfLines={2}>
+          {description}
+        </Text>
       </View>
 
       {/* Progress */}
@@ -204,8 +222,11 @@ export default function FullPlayerScreen() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.bottomBtn} onPress={handleShare}>
-          <Ionicons name="share-outline" size={24} color={colors.textMuted} />
+        <TouchableOpacity style={styles.whatsappBtn} onPress={handleWhatsAppShare}>
+          <Ionicons name="logo-whatsapp" size={20} color="#25D366" />
+          <Text style={styles.whatsappText}>
+            {language === 'ar' ? 'واتساب' : 'Share'}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -411,6 +432,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 1,
   },
+  trackDescription: {
+    color: 'rgba(255,255,255,0.55)',
+    fontSize: 13,
+    lineHeight: 19,
+    textAlign: 'center',
+    marginTop: 10,
+    paddingHorizontal: 10,
+  },
   progressSection: {
     paddingHorizontal: 20,
     marginBottom: 20,
@@ -476,6 +505,22 @@ const styles = StyleSheet.create({
   },
   bottomBtn: {
     padding: 12,
+  },
+  whatsappBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(37,211,102,0.12)',
+    borderWidth: 1,
+    borderColor: 'rgba(37,211,102,0.35)',
+  },
+  whatsappText: {
+    color: '#25D366',
+    fontSize: 13,
+    fontWeight: '700',
   },
   timerBtn: {
     flexDirection: 'row',

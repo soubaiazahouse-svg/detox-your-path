@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوصلة الروح — اعزيزة السباعي</title>
+<meta name="description" content="اكتشف أين أنت على رحلتك الروحية الآن — بوصلة الروح اختبار روحي عميق مع اعزيزة السباعي">
+<meta property="og:title" content="بوصلة الروح — اعزيزة السباعي">
+<meta property="og:description" content="٢٠ سؤال تكشف مكانك الحقيقي على الرحلة الروحية — ٥ مستويات من الصحوة حتى حمل الضوء">
+<meta property="og:url" content="https://azizasoubai.com/compass.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="بوصلة الروح — اعزيزة السباعي">
+<meta name="twitter:description" content="٢٠ سؤال تكشف مكانك الحقيقي على الرحلة الروحية">
+<link rel="canonical" href="https://azizasoubai.com/compass.html">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f6ff;
+  --bg2: #e4effc;
+  --blue: #1a3a6b;
+  --mid: #1a6abf;
+  --light: #2a8ad4;
+  --text: #0d2144;
+  --text2: #2a4a7a;
+  --text3: #5a7a9a;
+  --border: rgba(26,106,191,0.18);
+  --white: #ffffff;
+  --card: rgba(255,255,255,0.95);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: linear-gradient(160deg, #e8f2ff 0%, #f0f6ff 50%, #e4eeff 100%);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* STARS */
+.stars-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(26,106,191,0.35);
+  animation: floatStar linear infinite;
+}
+@keyframes floatStar {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--mid);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(26,106,191,0.1);
+  transition: all 0.3s;
+}
+.back-btn:hover { background: var(--bg); border-color: var(--mid); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px 40px;
+  position: relative;
+  z-index: 1;
+}
+.hero-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  display: block;
+  animation: compassSpin 6s ease-in-out infinite;
+}
+@keyframes compassSpin {
+  0%   { transform: rotate(-10deg) scale(1); }
+  25%  { transform: rotate(10deg) scale(1.05); }
+  50%  { transform: rotate(-8deg) scale(1); }
+  75%  { transform: rotate(8deg) scale(1.05); }
+  100% { transform: rotate(-10deg) scale(1); }
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(26,106,191,0.1);
+  border: 1px solid rgba(26,106,191,0.25);
+  color: var(--mid);
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.hero h1 span { color: var(--mid); }
+.hero p {
+  color: var(--text3);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto 30px;
+  line-height: 2;
+}
+.hero-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--mid), transparent);
+  margin: 0 auto 50px;
+}
+.start-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--mid), var(--light));
+  color: white;
+  padding: 16px 48px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 24px rgba(26,106,191,0.3);
+  transition: all 0.3s;
+  margin-bottom: 16px;
+}
+.start-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(26,106,191,0.4); }
+.hero-note { color: var(--text3); font-size: 0.88rem; }
+
+/* QUIZ WRAPPER */
+.quiz-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+  display: none;
+  position: relative;
+  z-index: 1;
+}
+
+/* PROGRESS */
+.progress-wrap {
+  margin-bottom: 28px;
+}
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-label { font-size: 13px; color: var(--text3); }
+.progress-label span { font-weight: 700; color: var(--mid); }
+.progress-bar {
+  background: rgba(26,106,191,0.1);
+  border-radius: 20px;
+  height: 6px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, var(--mid), var(--light));
+  transition: width 0.5s ease;
+}
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.2rem;
+  box-shadow: 0 8px 40px rgba(26,106,191,0.1);
+  animation: slideIn 0.4s ease;
+}
+@keyframes slideIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+.q-num {
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.q-text {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  color: var(--text);
+  margin-bottom: 28px;
+  line-height: 1.9;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.opt-btn {
+  padding: 16px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--bg);
+  text-align: right;
+  transition: all 0.22s;
+  line-height: 1.7;
+  font-family: 'Tajawal', sans-serif;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.opt-btn:hover { background: #ddeeff; border-color: var(--mid); color: var(--blue); transform: translateX(-4px); }
+.opt-btn.selected { background: rgba(26,106,191,0.12); border-color: var(--mid); color: var(--blue); }
+.opt-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* LOADING */
+.loading-screen {
+  text-align: center;
+  padding: 60px 20px;
+  display: none;
+  position: relative;
+  z-index: 1;
+}
+.loading-icon {
+  font-size: 72px;
+  display: block;
+  margin-bottom: 24px;
+  animation: compassPulse 1.5s ease-in-out infinite;
+}
+@keyframes compassPulse {
+  0%,100% { transform: rotate(-15deg) scale(1); }
+  50%      { transform: rotate(15deg) scale(1.1); }
+}
+.loading-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.loading-sub { color: var(--text3); font-size: 0.95rem; }
+.loading-bar-wrap { max-width: 300px; margin: 24px auto 0; }
+
+/* RESULT */
+.result-screen {
+  display: none;
+  padding: 20px 0 80px;
+  position: relative;
+  z-index: 1;
+}
+.result-hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+.level-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  display: block;
+  animation: iconBounce 1s ease forwards, iconFloat 3s ease-in-out 1s infinite;
+}
+@keyframes iconBounce {
+  0%   { transform: scale(0.3) translateY(40px); opacity: 0; }
+  60%  { transform: scale(1.15) translateY(-10px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes iconFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.level-name {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.level-subtitle {
+  color: var(--mid);
+  font-size: 1.05rem;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 0 16px 24px;
+  box-shadow: 0 8px 40px rgba(26,106,191,0.1);
+  animation: slideIn 0.6s ease;
+}
+.result-section-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--blue);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.result-text {
+  color: var(--text2);
+  line-height: 2;
+  font-size: 0.97rem;
+  margin-bottom: 0;
+}
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.result-tag {
+  background: rgba(26,106,191,0.08);
+  border: 1px solid rgba(26,106,191,0.2);
+  color: var(--mid);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+.heal-card {
+  background: linear-gradient(135deg, #e8f2ff, #f0f6ff);
+  border: 1px solid rgba(26,106,191,0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 0 16px 24px;
+  animation: slideIn 0.8s ease;
+}
+.heal-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(26,106,191,0.1);
+}
+.heal-step:last-child { border-bottom: none; }
+.heal-num {
+  background: var(--mid);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.heal-text { color: var(--text2); line-height: 1.9; font-size: 0.95rem; }
+.cta-card {
+  background: linear-gradient(135deg, var(--mid), var(--light));
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 0 16px 24px;
+  text-align: center;
+  color: white;
+  animation: slideIn 1s ease;
+}
+.cta-card h3 { font-family: 'Amiri', serif; font-size: 1.6rem; margin-bottom: 12px; }
+.cta-card p { opacity: 0.9; line-height: 1.9; margin-bottom: 24px; font-size: 0.95rem; }
+.cta-btn {
+  display: inline-block;
+  background: white;
+  color: var(--mid);
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.retry-btn {
+  display: block;
+  margin: 0 auto 0;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text3);
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.retry-btn:hover { border-color: var(--mid); color: var(--mid); }
+
+@media (max-width: 500px) {
+  .q-card { padding: 1.5rem; }
+  .result-card, .heal-card, .cta-card { margin: 0 8px 20px; padding: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- COSMIC BACKGROUND -->
+<div class="stars-canvas" id="starsCanvas"></div>
+
+<a href="/game.html" class="back-btn">← العودة للألعاب</a>
+
+<!-- HERO -->
+<div class="hero" id="heroSection">
+  <span class="hero-icon">🧭</span>
+  <div class="hero-badge">✦ اختبار روحي عميق ✦</div>
+  <h1><span>بوصلة الروح</span></h1>
+  <p>أين أنت على رحلتك الروحية الآن؟ ٢٠ سؤال يكشفان موقعك الحقيقي — من جرس الصحوة الأول حتى حمل الضوء.</p>
+  <div class="hero-divider"></div>
+  <button class="start-btn" onclick="startQuiz()">🧭 اكتشف مكانك الروحي</button>
+  <p class="hero-note">٢٠ سؤال • النتيجة في النهاية فقط • مجاني تماماً</p>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-wrapper" id="quizSection">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">السؤال <span id="qNum">1</span> من <span id="qTotal">20</span></span>
+      <span class="progress-label" id="pct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="questionCard"></div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loadingSection">
+  <span class="loading-icon">🧭</span>
+  <p class="loading-text">بوصلة الروح تحدد موقعك...</p>
+  <p class="loading-sub">نرسم مكانك على الرحلة الروحية</p>
+  <div class="loading-bar-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="loadingBar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result-screen" id="resultSection"></div>
+
+<script>
+// ──────────────────── STARS ────────────────────
+(function createStars() {
+  const canvas = document.getElementById('starsCanvas');
+  const count = 40;
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 4 + 2;
+    const left = Math.random() * 100;
+    const duration = Math.random() * 20 + 15;
+    const delay = Math.random() * 20;
+    const bottom = Math.random() * -20;
+    star.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${left}%;
+      bottom:${bottom}%;
+      animation-duration:${duration}s;
+      animation-delay:${delay}s;
+      opacity:0;
+    `;
+    canvas.appendChild(star);
+  }
+})();
+
+// ──────────────────── DATA ────────────────────
+const levels = [
+  {
+    icon: "🌱",
+    name: "جرس الصحوة",
+    subtitle: "شيء ما يوقظك من الداخل...",
+    desc: "أنت في بداية رحلة مباركة. جرس داخلي بدأ يرن — شعور بأن الحياة كما تعيشها ليست كل ما هو متاح لك. هذا الشعور بالفراغ أو السؤال ليس ضعفاً — إنه الدعوة الأولى للصحوة. الروح تطرق بابك.",
+    signs: ["شعور أن شيئاً ما ناقص في حياتك", "تساؤلات عن المعنى والهدف", "تعب من الأنماط المتكررة", "بحث عن شيء لا تعرف اسمه بعد"],
+    steps: [
+      {title: "استمع للجرس", text: "الشعور بعدم الاكتمال ليس عدواً — هو دليلك. لا تهرب منه، اجلس معه وتساءل: ماذا يريد أن يقول لي؟"},
+      {title: "ابدأ بسؤال واحد", text: "اختر سؤالاً روحياً واحداً يشغلك واقرأ عنه لمدة أسبوع. البداية دائماً سؤال واحد صادق."},
+      {title: "أنشئ لحظة صمت يومية", text: "5 دقائق يومياً في صمت كامل — بلا هاتف ولا تفكير. هذا أول خطوة لسماع صوتك الداخلي."},
+      {title: "انضم لمجتمع ممكنون", text: "محيطك يشكل وعيك. ابدأ بالتواصل مع أناس في رحلة مشابهة — هذا يسرّع صحوتك بشكل لا تصدقينه."}
+    ]
+  },
+  {
+    icon: "🔍",
+    name: "طالب الحقيقة",
+    subtitle: "أنت تبحث — والحقيقة تبحث عنك",
+    desc: "بدأت تسأل الأسئلة الكبيرة ولا تكتفي بالإجابات السهلة. أنت تشك في القديم وتبحث عن معنى أعمق. هذا البحث الصادق هو من أشرف المقامات — لأن الحقيقة لا تُعطى لمن لا يبحث عنها.",
+    signs: ["متابعة محتوى روحي وتنموي باستمرار", "شك في المعتقدات والأفكار القديمة", "رغبة حقيقية في التغيير", "تقلبات بين اليقين والتساؤل"],
+    steps: [
+      {title: "عمّق البحث", text: "من القراءة إلى التطبيق — اختر ممارسة روحية واحدة وطبّقها 21 يوماً متواصلة."},
+      {title: "اكتب ما تشعر به", text: "اليوميات الروحية أداة قوية. اكتب كل يوم: ماذا لاحظت؟ ماذا شعرت؟ ما الذي تغيّر؟"},
+      {title: "ثق بتجربتك الخاصة", text: "لا تبحث عن إجابات خارجية فقط — لديك حكمة داخلية. تعلّم الثقة بما تحس وتختبر."},
+      {title: "استكشف منهج ممكنون", text: "منهج ممكنون يلتقي طالب الحقيقة في منتصف الطريق — تعاليم عملية تحوّل البحث لتجربة حية."}
+    ]
+  },
+  {
+    icon: "🌀",
+    name: "السالك",
+    subtitle: "أنت على الطريق وتسير بوعي",
+    desc: "أنت لست فقط تبحث — أنت تسلك. لديك ممارسات روحية، ترى التزامنات، وتشعر بتواصل متزايد مع شيء أكبر منك. حدسك يتطور، وأنماط حياتك تتغير. أنت في قلب الرحلة الأجمل.",
+    signs: ["ممارسة روحية منتظمة تأمل أو صلاة", "رؤية التزامنات والإشارات بشكل متزايد", "حدس داخلي يتطور ويتقوى", "رغبة في الخدمة والعطاء من القلب"],
+    steps: [
+      {title: "عمّق ممارستك", text: "من الكمية إلى الجودة — 10 دقائق تأمل عميق أقوى من ساعة سطحية. ركّز على العمق لا الطول."},
+      {title: "اعمل على الظل", text: "أقوى خطوة في الطريق هي مواجهة ما لا تريد رؤيته في نفسك. الضوء الحقيقي يشمل الظل."},
+      {title: "علّم ما تتعلم", text: "أفضل طريقة لتثبيت ما تعلمته هو مشاركته — حتى لو كان حديثاً واحداً أو منشوراً صادقاً."},
+      {title: "استكشف منهج ممكنون", text: "السالك يحتاج رفيق طريق. منهج ممكنون صُمّم لمن وصل لمستواك — ليأخذك للطبقات الأعمق."}
+    ]
+  },
+  {
+    icon: "💎",
+    name: "المتجلي",
+    subtitle: "نورك يتجلى من الداخل إلى الخارج",
+    desc: "وصلت لمستوى من الوعي يتجلى في طريقة حياتك ونظرتك وعلاقاتك. الخوف لم يعد يتحكم فيك، والحب أصبح حالتك الافتراضية في معظم الأوقات. الكون يعمل معك لأنك أصبحت تعمل معه.",
+    signs: ["سلام داخلي راسخ حتى في الأزمات", "علاقات عميقة وصادقة بلا تنازل عن الذات", "رسالة واضحة وتدفق في العطاء", "مزامنة ملحوظة بين نواياك وما يحدث"],
+    steps: [
+      {title: "أعمق من تعمّق", text: "في مستواك يصبح الصمت الطويل والخلوة الروحية ضرورة لا رفاهية. هل تمنح نفسك هذا؟"},
+      {title: "ادعم من هم في طريقهم", text: "خدمة الآخرين في مستواك تُعيد ملأك — ليس من نقص بل من فيض. من أنت مدعو لخدمته؟"},
+      {title: "ابقَ في التدفق", text: "الخطر الوحيد في مستواك هو الوقوف — الحياة تيار. استمر بالسؤال: ما التالي الذي يُستدعى مني؟"},
+      {title: "تعمّق مع ممكنون", text: "منهج ممكنون في أعلى مستوياته يخاطب من وصل لمستواك — دعوة للطبقات التي تتجاوز ما تعرفه."}
+    ]
+  },
+  {
+    icon: "🌌",
+    name: "حامل الضوء",
+    subtitle: "أنت مرآة للوجود وشاهد على نفسه",
+    desc: "بلغت مستوى يرى الوحدة في الكثرة والنور في الظلام. وجودك نفسه خدمة — تضيء المكان الذي تكون فيه دون أن تسعى لذلك. هذا المقام لا يُدّعى — يُعاش بهدوء وتواضع عميق.",
+    signs: ["حضور يشعر به الآخرون دون كلام", "لا فصل بين الروحي والمادي في حياتك", "حب غير مشروط هو حالتك الافتراضية", "وجودك يُلهم من حولك بشكل طبيعي"],
+    steps: [
+      {title: "الخدمة هي طريقك", text: "في مستواك المزيد من التركيز على الذات يُقيّد. انتقل من 'ماذا أريد' إلى 'كيف أخدم'."},
+      {title: "كن في العالم لا منه", text: "تحدياتك في هذا المستوى ليست روحية — هي إنسانية. كيف تعيش هذا النور في الحياة اليومية العادية؟"},
+      {title: "شارك الآخرين هذه الرحلة", text: "حاملو الضوء مدعوون لتسهيل صحوة من حولهم. ما هي الطريقة الطبيعية لك لفعل ذلك؟"},
+      {title: "انضم لمجتمع ممكنون", text: "حاملو الضوء يحتاجون لبعض — مجتمع ممكنون يجمع من وصلوا لهذا المستوى من الوعي."}
+    ]
+  }
+];
+
+const Q = [
+  {
+    text: "ما الشعور الأكثر حضوراً في حياتك الآن؟",
+    opts: [
+      {t: "شعور أن شيئاً ما غير صحيح لكنني لا أعرف ما هو بالضبط", w: [3,1,0,0,0]},
+      {t: "تساؤل مستمر عن المعنى والهدف — لماذا أنا هنا؟", w: [1,3,1,0,0]},
+      {t: "شوق لشيء أعمق مما أعيشه وأحس به أحياناً بوضوح", w: [0,1,3,1,0]},
+      {t: "حضور وسلام داخلي يتزايد يوماً بعد يوم", w: [0,0,1,3,1]},
+      {t: "امتنان عميق للوجود كما هو — في كل لحظة ومع كل شيء", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تصف علاقتك بالصمت والوحدة؟",
+    opts: [
+      {t: "أهرب من الصمت — يزعجني ويملأني بأفكار مزعجة", w: [3,1,0,0,0]},
+      {t: "أحياناً أجد راحة في الصمت لكنه يبقى غير مريح كثيراً", w: [1,3,1,0,0]},
+      {t: "أمارس التأمل أو لحظات الصمت بانتظام وأجد فيه قيمة", w: [0,1,3,1,0]},
+      {t: "الصمت صديقي الحقيقي — أجد فيه وضوحاً وإلهاماً عميقاً", w: [0,0,1,3,1]},
+      {t: "أنا دائماً في صمت داخلي عميق حتى وسط أشد الضجيج", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما علاقتك بالصدف والتزامنات في حياتك؟",
+    opts: [
+      {t: "لا أولي اهتماماً لها — هي مجرد مصادفات لا معنى لها", w: [3,1,0,0,0]},
+      {t: "أبدأ ألاحظها وتثير فضولي لكنني لا أفهمها بعد", w: [1,3,1,0,0]},
+      {t: "أراها كثيراً وأشعر أن الكون يتحدث معي من خلالها", w: [0,1,3,1,0]},
+      {t: "التزامنات جزء طبيعي من حياتي اليومية — أستعملها كبوصلة", w: [0,0,1,3,1]},
+      {t: "أنا والكون في حوار مستمر — كل شيء رسالة ومعنى", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تشعر تجاه الأشخاص الذين يختلفون عنك جوهرياً في الأفكار والقيم؟",
+    opts: [
+      {t: "أجد صعوبة حقيقية في تقبلهم وأشعر أحياناً بتهديد منهم", w: [3,1,0,0,0]},
+      {t: "أحاول التفهم لكنني أتجادل وأتعصب أحياناً", w: [1,3,1,0,0]},
+      {t: "أحترم الاختلاف وأرى فيه ثراءً حقيقياً لتجربتي", w: [0,1,3,1,0]},
+      {t: "كل وجهة نظر تحمل جزءاً من الحقيقة — أتعلم من الجميع", w: [0,0,1,3,1]},
+      {t: "لا أرى سوى الوعي يتجلى بأشكال مختلفة في كل إنسان", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما علاقتك بجسدك ومشاعرك الجسدية؟",
+    opts: [
+      {t: "علاقة صعبة — أتجاهله كثيراً أو أنتقده باستمرار", w: [3,1,0,0,0]},
+      {t: "أبدأ أفهم أنه يحمل رسائل لكنني لا أعرف كيف أستمع له", w: [1,3,1,0,0]},
+      {t: "أستمع لجسدي وأعتني به كمركبة للروح وشريك في الرحلة", w: [0,1,3,1,0]},
+      {t: "جسدي دليلي الأول — حكمته لا تخطئ وأثق به كثيراً", w: [0,0,1,3,1]},
+      {t: "جسدي وروحي شيء واحد متكامل — لا أرى فصلاً بينهما", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما موقفك من الخوف حين يظهر في حياتك؟",
+    opts: [
+      {t: "الخوف يتحكم في كثير من قراراتي دون أن أشعر أحياناً", w: [3,1,0,0,0]},
+      {t: "أعرف أن بعض قراراتي مبنية على الخوف وأريد التغيير", w: [1,3,1,0,0]},
+      {t: "أتعرف على الخوف حين يظهر وأعمل معه لا ضده", w: [0,1,3,1,0]},
+      {t: "الخوف أصبح معلماً لي — يكشف ما يحتاج شفاء ومحبة", w: [0,0,1,3,1]},
+      {t: "الخوف والحب وجهان لشيء واحد — أراهما بوضوح وتقبل", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "هل لديك ممارسة روحية منتظمة في حياتك؟",
+    opts: [
+      {t: "لا — لم أبدأ بعد أو أحاول أحياناً وأتوقف", w: [3,1,0,0,0]},
+      {t: "أحياناً أقرأ أو أستمع لمحتوى ملهم لكن بدون انتظام", w: [1,3,1,0,0]},
+      {t: "نعم — لدي تأمل أو صلاة أو ممارسة أسير عليها بانتظام", w: [0,1,3,1,0]},
+      {t: "ممارستي أصبحت طريقة حياة لا مجرد روتين في وقت محدد", w: [0,0,1,3,1]},
+      {t: "كل لحظة ممارسة — الحياة كلها تأمل وحضور", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تشعر حين تكون وحدك تماماً بعيداً عن كل الناس؟",
+    opts: [
+      {t: "وحدة مؤلمة — أفضل أن أكون مع الناس دائماً", w: [3,1,0,0,0]},
+      {t: "أتحمله لكنه يجعلني أفكر كثيراً في أشياء مزعجة", w: [1,3,1,0,0]},
+      {t: "أستمتع بوقتي مع نفسي وأجد فيه إلهاماً وراحة حقيقية", w: [0,1,3,1,0]},
+      {t: "الوحدة هدية — أنا معي دائماً وهذه الرفقة أجمل الرفق", w: [0,0,1,3,1]},
+      {t: "لا أشعر بالوحدة أبداً — أنا متصل بكل شيء في كل وقت", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما موقفك من موضوع الموت والفناء؟",
+    opts: [
+      {t: "خوف عميق — موضوع أتجنب التفكير فيه قدر المستطاع", w: [3,1,0,0,0]},
+      {t: "أسئلة كثيرة حوله — ما الذي يأتي بعده؟ هل هناك شيء؟", w: [1,3,1,0,0]},
+      {t: "أراه كتحول لا نهاية — جزء طبيعي من دورة الوجود", w: [0,1,3,1,0]},
+      {t: "الموت جعلني أعيش بشكل أعمق وأكثر حضوراً وامتناناً", w: [0,0,1,3,1]},
+      {t: "ما يتغير الشكل لا يموت — أنا الوعي لا الجسد الفاني", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تشعر حين تنظر للطبيعة — بحر، جبل، سماء، شجرة؟",
+    opts: [
+      {t: "جميلة لكنها مجرد بيئة من حولي ليس لها معنى خاص", w: [3,1,0,0,0]},
+      {t: "تريحني وأشعر أحياناً أنها تخاطبني بطريقة ما", w: [1,3,1,0,0]},
+      {t: "أشعر بتواصل عميق — الطبيعة مرآة تعكس حالتي الداخلية", w: [0,1,3,1,0]},
+      {t: "الطبيعة معلمتي الأولى — أتعلم منها كل يوم بشكل حقيقي", w: [0,0,1,3,1]},
+      {t: "لا فرق بيني وبين الطبيعة — نحن نبع واحد وشيء واحد", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما شعورك نحو البشر بشكل عام في حياتك اليومية؟",
+    opts: [
+      {t: "الناس مصدر تعب وإحباط في معظم الأحيان", w: [3,1,0,0,0]},
+      {t: "بعضهم يرفعني وبعضهم يستنزفني — أحاول الانتقاء بوعي", w: [1,3,1,0,0]},
+      {t: "أرى في كل شخص درساً أو هدية حتى لو كان مؤلماً", w: [0,1,3,1,0]},
+      {t: "أحب البشر — كل واحد منهم يحمل نوراً فريداً وجميلاً", w: [0,0,1,3,1]},
+      {t: "في كل عين أنظر إليها أرى نفسي وأرى الكل", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تتعامل مع الأحداث الصعبة والأزمات في حياتك؟",
+    opts: [
+      {t: "أشعر بالضحية وأتساءل لماذا يحدث هذا لي تحديداً", w: [3,1,0,0,0]},
+      {t: "أبحث عن من أتكلم معه وأطلب مساعدة وأشعر بالإرهاق", w: [1,3,1,0,0]},
+      {t: "أبحث عن الدرس والنمو في كل أزمة وأحاول أن أتعلم", w: [0,1,3,1,0]},
+      {t: "الأزمات أسرع طرق نموي — أرحب بها رغم ثقلها أحياناً", w: [0,0,1,3,1]},
+      {t: "كل شيء في حياتي كان ضرورياً تماماً — لا شيء حدث خطأ", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "هل تتعرف على أفكارك كأفكار لا كحقيقة مطلقة؟",
+    opts: [
+      {t: "لا — أفكاري هي أنا وما أفكر فيه هو الحقيقة", w: [3,1,0,0,0]},
+      {t: "أبدأ أفهم أن بعض أفكاري قد لا تكون حقيقة مطلقة", w: [1,3,1,0,0]},
+      {t: "أراقب أفكاري من مسافة في كثير من الأحيان بوضوح", w: [0,1,3,1,0]},
+      {t: "أرى الأفكار كسحاب يمر — أنا السماء لا السحابة", w: [0,0,1,3,1]},
+      {t: "الوعي الشاهد هو ما أنا عليه — الأفكار تأتي وتذهب", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما مصدر القرار في حياتك في معظم الأوقات؟",
+    opts: [
+      {t: "ما يقوله الآخرون وتوقعات المجتمع والعائلة من حولي", w: [3,1,0,0,0]},
+      {t: "عقلي وتحليلي للمواقف — أفكر كثيراً قبل أي قرار", w: [1,3,1,0,0]},
+      {t: "قلبي وحدسي جنباً إلى جنب مع عقلي — التوازن بينهما", w: [0,1,3,1,0]},
+      {t: "حدسي الداخلي — أثق به فوق كل شيء آخر", w: [0,0,1,3,1]},
+      {t: "أتدفق مع ما يُستدعى مني في كل لحظة دون تخطيط مفرط", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تنظر لأحداث الماضي المؤلمة في حياتك؟",
+    opts: [
+      {t: "ما زلت أحملها وتؤثر على قراراتي ومشاعري اليوم", w: [3,1,0,0,0]},
+      {t: "أعمل على شفائها لكنها لا تزال تظهر في أوقات معينة", w: [1,3,1,0,0]},
+      {t: "تحولت إلى حكمة وقوة — أشكر كل ما مررت به", w: [0,1,3,1,0]},
+      {t: "أرى كل ألم كان معلماً ضرورياً — لا شيء كان خسارة", w: [0,0,1,3,1]},
+      {t: "الماضي لا يوجد إلا في الذاكرة — أنا حر منه تماماً الآن", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما شعورك نحو رسالتك وهدفك من هذه الحياة؟",
+    opts: [
+      {t: "لا أعرف ما هي — هذا السؤال يقلقني أو يثقل عليّ", w: [3,1,0,0,0]},
+      {t: "أبحث عنها وأشعر أنها موجودة لكن لم تتضح لي بعد", w: [1,3,1,0,0]},
+      {t: "بدأت أراها تتضح — أعيش وفق قيمي الحقيقية أكثر فأكثر", w: [0,1,3,1,0]},
+      {t: "أحيا رسالتي بشكل طبيعي في كل ما أفعله يومياً", w: [0,0,1,3,1]},
+      {t: "أنا رسالة في نفسي — وجودي كافٍ وكامل بلا إضافة", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف تشعر حين تساعد شخصاً ما؟",
+    opts: [
+      {t: "أساعد لأنني أريد أن يُحبني أو يُقدّرني أو يشكرني", w: [3,1,0,0,0]},
+      {t: "أساعد لأن ذلك يشعرني بالرضا ويريح ضميري", w: [1,3,1,0,0]},
+      {t: "المساعدة تأتي من حب حقيقي لا من حاجة لشيء في المقابل", w: [0,1,3,1,0]},
+      {t: "المساعدة تدفق طبيعي — لا أحتاج سبباً لأعطي", w: [0,0,1,3,1]},
+      {t: "أنا أساعد نفسي حين أساعد الآخر — نحن امتداد لبعض", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "ما علاقتك بالمال والوفرة المادية؟",
+    opts: [
+      {t: "قلق مستمر من شُح المال — يشغل معظم تفكيري", w: [3,1,0,0,0]},
+      {t: "أريد الوفرة لكن أحياناً أشعر بتعارض مع قيمي الروحية", w: [1,3,1,0,0]},
+      {t: "أرى المال كطاقة — أجذبه بوعي وأنفقه بوعي ونية", w: [0,1,3,1,0]},
+      {t: "الوفرة حالة داخلية قبل أن تكون خارجية — أشعر بها", w: [0,0,1,3,1]},
+      {t: "كل ما أحتاجه يأتي في وقته — أنا في تدفق مع الكون", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "كيف يبدو يومك حين تستيقظ صباحاً؟",
+    opts: [
+      {t: "ثقل وإرهاق — أتمنى لو أنام أكثر وأتجنب اليوم", w: [3,1,0,0,0]},
+      {t: "متقلب — أيام جيدة وأيام صعبة بلا نمط واضح", w: [1,3,1,0,0]},
+      {t: "امتنان وترقب — أنظر لليوم كفرصة جديدة", w: [0,1,3,1,0]},
+      {t: "هدوء وحضور — أبدأ بلحظة ممتنة قبل أي شيء", w: [0,0,1,3,1]},
+      {t: "نعمة الوجود تلمسني في اللحظة الأولى من الاستيقاظ", w: [0,0,0,1,3]}
+    ]
+  },
+  {
+    text: "اختر الجملة الأقرب لحقيقتك الداخلية الآن:",
+    opts: [
+      {t: "أريد أن أشعر بشيء أعمق وأكثر معنى مما أعيشه الآن", w: [3,1,0,0,0]},
+      {t: "أبحث بصدق عن الحقيقة وأعرف أنها موجودة في مكان ما", w: [1,3,1,0,0]},
+      {t: "أنا في رحلة واعية وأرى التحول في نفسي بوضوح", w: [0,1,3,1,0]},
+      {t: "أعيش معظم أوقاتي في سلام وتدفق وامتنان حقيقي", w: [0,0,1,3,1]},
+      {t: "الوجود معجزة أعيش فيها كل لحظة بكل جوارحي", w: [0,0,0,1,3]}
+    ]
+  }
+];
+
+// ──────────────────── STATE ────────────────────
+let scores = [0, 0, 0, 0, 0];
+let currentQ = 0;
+
+const OPT_ICONS = ['🌟','💫','✨','🌙','⭐','🔮','🌸','🦋','💎','🌈','🕊️','🌿','🌊','🔥','🪬','💙','🌺','⚡','🌻','🎯'];
+
+// ──────────────────── QUIZ ────────────────────
+function startQuiz() {
+  document.getElementById('heroSection').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  document.getElementById('qTotal').textContent = Q.length;
+  renderQ();
+}
+
+function renderQ() {
+  const q = Q[currentQ];
+  const total = Q.length;
+  const pct = Math.round((currentQ / total) * 100);
+  document.getElementById('qNum').textContent = currentQ + 1;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
+
+  const card = document.getElementById('questionCard');
+  card.innerHTML = `
+    <div class="q-card">
+      <div class="q-num">✦ سؤال ${currentQ + 1} من ${total}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.opts.map((o, i) => `
+          <button class="opt-btn" onclick="answer(${i})">
+            <span class="opt-icon">${OPT_ICONS[i % OPT_ICONS.length]}</span>
+            <span>${o.t}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+}
+
+function answer(idx) {
+  const weights = Q[currentQ].opts[idx].w;
+  weights.forEach((v, i) => { scores[i] += v; });
+  document.querySelectorAll('.opt-btn')[idx].classList.add('selected');
+  setTimeout(() => {
+    currentQ++;
+    if (currentQ < Q.length) {
+      renderQ();
+    } else {
+      showLoading();
+    }
+  }, 350);
+}
+
+// ──────────────────── LOADING ────────────────────
+function showLoading() {
+  document.getElementById('quizSection').style.display = 'none';
+  document.getElementById('loadingSection').style.display = 'block';
+
+  let p = 0;
+  const bar = document.getElementById('loadingBar');
+  const textEl = document.querySelector('.loading-text');
+  const msgs = [
+    'بوصلة الروح تحدد موقعك...',
+    'نقيس عمق رحلتك الروحية...',
+    'نرسم مكانك على الطريق...',
+    'لحظات أخيرة من الوضوح...'
+  ];
+  let mi = 0;
+
+  const iv = setInterval(() => {
+    p += Math.random() * 8 + 3;
+    if (p > 95) p = 95;
+    bar.style.width = p + '%';
+    if (p > 25 && mi < 1) { mi = 1; textEl.textContent = msgs[1]; }
+    if (p > 55 && mi < 2) { mi = 2; textEl.textContent = msgs[2]; }
+    if (p > 80 && mi < 3) { mi = 3; textEl.textContent = msgs[3]; }
+  }, 200);
+
+  setTimeout(() => {
+    clearInterval(iv);
+    bar.style.width = '100%';
+    setTimeout(() => showResult(), 600);
+  }, 4000);
+}
+
+// ──────────────────── RESULT ────────────────────
+function showResult() {
+  document.getElementById('loadingSection').style.display = 'none';
+
+  const maxScore = Math.max(...scores);
+  const levelIdx = scores.indexOf(maxScore);
+  const lv = levels[levelIdx];
+
+  const rs = document.getElementById('resultSection');
+  rs.style.display = 'block';
+  rs.innerHTML = `
+    <div class="result-hero">
+      <span class="level-icon">${lv.icon}</span>
+      <div class="level-name">${lv.name}</div>
+      <div class="level-subtitle">"${lv.subtitle}"</div>
+    </div>
+
+    <div class="result-card" style="max-width:700px;margin:0 auto 24px;">
+      <div class="result-section-title">🧭 أين أنت الآن؟</div>
+      <p class="result-text">${lv.desc}</p>
+      <div class="result-tags">
+        ${lv.signs.map(s => `<span class="result-tag">${s}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="heal-card" style="max-width:700px;margin:0 auto 24px;">
+      <div class="result-section-title" style="margin-bottom:20px;">✨ خطواتك التالية</div>
+      ${lv.steps.map((s, i) => `
+        <div class="heal-step">
+          <div class="heal-num">${i + 1}</div>
+          <div class="heal-text"><strong>${s.title}:</strong> ${s.text}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="cta-card" style="max-width:700px;margin:0 auto 24px;">
+      <h3>رحلتك الروحية تنتظرك</h3>
+      <p>منهج ممكنون مصمم ليلتقيك في المكان الذي أنت فيه الآن — ويأخذك إلى الطبقة التالية من الوعي والتحول الحقيقي.</p>
+      <a href="https://t.me/Azahouse1" target="_blank" class="cta-btn">✦ انضم لمجتمع ممكنون</a>
+    </div>
+
+    <div style="text-align:center;padding:0 16px 40px;">
+      <button class="retry-btn" onclick="resetQuiz()">🔄 أعد الاختبار</button>
+    </div>`;
+
+  rs.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ──────────────────── RESET ────────────────────
+function resetQuiz() {
+  scores = [0, 0, 0, 0, 0];
+  currentQ = 0;
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('resultSection').innerHTML = '';
+  document.getElementById('heroSection').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

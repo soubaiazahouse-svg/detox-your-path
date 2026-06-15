@@ -25,6 +25,29 @@ const getGreeting = () => {
   return 'goodEvening';
 };
 
+const getTimeRecommendations = () => {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 12) {
+    return {
+      labelKey: 'morningPicks',
+      emoji: '☀️',
+      tracks: TRACKS.filter((t) => t.timeOfDay === 'morning'),
+    };
+  }
+  if (h >= 12 && h < 18) {
+    return {
+      labelKey: 'afternoonPicks',
+      emoji: '🌤️',
+      tracks: TRACKS.filter((t) => ['focus', 'balance', 'clear'].includes(t.category)),
+    };
+  }
+  return {
+    labelKey: 'nightPicks',
+    emoji: '🌙',
+    tracks: TRACKS.filter((t) => t.timeOfDay === 'night'),
+  };
+};
+
 export default function HomeScreen() {
   const { t, isRTL, language } = useLanguage();
   const { user } = useAuth();
@@ -34,6 +57,7 @@ export default function HomeScreen() {
   const greeting = t[getGreeting()];
   const userName = user?.user_metadata?.full_name?.split(' ')[0] || t.hello;
   const featuredTracks = TRACKS.slice(0, 4);
+  const timeRec = getTimeRecommendations();
 
   const handlePlay = (track) => {
     playTrack(track, TRACKS);
@@ -89,7 +113,47 @@ export default function HomeScreen() {
           </LinearGradient>
         </TouchableOpacity>
 
-        {/* Quick Actions */}
+        {/* For You Right Now */}
+        <View style={[styles.sectionHeader, isRTL && styles.rtlRow]}>
+          <View style={[styles.sectionTitleRow, isRTL && styles.rtlRow]}>
+            <Text style={styles.timeEmoji}>{timeRec.emoji}</Text>
+            <View>
+              <Text style={styles.sectionLabel}>{t.forYouNow}</Text>
+              <Text style={styles.sectionTitle}>{t[timeRec.labelKey]}</Text>
+            </View>
+          </View>
+        </View>
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.hScroll}
+        >
+          {timeRec.tracks.map((track) => (
+            <TouchableOpacity
+              key={track.id}
+              style={styles.recCard}
+              onPress={() => handlePlay(track)}
+              activeOpacity={0.85}
+            >
+              <LinearGradient
+                colors={currentTrack?.id === track.id ? gradients.primary : gradients.card}
+                style={styles.recCardInner}
+              >
+                <Text style={styles.recEmoji}>{track.emoji}</Text>
+                <Text style={styles.recHz}>{track.hz}</Text>
+                <Text style={styles.recTitle} numberOfLines={1}>
+                  {language === 'ar' ? track.titleAr : track.title}
+                </Text>
+                {currentTrack?.id === track.id && isPlaying && (
+                  <View style={styles.playingDot} />
+                )}
+              </LinearGradient>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        {/* Featured tracks */}
         <View style={[styles.sectionHeader, isRTL && styles.rtlRow]}>
           <Text style={styles.sectionTitle}>{t.featuredTracks}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Music')}>
@@ -146,9 +210,9 @@ export default function HomeScreen() {
                 <Text style={styles.listTitle}>
                   {language === 'ar' ? track.titleAr : track.title}
                 </Text>
-                <Text style={styles.listDesc} numberOfLines={1}>
-                  {language === 'ar' ? track.descriptionAr : track.description}
-                </Text>
+                <View style={[styles.hzBadge, isRTL && { alignSelf: 'flex-end' }]}>
+                  <Text style={styles.hzBadgeText}>{track.hz}</Text>
+                </View>
               </View>
               {currentTrack?.id === track.id && isPlaying ? (
                 <Ionicons name="pause-circle" size={32} color={colors.primary} />
@@ -257,6 +321,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 16,
   },
+  sectionTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  timeEmoji: {
+    fontSize: 24,
+  },
+  sectionLabel: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: '600',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 2,
+  },
   sectionTitle: {
     color: colors.text,
     fontSize: 18,
@@ -271,6 +351,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     gap: 12,
     marginBottom: 28,
+  },
+  recCard: {
+    width: 130,
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  recCardInner: {
+    padding: 14,
+    minHeight: 120,
+    justifyContent: 'space-between',
+  },
+  recEmoji: {
+    fontSize: 32,
+    marginBottom: 8,
+  },
+  recHz: {
+    color: colors.accent,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1,
+    marginBottom: 4,
+  },
+  recTitle: {
+    color: colors.text,
+    fontSize: 13,
+    fontWeight: '700',
   },
   trackCard: {
     width: 140,
@@ -345,10 +451,21 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 15,
     fontWeight: '600',
-    marginBottom: 3,
+    marginBottom: 4,
   },
-  listDesc: {
-    color: colors.textMuted,
-    fontSize: 12,
+  hzBadge: {
+    alignSelf: 'flex-start',
+    backgroundColor: `${colors.accent}22`,
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderWidth: 1,
+    borderColor: `${colors.accent}44`,
+  },
+  hzBadgeText: {
+    color: colors.accent,
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
 });

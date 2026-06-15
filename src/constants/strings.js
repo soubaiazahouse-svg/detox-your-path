@@ -107,6 +107,24 @@ export const strings = {
     termsTitle: 'Terms of Service',
     allRightsReserved: 'All rights reserved to AZA HOUSE COMPANY',
 
+    // Sleep Timer
+    sleepTimer: 'Sleep Timer',
+    cancelTimer: 'Cancel Timer',
+    timerActive: 'Auto-off in',
+    setTimerTitle: 'Set Sleep Timer',
+    setTimerSub: 'Audio will stop automatically',
+
+    // Time-based recommendations
+    forYouNow: 'For You Right Now',
+    morningPicks: 'Morning Energy',
+    afternoonPicks: 'Afternoon Focus',
+    nightPicks: 'Wind Down',
+
+    // Hz Info
+    frequency: 'Frequency',
+    frequencyBenefits: 'Benefits',
+    knowYourFrequency: 'Know Your Frequency',
+
     // Navigation
     home: 'Home',
     music2: 'Music',
@@ -221,6 +239,24 @@ export const strings = {
     privacyTitle: 'سياسة الخصوصية',
     termsTitle: 'شروط الخدمة',
     allRightsReserved: 'جميع الحقوق محفوظة لشركة أزا هاوس',
+
+    // Sleep Timer
+    sleepTimer: 'مؤقت النوم',
+    cancelTimer: 'إلغاء المؤقت',
+    timerActive: 'إيقاف تلقائي بعد',
+    setTimerTitle: 'تعيين مؤقت النوم',
+    setTimerSub: 'سيتوقف الصوت تلقائياً',
+
+    // Time-based recommendations
+    forYouNow: 'مقترح لك الآن',
+    morningPicks: 'طاقة الصباح',
+    afternoonPicks: 'تركيز المساء',
+    nightPicks: 'هدوء الليل',
+
+    // Hz Info
+    frequency: 'التردد',
+    frequencyBenefits: 'الفوائد',
+    knowYourFrequency: 'تعرف على ترددك',
 
     // Navigation
     home: 'الرئيسية',

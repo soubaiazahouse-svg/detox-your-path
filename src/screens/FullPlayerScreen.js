@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,8 @@ import {
   StatusBar,
   ActivityIndicator,
   SafeAreaView,
+  Modal,
+  ScrollView,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -15,6 +17,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useAudio } from '../context/AudioContext';
 import { useLanguage } from '../context/LanguageContext';
 import { colors, gradients } from '../constants/colors';
+
+const TIMER_OPTIONS = [5, 10, 15, 20, 30, 45, 60];
 
 export default function FullPlayerScreen() {
   const navigation = useNavigation();
@@ -30,13 +34,20 @@ export default function FullPlayerScreen() {
     durationStr,
     isRepeat,
     isShuffle,
+    sleepTimerStr,
+    sleepTimerRemaining,
     togglePlayPause,
     handleNext,
     handlePrev,
     handleSeek,
     toggleRepeat,
     toggleShuffle,
+    activateSleepTimer,
+    cancelSleepTimer,
   } = useAudio();
+
+  const [showTimerModal, setShowTimerModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   if (!currentTrack) {
     return (
@@ -54,6 +65,7 @@ export default function FullPlayerScreen() {
 
   const title = language === 'ar' ? currentTrack.titleAr : currentTrack.title;
   const description = language === 'ar' ? currentTrack.descriptionAr : currentTrack.description;
+  const benefit = language === 'ar' ? currentTrack.benefitAr : currentTrack.benefit;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,8 +81,8 @@ export default function FullPlayerScreen() {
           <Text style={styles.nowPlayingText}>{t.nowPlaying}</Text>
           <Text style={styles.azaLabel}>AZA HOUSE</Text>
         </View>
-        <TouchableOpacity style={styles.iconBtn}>
-          <Ionicons name="ellipsis-horizontal" size={24} color={colors.textMuted} />
+        <TouchableOpacity style={styles.iconBtn} onPress={() => setShowInfoModal(true)}>
+          <Ionicons name="information-circle-outline" size={26} color={colors.textMuted} />
         </TouchableOpacity>
       </View>
 
@@ -101,7 +113,9 @@ export default function FullPlayerScreen() {
       {/* Track info */}
       <View style={[styles.trackInfo, isRTL && { alignItems: 'flex-end' }]}>
         <Text style={[styles.trackTitle, isRTL && { textAlign: 'right' }]}>{title}</Text>
-        <Text style={[styles.trackDesc, isRTL && { textAlign: 'right' }]}>{description}</Text>
+        <View style={styles.hzPill}>
+          <Text style={styles.hzText}>{currentTrack.hz}</Text>
+        </View>
       </View>
 
       {/* Progress */}
@@ -157,16 +171,137 @@ export default function FullPlayerScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Bottom */}
+      {/* Bottom row */}
       <View style={styles.bottomRow}>
         <TouchableOpacity style={styles.bottomBtn}>
           <Ionicons name="heart-outline" size={24} color={colors.textMuted} />
         </TouchableOpacity>
-        <Text style={styles.azaFooter}>AZA HOUSE</Text>
+
+        {/* Sleep Timer button */}
+        <TouchableOpacity
+          style={[styles.timerBtn, sleepTimerRemaining && styles.timerBtnActive]}
+          onPress={() => setShowTimerModal(true)}
+        >
+          <Ionicons
+            name="moon"
+            size={16}
+            color={sleepTimerRemaining ? colors.accent : colors.textMuted}
+          />
+          {sleepTimerStr ? (
+            <Text style={styles.timerText}>{sleepTimerStr}</Text>
+          ) : (
+            <Text style={styles.timerLabel}>{t.sleepTimer}</Text>
+          )}
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.bottomBtn}>
           <Ionicons name="share-outline" size={24} color={colors.textMuted} />
         </TouchableOpacity>
       </View>
+
+      {/* Sleep Timer Modal */}
+      <Modal
+        visible={showTimerModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowTimerModal(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setShowTimerModal(false)}
+        >
+          <View style={styles.modalSheet}>
+            <View style={styles.modalHandle} />
+            <Text style={styles.modalTitle}>{t.setTimerTitle}</Text>
+            <Text style={styles.modalSub}>{t.setTimerSub}</Text>
+
+            <View style={styles.timerGrid}>
+              {TIMER_OPTIONS.map((min) => (
+                <TouchableOpacity
+                  key={min}
+                  style={styles.timerOption}
+                  onPress={() => {
+                    activateSleepTimer(min);
+                    setShowTimerModal(false);
+                  }}
+                >
+                  <LinearGradient colors={gradients.primary} style={styles.timerOptionInner}>
+                    <Text style={styles.timerOptionNum}>{min}</Text>
+                    <Text style={styles.timerOptionMin}>{t.minutes}</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            {sleepTimerRemaining && (
+              <TouchableOpacity
+                style={styles.cancelTimerBtn}
+                onPress={() => {
+                  cancelSleepTimer();
+                  setShowTimerModal(false);
+                }}
+              >
+                <Ionicons name="close-circle" size={18} color={colors.error} />
+                <Text style={styles.cancelTimerText}>{t.cancelTimer}</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      {/* Hz Info Modal */}
+      <Modal
+        visible={showInfoModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowInfoModal(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setShowInfoModal(false)}
+        >
+          <View style={styles.modalSheet}>
+            <View style={styles.modalHandle} />
+
+            <View style={styles.infoHeader}>
+              <Text style={styles.infoEmoji}>{currentTrack.emoji}</Text>
+              <View style={styles.infoTitleWrap}>
+                <Text style={styles.infoTrackName}>{title}</Text>
+                <View style={styles.infoHzBadge}>
+                  <Text style={styles.infoHz}>{currentTrack.hz}</Text>
+                </View>
+              </View>
+            </View>
+
+            <Text style={styles.infoSectionLabel}>
+              {language === 'ar' ? '✦ ' : '✦ '}{t.knowYourFrequency}
+            </Text>
+
+            <View style={styles.infoCard}>
+              <Text style={styles.infoFreqLabel}>{t.frequency}</Text>
+              <Text style={styles.infoFreqValue}>{currentTrack.hz}</Text>
+            </View>
+
+            <View style={styles.infoCard}>
+              <Text style={styles.infoFreqLabel}>{t.frequencyBenefits}</Text>
+              <Text style={[styles.infoBenefit, isRTL && { textAlign: 'right' }]}>
+                {benefit}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.infoDoneBtn}
+              onPress={() => setShowInfoModal(false)}
+            >
+              <LinearGradient colors={gradients.primary} style={styles.infoDoneBtnInner}>
+                <Text style={styles.infoDoneText}>✓</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -211,12 +346,12 @@ const styles = StyleSheet.create({
   },
   artSection: {
     alignItems: 'center',
-    paddingVertical: 32,
+    paddingVertical: 28,
   },
   artCircle: {
-    width: 220,
-    height: 220,
-    borderRadius: 110,
+    width: 210,
+    height: 210,
+    borderRadius: 105,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: colors.primary,
@@ -231,7 +366,7 @@ const styles = StyleSheet.create({
   wavesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 20,
     gap: 4,
     height: 40,
   },
@@ -242,7 +377,7 @@ const styles = StyleSheet.create({
   },
   trackInfo: {
     paddingHorizontal: 28,
-    marginBottom: 24,
+    marginBottom: 20,
     alignItems: 'center',
   },
   trackTitle: {
@@ -250,17 +385,25 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '800',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 10,
   },
-  trackDesc: {
-    color: colors.textSecondary,
-    fontSize: 14,
-    textAlign: 'center',
-    lineHeight: 20,
+  hzPill: {
+    backgroundColor: `${colors.accent}22`,
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderColor: `${colors.accent}55`,
+  },
+  hzText: {
+    color: colors.accent,
+    fontSize: 13,
+    fontWeight: '700',
+    letterSpacing: 1,
   },
   progressSection: {
     paddingHorizontal: 20,
-    marginBottom: 24,
+    marginBottom: 20,
   },
   slider: {
     width: '100%',
@@ -281,7 +424,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 24,
     gap: 20,
-    marginBottom: 32,
+    marginBottom: 28,
   },
   sideBtn: {
     width: 44,
@@ -319,16 +462,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: 28,
   },
   bottomBtn: {
     padding: 12,
   },
-  azaFooter: {
-    color: colors.textMuted,
-    fontSize: 11,
-    letterSpacing: 4,
+  timerBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  timerBtnActive: {
+    borderColor: colors.accent,
+    backgroundColor: `${colors.accent}11`,
+  },
+  timerText: {
+    color: colors.accent,
+    fontSize: 13,
     fontWeight: '700',
+  },
+  timerLabel: {
+    color: colors.textMuted,
+    fontSize: 12,
+    fontWeight: '600',
   },
   emptyState: {
     flex: 1,
@@ -347,5 +509,173 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     padding: 20,
+  },
+
+  // Modal shared
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    justifyContent: 'flex-end',
+  },
+  modalSheet: {
+    backgroundColor: colors.surface,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    padding: 24,
+    paddingBottom: 40,
+    borderTopWidth: 1,
+    borderColor: colors.border,
+  },
+  modalHandle: {
+    width: 40,
+    height: 4,
+    backgroundColor: colors.border,
+    borderRadius: 2,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    color: colors.text,
+    fontSize: 20,
+    fontWeight: '800',
+    textAlign: 'center',
+    marginBottom: 6,
+  },
+  modalSub: {
+    color: colors.textMuted,
+    fontSize: 13,
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+
+  // Timer modal
+  timerGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  timerOption: {
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  timerOptionInner: {
+    width: 80,
+    height: 72,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+  },
+  timerOptionNum: {
+    color: colors.text,
+    fontSize: 22,
+    fontWeight: '800',
+  },
+  timerOptionMin: {
+    color: 'rgba(255,255,255,0.7)',
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  cancelTimerBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    paddingVertical: 12,
+    marginTop: 8,
+  },
+  cancelTimerText: {
+    color: colors.error,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
+  // Hz Info modal
+  infoHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+    marginBottom: 20,
+  },
+  infoEmoji: {
+    fontSize: 52,
+  },
+  infoTitleWrap: {
+    flex: 1,
+  },
+  infoTrackName: {
+    color: colors.text,
+    fontSize: 20,
+    fontWeight: '800',
+    marginBottom: 8,
+  },
+  infoHzBadge: {
+    alignSelf: 'flex-start',
+    backgroundColor: `${colors.accent}22`,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: `${colors.accent}55`,
+  },
+  infoHz: {
+    color: colors.accent,
+    fontSize: 14,
+    fontWeight: '800',
+    letterSpacing: 1,
+  },
+  infoSectionLabel: {
+    color: colors.primary,
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    marginBottom: 14,
+  },
+  infoCard: {
+    backgroundColor: colors.surfaceLight,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  infoFreqLabel: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 8,
+  },
+  infoFreqValue: {
+    color: colors.accent,
+    fontSize: 28,
+    fontWeight: '900',
+    letterSpacing: 2,
+  },
+  infoBenefit: {
+    color: colors.text,
+    fontSize: 14,
+    lineHeight: 22,
+  },
+  infoDoneBtn: {
+    borderRadius: 50,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    marginTop: 8,
+  },
+  infoDoneBtnInner: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  infoDoneText: {
+    color: colors.text,
+    fontSize: 20,
+    fontWeight: '800',
   },
 });

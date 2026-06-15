@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
 import {
   loadAndPlayTrack,
   pauseSound,
@@ -26,10 +26,18 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }
   const [isRepeat, setIsRepeat] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isPreviewEnded, setIsPreviewEnded] = useState(false);
+  const [sleepTimerRemaining, setSleepTimerRemaining] = useState(null); // seconds remaining
 
   const audioInitRef = useRef(false);
   const isSubscribedRef = useRef(isSubscribed);
   isSubscribedRef.current = isSubscribed;
+  const sleepTimerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (sleepTimerRef.current) clearInterval(sleepTimerRef.current);
+    };
+  }, []);
 
   const ensureAudioInit = async () => {
     if (!audioInitRef.current) {
@@ -37,6 +45,34 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }
       audioInitRef.current = true;
     }
   };
+
+  const activateSleepTimer = useCallback((minutes) => {
+    if (sleepTimerRef.current) clearInterval(sleepTimerRef.current);
+    if (!minutes) {
+      setSleepTimerRemaining(null);
+      return;
+    }
+    let seconds = minutes * 60;
+    setSleepTimerRemaining(seconds);
+    sleepTimerRef.current = setInterval(() => {
+      seconds -= 1;
+      if (seconds <= 0) {
+        clearInterval(sleepTimerRef.current);
+        sleepTimerRef.current = null;
+        setSleepTimerRemaining(null);
+        pauseSound();
+        setIsPlaying(false);
+      } else {
+        setSleepTimerRemaining(seconds);
+      }
+    }, 1000);
+  }, []);
+
+  const cancelSleepTimer = useCallback(() => {
+    if (sleepTimerRef.current) clearInterval(sleepTimerRef.current);
+    sleepTimerRef.current = null;
+    setSleepTimerRemaining(null);
+  }, []);
 
   const onPlaybackStatusUpdate = useCallback((status) => {
     if (!status.isLoaded) {
@@ -151,12 +187,17 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }
     setPositionMillis(0);
     setDurationMillis(0);
     setIsPreviewEnded(false);
-  }, []);
+    cancelSleepTimer();
+  }, [cancelSleepTimer]);
 
   const toggleRepeat = () => setIsRepeat((v) => !v);
   const toggleShuffle = () => setIsShuffle((v) => !v);
 
   const progress = durationMillis > 0 ? positionMillis / durationMillis : 0;
+
+  const sleepTimerStr = sleepTimerRemaining
+    ? `${Math.floor(sleepTimerRemaining / 60)}:${String(sleepTimerRemaining % 60).padStart(2, '0')}`
+    : null;
 
   return (
     <AudioContext.Provider
@@ -172,6 +213,8 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }
         isShuffle,
         isPreviewEnded,
         queue,
+        sleepTimerRemaining,
+        sleepTimerStr,
         playTrack,
         togglePlayPause,
         handleNext,
@@ -180,6 +223,8 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired }
         stopAudio,
         toggleRepeat,
         toggleShuffle,
+        activateSleepTimer,
+        cancelSleepTimer,
         positionStr: formatDuration(positionMillis),
         durationStr: formatDuration(durationMillis),
         previewLimitStr: formatDuration(PREVIEW_LIMIT_MS),

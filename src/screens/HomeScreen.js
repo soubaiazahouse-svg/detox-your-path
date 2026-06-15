@@ -17,6 +17,7 @@ import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useStats } from '../context/StatsContext';
 import MiniPlayer from '../components/MiniPlayer';
+import TrackSymbol from '../components/TrackSymbol';
 import { TRACKS } from '../constants/tracks';
 import { colors, gradients } from '../constants/colors';
 
@@ -172,7 +173,7 @@ export default function HomeScreen() {
                       colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || ['#1a1d38', '#14173a'])}
                       style={styles.moodTrackInner}
                     >
-                      <Text style={styles.moodTrackEmoji}>{track.emoji}</Text>
+                      <TrackSymbol category={track.category} size={32} />
                       <Text style={styles.moodTrackHz}>{track.hz}</Text>
                       <Text style={styles.moodTrackTitle} numberOfLines={1}>
                         {language === 'ar' ? track.titleAr : track.title}
@@ -241,7 +242,7 @@ export default function HomeScreen() {
                 colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
                 style={styles.recCardInner}
               >
-                <Text style={styles.recEmoji}>{track.emoji}</Text>
+                <TrackSymbol category={track.category} size={38} />
                 <Text style={styles.recHz}>{track.hz}</Text>
                 <Text style={styles.recTitle} numberOfLines={1}>
                   {language === 'ar' ? track.titleAr : track.title}
@@ -267,11 +268,11 @@ export default function HomeScreen() {
                 colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
                 style={styles.trackCardInner}
               >
-                <Text style={styles.trackEmoji}>{track.emoji}</Text>
+                <TrackSymbol category={track.category} size={46} />
                 <Text style={styles.trackTitle} numberOfLines={1}>
                   {language === 'ar' ? track.titleAr : track.title}
                 </Text>
-                <Text style={styles.trackCat}>{track.category}</Text>
+                <Text style={styles.trackHz}>{track.hz}</Text>
                 {currentTrack?.id === track.id && isPlaying && <View style={styles.playingDot} />}
               </LinearGradient>
             </TouchableOpacity>
@@ -295,7 +296,7 @@ export default function HomeScreen() {
                 colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || [colors.surfaceLight, colors.surfaceLight])}
                 style={styles.listEmoji}
               >
-                <Text style={styles.listEmojiText}>{track.emoji}</Text>
+                <TrackSymbol category={track.category} size={28} color="rgba(255,255,255,0.88)" />
               </LinearGradient>
               <View style={[styles.listText, isRTL && { alignItems: 'flex-end' }]}>
                 <Text style={styles.listTitle}>
@@ -367,8 +368,7 @@ const styles = StyleSheet.create({
   moodTracks: { flexDirection: 'row', gap: 12 },
   moodTrackCard: { flex: 1, borderRadius: 14, overflow: 'hidden' },
   moodTrackInner: { padding: 14, borderRadius: 14 },
-  moodTrackEmoji: { fontSize: 24, marginBottom: 6 },
-  moodTrackHz: { color: colors.accent, fontSize: 10, fontWeight: '700', marginBottom: 4, letterSpacing: 1 },
+  moodTrackHz: { color: 'rgba(255,255,255,0.75)', fontSize: 10, fontWeight: '700', marginTop: 6, marginBottom: 4, letterSpacing: 1 },
   moodTrackTitle: { color: colors.text, fontSize: 12, fontWeight: '700' },
 
   // Weekly Challenge
@@ -395,14 +395,12 @@ const styles = StyleSheet.create({
   hScroll: { paddingHorizontal: 20, gap: 12, marginBottom: 28 },
   recCard: { width: 130, borderRadius: 16, overflow: 'hidden' },
   recCardInner: { padding: 14, minHeight: 120, justifyContent: 'space-between' },
-  recEmoji: { fontSize: 32, marginBottom: 8 },
-  recHz: { color: colors.accent, fontSize: 11, fontWeight: '700', letterSpacing: 1, marginBottom: 4 },
+  recHz: { color: 'rgba(255,255,255,0.75)', fontSize: 11, fontWeight: '700', letterSpacing: 1, marginTop: 6, marginBottom: 2 },
   recTitle: { color: colors.text, fontSize: 13, fontWeight: '700' },
   trackCard: { width: 140, borderRadius: 16, overflow: 'hidden' },
   trackCardInner: { padding: 16, minHeight: 130, justifyContent: 'space-between' },
-  trackEmoji: { fontSize: 36, marginBottom: 12 },
   trackTitle: { color: colors.text, fontSize: 14, fontWeight: '700' },
-  trackCat: { color: 'rgba(255,255,255,0.5)', fontSize: 11, textTransform: 'uppercase', letterSpacing: 1 },
+  trackHz: { color: 'rgba(255,255,255,0.6)', fontSize: 10, fontWeight: '700', letterSpacing: 1, marginTop: 2 },
   playingDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.accent, position: 'absolute', top: 12, right: 12 },
 
   // List items

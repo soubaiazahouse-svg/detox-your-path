@@ -18,6 +18,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAudio } from '../context/AudioContext';
 import { useLanguage } from '../context/LanguageContext';
+import TrackSymbol from '../components/TrackSymbol';
 import { colors, gradients } from '../constants/colors';
 
 const TIMER_OPTIONS = [5, 10, 15, 20, 30, 45, 60];
@@ -117,7 +118,7 @@ export default function FullPlayerScreen() {
           colors={currentTrack.trackColor || (isPlaying ? gradients.primary : ['#1a1d38', '#0d0f24'])}
           style={styles.artCircle}
         >
-          <Text style={styles.artEmoji}>{currentTrack.emoji}</Text>
+          <TrackSymbol category={currentTrack.category} size={120} color="rgba(255,255,255,0.88)" />
         </LinearGradient>
 
         {isPlaying && (
@@ -297,7 +298,9 @@ export default function FullPlayerScreen() {
             <View style={styles.modalHandle} />
 
             <View style={styles.infoHeader}>
-              <Text style={styles.infoEmoji}>{currentTrack.emoji}</Text>
+              <View style={styles.infoSymbolWrap}>
+                <TrackSymbol category={currentTrack.category} size={40} />
+              </View>
               <View style={styles.infoTitleWrap}>
                 <Text style={styles.infoTrackName}>{title}</Text>
                 <View style={styles.infoHzBadge}>
@@ -653,8 +656,13 @@ const styles = StyleSheet.create({
     gap: 16,
     marginBottom: 20,
   },
-  infoEmoji: {
-    fontSize: 52,
+  infoSymbolWrap: {
+    width: 56,
+    height: 56,
+    borderRadius: 14,
+    backgroundColor: `${colors.primary}33`,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   infoTitleWrap: {
     flex: 1,

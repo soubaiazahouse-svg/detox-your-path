@@ -138,8 +138,13 @@ export default function MeditateScreen() {
               onPress={() => handlePlayGuided(session)}
               activeOpacity={0.85}
             >
-              <LinearGradient colors={gradients.primary} style={styles.guidedCardInner}>
-                <Text style={styles.guidedEmoji}>{session.emoji}</Text>
+              <LinearGradient colors={session.trackColor || gradients.primary} style={styles.guidedCardInner}>
+                <Ionicons
+                  name={session.id === 'g1' ? 'moon' : 'sunny'}
+                  size={30}
+                  color="rgba(255,255,255,0.9)"
+                  style={{ marginBottom: 10 }}
+                />
                 <Text style={[styles.guidedTitle, isRTL && { textAlign: 'right' }]}>
                   {language === 'ar' ? session.titleAr : session.title}
                 </Text>
@@ -183,7 +188,13 @@ export default function MeditateScreen() {
                   <Text style={styles.countdown}>{formatTime(secondsLeft)}</Text>
                 </View>
               ) : (
-                <Text style={styles.circleEmoji}>🧘</Text>
+                <View style={styles.circleSymbol}>
+                  <View style={styles.symRing1} />
+                  <View style={styles.symRing2} />
+                  <View style={styles.symH} />
+                  <View style={styles.symV} />
+                  <View style={styles.symDot} />
+                </View>
               )}
             </LinearGradient>
           </Animated.View>
@@ -270,7 +281,6 @@ const styles = StyleSheet.create({
   guidedRow: { flexDirection: 'row', paddingHorizontal: 20, gap: 12, marginBottom: 24 },
   guidedCard: { flex: 1, borderRadius: 18, overflow: 'hidden' },
   guidedCardInner: { padding: 16, minHeight: 180 },
-  guidedEmoji: { fontSize: 36, marginBottom: 10 },
   guidedTitle: { color: colors.text, fontSize: 15, fontWeight: '800', marginBottom: 6 },
   guidedDesc: { color: 'rgba(255,255,255,0.75)', fontSize: 12, lineHeight: 17, marginBottom: 14, flex: 1 },
   guidedFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' },
@@ -283,7 +293,12 @@ const styles = StyleSheet.create({
   circleSection: { alignItems: 'center', paddingVertical: 28 },
   breathOuter: { borderRadius: 130, overflow: 'hidden', elevation: 16, shadowColor: colors.primary, shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.4, shadowRadius: 24 },
   breathCircle: { width: 200, height: 200, borderRadius: 100, justifyContent: 'center', alignItems: 'center' },
-  circleEmoji: { fontSize: 72 },
+  circleSymbol: { width: 90, height: 90, justifyContent: 'center', alignItems: 'center' },
+  symRing1: { position: 'absolute', width: 88, height: 88, borderRadius: 44, borderWidth: 1, borderColor: 'rgba(255,255,255,0.22)' },
+  symRing2: { position: 'absolute', width: 58, height: 58, borderRadius: 29, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.38)' },
+  symH: { position: 'absolute', width: 72, height: 1.5, backgroundColor: 'rgba(255,255,255,0.32)' },
+  symV: { position: 'absolute', width: 1.5, height: 72, backgroundColor: 'rgba(255,255,255,0.32)' },
+  symDot: { width: 14, height: 14, borderRadius: 7, backgroundColor: 'rgba(255,255,255,0.80)' },
   breathLabel: { color: colors.text, fontSize: 18, fontWeight: '700', textAlign: 'center', marginBottom: 4 },
   countdown: { color: colors.text, fontSize: 32, fontWeight: '900' },
   breathPhaseHint: { color: colors.textSecondary, fontSize: 16, marginTop: 16, fontStyle: 'italic' },

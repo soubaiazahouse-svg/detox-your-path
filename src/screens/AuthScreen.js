@@ -47,7 +47,12 @@ function ConfirmEmailScreen({ email, onBack, language }) {
 
       <View style={styles.confirmIcon}>
         <LinearGradient colors={gradients.primary} style={styles.confirmCircle}>
-          <Text style={{ fontSize: 48 }}>📧</Text>
+          {/* Envelope symbol — 3 lines */}
+          <View style={confirmArt.envelope}>
+            <View style={confirmArt.topLine} />
+            <View style={confirmArt.midLine} />
+            <View style={confirmArt.bottomLine} />
+          </View>
         </LinearGradient>
       </View>
 
@@ -200,7 +205,11 @@ export default function AuthScreen() {
         {/* Logo */}
         <View style={styles.logoSection}>
           <LinearGradient colors={gradients.primary} style={styles.logoCircle}>
-            <Text style={styles.logoEmoji}>🎵</Text>
+            {/* Wave rings + center dot */}
+            <View style={logoArt.ring1} />
+            <View style={logoArt.ring2} />
+            <View style={logoArt.ring3} />
+            <View style={logoArt.dot} />
           </LinearGradient>
           <Text style={styles.appName}>AZA</Text>
           <Text style={styles.tagline}>{t.appTagline}</Text>
@@ -305,12 +314,25 @@ export default function AuthScreen() {
   );
 }
 
+const logoArt = StyleSheet.create({
+  ring1: { position: 'absolute', width: 70, height: 70, borderRadius: 35, borderWidth: 1, borderColor: 'rgba(255,255,255,0.25)' },
+  ring2: { position: 'absolute', width: 50, height: 50, borderRadius: 25, borderWidth: 1, borderColor: 'rgba(255,255,255,0.40)' },
+  ring3: { position: 'absolute', width: 30, height: 30, borderRadius: 15, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.60)' },
+  dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: 'rgba(255,255,255,0.95)' },
+});
+
+const confirmArt = StyleSheet.create({
+  envelope: { width: 48, height: 36, justifyContent: 'space-between', alignItems: 'center' },
+  topLine: { width: 44, height: 2, borderRadius: 1, backgroundColor: 'rgba(255,255,255,0.9)' },
+  midLine: { width: 36, height: 1.5, borderRadius: 1, backgroundColor: 'rgba(255,255,255,0.65)' },
+  bottomLine: { width: 44, height: 2, borderRadius: 1, backgroundColor: 'rgba(255,255,255,0.9)' },
+});
+
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   scroll: { flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 48 },
   logoSection: { alignItems: 'center', marginBottom: 40 },
   logoCircle: { width: 88, height: 88, borderRadius: 44, justifyContent: 'center', alignItems: 'center', marginBottom: 16 },
-  logoEmoji: { fontSize: 40 },
   appName: { color: colors.text, fontSize: 36, fontWeight: '900', letterSpacing: 8 },
   tagline: { color: colors.accent, fontSize: 13, letterSpacing: 3, marginTop: 4, textTransform: 'uppercase' },
   card: { backgroundColor: colors.surface, borderRadius: 24, padding: 24, borderWidth: 1, borderColor: colors.border },

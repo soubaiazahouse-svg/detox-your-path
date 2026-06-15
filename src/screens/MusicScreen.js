@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAudio } from '../context/AudioContext';
 import { useLanguage } from '../context/LanguageContext';
 import MiniPlayer from '../components/MiniPlayer';
+import TrackSymbol from '../components/TrackSymbol';
 import { TRACKS, CATEGORIES } from '../constants/tracks';
 import { colors, gradients } from '../constants/colors';
 
@@ -60,7 +61,7 @@ export default function MusicScreen() {
             colors={isActive ? gradients.primary : (item.trackColor || [colors.surfaceLight, colors.surfaceLight])}
             style={styles.emojiWrap}
           >
-            <Text style={styles.emoji}>{item.emoji}</Text>
+            <TrackSymbol category={item.category} size={32} color="rgba(255,255,255,0.88)" />
           </LinearGradient>
           <View style={[styles.trackInfo, isRTL && { alignItems: 'flex-end' }]}>
             <Text style={[styles.trackTitle, isActive && styles.trackTitleActive]}>

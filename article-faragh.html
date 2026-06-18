@@ -251,6 +251,14 @@ html, body {
 .author-info h4 { color: var(--blue); font-size: 1rem; margin-bottom: 6px; }
 .author-info p { color: var(--text3); font-size: 0.88rem; line-height: 1.7; margin: 0; }
 
+/* ILLUSTRATION */
+.article-illustration {
+  display: flex;
+  justify-content: center;
+  padding: 70px 20px 0;
+}
+.illustration-svg { width: 200px; height: 160px; opacity: 0.88; }
+
 @media (max-width: 500px) {
   .article-cta { padding: 1.8rem; }
   .steps-box { padding: 18px 20px; }
@@ -261,6 +269,34 @@ html, body {
 <body>
 
 <a href="/articles.html" class="back-btn">← العودة للمقالات</a>
+
+<!-- SVG Illustration: فراغ يمتلئ بالنور -->
+<div class="article-illustration">
+  <svg class="illustration-svg" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Background glow -->
+    <ellipse cx="100" cy="130" rx="55" ry="12" fill="rgba(26,106,191,0.08)"/>
+    <!-- Cup / Vessel body -->
+    <path d="M68 55 L72 130 Q100 138 128 130 L132 55 Z" fill="rgba(26,106,191,0.07)" stroke="#1a6abf" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Cup rim -->
+    <rect x="64" y="48" width="72" height="10" rx="5" fill="rgba(26,106,191,0.12)" stroke="#1a6abf" stroke-width="1.2"/>
+    <!-- Light filling inside cup - gradient glow -->
+    <path d="M73 120 L75 80 Q100 73 125 80 L127 120 Q100 128 73 120Z" fill="rgba(42,138,212,0.18)"/>
+    <path d="M75 105 L77 80 Q100 74 123 80 L125 105 Q100 112 75 105Z" fill="rgba(42,138,212,0.22)"/>
+    <!-- Light rays from above -->
+    <line x1="100" y1="8" x2="100" y2="46" stroke="#1a6abf" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+    <line x1="82" y1="12" x2="88" y2="46" stroke="#2a8ad4" stroke-width="1" stroke-dasharray="2 3" opacity="0.4"/>
+    <line x1="118" y1="12" x2="112" y2="46" stroke="#2a8ad4" stroke-width="1" stroke-dasharray="2 3" opacity="0.4"/>
+    <!-- Light sparkles -->
+    <circle cx="100" cy="5" r="3" fill="#1a6abf" opacity="0.7"/>
+    <circle cx="82" cy="9" r="2" fill="#2a8ad4" opacity="0.5"/>
+    <circle cx="118" cy="9" r="2" fill="#2a8ad4" opacity="0.5"/>
+    <circle cx="100" cy="90" r="4" fill="#2a8ad4" opacity="0.3"/>
+    <!-- Small stars -->
+    <circle cx="48" cy="35" r="1.5" fill="#1a6abf" opacity="0.4"/>
+    <circle cx="155" cy="28" r="1.5" fill="#2a8ad4" opacity="0.4"/>
+    <circle cx="40" cy="100" r="1" fill="#1a6abf" opacity="0.3"/>
+  </svg>
+</div>
 
 <div class="article-hero">
   <div class="article-category">✦ نمو روحي ✦</div>

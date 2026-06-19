@@ -2,6 +2,7 @@
   "expo": {
     "name": "Detox Your Path",
     "slug": "detox-your-path",
+    "owner": "aza.house.company",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

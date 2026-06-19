@@ -2,10 +2,16 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { getProfile, getStreak, signOut } from '../lib/db';
 import { UserData, StreakData, RootStackParamList } from '../types';
-import { colors, gradients } from '../theme';
+import { colors, shadows, radius } from '../theme';
+
+type SettingRow = {
+  icon: string;
+  label: string;
+  value?: string;
+};
 
 export default function SettingsScreen() {
   const [user, setUser] = useState<UserData | null>(null);
@@ -24,12 +30,13 @@ export default function SettingsScreen() {
 
   const confirmSignOut = () => {
     Alert.alert(
-      'تسجيل الخروج',
-      'هل تريدين تسجيل الخروج؟',
+      'Sign Out',
+      'Are you sure you want to sign out?',
       [
-        { text: 'إلغاء', style: 'cancel' },
+        { text: 'Cancel', style: 'cancel' },
         {
-          text: 'خروج', style: 'destructive',
+          text: 'Sign Out',
+          style: 'destructive',
           onPress: async () => {
             await signOut();
             navigation.replace('Splash');
@@ -39,121 +46,252 @@ export default function SettingsScreen() {
     );
   };
 
+  const initials = (user?.name ?? 'U').charAt(0).toUpperCase();
   const joinDate = user?.joinDate
-    ? new Date(user.joinDate).toLocaleDateString('ar-SA')
+    ? new Date(user.joinDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
     : '—';
 
+  const profileRows: SettingRow[] = [
+    { icon: 'person-outline', label: 'Name · الاسم', value: user?.name ?? '—' },
+    { icon: 'flag-outline', label: 'Daily Goal · الهدف', value: `${user?.goalHours ?? 2}h / day` },
+    { icon: 'calendar-outline', label: 'Joined', value: joinDate },
+  ];
+
+  const appRows: SettingRow[] = [
+    { icon: 'information-circle-outline', label: 'Detox Your Path', value: 'v2.0' },
+    { icon: 'shield-checkmark-outline', label: 'Data is synced securely', value: '' },
+  ];
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <LinearGradient colors={gradients.navy} style={styles.header}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.contentContainer}
+    >
+      {/* Profile header */}
+      <View style={styles.profileHeader}>
         <View style={styles.avatar}>
-          <Text style={styles.avatarIcon}>💧</Text>
+          <Text style={styles.avatarInitial}>{initials}</Text>
         </View>
-        <Text style={styles.name}>{user?.name ?? 'Friend'}</Text>
-        <Text style={styles.joinDate}>معنا منذ · Joined {joinDate}</Text>
+        <Text style={styles.userName}>{user?.name ?? 'Friend'}</Text>
+        <Text style={styles.userJoined}>Member since {joinDate}</Text>
+
+        {/* Streak stats */}
         <View style={styles.statsRow}>
           <View style={styles.stat}>
+            <View style={styles.statIconWrap}>
+              <Ionicons name="flame-outline" size={16} color="#FF6B35" />
+            </View>
             <Text style={styles.statNum}>{streak.count}</Text>
-            <Text style={styles.statLabel}>🔥 Streak</Text>
+            <Text style={styles.statLabel}>Streak</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.stat}>
+            <View style={styles.statIconWrap}>
+              <Ionicons name="trophy-outline" size={16} color={colors.gold} />
+            </View>
             <Text style={styles.statNum}>{streak.longestStreak}</Text>
-            <Text style={styles.statLabel}>🏆 Best</Text>
+            <Text style={styles.statLabel}>Best</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.stat}>
-            <Text style={styles.statNum}>{user?.goalHours ?? 2}</Text>
-            <Text style={styles.statLabel}>🎯 Goal hrs</Text>
+            <View style={styles.statIconWrap}>
+              <Ionicons name="flag-outline" size={16} color={colors.blue} />
+            </View>
+            <Text style={styles.statNum}>{user?.goalHours ?? 2}h</Text>
+            <Text style={styles.statLabel}>Goal</Text>
           </View>
         </View>
-      </LinearGradient>
+      </View>
 
+      {/* Profile section */}
       <View style={styles.body}>
+        <Text style={styles.sectionLabel}>Profile</Text>
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>PROFILE · الملف الشخصي</Text>
-          <View style={styles.row}>
-            <Text style={styles.rowIcon}>👤</Text>
-            <Text style={styles.rowLabel}>Name · الاسم</Text>
-            <Text style={styles.rowValue}>{user?.name}</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.rowIcon}>🎯</Text>
-            <Text style={styles.rowLabel}>Daily Goal · الهدف</Text>
-            <Text style={styles.rowValue}>{user?.goalHours}h</Text>
-          </View>
-          <View style={[styles.row, styles.rowLast]}>
-            <Text style={styles.rowIcon}>⏰</Text>
-            <Text style={styles.rowLabel}>Detox Times · أوقات الديتوكس</Text>
-            <Text style={styles.rowValue}>{(user?.detoxTimes ?? []).length} set</Text>
-          </View>
+          {profileRows.map((row, i) => (
+            <View key={i} style={[styles.row, i === profileRows.length - 1 && styles.rowLast]}>
+              <View style={styles.rowIconWrap}>
+                <Ionicons name={row.icon as any} size={18} color={colors.navy} />
+              </View>
+              <Text style={styles.rowLabel}>{row.label}</Text>
+              <Text style={styles.rowValue}>{row.value}</Text>
+              <Ionicons name="chevron-forward" size={16} color={colors.borderMed} />
+            </View>
+          ))}
         </View>
 
+        <Text style={styles.sectionLabel}>About</Text>
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>ABOUT · عن التطبيق</Text>
-          <View style={styles.row}>
-            <Text style={styles.rowIcon}>💧</Text>
-            <Text style={styles.rowLabel}>Detox Your Path</Text>
-            <Text style={styles.rowValue}>v2.0</Text>
-          </View>
-          <View style={[styles.row, styles.rowLast]}>
-            <Text style={styles.rowIcon}>🏠</Text>
-            <Text style={styles.rowLabel}>AZA House Company</Text>
-            <Text style={styles.rowValue}>2024</Text>
-          </View>
+          {appRows.map((row, i) => (
+            <View key={i} style={[styles.row, i === appRows.length - 1 && styles.rowLast]}>
+              <View style={styles.rowIconWrap}>
+                <Ionicons name={row.icon as any} size={18} color={colors.navy} />
+              </View>
+              <Text style={styles.rowLabel}>{row.label}</Text>
+              {row.value ? <Text style={styles.rowValue}>{row.value}</Text> : null}
+            </View>
+          ))}
         </View>
 
-        <TouchableOpacity style={styles.logoutBtn} onPress={confirmSignOut} activeOpacity={0.8}>
-          <Text style={styles.logoutBtnText}>🚪 تسجيل الخروج · Sign Out</Text>
+        {/* Sign out */}
+        <TouchableOpacity style={styles.signOutBtn} onPress={confirmSignOut} activeOpacity={0.8}>
+          <Ionicons name="log-out-outline" size={20} color={colors.error} />
+          <Text style={styles.signOutText}>Sign Out</Text>
         </TouchableOpacity>
 
         <Text style={styles.footer}>
-          Made with 💙 by AZA House{'\n'}
+          Made with care by AZA House{'\n'}
           بياناتك محفوظة بأمان في السحابة
         </Text>
-
-        <View style={{ height: 32 }} />
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.cream },
-  header: { paddingTop: 60, paddingHorizontal: 24, paddingBottom: 32, alignItems: 'center' },
+  container: { flex: 1, backgroundColor: colors.bg },
+  contentContainer: { paddingBottom: 40 },
+
+  profileHeader: {
+    backgroundColor: colors.surface,
+    paddingTop: 64,
+    paddingBottom: 28,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
   avatar: {
-    width: 80, height: 80, borderRadius: 40,
-    backgroundColor: 'rgba(79,163,224,0.2)',
-    alignItems: 'center', justifyContent: 'center',
-    borderWidth: 2, borderColor: colors.sky, marginBottom: 12,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: colors.navy,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 14,
+    ...shadows.md,
   },
-  avatarIcon: { fontSize: 36 },
-  name: { fontSize: 26, fontWeight: '700', color: colors.white, marginBottom: 4 },
-  joinDate: { fontSize: 12, color: colors.slateLight, marginBottom: 20 },
-  statsRow: { flexDirection: 'row', alignItems: 'center' },
-  stat: { flex: 1, alignItems: 'center' },
-  statNum: { fontSize: 28, fontWeight: '700', color: colors.white },
-  statLabel: { fontSize: 11, color: colors.slateLight, marginTop: 2 },
-  statDivider: { width: 1, height: 40, backgroundColor: 'rgba(255,255,255,0.15)' },
+  avatarInitial: {
+    fontSize: 32,
+    fontWeight: '800',
+    color: colors.white,
+  },
+  userName: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: colors.navy,
+    marginBottom: 4,
+  },
+  userJoined: {
+    fontSize: 13,
+    color: colors.textMuted,
+    marginBottom: 24,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
+  stat: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 4,
+  },
+  statIconWrap: {
+    width: 32,
+    height: 32,
+    borderRadius: 10,
+    backgroundColor: colors.bg,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  statNum: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: colors.navy,
+    letterSpacing: -0.5,
+  },
+  statLabel: {
+    fontSize: 11,
+    color: colors.textMuted,
+    fontWeight: '500',
+  },
+  statDivider: {
+    width: 1,
+    height: 44,
+    backgroundColor: colors.border,
+  },
+
   body: { padding: 20 },
+  sectionLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.textMuted,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 8,
+    marginLeft: 4,
+  },
   section: {
-    backgroundColor: colors.white, borderRadius: 20, marginBottom: 16,
-    shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2, overflow: 'hidden',
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    marginBottom: 24,
+    overflow: 'hidden',
+    ...shadows.sm,
   },
-  sectionLabel: { fontSize: 10, color: colors.textMuted, letterSpacing: 2, padding: 16, paddingBottom: 0 },
   row: {
-    flexDirection: 'row', alignItems: 'center',
-    paddingHorizontal: 16, paddingVertical: 14,
-    borderBottomWidth: 1, borderBottomColor: colors.border,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    gap: 12,
   },
-  rowLast: { borderBottomWidth: 0 },
-  rowIcon: { fontSize: 18, marginRight: 14 },
-  rowLabel: { flex: 1, fontSize: 15, color: colors.text },
-  rowValue: { fontSize: 14, color: colors.textMuted },
-  logoutBtn: {
-    borderWidth: 1.5, borderColor: colors.danger + '50',
-    borderRadius: 16, padding: 16, alignItems: 'center', marginBottom: 20,
+  rowLast: {
+    borderBottomWidth: 0,
   },
-  logoutBtnText: { color: colors.danger, fontSize: 15, fontWeight: '600' },
-  footer: { textAlign: 'center', fontSize: 12, color: colors.textMuted, lineHeight: 20 },
+  rowIconWrap: {
+    width: 34,
+    height: 34,
+    borderRadius: 9,
+    backgroundColor: colors.blueLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rowLabel: {
+    flex: 1,
+    fontSize: 15,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  rowValue: {
+    fontSize: 14,
+    color: colors.textMuted,
+  },
+
+  signOutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFF2F1',
+    borderRadius: radius.md,
+    paddingVertical: 16,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#FFD5D3',
+    marginBottom: 24,
+  },
+  signOutText: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: colors.error,
+  },
+
+  footer: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: colors.textMuted,
+    lineHeight: 20,
+  },
 });

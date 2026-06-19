@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 
 import SplashScreen from '../screens/SplashScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -17,40 +18,74 @@ import AnalyticsScreen from '../screens/AnalyticsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 import { RootStackParamList, TabParamList } from '../types';
-import { colors } from '../theme';
+import { colors, shadows } from '../theme';
 import { supabase } from '../lib/supabase';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
-function TabIcon({ icon, label, focused }: { icon: string; label: string; focused: boolean }) {
+type IoniconName = React.ComponentProps<typeof Ionicons>['name'];
+
+const TAB_ICONS: Record<string, { active: IoniconName; inactive: IoniconName }> = {
+  Dashboard: { active: 'home', inactive: 'home-outline' },
+  Pause: { active: 'pause-circle', inactive: 'pause-circle-outline' },
+  Challenges: { active: 'checkbox', inactive: 'checkbox-outline' },
+  Analytics: { active: 'bar-chart', inactive: 'bar-chart-outline' },
+  Settings: { active: 'person-circle', inactive: 'person-circle-outline' },
+};
+
+function PauseTabButton({ children, onPress, accessibilityState }: BottomTabBarButtonProps) {
+  const focused = accessibilityState?.selected;
   return (
-    <View style={[tabStyles.iconWrap, focused && tabStyles.iconWrapActive]}>
-      <Text style={tabStyles.icon}>{icon}</Text>
-      <Text style={[tabStyles.label, focused && tabStyles.labelActive]}>{label}</Text>
-    </View>
+    <TouchableOpacity
+      style={tabStyles.pauseButtonWrap}
+      onPress={onPress}
+      activeOpacity={0.9}
+    >
+      <View style={[tabStyles.pauseButton, focused && tabStyles.pauseButtonActive]}>
+        <Ionicons
+          name={focused ? 'pause-circle' : 'pause-circle-outline'}
+          size={30}
+          color={colors.white}
+        />
+      </View>
+    </TouchableOpacity>
   );
 }
 
 function MainTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarStyle: tabStyles.bar,
         tabBarShowLabel: false,
-      }}
+        tabBarStyle: tabStyles.bar,
+        tabBarActiveTintColor: colors.navy,
+        tabBarInactiveTintColor: colors.textMuted,
+        tabBarIcon: ({ focused, color, size }) => {
+          const icons = TAB_ICONS[route.name];
+          if (!icons) return null;
+          return (
+            <Ionicons
+              name={focused ? icons.active : icons.inactive}
+              size={24}
+              color={color}
+            />
+          );
+        },
+      })}
     >
-      <Tab.Screen name="Dashboard" component={DashboardScreen}
-        options={{ tabBarIcon: ({ focused }) => <TabIcon icon="🏠" label="Home" focused={focused} /> }} />
-      <Tab.Screen name="Pause" component={PauseScreen}
-        options={{ tabBarIcon: ({ focused }) => <TabIcon icon="⏸" label="Pause" focused={focused} /> }} />
-      <Tab.Screen name="Challenges" component={ChallengesScreen}
-        options={{ tabBarIcon: ({ focused }) => <TabIcon icon="🎯" label="تحديات" focused={focused} /> }} />
-      <Tab.Screen name="Analytics" component={AnalyticsScreen}
-        options={{ tabBarIcon: ({ focused }) => <TabIcon icon="📊" label="مرآة" focused={focused} /> }} />
-      <Tab.Screen name="Settings" component={SettingsScreen}
-        options={{ tabBarIcon: ({ focused }) => <TabIcon icon="⚙️" label="إعدادات" focused={focused} /> }} />
+      <Tab.Screen name="Dashboard" component={DashboardScreen} />
+      <Tab.Screen name="Challenges" component={ChallengesScreen} />
+      <Tab.Screen
+        name="Pause"
+        component={PauseScreen}
+        options={{
+          tabBarButton: (props) => <PauseTabButton {...props} />,
+        }}
+      />
+      <Tab.Screen name="Analytics" component={AnalyticsScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
@@ -67,8 +102,8 @@ export default function AppNavigator() {
 
   if (!initialRoute) {
     return (
-      <View style={{ flex: 1, backgroundColor: colors.navy, alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator color={colors.sky} size="large" />
+      <View style={styles.loading}>
+        <ActivityIndicator color={colors.blue} size="large" />
       </View>
     );
   }
@@ -90,17 +125,46 @@ export default function AppNavigator() {
   );
 }
 
+const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    backgroundColor: colors.bg,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 const tabStyles = StyleSheet.create({
   bar: {
-    backgroundColor: colors.navy,
-    borderTopColor: 'rgba(79,163,224,0.15)',
+    backgroundColor: colors.white,
     borderTopWidth: 1,
-    height: 80,
-    paddingBottom: 8,
+    borderTopColor: colors.border,
+    height: 82,
+    paddingTop: 8,
+    paddingBottom: 16,
+    paddingHorizontal: 8,
+    ...shadows.sm,
   },
-  iconWrap: { alignItems: 'center', paddingTop: 8, paddingHorizontal: 4 },
-  iconWrapActive: {},
-  icon: { fontSize: 22 },
-  label: { fontSize: 9, color: colors.slateLight, marginTop: 3, letterSpacing: 0.5 },
-  labelActive: { color: colors.sky },
+  pauseButtonWrap: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -10,
+  },
+  pauseButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.navyLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: colors.navy,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  pauseButtonActive: {
+    backgroundColor: colors.navy,
+  },
 });

@@ -4,11 +4,12 @@ import {
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { getProfile, getStreak, getTodayChallenges, getTotalMinutesThisWeek } from '../lib/db';
 import { getWeeklyMessage } from '../data/messages';
 import { CHALLENGES } from '../data/challenges';
 import { UserData, StreakData } from '../types';
-import { colors, gradients } from '../theme';
+import { colors, gradients, shadows, radius } from '../theme';
 
 const { width } = Dimensions.get('window');
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -38,129 +39,341 @@ export default function DashboardScreen() {
   const weekMins = weekMinutes % 60;
   const todayDone = CHALLENGES.filter(c => completedIds.includes(c.id)).length;
   const todayTotal = CHALLENGES.length;
-  const greeting = (() => {
-    const h = new Date().getHours();
-    if (h < 12) return 'Good morning';
-    if (h < 17) return 'Good afternoon';
-    return 'Good evening';
-  })();
+  const todayDate = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const initials = (user?.name ?? 'U').charAt(0).toUpperCase();
+
+  const timeDisplay = weekMinutes === 0
+    ? '0m'
+    : weekHours > 0
+      ? `${weekHours}h ${weekMins > 0 ? `${weekMins}m` : ''}`
+      : `${weekMins}m`;
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.contentContainer}
+    >
       {/* Header */}
-      <LinearGradient colors={gradients.navy} style={styles.header}>
-        <View style={styles.headerTop}>
+      <View style={styles.header}>
+        <View style={styles.headerLeft}>
+          <Text style={styles.dateLabel}>{todayDate}</Text>
+          <Text style={styles.greeting}>Hello, {user?.name ?? 'Friend'}</Text>
+        </View>
+        <View style={styles.avatarCircle}>
+          <Text style={styles.avatarInitial}>{initials}</Text>
+        </View>
+      </View>
+
+      {/* Hero Card */}
+      <LinearGradient colors={gradients.navy} style={styles.heroCard}>
+        <View style={styles.heroTop}>
           <View>
-            <Text style={styles.greeting}>{greeting}</Text>
-            <Text style={styles.name}>{user?.name ?? 'Friend'} ✨</Text>
+            <Text style={styles.heroLabel}>Time reclaimed this week</Text>
+            <Text style={styles.heroLabelAr}>الوقت المسترد هذا الأسبوع</Text>
           </View>
           <View style={styles.streakBadge}>
+            <Ionicons name="flame-outline" size={14} color={colors.gold} />
             <Text style={styles.streakNum}>{streak.count}</Text>
-            <Text style={styles.streakFire}>🔥</Text>
-            <Text style={styles.streakLabel}>days</Text>
           </View>
         </View>
 
-        <View style={styles.weekCard}>
-          <Text style={styles.weekTitle}>This week you reclaimed</Text>
-          <Text style={styles.weekTitleAr}>هذا الأسبوع استرجعت</Text>
-          <Text style={styles.weekTime}>
-            {weekHours > 0 ? `${weekHours}h ` : ''}{weekMins}m
-            <Text style={styles.weekTimeSub}> of your life</Text>
-          </Text>
-          <View style={styles.dayRow}>
-            {DAY_LABELS.map((d, i) => (
+        <Text style={styles.heroTime}>{timeDisplay}</Text>
+        <Text style={styles.heroSub}>of mindful time</Text>
+
+        {/* Day bar chart */}
+        <View style={styles.dayRow}>
+          {DAY_LABELS.map((d, i) => {
+            const isToday = i === new Date().getDay();
+            return (
               <View key={i} style={styles.dayCol}>
-                <View style={[styles.dayBar, i === new Date().getDay() && styles.dayBarActive]} />
-                <Text style={styles.dayLabel}>{d}</Text>
+                <View style={[styles.dayBar, isToday && styles.dayBarActive]} />
+                <Text style={[styles.dayLabel, isToday && styles.dayLabelActive]}>{d}</Text>
               </View>
-            ))}
-          </View>
+            );
+          })}
         </View>
       </LinearGradient>
 
-      <View style={styles.body}>
-
-        {/* Weekly Message */}
-        <View style={styles.messageCard}>
-          <Text style={styles.messageQuote}>❝</Text>
-          <Text style={styles.messageAr}>{message.ar}</Text>
-          <Text style={styles.messageEn}>{message.en}</Text>
-        </View>
-
-        {/* Today's Progress */}
+      {/* Today's Challenges */}
+      <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Today's Challenges</Text>
-          <Text style={styles.sectionBadge}>{todayDone}/{todayTotal}</Text>
+          <View style={styles.progressPill}>
+            <Text style={styles.progressPillText}>{todayDone}/{todayTotal}</Text>
+          </View>
         </View>
 
-        {CHALLENGES.slice(0, 3).map(ch => (
-          <View key={ch.id} style={[styles.challengeRow, completedIds.includes(ch.id) && styles.challengeDone]}>
-            <Text style={styles.challengeIcon}>{ch.icon}</Text>
-            <View style={styles.challengeInfo}>
-              <Text style={[styles.challengeName, completedIds.includes(ch.id) && styles.strikethrough]}>
-                {ch.titleAr}
-              </Text>
-              <Text style={styles.challengeNameEn}>{ch.title}</Text>
+        {CHALLENGES.slice(0, 3).map(ch => {
+          const isDone = completedIds.includes(ch.id);
+          return (
+            <View key={ch.id} style={[styles.challengeCard, isDone && styles.challengeCardDone]}>
+              <View style={[styles.challengeIcon, isDone && styles.challengeIconDone]}>
+                <Ionicons
+                  name={ch.icon as any}
+                  size={20}
+                  color={isDone ? colors.mint : colors.navy}
+                />
+              </View>
+              <View style={styles.challengeInfo}>
+                <Text style={[styles.challengeTitle, isDone && styles.challengeTitleDone]}>
+                  {ch.titleAr}
+                </Text>
+                <Text style={styles.challengeSubtitle}>{ch.title}</Text>
+              </View>
+              <View style={[styles.checkCircle, isDone && styles.checkCircleDone]}>
+                {isDone && <Ionicons name="checkmark" size={14} color={colors.white} />}
+              </View>
             </View>
-            {completedIds.includes(ch.id) && <Text style={styles.doneCheck}>✓</Text>}
-          </View>
-        ))}
-
-        <View style={{ height: 32 }} />
+          );
+        })}
       </View>
+
+      {/* Quote card */}
+      <View style={styles.quoteCard}>
+        <View style={styles.quoteBar} />
+        <View style={styles.quoteContent}>
+          <Text style={styles.quoteAr}>{message.ar}</Text>
+          <Text style={styles.quoteEn}>{message.en}</Text>
+        </View>
+      </View>
+
+      <View style={{ height: 24 }} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.cream },
-  header: { paddingTop: 60, paddingHorizontal: 24, paddingBottom: 32 },
-  headerTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 },
-  greeting: { fontSize: 13, color: colors.slateLight, letterSpacing: 1 },
-  name: { fontSize: 28, fontWeight: '700', color: colors.white, marginTop: 2 },
-  streakBadge: { alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 16, padding: 12, minWidth: 64 },
-  streakNum: { fontSize: 28, fontWeight: '700', color: colors.white, lineHeight: 32 },
-  streakFire: { fontSize: 18 },
-  streakLabel: { fontSize: 10, color: colors.slateLight, letterSpacing: 1 },
-  weekCard: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: 20, padding: 20,
-    borderWidth: 1, borderColor: 'rgba(79,163,224,0.2)',
+  container: { flex: 1, backgroundColor: colors.bg },
+  contentContainer: { paddingBottom: 16 },
+
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 60,
+    paddingBottom: 20,
   },
-  weekTitle: { fontSize: 13, color: colors.slateLight, letterSpacing: 0.5 },
-  weekTitleAr: { fontSize: 12, color: 'rgba(255,255,255,0.4)', textAlign: 'right', marginBottom: 8 },
-  weekTime: { fontSize: 36, fontWeight: '700', color: colors.white, marginBottom: 16 },
-  weekTimeSub: { fontSize: 16, fontWeight: '400', color: colors.slateLight },
-  dayRow: { flexDirection: 'row', gap: 8 },
-  dayCol: { flex: 1, alignItems: 'center', gap: 4 },
-  dayBar: { width: '100%', height: 32, backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 6 },
-  dayBarActive: { backgroundColor: colors.sky },
-  dayLabel: { fontSize: 10, color: colors.slateLight },
-  body: { padding: 20 },
-  messageCard: {
+  headerLeft: { flex: 1 },
+  dateLabel: {
+    fontSize: 12,
+    color: colors.textMuted,
+    letterSpacing: 0.3,
+    marginBottom: 3,
+  },
+  greeting: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: colors.navy,
+    letterSpacing: -0.3,
+  },
+  avatarCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: colors.navy,
-    borderRadius: 20, padding: 24, marginBottom: 24,
-    shadowColor: colors.navy, shadowOpacity: 0.15, shadowRadius: 12, elevation: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 12,
   },
-  messageQuote: { fontSize: 32, color: colors.sky, lineHeight: 36, marginBottom: 8 },
-  messageAr: { fontSize: 18, color: colors.white, lineHeight: 28, fontWeight: '500', textAlign: 'right', marginBottom: 8 },
-  messageEn: { fontSize: 13, color: colors.slateLight, fontStyle: 'italic', lineHeight: 20 },
-  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
-  sectionTitle: { fontSize: 18, fontWeight: '700', color: colors.text },
-  sectionBadge: { fontSize: 13, color: colors.textMuted, backgroundColor: colors.ice, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12 },
-  challengeRow: {
-    flexDirection: 'row', alignItems: 'center',
-    backgroundColor: colors.white, borderRadius: 14,
-    padding: 16, marginBottom: 10,
-    shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2,
+  avatarInitial: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.white,
   },
-  challengeDone: { opacity: 0.6 },
-  challengeIcon: { fontSize: 24, marginRight: 14 },
+
+  heroCard: {
+    marginHorizontal: 20,
+    borderRadius: radius.lg,
+    padding: 22,
+    marginBottom: 24,
+    ...shadows.lg,
+  },
+  heroTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 16,
+  },
+  heroLabel: {
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.65)',
+    fontWeight: '500',
+  },
+  heroLabelAr: {
+    fontSize: 11,
+    color: 'rgba(255,255,255,0.35)',
+    marginTop: 2,
+    textAlign: 'right',
+  },
+  streakBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: radius.full,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    gap: 4,
+  },
+  streakNum: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: colors.gold,
+  },
+  heroTime: {
+    fontSize: 52,
+    fontWeight: '800',
+    color: colors.white,
+    letterSpacing: -1,
+    lineHeight: 56,
+  },
+  heroSub: {
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.5)',
+    marginTop: 2,
+    marginBottom: 20,
+  },
+  dayRow: {
+    flexDirection: 'row',
+    gap: 6,
+    alignItems: 'flex-end',
+  },
+  dayCol: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 5,
+  },
+  dayBar: {
+    width: '100%',
+    height: 28,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    borderRadius: 5,
+  },
+  dayBarActive: {
+    backgroundColor: colors.blue,
+    height: 36,
+  },
+  dayLabel: {
+    fontSize: 10,
+    color: 'rgba(255,255,255,0.4)',
+    fontWeight: '500',
+  },
+  dayLabelActive: {
+    color: colors.white,
+    fontWeight: '700',
+  },
+
+  section: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.navy,
+    letterSpacing: -0.2,
+  },
+  progressPill: {
+    backgroundColor: colors.blueLight,
+    borderRadius: radius.full,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  progressPillText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: colors.blue,
+  },
+  challengeCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    padding: 14,
+    marginBottom: 8,
+    ...shadows.sm,
+  },
+  challengeCardDone: {
+    opacity: 0.6,
+  },
+  challengeIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: radius.sm,
+    backgroundColor: colors.blueLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 14,
+  },
+  challengeIconDone: {
+    backgroundColor: colors.mintLight,
+  },
   challengeInfo: { flex: 1 },
-  challengeName: { fontSize: 16, fontWeight: '600', color: colors.text },
-  challengeNameEn: { fontSize: 12, color: colors.textMuted, marginTop: 2 },
-  strikethrough: { textDecorationLine: 'line-through', color: colors.textMuted },
-  doneCheck: { fontSize: 20, color: colors.success, fontWeight: '700' },
+  challengeTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: colors.text,
+    textAlign: 'right',
+  },
+  challengeTitleDone: {
+    textDecorationLine: 'line-through',
+    color: colors.textMuted,
+  },
+  challengeSubtitle: {
+    fontSize: 12,
+    color: colors.textMuted,
+    marginTop: 2,
+  },
+  checkCircle: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    borderWidth: 2,
+    borderColor: colors.borderMed,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 10,
+  },
+  checkCircleDone: {
+    backgroundColor: colors.mint,
+    borderColor: colors.mint,
+  },
+
+  quoteCard: {
+    marginHorizontal: 20,
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    padding: 18,
+    flexDirection: 'row',
+    gap: 14,
+    ...shadows.sm,
+  },
+  quoteBar: {
+    width: 3,
+    borderRadius: 2,
+    backgroundColor: colors.blue,
+    minHeight: 40,
+  },
+  quoteContent: { flex: 1 },
+  quoteAr: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.text,
+    lineHeight: 24,
+    textAlign: 'right',
+    marginBottom: 6,
+  },
+  quoteEn: {
+    fontSize: 12,
+    color: colors.textMuted,
+    fontStyle: 'italic',
+    lineHeight: 18,
+  },
 });

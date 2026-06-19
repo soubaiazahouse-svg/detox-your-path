@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { getTodayChallenges, toggleChallenge, updateStreak } from '../lib/db';
 import { CHALLENGES } from '../data/challenges';
-import { colors, gradients } from '../theme';
+import { colors, shadows, radius } from '../theme';
 
 export default function ChallengesScreen() {
   const [completedIds, setCompletedIds] = useState<string[]>([]);
@@ -23,32 +23,50 @@ export default function ChallengesScreen() {
 
   const done = CHALLENGES.filter(c => completedIds.includes(c.id)).length;
   const total = CHALLENGES.length;
-  const pct = Math.round((done / total) * 100);
+  const pct = total > 0 ? done / total : 0;
+
+  const todayDate = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <LinearGradient colors={gradients.navy} style={styles.header}>
-        <Text style={styles.headerLabel}>TODAY · اليوم</Text>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.contentContainer}
+    >
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerDate}>{todayDate}</Text>
         <Text style={styles.headerTitle}>Daily Challenges</Text>
         <Text style={styles.headerTitleAr}>التحديات اليومية</Text>
 
-        <View style={styles.progressRow}>
-          <View style={styles.progressBarBg}>
-            <View style={[styles.progressBarFill, { width: `${pct}%` }]} />
+        {/* Progress bar */}
+        <View style={styles.progressSection}>
+          <View style={styles.progressBar}>
+            <View style={[styles.progressFill, { width: `${pct * 100}%` }]} />
           </View>
-          <Text style={styles.progressText}>{done}/{total}</Text>
+          <Text style={styles.progressText}>{done}/{total} complete</Text>
         </View>
-      </LinearGradient>
+      </View>
 
-      <View style={styles.body}>
-        {done === total && total > 0 && (
-          <View style={styles.allDoneCard}>
-            <Text style={styles.allDoneEmoji}>🌟</Text>
-            <Text style={styles.allDoneTitle}>أكملت تحديات اليوم!</Text>
-            <Text style={styles.allDoneSub}>All done for today! Come back tomorrow.</Text>
+      {/* All done banner */}
+      {done === total && total > 0 && (
+        <View style={styles.allDoneCard}>
+          <View style={styles.allDoneIconWrap}>
+            <Ionicons name="trophy" size={28} color={colors.gold} />
           </View>
-        )}
+          <View style={styles.allDoneText}>
+            <Text style={styles.allDoneTitle}>أكملت تحديات اليوم!</Text>
+            <Text style={styles.allDoneSub}>All challenges complete. Come back tomorrow!</Text>
+          </View>
+        </View>
+      )}
 
+      {/* Challenge list */}
+      <View style={styles.list}>
         {CHALLENGES.map(ch => {
           const isDone = completedIds.includes(ch.id);
           return (
@@ -59,70 +77,192 @@ export default function ChallengesScreen() {
               activeOpacity={0.85}
             >
               <View style={[styles.iconWrap, isDone && styles.iconWrapDone]}>
-                <Text style={styles.icon}>{ch.icon}</Text>
+                <Ionicons
+                  name={ch.icon as any}
+                  size={22}
+                  color={isDone ? colors.mint : colors.navy}
+                />
               </View>
-              <View style={styles.info}>
-                <Text style={[styles.titleAr, isDone && styles.strike]}>{ch.titleAr}</Text>
-                <Text style={styles.title}>{ch.title}</Text>
-                <Text style={styles.desc}>{ch.descAr}</Text>
+              <View style={styles.cardInfo}>
+                <Text style={[styles.cardTitleAr, isDone && styles.textDone]}>
+                  {ch.titleAr}
+                </Text>
+                <Text style={styles.cardTitle}>{ch.title}</Text>
+                <Text style={styles.cardDesc}>{ch.desc}</Text>
               </View>
-              <View style={[styles.checkCircle, isDone && styles.checkCircleDone]}>
-                {isDone && <Text style={styles.checkMark}>✓</Text>}
+              <View style={styles.cardRight}>
+                <View style={[styles.checkCircle, isDone && styles.checkCircleDone]}>
+                  {isDone && <Ionicons name="checkmark" size={14} color={colors.white} />}
+                </View>
+                <Text style={styles.pointsBadge}>+{ch.points}</Text>
               </View>
             </TouchableOpacity>
           );
         })}
-
-        <View style={{ height: 32 }} />
       </View>
+
+      <View style={{ height: 24 }} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.cream },
-  header: { paddingTop: 60, paddingHorizontal: 24, paddingBottom: 32 },
-  headerLabel: { fontSize: 11, color: colors.slateLight, letterSpacing: 3, marginBottom: 8 },
-  headerTitle: { fontSize: 32, fontWeight: '700', color: colors.white },
-  headerTitleAr: { fontSize: 18, color: colors.sky, fontStyle: 'italic', marginBottom: 24 },
-  progressRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  progressBarBg: { flex: 1, height: 6, backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 3 },
-  progressBarFill: { height: 6, backgroundColor: colors.success, borderRadius: 3 },
-  progressText: { fontSize: 13, color: colors.slateLight, fontWeight: '600' },
-  body: { padding: 20 },
+  container: { flex: 1, backgroundColor: colors.bg },
+  contentContainer: { paddingBottom: 16 },
+
+  header: {
+    paddingHorizontal: 24,
+    paddingTop: 60,
+    paddingBottom: 24,
+    backgroundColor: colors.bg,
+  },
+  headerDate: {
+    fontSize: 12,
+    color: colors.textMuted,
+    letterSpacing: 0.3,
+    marginBottom: 4,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.navy,
+    letterSpacing: -0.5,
+  },
+  headerTitleAr: {
+    fontSize: 17,
+    color: colors.textSecondary,
+    fontWeight: '600',
+    marginTop: 2,
+    textAlign: 'right',
+    marginBottom: 20,
+  },
+  progressSection: {
+    gap: 8,
+  },
+  progressBar: {
+    height: 6,
+    backgroundColor: colors.borderMed,
+    borderRadius: radius.full,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: colors.navy,
+    borderRadius: radius.full,
+  },
+  progressText: {
+    fontSize: 12,
+    color: colors.textMuted,
+    fontWeight: '500',
+  },
+
   allDoneCard: {
-    backgroundColor: colors.success + '20',
-    borderWidth: 1, borderColor: colors.success + '50',
-    borderRadius: 20, padding: 24,
-    alignItems: 'center', marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.goldLight,
+    borderRadius: radius.md,
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#F0DFA8',
+    gap: 14,
   },
-  allDoneEmoji: { fontSize: 40, marginBottom: 8 },
-  allDoneTitle: { fontSize: 20, fontWeight: '700', color: colors.success, marginBottom: 4 },
-  allDoneSub: { fontSize: 13, color: colors.textMuted, textAlign: 'center' },
+  allDoneIconWrap: {
+    width: 52,
+    height: 52,
+    borderRadius: radius.sm,
+    backgroundColor: 'rgba(212,168,83,0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  allDoneText: { flex: 1 },
+  allDoneTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#8B6914',
+    marginBottom: 2,
+    textAlign: 'right',
+  },
+  allDoneSub: {
+    fontSize: 12,
+    color: '#A07820',
+  },
+
+  list: {
+    paddingHorizontal: 20,
+    gap: 10,
+  },
   card: {
-    flexDirection: 'row', alignItems: 'center',
-    backgroundColor: colors.white, borderRadius: 18,
-    padding: 18, marginBottom: 12,
-    shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 10, elevation: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    padding: 16,
+    ...shadows.sm,
   },
-  cardDone: { opacity: 0.65 },
+  cardDone: {
+    opacity: 0.65,
+  },
   iconWrap: {
-    width: 52, height: 52, borderRadius: 16,
-    backgroundColor: colors.ice,
-    alignItems: 'center', justifyContent: 'center', marginRight: 16,
+    width: 48,
+    height: 48,
+    borderRadius: radius.sm,
+    backgroundColor: colors.blueLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 14,
+    flexShrink: 0,
   },
-  iconWrapDone: { backgroundColor: colors.success + '20' },
-  icon: { fontSize: 26 },
-  info: { flex: 1 },
-  titleAr: { fontSize: 17, fontWeight: '700', color: colors.text, textAlign: 'right' },
-  title: { fontSize: 13, color: colors.textMuted, marginTop: 2 },
-  desc: { fontSize: 12, color: colors.textMuted, marginTop: 4, lineHeight: 18, textAlign: 'right' },
-  strike: { textDecorationLine: 'line-through', color: colors.textMuted },
+  iconWrapDone: {
+    backgroundColor: colors.mintLight,
+  },
+  cardInfo: {
+    flex: 1,
+  },
+  cardTitleAr: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.text,
+    textAlign: 'right',
+  },
+  cardTitle: {
+    fontSize: 12,
+    color: colors.textMuted,
+    marginTop: 2,
+    fontWeight: '500',
+  },
+  cardDesc: {
+    fontSize: 12,
+    color: colors.textMuted,
+    marginTop: 3,
+    lineHeight: 17,
+  },
+  textDone: {
+    textDecorationLine: 'line-through',
+    color: colors.textMuted,
+  },
+  cardRight: {
+    alignItems: 'center',
+    gap: 6,
+    marginLeft: 12,
+  },
   checkCircle: {
-    width: 28, height: 28, borderRadius: 14,
-    borderWidth: 2, borderColor: colors.border,
-    alignItems: 'center', justifyContent: 'center', marginLeft: 12,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    borderWidth: 2,
+    borderColor: colors.borderMed,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  checkCircleDone: { backgroundColor: colors.success, borderColor: colors.success },
-  checkMark: { color: colors.white, fontSize: 14, fontWeight: '700' },
+  checkCircleDone: {
+    backgroundColor: colors.mint,
+    borderColor: colors.mint,
+  },
+  pointsBadge: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.textMuted,
+  },
 });

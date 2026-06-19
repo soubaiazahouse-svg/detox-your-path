@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أفضل 15 نيتش على يوتيوب — AZA House</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --navy:#0f1f3d; --navy2:#162947; --blue:#1a56a0; --blue2:#2171c7;
+  --sky:#4fa3e0; --sky-light:#a8d4f5; --ice:#e8f4fd; --white:#ffffff;
+  --cream:#f7f9fc; --slate:#6b8cae; --slate-light:#b8d0e8;
+  --text:#0f1f3d; --text-muted:#6b8cae; --gold:#c8a84b;
+  --success:#2ebd8f; --danger:#e05a6b; --border:rgba(26,86,160,0.12);
+  --orange:#e8833a; --purple:#7c3aed;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* HERO */
+.hero {
+  background:linear-gradient(145deg,var(--navy) 0%,var(--navy2) 40%,#1a3a6e 100%);
+  padding:60px 40px 80px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,163,224,0.12) 0%,transparent 70%);
+  top:-100px;right:-100px;
+}
+.hero::after {
+  content:'';position:absolute;width:350px;height:350px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,86,160,0.15) 0%,transparent 70%);
+  bottom:-80px;left:-80px;
+}
+.hero-inner { position:relative;z-index:2; }
+.hero-badge {
+  display:inline-block;background:rgba(79,163,224,0.15);
+  border:1px solid rgba(79,163,224,0.3);
+  color:var(--sky-light);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:20px;
+}
+.hero-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;color:white;line-height:1.15;margin-bottom:12px;
+}
+.hero-title span { color:var(--sky);font-style:italic; }
+.hero-sub { font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;max-width:600px;margin:0 auto 36px; }
+
+.hero-stats {
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+}
+.hero-stat {
+  text-align:center;
+}
+.hero-stat .hs-num {
+  font-family:'Cormorant Garamond',serif;font-size:36px;color:white;line-height:1;
+}
+.hero-stat .hs-label { font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px; }
+
+/* FILTER BAR */
+.filter-bar {
+  background:white;border-bottom:1px solid var(--border);
+  padding:16px 40px;display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;position:sticky;top:0;z-index:50;
+  box-shadow:0 2px 12px rgba(15,31,61,0.06);
+}
+.filter-label { font-size:12px;color:var(--text-muted);margin-left:6px; }
+.filter-btn {
+  padding:7px 16px;border-radius:20px;font-size:12px;font-weight:500;
+  border:1.5px solid var(--border);background:white;color:var(--text-muted);
+  cursor:pointer;transition:all 0.2s;font-family:'Outfit',sans-serif;
+}
+.filter-btn:hover,.filter-btn.active {
+  background:var(--navy);color:white;border-color:var(--navy);
+}
+
+/* MAIN */
+.main { max-width:1200px;margin:0 auto;padding:40px 24px 80px; }
+
+/* SUMMARY CARDS */
+.summary-row {
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;
+}
+.sum-card {
+  background:white;border-radius:18px;padding:22px 20px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 12px rgba(15,31,61,0.04);
+}
+.sum-icon { font-size:26px;margin-bottom:10px; }
+.sum-val {
+  font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--navy);
+  line-height:1;margin-bottom:4px;
+}
+.sum-lbl { font-size:12px;color:var(--text-muted); }
+
+/* SECTION TITLE */
+.section-title {
+  font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--navy);
+  margin-bottom:6px;
+}
+.section-sub { font-size:13px;color:var(--text-muted);margin-bottom:28px; }
+
+/* NICHE CARDS */
+.niches-grid { display:flex;flex-direction:column;gap:20px; }
+
+.niche-card {
+  background:white;border-radius:20px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(15,31,61,0.04);
+  overflow:hidden;
+  transition:all 0.25s;
+  cursor:pointer;
+}
+.niche-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 10px 32px rgba(15,31,61,0.1);
+}
+
+.niche-header {
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:20px;
+  padding:24px 28px;
+}
+
+.niche-rank {
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;color:var(--slate-light);
+  font-weight:600;line-height:1;width:52px;text-align:center;
+}
+.niche-card[data-rank="1"] .niche-rank { color:var(--gold); }
+.niche-card[data-rank="2"] .niche-rank { color:#94a3b8; }
+.niche-card[data-rank="3"] .niche-rank { color:#cd7f32; }
+
+.niche-main {}
+.niche-name-ar {
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;color:var(--navy);font-weight:600;line-height:1.2;
+}
+.niche-name-en {
+  font-size:13px;color:var(--text-muted);margin-top:3px;direction:ltr;
+}
+.niche-idea {
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;
+  background:var(--ice);border:1px solid rgba(79,163,224,0.2);
+  color:var(--blue2);font-size:12px;font-weight:500;
+  padding:4px 12px;border-radius:20px;
+  direction:ltr;
+}
+.niche-idea::before { content:'💡'; font-size:13px; }
+
+.niche-right {
+  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+}
+.cpm-badge {
+  background:linear-gradient(135deg,var(--navy),var(--blue2));
+  color:white;padding:10px 18px;border-radius:14px;
+  text-align:center;
+}
+.cpm-num {
+  font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1;
+}
+.cpm-lbl { font-size:10px;opacity:0.7;margin-top:2px;letter-spacing:1px; }
+
+.niche-tags { display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end; }
+.tag {
+  padding:4px 10px;border-radius:12px;font-size:11px;font-weight:500;
+}
+.tag.diff-low { background:rgba(46,189,143,0.1);color:var(--success); }
+.tag.diff-med { background:rgba(79,163,224,0.1);color:var(--blue2); }
+.tag.diff-high { background:rgba(224,90,107,0.1);color:var(--danger); }
+.tag.evergreen { background:rgba(200,168,75,0.1);color:var(--gold); }
+
+/* NICHE BODY */
+.niche-body {
+  border-top:1px solid var(--border);
+  padding:20px 28px 24px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:24px;
+}
+.nb-section {}
+.nb-label {
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--slate);margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.nb-label span { font-size:14px; }
+.nb-content { font-size:13px;color:var(--text);line-height:1.7; }
+
+.monetize-list { display:flex;flex-direction:column;gap:6px; }
+.mon-item {
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--text);
+}
+.mon-dot {
+  width:6px;height:6px;border-radius:50%;
+  background:var(--sky);flex-shrink:0;
+}
+
+/* CPM METER */
+.cpm-meter {
+  height:6px;background:var(--ice);border-radius:3px;
+  margin-top:8px;overflow:hidden;
+}
+.cpm-fill {
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--sky),var(--blue2));
+}
+
+/* COMPETITION METER */
+.comp-meter {
+  display:flex;gap:3px;margin-top:8px;
+}
+.comp-dot {
+  width:12px;height:12px;border-radius:3px;
+  background:var(--ice);
+}
+.comp-dot.on { background:var(--navy); }
+
+/* FOOTER */
+.footer-banner {
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  border-radius:20px;padding:36px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+  margin-top:48px;
+}
+.fb-text {}
+.fb-title {
+  font-family:'Cormorant Garamond',serif;font-size:26px;color:white;
+  margin-bottom:6px;
+}
+.fb-sub { font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6; }
+.fb-badge {
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  color:white;padding:12px 24px;border-radius:12px;
+  font-size:13px;white-space:nowrap;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.niche-card { animation:fadeUp 0.4s ease both; }
+.niche-card:nth-child(1){animation-delay:0.05s;}
+.niche-card:nth-child(2){animation-delay:0.08s;}
+.niche-card:nth-child(3){animation-delay:0.11s;}
+.niche-card:nth-child(4){animation-delay:0.14s;}
+.niche-card:nth-child(5){animation-delay:0.17s;}
+.niche-card:nth-child(6){animation-delay:0.20s;}
+.niche-card:nth-child(7){animation-delay:0.23s;}
+.niche-card:nth-child(8){animation-delay:0.26s;}
+.niche-card:nth-child(9){animation-delay:0.29s;}
+.niche-card:nth-child(10){animation-delay:0.32s;}
+.niche-card:nth-child(11){animation-delay:0.35s;}
+.niche-card:nth-child(12){animation-delay:0.38s;}
+.niche-card:nth-child(13){animation-delay:0.41s;}
+.niche-card:nth-child(14){animation-delay:0.44s;}
+.niche-card:nth-child(15){animation-delay:0.47s;}
+
+@media(max-width:768px){
+  .hero-title{font-size:34px;}
+  .hero{padding:40px 20px 60px;}
+  .filter-bar{padding:12px 16px;}
+  .main{padding:24px 16px 60px;}
+  .summary-row{grid-template-columns:1fr 1fr;}
+  .niche-header{grid-template-columns:auto 1fr;gap:14px;}
+  .niche-right{display:none;}
+  .niche-body{grid-template-columns:1fr;}
+  .footer-banner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">AZA House — YouTube Research 2025</div>
+    <h1 class="hero-title">أفضل <span>15 نيتش</span><br>على يوتيوب لعام 2025</h1>
+    <p class="hero-sub">
+      تحليل شامل للنيتشات الأعلى CPM، الأقل منافسة، والطلب عليها دائم ومستمر.<br>
+      لكل نيتش: متوسط الـCPM، صعوبة المحتوى، طرق ربح بديلة، وفكرة قناة بثلاث كلمات.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hs-num">$48</div><div class="hs-label">أعلى CPM ممكن</div></div>
+      <div class="hero-stat"><div class="hs-num">15</div><div class="hs-label">نيتش محلَّل</div></div>
+      <div class="hero-stat"><div class="hs-num">4+</div><div class="hs-label">مصدر ربح لكل نيتش</div></div>
+      <div class="hero-stat"><div class="hs-num">100%</div><div class="hs-label">Evergreen</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">تصفية:</span>
+  <button class="filter-btn active" onclick="filterCards('all',this)">الكل</button>
+  <button class="filter-btn" onclick="filterCards('low',this)">منافسة منخفضة</button>
+  <button class="filter-btn" onclick="filterCards('high-cpm',this)">CPM +$20</button>
+  <button class="filter-btn" onclick="filterCards('easy',this)">محتوى سهل</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SUMMARY -->
+  <div class="summary-row">
+    <div class="sum-card">
+      <div class="sum-icon">💰</div>
+      <div class="sum-val">$48</div>
+      <div class="sum-lbl">أعلى CPM (التأمين)</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">📉</div>
+      <div class="sum-val">5</div>
+      <div class="sum-lbl">نيتشات منافسة منخفضة</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">🔁</div>
+      <div class="sum-val">15/15</div>
+      <div class="sum-lbl">نيتشات Evergreen</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-icon">🎯</div>
+      <div class="sum-val">$8</div>
+      <div class="sum-lbl">أقل CPM في القائمة</div>
+    </div>
+  </div>
+
+  <div class="section-title">النيتشات الـ 15</div>
+  <p class="section-sub">مرتبة من الأعلى CPM إلى الأقل — جميعها Evergreen والطلب عليها ثابت</p>
+
+  <div class="niches-grid" id="niches-container">
+
+    <!-- 1. Insurance -->
+    <div class="niche-card" data-rank="1" data-diff="low" data-cpm="high">
+      <div class="niche-header">
+        <div class="niche-rank">01</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">التأمين والحماية المالية</div>
+          <div class="niche-name-en">Insurance & Financial Protection</div>
+          <div class="niche-idea">Insure Your Future</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$22–48</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-med">صعوبة متوسطة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$22 – $48 للألف مشاهدة<br>أعلى نيتش في يوتيوب، المعلنون يدفعون أكثر لكل كليك لأن العميل يساوي آلاف الدولارات.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:100%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>متوسطة</strong> — لا تحتاج خبرة عميقة، الجمهور يريد شرحاً مبسطاً.
+            <br><br>أفضل فورمات: شرح أنواع التأمين، مقارنة شركات، "كيف تحمي عائلتك؟"
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>برامج أفيلييت لشركات التأمين (عمولة $50–200/عميل)</div>
+            <div class="mon-item"><div class="mon-dot"></div>سبونسرشيب مباشر من شركات التأمين</div>
+            <div class="mon-item"><div class="mon-dot"></div>تحويل عملاء لوسيط تأمين مقابل عمولة</div>
+            <div class="mon-item"><div class="mon-dot"></div>بيع كورس "دليل التأمين الذكي"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Personal Finance & Investing -->
+    <div class="niche-card" data-rank="2" data-diff="med" data-cpm="high">
+      <div class="niche-header">
+        <div class="niche-rank">02</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">المال الشخصي والاستثمار</div>
+          <div class="niche-name-en">Personal Finance & Investing</div>
+          <div class="niche-idea">Money Builds Wealth</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$18–45</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-med">منافسة متوسطة</span>
+            <span class="tag diff-med">صعوبة متوسطة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$18 – $45 للألف مشاهدة<br>ثاني أعلى نيتش. الجمهور "نية شراء عالية" مما يرفع CPM عند المعلنين.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:93%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>متوسطة</strong> — تحتاج فهم أساسي للأسواق المالية.
+            <br><br>أفضل فورمات: "استثمر $100 شهرياً"، شرح الأسهم/ETF، مراجعة تطبيقات الاستثمار.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot on"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت لمنصات الاستثمار (Robinhood, eToro) $50–150/مستخدم</div>
+            <div class="mon-item"><div class="mon-dot"></div>بيع كورسات استثمار ($97–497)</div>
+            <div class="mon-item"><div class="mon-dot"></div>مجتمع Patreon/Discord مدفوع للإشارات</div>
+            <div class="mon-item"><div class="mon-dot"></div>استشارات مالية شخصية</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Tax & Accounting -->
+    <div class="niche-card" data-rank="3" data-diff="high" data-cpm="high">
+      <div class="niche-header">
+        <div class="niche-rank">03</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">الضرائب والمحاسبة</div>
+          <div class="niche-name-en">Tax & Accounting</div>
+          <div class="niche-idea">Taxes Made Easy</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$15–42</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة جداً</span>
+            <span class="tag diff-high">صعوبة عالية</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$15 – $42 للألف مشاهدة<br>المحتوى الضريبي "موسمي" في بعضه (موسم التقديم) لكنه ثابت طوال العام لأصحاب الأعمال.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:87%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>عالية</strong> — يحتاج خبرة أو CPA. لكن هذا بالضبط سبب قلة المنافسة!
+            <br><br>أفضل فورمات: "كيف توفر في ضرائبك؟"، شرح القوانين الجديدة، أخطاء ضريبية شائعة.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت لبرامج الضرائب (TurboTax, QuickBooks)</div>
+            <div class="mon-item"><div class="mon-dot"></div>خدمة إعداد ضرائب مدفوعة عبر القناة</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس "ضرائب أصحاب الفري لانس"</div>
+            <div class="mon-item"><div class="mon-dot"></div>استشارات ضريبية بالساعة ($200–400/ساعة)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Legal Advice -->
+    <div class="niche-card" data-rank="4" data-diff="high" data-cpm="high">
+      <div class="niche-header">
+        <div class="niche-rank">04</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">القانون والاستشارات القانونية</div>
+          <div class="niche-name-en">Legal Advice Simplified</div>
+          <div class="niche-idea">Law Made Simple</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$14–40</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة جداً</span>
+            <span class="tag diff-high">صعوبة عالية</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$14 – $40 للألف مشاهدة<br>المعلنون من مكاتب المحامين يدفعون دولارات مرتفعة جداً لكل نقرة على إعلاناتهم.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:83%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>عالية</strong> — يحتاج محامي أو خبرة قانونية. نيتش خالٍ شبه كامل على يوتيوب بالعربية.
+            <br><br>أفضل فورمات: "حقوقك عند الفصل"، "عقد العمل.. اقرأ هذا أولاً"، قضايا حقيقية.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت لمواقع الاستشارات القانونية (LegalZoom)</div>
+            <div class="mon-item"><div class="mon-dot"></div>استشارات قانونية عبر Calendly ($300–600/ساعة)</div>
+            <div class="mon-item"><div class="mon-dot"></div>بيع قوالب عقود جاهزة ($19–97)</div>
+            <div class="mon-item"><div class="mon-dot"></div>إحالة قضايا لمكاتب محاماة مقابل نسبة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Real Estate Investing -->
+    <div class="niche-card" data-rank="5" data-diff="med" data-cpm="high">
+      <div class="niche-header">
+        <div class="niche-rank">05</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">الاستثمار في العقارات</div>
+          <div class="niche-name-en">Real Estate Investing</div>
+          <div class="niche-idea">Build Real Wealth</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$13–38</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-med">منافسة متوسطة</span>
+            <span class="tag diff-med">صعوبة متوسطة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$13 – $38 للألف مشاهدة<br>الجمهور يأتي بنية شراء عالية، مما يرفع قيمة كل مشاهدة بشكل كبير للمعلنين.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:78%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>متوسطة</strong> — تحتاج معرفة بالسوق المحلي أو إجراء مقابلات مع خبراء.
+            <br><br>أفضل فورمات: تحليل مناطق، "كيف اشتريت شقتي الأولى؟"، حساب العائد.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot on"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت لمنصات الاستثمار العقاري (Fundrise)</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس "استثمر في العقار بدون خبرة"</div>
+            <div class="mon-item"><div class="mon-dot"></div>عمولة وساطة عقارية من المتابعين</div>
+            <div class="mon-item"><div class="mon-dot"></div>سبونسرشيب من شركات التمويل العقاري</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SaaS & Software Reviews -->
+    <div class="niche-card" data-rank="6" data-diff="low" data-cpm="high">
+      <div class="niche-header">
+        <div class="niche-rank">06</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">مراجعات أدوات SaaS والبرمجيات</div>
+          <div class="niche-name-en">SaaS & Software Reviews</div>
+          <div class="niche-idea">Tools That Work</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$12–35</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-low">صعوبة سهلة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$12 – $35 للألف مشاهدة<br>شركات SaaS تدفع $50–200 كعمولة أفيلييت لكل مشترك، الـ CPM يرتفع معها تلقائياً.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:72%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>سهلة</strong> — تجرب الأداة وتسجل شاشتك. لا تحتاج كاميرا أو استوديو.
+            <br><br>أفضل فورمات: مقارنة أدوات، "أفضل 5 أدوات لـ...", شرح تفصيلي للأداة.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت SaaS (عمولة recurring شهرية 30–50%)</div>
+            <div class="mon-item"><div class="mon-dot"></div>سبونسرشيب مباشر من شركات البرمجيات</div>
+            <div class="mon-item"><div class="mon-dot"></div>إنشاء تقارير مقارنة مدفوعة (لينكد إن)</div>
+            <div class="mon-item"><div class="mon-dot"></div>استشارات اختيار التقنية للشركات ($200+/ساعة)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. AI Tools & Productivity -->
+    <div class="niche-card" data-rank="7" data-diff="low" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">07</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">أدوات الذكاء الاصطناعي والإنتاجية</div>
+          <div class="niche-name-en">AI Tools & Productivity</div>
+          <div class="niche-idea">AI Saves Time</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$10–32</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-low">صعوبة سهلة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$10 – $32 للألف مشاهدة<br>الطلب في ارتفاع مستمر مع انفجار سوق الذكاء الاصطناعي. النيتش لا يزال جديداً نسبياً.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:65%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>سهلة جداً</strong> — تجرب الأداة وتشرحها. المحتوى يكتب نفسه مع كل أداة جديدة.
+            <br><br>أفضل فورمات: "10 أدوات AI وفرت 20 ساعة"، workflows، مقارنات.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت لأدوات AI (Jasper, Midjourney, etc.)</div>
+            <div class="mon-item"><div class="mon-dot"></div>بيع Notion templates وworkflows جاهزة</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس "استخدم AI في عملك من الأول"</div>
+            <div class="mon-item"><div class="mon-dot"></div>خدمة إعداد AI workflows للشركات</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Cybersecurity & Privacy -->
+    <div class="niche-card" data-rank="8" data-diff="high" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">08</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">الأمن السيبراني والخصوصية الرقمية</div>
+          <div class="niche-name-en">Cybersecurity & Digital Privacy</div>
+          <div class="niche-idea">Stay Digitally Safe</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$10–35</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-high">صعوبة عالية</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$10 – $35 للألف مشاهدة<br>معلنو VPN يدفعون بسخاء. المحتوى يجذب جمهور تقني عالي الدخل.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:70%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>عالية</strong> — يحتاج خلفية تقنية. لكن يمكن البدء بمحتوى توعوي دون أن تكون هاكر.
+            <br><br>أفضل فورمات: "كيف يسرقون كلمة مرورك"، مراجعات VPN، أمان الهاتف.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت VPN (NordVPN, ExpressVPN) $50–150/مشترك</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس أمن سيبراني معتمد على Udemy</div>
+            <div class="mon-item"><div class="mon-dot"></div>استشارات أمن للشركات الصغيرة</div>
+            <div class="mon-item"><div class="mon-dot"></div>سبونسرشيب أدوات Password Manager</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Digital Marketing -->
+    <div class="niche-card" data-rank="9" data-diff="med" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">09</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">التسويق الرقمي والنمو</div>
+          <div class="niche-name-en">Digital Marketing & Growth</div>
+          <div class="niche-idea">Marketing That Converts</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$9–28</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-med">منافسة متوسطة</span>
+            <span class="tag diff-med">صعوبة متوسطة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$9 – $28 للألف مشاهدة<br>كل صاحب عمل يريد تسويقاً. الطلب لا ينتهي ويتجدد مع كل أداة أو منصة جديدة.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:58%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>متوسطة</strong> — تجربة عملية كافية. المحتوى التطبيقي أقوى من النظري.
+            <br><br>أفضل فورمات: case studies حقيقية، "كيف حصلنا على 10K عميل"، أدوات مجانية.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot on"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت أدوات تسويق (SEMrush, HubSpot)</div>
+            <div class="mon-item"><div class="mon-dot"></div>وكالة تسويق رقمي موصولة بالقناة</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس "إتقان الإعلانات المدفوعة"</div>
+            <div class="mon-item"><div class="mon-dot"></div>mentorship مجموعات مدفوعة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Career Development & Job Skills -->
+    <div class="niche-card" data-rank="10" data-diff="low" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">10</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">التطوير الوظيفي ومهارات العمل</div>
+          <div class="niche-name-en">Career Development & Job Skills</div>
+          <div class="niche-idea">Land Dream Job</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$8–24</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-low">صعوبة سهلة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$8 – $24 للألف مشاهدة<br>سوق العمل يتغير باستمرار. محتوى "كيف تحصل على وظيفة" لا يشيخ أبداً.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:49%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>سهلة</strong> — تجاربك الشخصية = محتوى أصيل. لا تحتاج شهادة أو خبرة طويلة.
+            <br><br>أفضل فورمات: مراجعة CV، تحضير مقابلات، "راتبي بعد 5 سنوات".
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت LinkedIn Premium, Coursera, Udemy</div>
+            <div class="mon-item"><div class="mon-dot"></div>خدمة تحسين السيرة الذاتية ($50–150/CV)</div>
+            <div class="mon-item"><div class="mon-dot"></div>جلسات تحضير مقابلات مدفوعة</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس "احتلّ يوتيوب المهني"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Mental Health & Mindfulness -->
+    <div class="niche-card" data-rank="11" data-diff="med" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">11</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">الصحة النفسية والتأمل</div>
+          <div class="niche-name-en">Mental Health & Mindfulness</div>
+          <div class="niche-idea">Mind Over Chaos</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$7–22</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-med">منافسة متوسطة</span>
+            <span class="tag diff-low">صعوبة سهلة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$7 – $22 للألف مشاهدة<br>أحد أسرع النيتشات نمواً بعد جائحة كوفيد. الجمهور وفي جداً والاشتراك سهل.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:45%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>سهلة</strong> — تحدث من تجربتك. الأصالة والهشاشة هنا أقوى من الخبرة الأكاديمية.
+            <br><br>أفضل فورمات: قصص شخصية، تمارين تنفس موجهة، "يوم في حياتي مع القلق".
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot on"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت BetterHelp, Calm, Headspace ($100–200/مستخدم)</div>
+            <div class="mon-item"><div class="mon-dot"></div>جلسات coaching نفسي مدفوعة</div>
+            <div class="mon-item"><div class="mon-dot"></div>كتاب رقمي "تعافٍ يومي" ($17–37)</div>
+            <div class="mon-item"><div class="mon-dot"></div>Patreon: مجتمع دعم نفسي شهري</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Entrepreneurship & Business -->
+    <div class="niche-card" data-rank="12" data-diff="med" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">12</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">ريادة الأعمال وبناء المشاريع</div>
+          <div class="niche-name-en">Entrepreneurship & Business Building</div>
+          <div class="niche-idea">Build Your Empire</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$8–25</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-med">منافسة متوسطة</span>
+            <span class="tag diff-med">صعوبة متوسطة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$8 – $25 للألف مشاهدة<br>جمهور رواد الأعمال من الأكثر شراءً للمنتجات والكورسات. CPM يرتفع مع نمو القناة.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:51%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>متوسطة</strong> — تجربتك الشخصية في بناء مشروع هي المحتوى الأقوى.
+            <br><br>أفضل فورمات: "بنيت مشروع $10K في 3 أشهر"، أخطاء أولى السنة، مقابلات مع رواد.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot on"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>كورسات ريادة ($197–997)</div>
+            <div class="mon-item"><div class="mon-dot"></div>coaching لرواد الأعمال المبتدئين</div>
+            <div class="mon-item"><div class="mon-dot"></div>مجتمع membership شهري ($29–97)</div>
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت أدوات أعمال (Shopify, Notion)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Health & Medical Education -->
+    <div class="niche-card" data-rank="13" data-diff="high" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">13</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">الصحة والتثقيف الطبي</div>
+          <div class="niche-name-en">Health & Medical Education</div>
+          <div class="niche-idea">Doctor Explains Simply</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$8–24</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-high">صعوبة عالية</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$8 – $24 للألف مشاهدة<br>المعلنون من صناعة الصحة والأدوية يدفعون جيداً. والجمهور يثق بالمحتوى الطبي ويتفاعل.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:49%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>عالية</strong> — يحتاج خلفية طبية. لكن التبسيط الطبي نيتش فارغ شبه كامل بالعربية.
+            <br><br>أفضل فورمات: شرح الأمراض الشائعة، ردود على مخاوف الناس، تصحيح المعلومات الخاطئة.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت مكملات غذائية ومنتجات صحية</div>
+            <div class="mon-item"><div class="mon-dot"></div>سبونسرشيب أجهزة قياس صحية (ساعات, oximeters)</div>
+            <div class="mon-item"><div class="mon-dot"></div>كتب رقمية عن الصحة الوقائية</div>
+            <div class="mon-item"><div class="mon-dot"></div>استشارات طبية عبر منصات متخصصة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. E-commerce & Dropshipping -->
+    <div class="niche-card" data-rank="14" data-diff="med" data-cpm="med">
+      <div class="niche-header">
+        <div class="niche-rank">14</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">التجارة الإلكترونية والدروبشيبينغ</div>
+          <div class="niche-name-en">E-commerce & Dropshipping</div>
+          <div class="niche-idea">Sell Online Smart</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$7–20</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-med">منافسة متوسطة</span>
+            <span class="tag diff-low">صعوبة سهلة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$7 – $20 للألف مشاهدة<br>جمهور يريد ربح المال مباشرة = عالي التحويل للكورسات والأدوات. CPM متوسط لكن الربح البديل عالٍ.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:40%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>سهلة</strong> — توثيق رحلتك كافٍ. الشفافية عن الأرقام الحقيقية = views مضمونة.
+            <br><br>أفضل فورمات: "أرباحي هذا الشهر"، تحليل المنتجات، "فشلت في هذا وإليك السبب".
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot on"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت Shopify ($150/متجر نشط)</div>
+            <div class="mon-item"><div class="mon-dot"></div>كورس "ابدأ متجرك في أسبوع" ($197–497)</div>
+            <div class="mon-item"><div class="mon-dot"></div>خدمة إعداد متاجر Shopify ($300–1000/متجر)</div>
+            <div class="mon-item"><div class="mon-dot"></div>تحليل منتجات رابحة كخدمة مدفوعة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Language Learning -->
+    <div class="niche-card" data-rank="15" data-diff="low" data-cpm="low">
+      <div class="niche-header">
+        <div class="niche-rank">15</div>
+        <div class="niche-main">
+          <div class="niche-name-ar">تعلم اللغات والثقافات</div>
+          <div class="niche-name-en">Language Learning & Cultures</div>
+          <div class="niche-idea">Speak New Language</div>
+        </div>
+        <div class="niche-right">
+          <div class="cpm-badge">
+            <div class="cpm-num">$6–18</div>
+            <div class="cpm-lbl">AVG CPM</div>
+          </div>
+          <div class="niche-tags">
+            <span class="tag diff-low">منافسة منخفضة</span>
+            <span class="tag diff-low">صعوبة سهلة</span>
+            <span class="tag evergreen">Evergreen ♾️</span>
+          </div>
+        </div>
+      </div>
+      <div class="niche-body">
+        <div class="nb-section">
+          <div class="nb-label"><span>📊</span> متوسط الـ CPM</div>
+          <div class="nb-content">$6 – $18 للألف مشاهدة<br>أقل CPM في القائمة لكنه يعوضها بالـ watch time الطويل والجمهور الوفي جداً.</div>
+          <div class="cpm-meter"><div class="cpm-fill" style="width:34%"></div></div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>🎬</span> صعوبة المحتوى</div>
+          <div class="nb-content">
+            <strong>سهلة جداً</strong> — إذا أتقنت لغتين، لديك قناة. المحتوى ممتع وبطبيعته جذاب.
+            <br><br>أفضل فورمات: "تعلم 1000 كلمة"، أخطاء شائعة، يوميات تعلم لغة جديدة.
+            <div class="comp-meter">
+              <div class="comp-dot on"></div><div class="comp-dot on"></div><div class="comp-dot"></div>
+              <div class="comp-dot"></div><div class="comp-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nb-section">
+          <div class="nb-label"><span>💸</span> طرق ربح غير AdSense</div>
+          <div class="monetize-list">
+            <div class="mon-item"><div class="mon-dot"></div>أفيلييت Rosetta Stone, Babbel, Duolingo Plus</div>
+            <div class="mon-item"><div class="mon-dot"></div>دروس لغة خاصة عبر iTalki أو مباشرة</div>
+            <div class="mon-item"><div class="mon-dot"></div>كتب أنماط لغوية رقمية ($9–27)</div>
+            <div class="mon-item"><div class="mon-dot"></div>مجتمع تدريب لغوي بالاشتراك الشهري</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end niches-grid -->
+
+  <!-- FOOTER BANNER -->
+  <div class="footer-banner">
+    <div class="fb-text">
+      <div class="fb-title">ملاحظة مهمة حول الـ CPM</div>
+      <div class="fb-sub">
+        الأرقام المذكورة هي متوسطات للسوق الإنجليزي (US/UK/CA/AU). للمحتوى العربي، اضرب في 0.3–0.6 عموماً.<br>
+        CPM الفعلي يتأثر بالموسم، الجغرافيا، جودة الجمهور، ومدة المشاهدة.
+      </div>
+    </div>
+    <div class="fb-badge">AZA House — YouTube Research 2025</div>
+  </div>
+
+</div><!-- end main -->
+
+<script>
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.niche-card');
+  cards.forEach(card => {
+    const diff = card.dataset.diff;
+    const cpm = card.dataset.cpm;
+    let show = true;
+    if (type === 'low' && diff !== 'low') show = false;
+    if (type === 'high-cpm' && cpm !== 'high') show = false;
+    if (type === 'easy' && diff !== 'low') show = false;
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+document.querySelectorAll('.niche-card').forEach(card => {
+  card.addEventListener('click', function(e) {
+    const body = this.querySelector('.niche-body');
+    if (body) {
+      const isHidden = body.style.display === 'none';
+      body.style.display = isHidden ? 'grid' : 'none';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

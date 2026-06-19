@@ -82,7 +82,7 @@ export default function ScreenTimePermissionScreen({ navigation }: Props) {
           onPress={granted ? continueToApp : openUsageSettings}
           activeOpacity={0.85}
         >
-          <LinearGradient colors={gradients.sky} style={styles.btnGrad}>
+          <LinearGradient colors={gradients.blue} style={styles.btnGrad}>
             <Text style={styles.btnText}>
               {granted ? 'ادخلي التطبيق ←' : 'السماح بالوصول — Allow Access'}
             </Text>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   content: { flex: 1, padding: 28, paddingTop: 70, alignItems: 'center' },
   icon: { fontSize: 72, marginBottom: 20 },
   title: { fontSize: 32, fontWeight: '700', color: colors.white, textAlign: 'center' },
-  titleEn: { fontSize: 16, color: colors.sky, marginBottom: 20, fontStyle: 'italic' },
+  titleEn: { fontSize: 16, color: colors.blue, marginBottom: 20, fontStyle: 'italic' },
   desc: {
     fontSize: 15, color: 'rgba(255,255,255,0.7)',
     textAlign: 'right', lineHeight: 24, marginBottom: 32,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 18, padding: 20, width: '100%', marginBottom: 24,
     borderWidth: 1, borderColor: 'rgba(79,163,224,0.2)',
   },
-  stepsTitle: { fontSize: 14, color: colors.sky, fontWeight: '600', marginBottom: 12, textAlign: 'right' },
+  stepsTitle: { fontSize: 14, color: colors.blue, fontWeight: '600', marginBottom: 12, textAlign: 'right' },
   step: { fontSize: 14, color: 'rgba(255,255,255,0.75)', marginBottom: 8, textAlign: 'right', lineHeight: 20 },
   iosCard: {
     flexDirection: 'row', gap: 12, backgroundColor: 'rgba(200,168,75,0.1)',
@@ -132,5 +132,5 @@ const styles = StyleSheet.create({
   btnGrad: { paddingVertical: 18, alignItems: 'center', borderRadius: 50 },
   btnText: { color: colors.white, fontSize: 16, fontWeight: '600' },
   skipBtn: { marginTop: 20, padding: 12 },
-  skipText: { color: colors.slateLight, fontSize: 14 },
+  skipText: { color: colors.textMuted, fontSize: 14 },
 });

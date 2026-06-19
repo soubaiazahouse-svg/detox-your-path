@@ -68,7 +68,7 @@ export default function OnboardingScreen({ navigation }: Props) {
               autoFocus
             />
             <TouchableOpacity style={styles.btn} onPress={() => setStep(2)} activeOpacity={0.85}>
-              <LinearGradient colors={gradients.sky} style={styles.btnGrad}>
+              <LinearGradient colors={gradients.blue} style={styles.btnGrad}>
                 <Text style={styles.btnText}>Next · التالي</Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -98,7 +98,7 @@ export default function OnboardingScreen({ navigation }: Props) {
               ))}
             </View>
             <TouchableOpacity style={styles.btn} onPress={() => setStep(3)} activeOpacity={0.85}>
-              <LinearGradient colors={gradients.sky} style={styles.btnGrad}>
+              <LinearGradient colors={gradients.blue} style={styles.btnGrad}>
                 <Text style={styles.btnText}>Next · التالي</Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -146,11 +146,11 @@ const styles = StyleSheet.create({
   scroll: { flexGrow: 1, padding: 28, paddingTop: 70 },
   progress: { flexDirection: 'row', gap: 8, marginBottom: 40, alignSelf: 'center' },
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: 'rgba(255,255,255,0.2)' },
-  dotActive: { backgroundColor: colors.sky, width: 24 },
+  dotActive: { backgroundColor: colors.blue, width: 24 },
   step: { flex: 1 },
   emoji: { fontSize: 48, marginBottom: 16 },
   title: { fontSize: 30, fontWeight: '700', color: colors.white, marginBottom: 4 },
-  titleAr: { fontSize: 20, color: colors.sky, marginBottom: 16, fontStyle: 'italic' },
+  titleAr: { fontSize: 20, color: colors.blue, marginBottom: 16, fontStyle: 'italic' },
   desc: { fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 22, marginBottom: 28 },
   descAr: { fontSize: 13, color: 'rgba(255,255,255,0.45)' },
   input: {
@@ -167,9 +167,9 @@ const styles = StyleSheet.create({
     borderWidth: 1, borderColor: 'rgba(79,163,224,0.2)',
     borderRadius: 16, padding: 16, alignItems: 'center',
   },
-  optionSelected: { borderColor: colors.sky, backgroundColor: 'rgba(79,163,224,0.2)' },
+  optionSelected: { borderColor: colors.blue, backgroundColor: 'rgba(79,163,224,0.2)' },
   optHours: { fontSize: 28, fontWeight: '700', color: colors.white },
-  optLabel: { fontSize: 12, color: colors.slateLight, marginTop: 2 },
+  optLabel: { fontSize: 12, color: colors.textMuted, marginTop: 2 },
   optLabelAr: { fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 2 },
   timeCard: {
     flexDirection: 'row', alignItems: 'center',
@@ -177,13 +177,13 @@ const styles = StyleSheet.create({
     borderWidth: 1, borderColor: 'rgba(79,163,224,0.2)',
     borderRadius: 16, padding: 18, marginBottom: 12,
   },
-  timeSelected: { borderColor: colors.sky, backgroundColor: 'rgba(79,163,224,0.15)' },
+  timeSelected: { borderColor: colors.blue, backgroundColor: 'rgba(79,163,224,0.15)' },
   timeIcon: { fontSize: 28, marginRight: 16 },
   timeText: { flex: 1 },
   timeName: { fontSize: 16, color: colors.white, fontWeight: '500' },
-  timeDesc: { fontSize: 12, color: colors.slateLight, marginTop: 2 },
+  timeDesc: { fontSize: 12, color: colors.textMuted, marginTop: 2 },
   check: { fontSize: 18, color: colors.success, fontWeight: '700' },
-  btn: { borderRadius: 50, overflow: 'hidden', shadowColor: colors.sky, shadowOpacity: 0.4, shadowRadius: 16, elevation: 6 },
+  btn: { borderRadius: 50, overflow: 'hidden', shadowColor: colors.blue, shadowOpacity: 0.4, shadowRadius: 16, elevation: 6 },
   btnGrad: { paddingVertical: 18, alignItems: 'center', borderRadius: 50 },
   btnText: { color: colors.white, fontSize: 16, fontWeight: '600' },
 });

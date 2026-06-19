@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هوية قناة Career Development — AZA House</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0f1f3d;--navy2:#162947;--blue:#1a56a0;--blue2:#2171c7;
+  --sky:#4fa3e0;--sky-light:#a8d4f5;--ice:#e8f4fd;--white:#fff;
+  --cream:#f7f9fc;--slate:#6b8cae;--slate-light:#b8d0e8;
+  --text:#0f1f3d;--text-muted:#6b8cae;--gold:#c8a84b;--gold2:#e8c96a;
+  --success:#2ebd8f;--danger:#e05a6b;--border:rgba(26,86,160,0.12);
+  --amber:#d97706;--emerald:#059669;--rose:#e11d48;--violet:#7c3aed;
+  --hero-grad:linear-gradient(145deg,#1a0a2e 0%,#0f1f3d 45%,#162947 100%);
+}
+
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);line-height:1.6;}
+
+/* ── HERO ── */
+.hero{
+  background:var(--hero-grad);
+  padding:72px 40px 96px;text-align:center;position:relative;overflow:hidden;
+}
+.hero-glow-1{
+  position:absolute;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,168,75,0.08) 0%,transparent 65%);
+  top:-200px;right:-200px;pointer-events:none;
+}
+.hero-glow-2{
+  position:absolute;width:450px;height:450px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,163,224,0.1) 0%,transparent 65%);
+  bottom:-120px;left:-80px;pointer-events:none;
+}
+.hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);
+  color:var(--gold2);font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  padding:7px 22px;border-radius:20px;margin-bottom:26px;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:60px;color:white;line-height:1.1;margin-bottom:16px;
+}
+.hero-title span{color:var(--gold2);font-style:italic;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;max-width:600px;margin:0 auto 46px;}
+.hero-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.hero-pill{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.7);font-size:12px;padding:7px 16px;border-radius:20px;
+}
+
+/* ── LAYOUT ── */
+.main{max-width:1120px;margin:0 auto;padding:60px 24px 88px;}
+.section{margin-bottom:68px;}
+.section-eyebrow{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:10px;
+}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:rgba(200,168,75,0.2);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--navy);margin-bottom:6px;}
+.section-sub{font-size:14px;color:var(--text-muted);margin-bottom:34px;max-width:680px;}
+
+/* ══════════════════════════════
+   SECTION 1 — CHANNEL NAMES
+══════════════════════════════ */
+.names-stack{display:flex;flex-direction:column;gap:14px;}
+
+.name-card{
+  background:white;border-radius:20px;overflow:hidden;
+  border:2px solid var(--border);
+  display:grid;grid-template-columns:72px 1fr 100px;
+  transition:border-color .25s,box-shadow .25s;cursor:default;
+}
+.name-card:hover{border-color:var(--gold);box-shadow:0 8px 32px rgba(200,168,75,0.1);}
+.name-card.top{
+  border-color:var(--gold);
+  background:linear-gradient(to left,rgba(200,168,75,0.03) 0%,white 60%);
+}
+
+.nc-num{
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:34px;
+  color:var(--slate-light);border-left:1px solid var(--border);
+}
+.name-card.top .nc-num{color:var(--gold);}
+
+.nc-body{padding:20px 24px;}
+.nc-en{
+  font-family:'Cormorant Garamond',serif;font-size:30px;
+  color:var(--navy);direction:ltr;line-height:1;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.nc-crown{
+  font-family:'Outfit',sans-serif;font-size:10px;letter-spacing:2px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--amber));
+  color:white;padding:3px 10px;border-radius:20px;
+}
+.nc-tagline{font-size:13px;color:var(--slate);margin-top:5px;direction:ltr;}
+.nc-ar{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.nc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;}
+.nc-tag{
+  font-size:11px;padding:3px 10px;border-radius:10px;
+  background:var(--ice);border:1px solid var(--border);color:var(--text-muted);
+}
+.name-card.top .nc-tag{
+  background:rgba(200,168,75,0.07);border-color:rgba(200,168,75,0.22);color:var(--amber);
+}
+
+.nc-score{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-right:1px solid var(--border);gap:3px;
+}
+.ncs-num{
+  font-family:'Cormorant Garamond',serif;font-size:38px;color:var(--navy);line-height:1;
+}
+.name-card.top .ncs-num{color:var(--gold);}
+.ncs-lbl{font-size:10px;color:var(--text-muted);text-align:center;line-height:1.4;}
+
+/* ══════════════════════════════
+   SECTION 2 — SLOGAN
+══════════════════════════════ */
+.slogan-wrap{
+  background:linear-gradient(135deg,#1a0a2e 0%,var(--navy) 50%,#1a3a2e 100%);
+  border-radius:26px;padding:52px 48px;position:relative;overflow:hidden;
+}
+.slogan-wrap::after{
+  content:'"';position:absolute;left:32px;top:-10px;
+  font-size:200px;color:rgba(200,168,75,0.05);
+  font-family:'Cormorant Garamond',serif;line-height:1;pointer-events:none;
+}
+.slogan-inner{position:relative;z-index:2;}
+.slogan-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);
+  color:var(--gold2);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  padding:6px 18px;border-radius:20px;margin-bottom:20px;
+}
+.slogan-main{
+  font-family:'Cormorant Garamond',serif;font-size:50px;
+  color:white;line-height:1.12;direction:ltr;margin-bottom:10px;
+}
+.slogan-main em{color:var(--gold2);font-style:italic;}
+.slogan-ar{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:36px;}
+
+.slogan-sep{height:1px;background:rgba(255,255,255,0.08);margin-bottom:28px;}
+.slogan-alts-label{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:14px;}
+.slogan-alts{display:flex;flex-direction:column;gap:10px;}
+.slogan-alt{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;padding:13px 18px;direction:ltr;
+}
+.salt-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.salt-text{font-size:14px;color:rgba(255,255,255,0.7);}
+.salt-text em{color:white;font-style:normal;font-weight:600;}
+
+/* ══════════════════════════════
+   SECTION 3 — PERSONA
+══════════════════════════════ */
+.persona-outer{display:grid;grid-template-columns:260px 1fr;gap:22px;}
+
+.persona-id{
+  background:white;border-radius:20px;padding:30px 22px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(15,31,61,0.04);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.p-avatar{
+  width:78px;height:78px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--amber));
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(200,168,75,0.3);
+}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--navy);}
+.p-type{font-size:11px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:18px;}
+.p-divider{width:100%;height:1px;background:var(--border);margin-bottom:16px;}
+.p-row{display:flex;justify-content:space-between;width:100%;padding:7px 0;font-size:12px;border-bottom:1px solid var(--ice);}
+.p-row:last-child{border-bottom:none;}
+.p-row-k{color:var(--text-muted);}
+.p-row-v{font-weight:600;color:var(--navy);}
+
+.persona-right{display:flex;flex-direction:column;gap:14px;}
+
+.pr-card{
+  background:white;border-radius:16px;padding:20px 22px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 10px rgba(15,31,61,0.03);
+}
+.pr-label{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:13px;display:flex;align-items:center;gap:8px;
+}
+.pr-label-icon{font-size:15px;}
+
+.pr-items{display:flex;flex-direction:column;gap:8px;}
+.pr-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text);line-height:1.55;}
+.pr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.pr-dot.pain{background:var(--danger);}
+.pr-dot.goal{background:var(--emerald);}
+.pr-dot.truth{background:var(--gold);}
+.pr-dot.habit{background:var(--sky);}
+
+.pr-item-pill{
+  background:rgba(224,90,107,0.05);border:1px solid rgba(224,90,107,0.12);
+  border-radius:10px;padding:9px 13px;font-size:12px;color:var(--text);line-height:1.5;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.pr-item-pill.goal-pill{
+  background:rgba(5,150,105,0.05);border-color:rgba(5,150,105,0.15);
+}
+.pr-item-pill.truth-pill{
+  background:rgba(200,168,75,0.05);border-color:rgba(200,168,75,0.2);
+}
+
+/* ══════════════════════════════
+   SECTION 4 — PILLARS
+══════════════════════════════ */
+.pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+
+.pillar{
+  background:white;border-radius:22px;padding:28px 26px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(15,31,61,0.04);
+  position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+}
+.pillar:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(15,31,61,0.09);}
+
+.pillar-stripe{position:absolute;top:0;right:0;width:4px;height:100%;}
+.p1 .pillar-stripe{background:linear-gradient(180deg,var(--gold),var(--amber));}
+.p2 .pillar-stripe{background:linear-gradient(180deg,var(--emerald),#047857);}
+.p3 .pillar-stripe{background:linear-gradient(180deg,var(--sky),var(--blue2));}
+.p4 .pillar-stripe{background:linear-gradient(180deg,var(--violet),#5b21b6);}
+
+.pillar-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+.pillar-icon-wrap{
+  width:50px;height:50px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.p1 .pillar-icon-wrap{background:rgba(200,168,75,0.1);}
+.p2 .pillar-icon-wrap{background:rgba(5,150,105,0.1);}
+.p3 .pillar-icon-wrap{background:rgba(79,163,224,0.1);}
+.p4 .pillar-icon-wrap{background:rgba(124,58,237,0.1);}
+
+.pillar-num-badge{
+  font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--ice);line-height:1;
+}
+
+.pillar-name-ar{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:2px;}
+.pillar-name-en{font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-bottom:12px;direction:ltr;}
+.pillar-why{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:18px;}
+
+.pillar-videos{display:flex;flex-direction:column;gap:8px;}
+.pv-item{
+  background:var(--ice);border-radius:10px;padding:9px 13px;
+  display:flex;align-items:center;gap:10px;
+}
+.pv-play{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;color:white;
+}
+.p1 .pv-play{background:var(--gold);}
+.p2 .pv-play{background:var(--emerald);}
+.p3 .pv-play{background:var(--sky);}
+.p4 .pv-play{background:var(--violet);}
+.pv-text{font-size:12px;color:var(--text);direction:ltr;line-height:1.4;}
+
+.pillar-footer{
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pillar-freq{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;}
+.pillar-freq-dot{width:6px;height:6px;border-radius:50%;}
+.p1 .pillar-freq-dot{background:var(--gold);}
+.p2 .pillar-freq-dot{background:var(--emerald);}
+.p3 .pillar-freq-dot{background:var(--sky);}
+.p4 .pillar-freq-dot{background:var(--violet);}
+.pillar-cpm-tag{
+  font-size:10px;font-weight:600;letter-spacing:1px;
+  padding:3px 10px;border-radius:10px;
+}
+.p1 .pillar-cpm-tag{background:rgba(200,168,75,0.1);color:var(--amber);}
+.p2 .pillar-cpm-tag{background:rgba(5,150,105,0.1);color:var(--emerald);}
+.p3 .pillar-cpm-tag{background:rgba(79,163,224,0.1);color:var(--blue2);}
+.p4 .pillar-cpm-tag{background:rgba(124,58,237,0.1);color:var(--violet);}
+
+/* ══════════════════════════════
+   SECTION 5 — UNIQUE MECHANISM
+══════════════════════════════ */
+.mech-hero{
+  background:linear-gradient(145deg,#1a0a2e 0%,#0f1f3d 60%,#1a2a0a 100%);
+  border-radius:28px;padding:56px 50px;position:relative;overflow:hidden;
+}
+.mech-hero::before{
+  content:'';position:absolute;
+  width:550px;height:550px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,168,75,0.08) 0%,transparent 70%);
+  top:-100px;right:-100px;pointer-events:none;
+}
+.mech-inner{position:relative;z-index:2;}
+
+.mech-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);
+  color:var(--gold2);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  padding:6px 20px;border-radius:20px;margin-bottom:20px;
+}
+.mech-title{
+  font-family:'Cormorant Garamond',serif;font-size:44px;color:white;
+  line-height:1.15;margin-bottom:10px;
+}
+.mech-title em{color:var(--gold2);font-style:italic;}
+.mech-sub{font-size:15px;color:rgba(255,255,255,0.5);max-width:640px;line-height:1.8;margin-bottom:44px;}
+
+/* Mechanism steps */
+.mech-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
+.mech-step{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;padding:22px 18px;text-align:center;
+  position:relative;
+}
+.mech-step-arrow{
+  position:absolute;top:50%;left:-12px;transform:translateY(-50%);
+  font-size:16px;color:rgba(200,168,75,0.4);
+}
+.ms-num{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(200,168,75,0.12);border:1px solid rgba(200,168,75,0.25);
+  color:var(--gold2);font-family:'Cormorant Garamond',serif;font-size:22px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 12px;
+}
+.ms-title{font-size:13px;font-weight:600;color:white;margin-bottom:6px;}
+.ms-desc{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.55;}
+
+/* Career Audit visual */
+.audit-wrap{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:20px;padding:30px 32px;margin-bottom:28px;
+}
+.audit-title{font-size:13px;font-weight:600;color:white;margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+.audit-title-icon{
+  width:28px;height:28px;border-radius:8px;background:rgba(200,168,75,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
+}
+.audit-rows{display:flex;flex-direction:column;gap:14px;}
+.audit-row{display:grid;grid-template-columns:180px 1fr 50px;align-items:center;gap:16px;}
+.audit-label{font-size:12px;color:rgba(255,255,255,0.55);direction:rtl;}
+.audit-bar-bg{height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.audit-bar-fill{height:100%;border-radius:4px;}
+.af-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.af-green{background:linear-gradient(90deg,var(--emerald),#34d399);}
+.af-blue{background:linear-gradient(90deg,var(--sky),var(--blue2));}
+.af-red{background:linear-gradient(90deg,#f87171,var(--danger));}
+.af-violet{background:linear-gradient(90deg,var(--violet),#a78bfa);}
+.audit-val{font-family:'Cormorant Garamond',serif;font-size:20px;color:white;text-align:center;direction:ltr;}
+
+/* VS table */
+.vs-box{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:20px;padding:28px 32px;
+}
+.vs-header{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:12px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:16px;text-align:center;
+}
+.vs-header .left{text-align:right;color:rgba(224,90,107,0.7);}
+.vs-header .right{text-align:left;color:rgba(5,150,105,0.7);}
+.vs-rows{display:flex;flex-direction:column;gap:10px;}
+.vs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;}
+.vs-them{
+  background:rgba(224,90,107,0.06);border:1px solid rgba(224,90,107,0.14);
+  border-radius:10px;padding:9px 13px;font-size:12px;color:rgba(255,255,255,0.5);
+  text-align:right;
+}
+.vs-you{
+  background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.18);
+  border-radius:10px;padding:9px 13px;font-size:12px;color:rgba(52,211,153,0.85);
+  text-align:left;
+}
+.vs-mid{font-size:10px;color:rgba(255,255,255,0.25);text-align:center;white-space:nowrap;}
+
+/* ══════════════════════════════
+   SECTION 6 — MONETIZATION
+══════════════════════════════ */
+.mono-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.mono-card{
+  background:white;border-radius:18px;padding:24px 20px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 12px rgba(15,31,61,0.04);
+}
+.mono-icon{font-size:28px;margin-bottom:12px;}
+.mono-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.mono-potential{
+  font-size:11px;font-weight:600;letter-spacing:1px;
+  padding:3px 10px;border-radius:10px;
+  background:rgba(5,150,105,0.08);color:var(--emerald);
+  display:inline-block;margin-bottom:12px;
+}
+.mono-list{display:flex;flex-direction:column;gap:7px;}
+.mono-item{display:flex;gap:8px;font-size:12px;color:var(--text);}
+.mono-check{color:var(--emerald);font-size:13px;flex-shrink:0;}
+
+/* ══════════════════════════════
+   SECTION 7 — LAUNCH PLAN
+══════════════════════════════ */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.plan-card{
+  background:white;border-radius:18px;padding:24px 20px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 12px rgba(15,31,61,0.04);
+}
+.plan-phase{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.plan-period{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:4px;}
+.plan-goal{font-size:13px;color:var(--text-muted);margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.plan-items{display:flex;flex-direction:column;gap:7px;}
+.plan-item{display:flex;gap:8px;font-size:12px;color:var(--text);}
+.plan-check{color:var(--emerald);font-size:13px;flex-shrink:0;margin-top:1px;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.name-card{animation:fadeUp .4s ease both;}
+.name-card:nth-child(1){animation-delay:.04s;}
+.name-card:nth-child(2){animation-delay:.08s;}
+.name-card:nth-child(3){animation-delay:.12s;}
+.name-card:nth-child(4){animation-delay:.16s;}
+.name-card:nth-child(5){animation-delay:.20s;}
+.pillar{animation:fadeUp .45s ease both;}
+.pillar:nth-child(1){animation-delay:.05s;}
+.pillar:nth-child(2){animation-delay:.10s;}
+.pillar:nth-child(3){animation-delay:.15s;}
+.pillar:nth-child(4){animation-delay:.20s;}
+
+@media(max-width:820px){
+  .hero-title{font-size:38px;}
+  .main{padding:36px 16px 64px;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .persona-outer{grid-template-columns:1fr;}
+  .mech-steps{grid-template-columns:1fr 1fr;}
+  .mono-grid{grid-template-columns:1fr;}
+  .plan-grid{grid-template-columns:1fr;}
+  .name-card{grid-template-columns:60px 1fr;}
+  .nc-score{display:none;}
+  .mech-hero{padding:36px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🚀 هوية قناة Career Development</div>
+    <h1 class="hero-title">هويتك الكاملة<br><span>من الاسم للآلية الفريدة</span></h1>
+    <p class="hero-sub">
+      كل ما تحتاجه لإطلاق قناة Career Development مختلفة —<br>
+      اسم يُحفر في الذاكرة، جمهور دقيق، وآلية لا يملكها أحد غيرك.
+    </p>
+    <div class="hero-pills">
+      <div class="hero-pill">5 أسماء مع تقييم</div>
+      <div class="hero-pill">سلوغن + 3 بدائل</div>
+      <div class="hero-pill">Persona مفصلة</div>
+      <div class="hero-pill">4 أعمدة محتوى</div>
+      <div class="hero-pill">الآلية الفريدة</div>
+      <div class="hero-pill">3 مصادر ربح</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══ 01 — NAMES ══ -->
+<div class="section">
+  <div class="section-eyebrow">01 — Channel Name</div>
+  <div class="section-title">اسم القناة — 5 خيارات</div>
+  <p class="section-sub">كل اسم يحمل زاوية مختلفة في السوق — اختر بناءً على الشخصية التي تريد تقديمها</p>
+
+  <div class="names-stack">
+
+    <!-- Winner -->
+    <div class="name-card top">
+      <div class="nc-score">
+        <div class="ncs-num">9.6</div>
+        <div class="ncs-lbl">قوة<br>الاسم</div>
+      </div>
+      <div class="nc-body">
+        <div class="nc-en">
+          RiseProtocol
+          <span class="nc-crown">★ الأفضل</span>
+        </div>
+        <div class="nc-tagline">"Your career, engineered — not left to chance."</div>
+        <div class="nc-ar">رايز بروتوكول — بروتوكول الصعود الوظيفي</div>
+        <div class="nc-tags">
+          <span class="nc-tag">Rise = صعود + تقدم + طموح</span>
+          <span class="nc-tag">Protocol = منهجية + نظام + علم</span>
+          <span class="nc-tag">يوحي بـ "خطة"، لا حظ عشوائي</span>
+          <span class="nc-tag">قوي كـ brand للكورسات والكتب</span>
+          <span class="nc-tag">يفرق بين التطوير العشوائي والمنهجي</span>
+        </div>
+      </div>
+      <div class="nc-num">01</div>
+    </div>
+
+    <!-- Option 2 -->
+    <div class="name-card">
+      <div class="nc-score">
+        <div class="ncs-num">8.9</div>
+        <div class="ncs-lbl">قوة<br>الاسم</div>
+      </div>
+      <div class="nc-body">
+        <div class="nc-en">The Career Lab</div>
+        <div class="nc-tagline">"We experiment so you don't have to guess."</div>
+        <div class="nc-ar">ذا كاريير لاب — مختبر المسار الوظيفي</div>
+        <div class="nc-tags">
+          <span class="nc-tag">Lab = تجارب حقيقية + بيانات + نتائج</span>
+          <span class="nc-tag">يفرق عن "النصائح" التقليدية</span>
+          <span class="nc-tag">يصلح كـ newsletter وpodcast</span>
+        </div>
+      </div>
+      <div class="nc-num">02</div>
+    </div>
+
+    <!-- Option 3 -->
+    <div class="name-card">
+      <div class="nc-score">
+        <div class="ncs-num">8.4</div>
+        <div class="ncs-lbl">قوة<br>الاسم</div>
+      </div>
+      <div class="nc-body">
+        <div class="nc-en">CareerCraft</div>
+        <div class="nc-tagline">"Careers worth being proud of — built deliberately."</div>
+        <div class="nc-ar">كاريير كرافت — صنع المسار الوظيفي</div>
+        <div class="nc-tags">
+          <span class="nc-tag">Craft = براعة + صنع + فن</span>
+          <span class="nc-tag">Career = مباشر للكيورد</span>
+          <span class="nc-tag">يوحي بالصبر والجودة</span>
+        </div>
+      </div>
+      <div class="nc-num">03</div>
+    </div>
+
+    <!-- Option 4 -->
+    <div class="name-card">
+      <div class="nc-score">
+        <div class="ncs-num">8.0</div>
+        <div class="ncs-lbl">قوة<br>الاسم</div>
+      </div>
+      <div class="nc-body">
+        <div class="nc-en">WorkForward</div>
+        <div class="nc-tagline">"Move forward — not just work harder."</div>
+        <div class="nc-ar">ووركفورورد — إلى الأمام وظيفياً</div>
+        <div class="nc-tags">
+          <span class="nc-tag">بسيط وسهل النطق</span>
+          <span class="nc-tag">يعكس التحرك لا الركود</span>
+          <span class="nc-tag">مناسب للسوق الإنجليزي والعربي</span>
+        </div>
+      </div>
+      <div class="nc-num">04</div>
+    </div>
+
+    <!-- Option 5 -->
+    <div class="name-card">
+      <div class="nc-score">
+        <div class="ncs-num">7.7</div>
+        <div class="ncs-lbl">قوة<br>الاسم</div>
+      </div>
+      <div class="nc-body">
+        <div class="nc-en">The Leap</div>
+        <div class="nc-tagline">"The jump you've been delaying. Let's take it."</div>
+        <div class="nc-ar">ذا ليب — القفزة الوظيفية</div>
+        <div class="nc-tags">
+          <span class="nc-tag">كلمة واحدة = ذاكرة قوية</span>
+          <span class="nc-tag">تعكس شجاعة تغيير المسار</span>
+          <span class="nc-tag">يصلح لجمهور يريد تغيير جذري</span>
+        </div>
+      </div>
+      <div class="nc-num">05</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 02 — SLOGAN ══ -->
+<div class="section">
+  <div class="section-eyebrow">02 — Tagline</div>
+  <div class="section-title">السلوغن والعبارة التعريفية</div>
+  <p class="section-sub">الوعد الذي يجعل المشاهد يضغط subscribe في أول 30 ثانية</p>
+
+  <div class="slogan-wrap">
+    <div class="slogan-inner">
+      <div class="slogan-chip">السلوغن الرئيسي</div>
+      <div class="slogan-main">
+        The career you want<br>has a <em>playbook.</em><br>We wrote it.
+      </div>
+      <div class="slogan-ar">
+        المسار الذي تريده له خارطة طريق. نحن كتبناها لك.
+      </div>
+
+      <div class="slogan-sep"></div>
+      <div class="slogan-alts-label">بدائل حسب الزاوية</div>
+      <div class="slogan-alts">
+        <div class="slogan-alt">
+          <div class="salt-label">للشخص العالق في وظيفته</div>
+          <div class="salt-text"><em>"Stop waiting to be discovered. Start being undeniable."</em></div>
+        </div>
+        <div class="slogan-alt">
+          <div class="salt-label">للشخص الذي يريد تغيير المسار</div>
+          <div class="salt-text"><em>"You don't need a new career. You need a new strategy."</em></div>
+        </div>
+        <div class="slogan-alt">
+          <div class="salt-label">للعاطل عن العمل أو حديث التخرج</div>
+          <div class="salt-text"><em>"The job hunt is broken. Here's how to win it anyway."</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 03 — PERSONA ══ -->
+<div class="section">
+  <div class="section-eyebrow">03 — Target Audience</div>
+  <div class="section-title">شخصية الجمهور المستهدف</div>
+  <p class="section-sub">شخص محدد وحقيقي — وليس "كل من يريد تطوير نفسه"</p>
+
+  <div class="persona-outer">
+
+    <div class="persona-id">
+      <div class="p-avatar">👩‍💼</div>
+      <div class="p-name">Sarah Khalid</div>
+      <div class="p-type">The Invisible High Performer</div>
+      <div class="p-divider"></div>
+      <div class="p-row"><span class="p-row-k">العمر</span><span class="p-row-v">26–36</span></div>
+      <div class="p-row"><span class="p-row-k">سنوات الخبرة</span><span class="p-row-v">3–8 سنوات</span></div>
+      <div class="p-row"><span class="p-row-k">الراتب الحالي</span><span class="p-row-v">أقل مما تستحق</span></div>
+      <div class="p-row"><span class="p-row-k">آخر ترقية</span><span class="p-row-v">+18 شهراً</span></div>
+      <div class="p-row"><span class="p-row-k">يشعر بـ</span><span class="p-row-v">غير مرئي</span></div>
+      <div class="p-row"><span class="p-row-k">لديه mentor؟</span><span class="p-row-v">لا</span></div>
+    </div>
+
+    <div class="persona-right">
+
+      <div class="pr-card">
+        <div class="pr-label"><span class="pr-label-icon">🎯</span> من هو بالضبط؟</div>
+        <div class="pr-items">
+          <div class="pr-item"><div class="pr-dot habit"></div>موظف يجتهد لكنه لا يُرى — يعمل أكثر من زملائه ويُكافَأون هم</div>
+          <div class="pr-item"><div class="pr-dot habit"></div>يتقن عمله تقنياً لكنه لا يعرف كيف يسوّق نفسه داخل الشركة أو خارجها</div>
+          <div class="pr-item"><div class="pr-dot habit"></div>يبحث على يوتيوب عن "how to get promoted" أو "how to negotiate salary" في وقت الغداء</div>
+          <div class="pr-item"><div class="pr-dot habit"></div>يشعر بأن الترقيات تذهب لمن يتكلم أكثر لا لمن يعمل أكثر — وهو محق</div>
+        </div>
+      </div>
+
+      <div class="pr-card">
+        <div class="pr-label"><span class="pr-label-icon">🔥</span> مشاكله الحقيقية (Pain Points)</div>
+        <div class="pr-items">
+          <div class="pr-item pr-item-pill"><div class="pr-dot pain" style="margin-top:5px;flex-shrink:0;"></div>"أنجزت أكثر من أي أحد في الفريق لكن زميلي المتكلم الكثير حصل على الترقية"</div>
+          <div class="pr-item pr-item-pill"><div class="pr-dot pain" style="margin-top:5px;flex-shrink:0;"></div>لا يعرف كيف يتفاوض على الراتب — يقبل أي رقم من خوف أن يبدو "طماعاً"</div>
+          <div class="pr-item pr-item-pill"><div class="pr-dot pain" style="margin-top:5px;flex-shrink:0;"></div>CV قوي لكن لا يعرف كيف ينتقل لوظيفة أفضل دون شبكة علاقات</div>
+          <div class="pr-item pr-item-pill"><div class="pr-dot pain" style="margin-top:5px;flex-shrink:0;"></div>يشعر بإحساس زائف بأن "العمل الجيد يتكلم عن نفسه" — وقد انتظر سنوات للتثبت</div>
+        </div>
+      </div>
+
+      <div class="pr-card">
+        <div class="pr-label"><span class="pr-label-icon">💛</span> الحقيقة التي يحتاج أن يسمعها</div>
+        <div class="pr-items">
+          <div class="pr-item pr-item-pill truth-pill"><div class="pr-dot truth" style="margin-top:5px;flex-shrink:0;"></div>"التميز لا يُكتشف — يُسوَّق له. المهارة التقنية 50% فقط من المعادلة."</div>
+          <div class="pr-item pr-item-pill truth-pill"><div class="pr-dot truth" style="margin-top:5px;flex-shrink:0;"></div>"التفاوض على الراتب مهارة تُتعلم — وكل سنة لا تتفاوض فيها تخسر آلاف الدولارات للأبد"</div>
+        </div>
+      </div>
+
+      <div class="pr-card">
+        <div class="pr-label"><span class="pr-label-icon">✅</span> ما يريده من قناتك</div>
+        <div class="pr-items">
+          <div class="pr-item goal-item pr-item-pill"><div class="pr-dot goal" style="margin-top:5px;flex-shrink:0;"></div>استراتيجية واضحة للحصول على الترقية خلال 6–12 شهراً بخطوات قابلة للتطبيق</div>
+          <div class="pr-item goal-item pr-item-pill"><div class="pr-dot goal" style="margin-top:5px;flex-shrink:0;"></div>نصوص جاهزة: "قل هذا بالضبط في مقابلة التقييم السنوي"</div>
+          <div class="pr-item goal-item pr-item-pill"><div class="pr-dot goal" style="margin-top:5px;flex-shrink:0;"></div>كيف يبني brand شخصي داخل وخارج الشركة بدون أن يبدو متكبراً</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ 04 — PILLARS ══ -->
+<div class="section">
+  <div class="section-eyebrow">04 — Content Pillars</div>
+  <div class="section-title">أعمدة المحتوى الأربعة</div>
+  <p class="section-sub">كل عمود يغطي مرحلة مختلفة في رحلة Sarah — معاً يغطون الـ funnel كاملاً</p>
+
+  <div class="pillars-grid">
+
+    <!-- Pillar 1 -->
+    <div class="pillar p1">
+      <div class="pillar-stripe"></div>
+      <div class="pillar-head">
+        <div class="pillar-icon-wrap">🚀</div>
+        <div class="pillar-num-badge">01</div>
+      </div>
+      <div class="pillar-name-ar">فن الترقية المبرمجة</div>
+      <div class="pillar-name-en">The Promotion Protocol</div>
+      <div class="pillar-why">
+        كيف تحصل على الترقية بخطوات مهندسة — لا انتظار ولا مصادفة. يكشف القواعد غير المكتوبة للصعود الوظيفي التي لا يشرحها أحد في الجامعة.
+      </div>
+      <div class="pillar-videos">
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">The Exact Conversation That Gets You Promoted (Word for Word)</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">Why Hard Workers Get Passed Over — The Visibility Problem</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">I Asked 20 Managers: What Actually Gets Someone Promoted?</div></div>
+      </div>
+      <div class="pillar-footer">
+        <div class="pillar-freq"><div class="pillar-freq-dot"></div> مرة أسبوعياً — أعلى search volume</div>
+        <span class="pillar-cpm-tag">CPM عالٍ</span>
+      </div>
+    </div>
+
+    <!-- Pillar 2 -->
+    <div class="pillar p2">
+      <div class="pillar-stripe"></div>
+      <div class="pillar-head">
+        <div class="pillar-icon-wrap">💰</div>
+        <div class="pillar-num-badge">02</div>
+      </div>
+      <div class="pillar-name-ar">التفاوض على الراتب</div>
+      <div class="pillar-name-en">Salary Negotiation Mastery</div>
+      <div class="pillar-why">
+        أعلى نيتش conversion في الـ career content — كل شخص شاهد فيديو تفاوض ونجح معه سيشترك ويشارك. الموضوع حساس لكنه يمس الجيب مباشرة.
+      </div>
+      <div class="pillar-videos">
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">Say This — Not That: Salary Negotiation Scripts That Work</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">I Negotiated a 40% Raise. Here's the Exact Strategy.</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">They Said "That's Our Final Offer" — What to Say Next</div></div>
+      </div>
+      <div class="pillar-footer">
+        <div class="pillar-freq"><div class="pillar-freq-dot"></div> مرة أسبوعياً — أعلى share rate</div>
+        <span class="pillar-cpm-tag">CPM مرتفع جداً</span>
+      </div>
+    </div>
+
+    <!-- Pillar 3 -->
+    <div class="pillar p3">
+      <div class="pillar-stripe"></div>
+      <div class="pillar-head">
+        <div class="pillar-icon-wrap">🎯</div>
+        <div class="pillar-num-badge">03</div>
+      </div>
+      <div class="pillar-name-ar">المقابلات والانتقال الوظيفي</div>
+      <div class="pillar-name-en">Job Interviews & Career Pivots</div>
+      <div class="pillar-why">
+        يجذب أعلى search volume في الـ career niche — الناس يبحثون عنه في لحظات ضغط حقيقية. فيديو واحد هنا يمكن أن يجلب 100K view.
+      </div>
+      <div class="pillar-videos">
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">Answer "Tell Me About Yourself" — The Formula That Works</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">How to Switch Industries With Zero Experience in That Field</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">The 24-Hour Pre-Interview Ritual That Changes Everything</div></div>
+      </div>
+      <div class="pillar-footer">
+        <div class="pillar-freq"><div class="pillar-freq-dot"></div> مرتين أسبوعياً في موسم التوظيف</div>
+        <span class="pillar-cpm-tag">SEO قوي</span>
+      </div>
+    </div>
+
+    <!-- Pillar 4 -->
+    <div class="pillar p4">
+      <div class="pillar-stripe"></div>
+      <div class="pillar-head">
+        <div class="pillar-icon-wrap">♟️</div>
+        <div class="pillar-num-badge">04</div>
+      </div>
+      <div class="pillar-name-ar">اللعبة غير المرئية في بيئة العمل</div>
+      <div class="pillar-name-en">The Invisible Rules of Work</div>
+      <div class="pillar-why">
+        القواعد التي لا تجدها في أي كتاب — السياسة المكتبية، كيف تبني علاقة مع مديرك، وكيف تتحكم في سمعتك المهنية. العمود الأكثر shareability.
+      </div>
+      <div class="pillar-videos">
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">The Unwritten Rules Nobody Tells You on Day 1</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">Managing Up: How to Make Your Boss Your Biggest Advocate</div></div>
+        <div class="pv-item"><div class="pv-play">▶</div><div class="pv-text">Quiet Quitting vs. Strategic Coasting — There's a Difference</div></div>
+      </div>
+      <div class="pillar-footer">
+        <div class="pillar-freq"><div class="pillar-freq-dot"></div> مرتين شهرياً — watch time عالٍ</div>
+        <span class="pillar-cpm-tag">Viral Potential</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 05 — UNIQUE MECHANISM ══ -->
+<div class="section">
+  <div class="section-eyebrow">05 — Unique Mechanism</div>
+  <div class="section-title">الآلية الفريدة</div>
+  <p class="section-sub">ما يراه جمهورك ويقول: "هذه القناة تختلف جوهرياً عن كل ما رأيته"</p>
+
+  <div class="mech-hero">
+    <div class="mech-inner">
+
+      <div class="mech-badge">⚡ The Unique Mechanism</div>
+      <div class="mech-title">
+        The <em>Career Audit</em> Framework<br>
+        + The 90-Day Rise Plan
+      </div>
+      <div class="mech-sub">
+        قناتك لا تقدم "نصائح" — تقدم <strong style="color:white;">تشخيصاً دقيقاً</strong> لسبب ركود المسار الوظيفي وخطة 90 يوماً لتغييره.
+        هذا يحول كل فيديو من "محتوى يُشاهد" إلى "أداة تُستخدم".
+      </div>
+
+      <!-- 4 Steps -->
+      <div class="mech-steps">
+        <div class="mech-step">
+          <div class="ms-num">1</div>
+          <div class="ms-title">Career Audit</div>
+          <div class="ms-desc">تشخيص دقيق: أين أنت الآن ولماذا؟ 5 محاور قابلة للقياس.</div>
+        </div>
+        <div class="mech-step">
+          <div class="mech-step-arrow">›</div>
+          <div class="ms-num">2</div>
+          <div class="ms-title">Gap Analysis</div>
+          <div class="ms-desc">الفجوة بين وضعك الحالي والوضع المستهدف — بأرقام لا مشاعر.</div>
+        </div>
+        <div class="mech-step">
+          <div class="mech-step-arrow">›</div>
+          <div class="ms-num">3</div>
+          <div class="ms-title">90-Day Sprint</div>
+          <div class="ms-desc">خطة 90 يوماً محددة بـ milestones أسبوعية قابلة للتتبع.</div>
+        </div>
+        <div class="mech-step">
+          <div class="mech-step-arrow">›</div>
+          <div class="ms-num">4</div>
+          <div class="ms-title">Proof of Work</div>
+          <div class="ms-desc">توثيق النتائج الحقيقية من جمهورك — يبني social proof مستمراً.</div>
+        </div>
+      </div>
+
+      <!-- Career Audit Visual -->
+      <div class="audit-wrap">
+        <div class="audit-title">
+          <div class="audit-title-icon">📊</div>
+          Career Audit — نظام التشخيص الحصري (مثال تطبيقي)
+        </div>
+        <div class="audit-rows">
+          <div class="audit-row">
+            <div class="audit-label">قوة السيرة الذاتية (CV Power)</div>
+            <div class="audit-bar-bg"><div class="audit-bar-fill af-green" style="width:82%"></div></div>
+            <div class="audit-val">8.2</div>
+          </div>
+          <div class="audit-row">
+            <div class="audit-label">الظهور المهني (Visibility)</div>
+            <div class="audit-bar-bg"><div class="audit-bar-fill af-red" style="width:28%"></div></div>
+            <div class="audit-val">2.8</div>
+          </div>
+          <div class="audit-row">
+            <div class="audit-label">مهارة التفاوض (Negotiation)</div>
+            <div class="audit-bar-bg"><div class="audit-bar-fill af-red" style="width:35%"></div></div>
+            <div class="audit-val">3.5</div>
+          </div>
+          <div class="audit-row">
+            <div class="audit-label">شبكة العلاقات (Network)</div>
+            <div class="audit-bar-bg"><div class="audit-bar-fill af-gold" style="width:55%"></div></div>
+            <div class="audit-val">5.5</div>
+          </div>
+          <div class="audit-row">
+            <div class="audit-label">التموضع الاستراتيجي (Positioning)</div>
+            <div class="audit-bar-bg"><div class="audit-bar-fill af-violet" style="width:40%"></div></div>
+            <div class="audit-val">4.0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VS Table -->
+      <div class="vs-box">
+        <div class="vs-header">
+          <div class="left">قنوات Career الأخرى</div>
+          <div></div>
+          <div class="right">RiseProtocol</div>
+        </div>
+        <div class="vs-rows">
+          <div class="vs-row">
+            <div class="vs-them">"اعمل بجد وستُكافأ" — نصيحة فارغة</div>
+            <div class="vs-mid">المحتوى</div>
+            <div class="vs-you">✓ تشخيص دقيق لماذا لم تُكافأ + خطوة تالية</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-them">نصائح عامة تصلح لأي شخص</div>
+            <div class="vs-mid">الدقة</div>
+            <div class="vs-you">✓ مخصص لـ Sarah: 3–8 سنوات خبرة، غير مرئية</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-them">يقيس النجاح بالـ views فقط</div>
+            <div class="vs-mid">النتائج</div>
+            <div class="vs-you">✓ يجمع success stories من الجمهور كـ social proof</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-them">لا يوجد نظام تقييم موحد</div>
+            <div class="vs-mid">الآلية</div>
+            <div class="vs-you">✓ Career Audit Score موحد في كل فيديو</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-them">فيديو يُشاهد ثم يُنسى</div>
+            <div class="vs-mid">الأثر</div>
+            <div class="vs-you">✓ 90-Day Plan — أداة تُستخدم لأشهر</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ 06 — MONETIZATION ══ -->
+<div class="section">
+  <div class="section-eyebrow">06 — Monetization</div>
+  <div class="section-title">طرق الربح غير AdSense</div>
+  <p class="section-sub">Career content يحوّل بشكل أعلى من أي نيتش لأن النتيجة (راتب أعلى) ملموسة وفورية</p>
+
+  <div class="mono-grid">
+
+    <div class="mono-card">
+      <div class="mono-icon">📚</div>
+      <div class="mono-title">كورسات مدفوعة</div>
+      <div class="mono-potential">$2K–15K شهرياً</div>
+      <div class="mono-list">
+        <div class="mono-item"><div class="mono-check">✓</div>"The 90-Day Promotion Sprint" ($197–397)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>"Salary Negotiation Masterclass" ($97–197)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>"The Interview Playbook" ($47–97)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>حزمة الثلاثة بخصم (Bundle)</div>
+      </div>
+    </div>
+
+    <div class="mono-card">
+      <div class="mono-icon">🤝</div>
+      <div class="mono-title">Coaching & Resume Services</div>
+      <div class="mono-potential">$1K–8K شهرياً</div>
+      <div class="mono-list">
+        <div class="mono-item"><div class="mono-check">✓</div>جلسات Career Coaching ($150–300/ساعة)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>خدمة مراجعة CV + LinkedIn ($75–150)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>Mock Interview Session ($100–200)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>Career Audit Report مدفوع ($49–97)</div>
+      </div>
+    </div>
+
+    <div class="mono-card">
+      <div class="mono-icon">🔗</div>
+      <div class="mono-title">أفيلييت استراتيجي</div>
+      <div class="mono-potential">$500–3K شهرياً</div>
+      <div class="mono-list">
+        <div class="mono-item"><div class="mono-check">✓</div>LinkedIn Premium ($30–50/مشترك)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>Coursera / Udemy / Skillshare</div>
+        <div class="mono-item"><div class="mono-check">✓</div>أدوات Resume (Resume.io, Enhancv)</div>
+        <div class="mono-item"><div class="mono-check">✓</div>Notion templates جاهزة للـ Job Hunt</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 07 — LAUNCH PLAN ══ -->
+<div class="section">
+  <div class="section-eyebrow">07 — Launch Plan</div>
+  <div class="section-title">خطة الإطلاق — 90 يوماً</div>
+  <p class="section-sub">الترتيب الصحيح يضاعف النتائج — لا تنشر أي فيديو قبل إعداد هذا الأساس</p>
+
+  <div class="plan-grid">
+
+    <div class="plan-card">
+      <div class="plan-phase">المرحلة الأولى</div>
+      <div class="plan-period">الأيام 1–30</div>
+      <div class="plan-goal">بناء الأساس والـ Brand قبل أي فيديو</div>
+      <div class="plan-items">
+        <div class="plan-item"><div class="plan-check">✓</div>سجّل RiseProtocol.com + YouTube + LinkedIn</div>
+        <div class="plan-item"><div class="plan-check">✓</div>صمم الـ Career Audit Template (Google Sheets)</div>
+        <div class="plan-item"><div class="plan-check">✓</div>سجّل 3 فيديوهات (لا تنشر بعد) — اختبر الكاميرا والإيقاع</div>
+        <div class="plan-item"><div class="plan-check">✓</div>ابحث 20 كيورد career بـ vid.IQ أو TubeBuddy</div>
+        <div class="plan-item"><div class="plan-check">✓</div>ابن LinkedIn profile قوي كـ extension للقناة</div>
+      </div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-phase">المرحلة الثانية</div>
+      <div class="plan-period">الأيام 31–60</div>
+      <div class="plan-goal">إطلاق بـ 4 فيديوهات يغطون الـ funnel</div>
+      <div class="plan-items">
+        <div class="plan-item"><div class="plan-check">✓</div>انشر: "Why Smart People Don't Get Promoted" (Hook قوي)</div>
+        <div class="plan-item"><div class="plan-check">✓</div>انشر: مقابلة مع شخص نجح بـ 90-Day Plan</div>
+        <div class="plan-item"><div class="plan-check">✓</div>انشر: Salary Negotiation Script (أعلى search volume)</div>
+        <div class="plan-item"><div class="plan-check">✓</div>انشر: Career Audit Tutorial — كيف تقيّم نفسك</div>
+        <div class="plan-item"><div class="plan-check">✓</div>انضم لبرامج أفيلييت LinkedIn وCoursera</div>
+      </div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-phase">المرحلة الثالثة</div>
+      <div class="plan-period">الأيام 61–90</div>
+      <div class="plan-goal">تسريع + بدء الربح المباشر</div>
+      <div class="plan-items">
+        <div class="plan-item"><div class="plan-check">✓</div>أطلق أول Career Audit Service ($49) للمشتركين الأوائل</div>
+        <div class="plan-item"><div class="plan-check">✓</div>ابنِ email list من كل فيديو (free Career Audit template)</div>
+        <div class="plan-item"><div class="plan-check">✓</div>راقب أي فيديو اشتغل — كرره بعنوان مختلف فوراً</div>
+        <div class="plan-item"><div class="plan-check">✓</div>اطلب Success Stories من المشتركين — هذه أقوى content لديك</div>
+        <div class="plan-item"><div class="plan-check">✓</div>خطط لأول كورس ($97) بناءً على أكثر الأسئلة تكراراً</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end main -->
+</body>
+</html>

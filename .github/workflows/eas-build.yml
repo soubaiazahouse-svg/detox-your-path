@@ -27,7 +27,7 @@ jobs:
 
       - name: Link EAS project
         working-directory: mobile
-        run: eas init --non-interactive
+        run: eas init --non-interactive --force
 
       - name: Build APK
         working-directory: mobile

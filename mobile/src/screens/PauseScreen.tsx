@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, TouchableOpacity, Animated, Dimensions, ScrollView, TextInput,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { addSession, updateStreak } from '../storage';
+import { addSession, updateStreak } from '../lib/db';
 import { INTENTIONS } from '../data/messages';
 import { colors, gradients } from '../theme';
 

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getSessions, getStreak, getTotalMinutesThisWeek, getSessionsThisWeek } from '../storage';
+import { getSessions, getStreak, getTotalMinutesThisWeek, getSessionsThisWeek } from '../lib/db';
 import { DetoxSession, StreakData } from '../types';
 import { colors, gradients } from '../theme';
 

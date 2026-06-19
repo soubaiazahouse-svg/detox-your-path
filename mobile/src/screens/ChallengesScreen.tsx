@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getTodayChallenges, toggleChallenge, updateStreak } from '../storage';
+import { getTodayChallenges, toggleChallenge, updateStreak } from '../lib/db';
 import { CHALLENGES } from '../data/challenges';
 import { colors, gradients } from '../theme';
 

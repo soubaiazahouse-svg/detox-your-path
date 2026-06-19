@@ -1,34 +1,39 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getUser, getStreak, clearAll } from '../storage';
-import { UserData, StreakData } from '../types';
+import { getProfile, getStreak, signOut } from '../lib/db';
+import { UserData, StreakData, RootStackParamList } from '../types';
 import { colors, gradients } from '../theme';
 
 export default function SettingsScreen() {
   const [user, setUser] = useState<UserData | null>(null);
   const [streak, setStreak] = useState<StreakData>({ count: 0, lastActiveDate: '', longestStreak: 0 });
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
-        const [u, s] = await Promise.all([getUser(), getStreak()]);
+        const [u, s] = await Promise.all([getProfile(), getStreak()]);
         setUser(u);
         setStreak(s);
       })();
     }, [])
   );
 
-  const confirmReset = () => {
+  const confirmSignOut = () => {
     Alert.alert(
-      'Reset All Data',
-      'هل أنت متأكد؟ سيتم مسح جميع بياناتك.\nAre you sure? All your data will be deleted.',
+      'تسجيل الخروج',
+      'هل تريدين تسجيل الخروج؟',
       [
-        { text: 'Cancel · إلغاء', style: 'cancel' },
+        { text: 'إلغاء', style: 'cancel' },
         {
-          text: 'Reset · إعادة ضبط', style: 'destructive',
-          onPress: async () => { await clearAll(); Alert.alert('Done · تم', 'Restart the app.'); },
+          text: 'خروج', style: 'destructive',
+          onPress: async () => {
+            await signOut();
+            navigation.replace('Splash');
+          },
         },
       ]
     );
@@ -65,7 +70,6 @@ export default function SettingsScreen() {
       </LinearGradient>
 
       <View style={styles.body}>
-
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>PROFILE · الملف الشخصي</Text>
           <View style={styles.row}>
@@ -90,7 +94,7 @@ export default function SettingsScreen() {
           <View style={styles.row}>
             <Text style={styles.rowIcon}>💧</Text>
             <Text style={styles.rowLabel}>Detox Your Path</Text>
-            <Text style={styles.rowValue}>v1.0</Text>
+            <Text style={styles.rowValue}>v2.0</Text>
           </View>
           <View style={[styles.row, styles.rowLast]}>
             <Text style={styles.rowIcon}>🏠</Text>
@@ -99,13 +103,13 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.resetBtn} onPress={confirmReset} activeOpacity={0.8}>
-          <Text style={styles.resetBtnText}>Reset All Data · مسح البيانات</Text>
+        <TouchableOpacity style={styles.logoutBtn} onPress={confirmSignOut} activeOpacity={0.8}>
+          <Text style={styles.logoutBtnText}>🚪 تسجيل الخروج · Sign Out</Text>
         </TouchableOpacity>
 
         <Text style={styles.footer}>
           Made with 💙 by AZA House{'\n'}
-          Your data stays on your device only
+          بياناتك محفوظة بأمان في السحابة
         </Text>
 
         <View style={{ height: 32 }} />
@@ -121,23 +125,20 @@ const styles = StyleSheet.create({
     width: 80, height: 80, borderRadius: 40,
     backgroundColor: 'rgba(79,163,224,0.2)',
     alignItems: 'center', justifyContent: 'center',
-    borderWidth: 2, borderColor: colors.sky,
-    marginBottom: 12,
+    borderWidth: 2, borderColor: colors.sky, marginBottom: 12,
   },
   avatarIcon: { fontSize: 36 },
   name: { fontSize: 26, fontWeight: '700', color: colors.white, marginBottom: 4 },
   joinDate: { fontSize: 12, color: colors.slateLight, marginBottom: 20 },
-  statsRow: { flexDirection: 'row', alignItems: 'center', gap: 0 },
+  statsRow: { flexDirection: 'row', alignItems: 'center' },
   stat: { flex: 1, alignItems: 'center' },
   statNum: { fontSize: 28, fontWeight: '700', color: colors.white },
   statLabel: { fontSize: 11, color: colors.slateLight, marginTop: 2 },
   statDivider: { width: 1, height: 40, backgroundColor: 'rgba(255,255,255,0.15)' },
   body: { padding: 20 },
   section: {
-    backgroundColor: colors.white, borderRadius: 20,
-    marginBottom: 16,
-    shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2,
-    overflow: 'hidden',
+    backgroundColor: colors.white, borderRadius: 20, marginBottom: 16,
+    shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 8, elevation: 2, overflow: 'hidden',
   },
   sectionLabel: { fontSize: 10, color: colors.textMuted, letterSpacing: 2, padding: 16, paddingBottom: 0 },
   row: {
@@ -149,10 +150,10 @@ const styles = StyleSheet.create({
   rowIcon: { fontSize: 18, marginRight: 14 },
   rowLabel: { flex: 1, fontSize: 15, color: colors.text },
   rowValue: { fontSize: 14, color: colors.textMuted },
-  resetBtn: {
+  logoutBtn: {
     borderWidth: 1.5, borderColor: colors.danger + '50',
     borderRadius: 16, padding: 16, alignItems: 'center', marginBottom: 20,
   },
-  resetBtnText: { color: colors.danger, fontSize: 15, fontWeight: '600' },
+  logoutBtnText: { color: colors.danger, fontSize: 15, fontWeight: '600' },
   footer: { textAlign: 'center', fontSize: 12, color: colors.textMuted, lineHeight: 20 },
 });

@@ -5,7 +5,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
-import { saveUser } from '../storage';
+import { saveProfile } from '../lib/db';
 import { colors, gradients } from '../theme';
 
 type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'Onboarding'> };
@@ -36,14 +36,12 @@ export default function OnboardingScreen({ navigation }: Props) {
   };
 
   const finish = async () => {
-    await saveUser({
+    await saveProfile({
       name: name.trim() || 'Friend',
       goalHours,
       detoxTimes,
-      onboarded: true,
-      joinDate: new Date().toISOString(),
     });
-    navigation.replace('Main');
+    navigation.replace('ScreenTimePermission');
   };
 
   return (

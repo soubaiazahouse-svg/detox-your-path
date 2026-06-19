@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getUser, getStreak, getTodayChallenges, getTotalMinutesThisWeek } from '../storage';
+import { getProfile, getStreak, getTodayChallenges, getTotalMinutesThisWeek } from '../lib/db';
 import { getWeeklyMessage } from '../data/messages';
 import { CHALLENGES } from '../data/challenges';
 import { UserData, StreakData } from '../types';
@@ -24,7 +24,7 @@ export default function DashboardScreen() {
     useCallback(() => {
       (async () => {
         const [u, s, c, wm] = await Promise.all([
-          getUser(), getStreak(), getTodayChallenges(), getTotalMinutesThisWeek(),
+          getProfile(), getStreak(), getTodayChallenges(), getTotalMinutesThisWeek(),
         ]);
         setUser(u);
         setStreak(s);

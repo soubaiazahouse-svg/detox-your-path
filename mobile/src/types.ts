@@ -30,7 +30,10 @@ export interface ChallengeCompletion {
 
 export type RootStackParamList = {
   Splash: undefined;
+  Login: undefined;
+  Signup: undefined;
   Onboarding: undefined;
+  ScreenTimePermission: undefined;
   Main: undefined;
 };
 

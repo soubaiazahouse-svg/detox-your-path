@@ -1,56 +1,28 @@
-name: EAS Build — AZA Android APK
+name: Build Android APK
 
 on:
-  push:
-    branches:
-      - claude/aza-audio-playback-eas-lsyo27
   workflow_dispatch:
-    inputs:
-      profile:
-        description: 'Build profile'
-        required: true
-        default: 'preview'
-        type: choice
-        options:
-          - preview
-          - production
 
 jobs:
   build:
-    name: Build Android APK
+    name: EAS Build — Android APK
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout app branch
-        uses: actions/checkout@v4
-        with:
-          ref: claude/aza-audio-playback-eas-lsyo27
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: 22
 
       - name: Install dependencies
+        working-directory: mobile
         run: npm install
 
-      - name: Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
 
-      - name: Initialize EAS project
-        run: eas init --slug aza-house --non-interactive
+      - name: Build APK
+        working-directory: mobile
         env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Build Android APK
-        run: |
-          PROFILE="${{ github.event.inputs.profile || 'preview' }}"
-          echo "Building with profile: $PROFILE"
-          eas build --platform android --profile "$PROFILE" --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Done
-        run: echo "Build queued! Check https://expo.dev/accounts/azasou86/projects"
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_DETOX }}
+        run: eas build --platform android --profile preview --non-interactive

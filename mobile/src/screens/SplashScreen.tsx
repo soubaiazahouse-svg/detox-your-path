@@ -5,8 +5,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
-import { getSession } from '../lib/db';
-import { colors, gradients } from '../theme';
+import { colors, gradients, shadows, radius } from '../theme';
 
 const { width } = Dimensions.get('window');
 
@@ -14,57 +13,55 @@ type Props = { navigation: NativeStackNavigationProp<RootStackParamList, 'Splash
 
 export default function SplashScreen({ navigation }: Props) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  const slideAnim = useRef(new Animated.Value(32)).current;
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 1, duration: 900, useNativeDriver: true }),
-      Animated.spring(scaleAnim, { toValue: 1, tension: 60, friction: 8, useNativeDriver: true }),
+      Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 0, duration: 700, useNativeDriver: true }),
     ]).start();
 
     Animated.loop(
       Animated.sequence([
-        Animated.timing(pulseAnim, { toValue: 1.12, duration: 2000, useNativeDriver: true }),
-        Animated.timing(pulseAnim, { toValue: 1, duration: 2000, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1.08, duration: 2500, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1, duration: 2500, useNativeDriver: true }),
       ])
     ).start();
   }, []);
 
-  const handleStart = async () => {
-    navigation.navigate('Signup');
-  };
-
-  const handleLogin = () => {
-    navigation.navigate('Login');
-  };
-
   return (
     <LinearGradient colors={gradients.navy} style={styles.container}>
-      <Animated.View style={[styles.glow, { transform: [{ scale: pulseAnim }] }]} />
+      {/* Background circles */}
+      <Animated.View style={[styles.bgCircle, styles.bgCircle1, { transform: [{ scale: pulseAnim }] }]} />
+      <View style={[styles.bgCircle, styles.bgCircle2]} />
 
-      <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
-        <View style={styles.logoWrap}>
-          <Text style={styles.logoIcon}>💧</Text>
+      <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
+        {/* Logo mark */}
+        <View style={styles.logoMark}>
+          <View style={styles.logoInner} />
         </View>
 
-        <Text style={styles.company}>AZA HOUSE COMPANY</Text>
-        <Text style={styles.title}>DETOX</Text>
-        <Text style={styles.titleSub}>your Path</Text>
-        <Text style={styles.badge}>Digital Wellness · Since 2024</Text>
+        <Text style={styles.appName}>Detox Your Path</Text>
+        <Text style={styles.taglineEn}>Take back your time</Text>
+        <Text style={styles.taglineAr}>استرجعي وقتك</Text>
 
-        <Text style={styles.tagline}>
-          Reclaim your time.{'\n'}
-          <Text style={styles.taglineAr}>استعد حياتك.</Text>
-        </Text>
+        <View style={styles.divider} />
 
-        <TouchableOpacity style={styles.btn} onPress={handleStart} activeOpacity={0.85}>
-          <LinearGradient colors={gradients.sky} style={styles.btnGrad}>
-            <Text style={styles.btnText}>Get Started — ابدأي الآن</Text>
-          </LinearGradient>
+        <TouchableOpacity
+          style={styles.primaryBtn}
+          onPress={() => navigation.navigate('Signup')}
+          activeOpacity={0.9}
+        >
+          <Text style={styles.primaryBtnText}>Get Started</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnSecondary} onPress={handleLogin} activeOpacity={0.8}>
-          <Text style={styles.btnSecondaryText}>لدي حساب · I have an account</Text>
+
+        <TouchableOpacity
+          style={styles.secondaryBtn}
+          onPress={() => navigation.navigate('Login')}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.secondaryBtnText}>Sign In · لدي حساب</Text>
         </TouchableOpacity>
       </Animated.View>
     </LinearGradient>
@@ -73,30 +70,99 @@ export default function SplashScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  glow: {
-    position: 'absolute', width: width * 1.4, height: width * 1.4,
-    borderRadius: width * 0.7,
-    backgroundColor: 'rgba(79,163,224,0.07)',
-    top: -width * 0.4,
+  bgCircle: {
+    position: 'absolute',
+    borderRadius: 999,
+    backgroundColor: 'rgba(255,255,255,0.04)',
   },
-  content: { alignItems: 'center', paddingHorizontal: 32 },
-  logoWrap: {
-    width: 88, height: 88, borderRadius: 26,
-    backgroundColor: 'rgba(79,163,224,0.18)',
-    alignItems: 'center', justifyContent: 'center',
-    marginBottom: 28,
-    borderWidth: 1, borderColor: 'rgba(79,163,224,0.3)',
+  bgCircle1: {
+    width: width * 1.1,
+    height: width * 1.1,
+    top: -width * 0.3,
+    left: -width * 0.05,
   },
-  logoIcon: { fontSize: 42 },
-  company: { fontSize: 11, color: 'rgba(255,255,255,0.4)', letterSpacing: 3, marginBottom: 8 },
-  title: { fontSize: 64, fontWeight: '700', color: colors.white, letterSpacing: 4, lineHeight: 68 },
-  titleSub: { fontSize: 32, fontStyle: 'italic', color: colors.sky, marginBottom: 8 },
-  badge: { fontSize: 11, color: colors.slateLight, letterSpacing: 2, marginBottom: 40 },
-  tagline: { fontSize: 18, color: 'rgba(255,255,255,0.75)', textAlign: 'center', lineHeight: 28, marginBottom: 52 },
-  taglineAr: { fontSize: 15, color: 'rgba(255,255,255,0.45)' },
-  btn: { width: '100%', borderRadius: 50, overflow: 'hidden', shadowColor: colors.sky, shadowOpacity: 0.5, shadowRadius: 20, elevation: 8, marginBottom: 12 },
-  btnSecondary: { width: '100%', borderRadius: 50, borderWidth: 1.5, borderColor: 'rgba(79,163,224,0.4)', paddingVertical: 16, alignItems: 'center' },
-  btnSecondaryText: { color: colors.skyLight, fontSize: 15 },
-  btnGrad: { paddingVertical: 18, alignItems: 'center', borderRadius: 50 },
-  btnText: { color: colors.white, fontSize: 16, fontWeight: '600', letterSpacing: 0.5 },
+  bgCircle2: {
+    width: width * 0.7,
+    height: width * 0.7,
+    bottom: -width * 0.15,
+    right: -width * 0.15,
+    backgroundColor: 'rgba(76,126,243,0.08)',
+  },
+  content: {
+    alignItems: 'center',
+    paddingHorizontal: 40,
+    width: '100%',
+  },
+  logoMark: {
+    width: 72,
+    height: 72,
+    borderRadius: radius.md,
+    backgroundColor: 'rgba(76,126,243,0.25)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 32,
+    borderWidth: 1.5,
+    borderColor: 'rgba(76,126,243,0.4)',
+  },
+  logoInner: {
+    width: 32,
+    height: 32,
+    borderRadius: 8,
+    backgroundColor: colors.blue,
+    transform: [{ rotate: '45deg' }],
+  },
+  appName: {
+    fontSize: 30,
+    fontWeight: '700',
+    color: colors.white,
+    letterSpacing: 0.5,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  taglineEn: {
+    fontSize: 16,
+    color: 'rgba(255,255,255,0.65)',
+    marginBottom: 4,
+    textAlign: 'center',
+  },
+  taglineAr: {
+    fontSize: 15,
+    color: 'rgba(255,255,255,0.4)',
+    textAlign: 'center',
+  },
+  divider: {
+    width: 40,
+    height: 1.5,
+    backgroundColor: 'rgba(76,126,243,0.5)',
+    borderRadius: 1,
+    marginVertical: 40,
+  },
+  primaryBtn: {
+    width: '100%',
+    backgroundColor: colors.blue,
+    borderRadius: radius.full,
+    paddingVertical: 17,
+    alignItems: 'center',
+    marginBottom: 12,
+    ...shadows.md,
+  },
+  primaryBtnText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0.3,
+  },
+  secondaryBtn: {
+    width: '100%',
+    borderRadius: radius.full,
+    paddingVertical: 17,
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.2)',
+  },
+  secondaryBtnText: {
+    color: 'rgba(255,255,255,0.75)',
+    fontSize: 15,
+    fontWeight: '500',
+  },
 });

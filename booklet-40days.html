@@ -322,6 +322,21 @@ body {
   body { background: white; }
   .page { border-bottom: none; margin: 0; width: 148mm; min-height: 210mm; }
 }
+
+/* ======= COPYRIGHT FOOTER ON EVERY PAGE ======= */
+.page::after {
+  content: '٤٠ يوماً لتتكامل مع نفسك · اعزيزة السباعي · AZA HOUSE · جميع الحقوق محفوظة ©2026';
+  position: absolute;
+  bottom: 5mm;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 6.5pt;
+  color: rgba(26,106,191,0.35);
+  letter-spacing: 0.5px;
+}
+.section-page::after { color: rgba(255,255,255,0.35); }
+.cover::after { display: none; }
 </style>
 </head>
 <body>
@@ -478,9 +493,9 @@ body {
     <div class="day-num">٤</div>
     <div><div class="day-label">اليوم الرابع</div><div class="day-theme">التغذية</div></div>
   </div>
-  <div class="day-quote">"ما تُطعمين جسدك يُشكّل طاقتك اختر ما يُغذّيك حقاً، لا ما يُخدّرك."</div>
+  <div class="day-quote">"ما تُطعم جسدك يُشكّل طاقتك اختر ما يُغذّيك حقاً، لا ما يُخدّرك."</div>
   <div class="day-question-label">✦ سؤال اليوم</div>
-  <div class="day-question">هل تأكل بوعي أم بتشتت؟ ما الذي تأكله حين تكنن حزينة أو قلقة؟</div>
+  <div class="day-question">هل تأكل بوعي أم بتشتت؟ ما الذي تأكله حين تكون حزيناً أو قلقاً؟</div>
   <div class="writing-lines">
     <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
     <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
@@ -538,9 +553,9 @@ body {
     <div class="day-num">٧</div>
     <div><div class="day-label">اليوم السابع</div><div class="day-theme">الألم الجسدي</div></div>
   </div>
-  <div class="day-quote">"أحياناً يتكلم جسدك بالألم لأنك لم تسمعيه حين تكلّم بالهدوء استمعي له الآن."</div>
+  <div class="day-quote">"أحياناً يتكلم جسدك بالألم لأنك لم تسمعه حين تكلّم بالهدوء، استمع له الآن."</div>
   <div class="day-question-label">✦ سؤال اليوم</div>
-  <div class="day-question">أين في جسدك تحمل أكثر توتر أو ألم؟ ما الذي تعتقدين أن هذا المكان يحمله نيابة عنك؟</div>
+  <div class="day-question">أين في جسدك تحمل أكثر توتر أو ألم؟ ما الذي تعتقد أن هذا المكان يحمله نيابة عنك؟</div>
   <div class="writing-lines">
     <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
     <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
@@ -770,7 +785,7 @@ body {
   </div>
   <div class="day-quote">"الصمت ليس فراغاً هو المكان الذي تسمع فيه ما لا تستطيع الضجة أن تقوله."</div>
   <div class="day-question-label">✦ سؤال اليوم</div>
-  <div class="day-question">متى كانت آخر مرة جلستِ في صمت تام؟ ما الذي تخاف أن تسمعيه حين يهدأ كل شيء؟</div>
+  <div class="day-question">متى كانت آخر مرة جلست في صمت تام؟ ما الذي تخاف أن تسمعه حين يهدأ كل شيء؟</div>
   <div class="writing-lines">
     <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
     <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
@@ -858,7 +873,7 @@ body {
     <div class="day-num">٢٢</div>
     <div><div class="day-label">اليوم الثاني والعشرون</div><div class="day-theme">الغضب</div></div>
   </div>
-  <div class="day-quote">"الغضب رسالة يخبرك بأن حداً تجاوزته أو قيمة انتُهكت. استمعي إليه قبل أن تعبّري عنه."</div>
+  <div class="day-quote">"الغضب رسالة يخبرك بأن حداً تجاوزته أو قيمة انتُهكت. استمع إليه قبل أن تعبّر عنه."</div>
   <div class="day-question-label">✦ سؤال اليوم</div>
   <div class="day-question">ما الذي يُغضبك بسهولة في حياتك؟ ما الحد أو القيمة التي يُشير إليها هذا الغضب؟</div>
   <div class="writing-lines">
@@ -1246,7 +1261,7 @@ body {
 <div class="page promise-page">
   <div class="promise-title">وعدي لنفسي</div>
   <div class="promise-text">
-    أنا التي أكملتُ هذه الرحلة أعِد نفسي بأن أستمر في الاتصال بها بجسدها وعقلها ومشاعرها وروحها.
+    أنا من أكمل هذه الرحلة، أعِد نفسي بأن أستمر في الاتصال بنفسه، بجسده وعقله ومشاعره وروحه.
   </div>
   <div class="promise-box">
     <div style="font-family:'Tajawal',sans-serif;font-size:8pt;color:#4a7abf;margin-bottom:3mm;">أكتب هنا وعداً لنفسك</div>

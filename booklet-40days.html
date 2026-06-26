@@ -9,7 +9,7 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-@page { size: A5; margin: 12mm 16mm; }
+@page { size: A5; margin: 0; }
 
 body {
   font-family: 'Tajawal', sans-serif;
@@ -327,17 +327,21 @@ body {
     height: 210mm;
     min-height: unset;
     overflow: hidden;
-    padding: 10mm 14mm 10mm;
+    padding: 12mm 16mm 10mm;
     page-break-after: always;
     page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
   }
-  .writing-lines { gap: 4.5mm; }
-  .writing-line { height: 4.5mm; }
-  .day-quote { padding: 2.5mm 3.5mm; margin-bottom: 3mm; font-size: 9.5pt; }
-  .day-question { font-size: 10.5pt; margin-bottom: 3mm; }
+  .writing-lines { gap: 4mm; }
+  .writing-line { height: 4mm; }
+  .day-quote { padding: 2.5mm 3.5mm; margin-bottom: 3mm; font-size: 9pt; line-height: 1.6; }
+  .day-question { font-size: 10pt; margin-bottom: 3mm; line-height: 1.6; }
   .day-exercise { padding: 2mm 3.5mm; }
-  .day-exercise-text { font-size: 8.5pt; }
-  .page-text { font-size: 9.5pt; margin-bottom: 3mm; line-height: 1.9; }
+  .day-exercise-text { font-size: 8.5pt; line-height: 1.6; }
+  .page-text { font-size: 9.5pt; margin-bottom: 2.5mm; line-height: 1.8; }
+  .day-header { margin-bottom: 3mm; padding-bottom: 2.5mm; }
+  .day-question-label { margin-bottom: 1mm; }
 }
 
 /* ======= COPYRIGHT FOOTER ON EVERY PAGE ======= */

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #222; display: flex; flex-direction: column; gap: 20px; padding: 20px; align-items: center; }
+
+.slide {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ===== SLIDE 1 ===== */
+.s1 { background: linear-gradient(150deg, #0d2144 0%, #1a3a6b 45%, #1a6abf 100%); }
+.s1::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+.s1::after {
+  content: '';
+  position: absolute;
+  bottom: -120px; left: -80px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.02);
+}
+.s1-badge {
+  background: rgba(255,210,100,0.15);
+  border: 1px solid rgba(255,210,100,0.35);
+  color: #f0c040;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  padding: 10px 32px;
+  border-radius: 40px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.s1-title {
+  font-family: 'Amiri', serif;
+  font-size: 80px;
+  color: white;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.s1-title span { color: #f0c040; }
+.s1-line {
+  width: 120px; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,210,100,0.6), transparent);
+  margin: 30px auto;
+  position: relative;
+  z-index: 1;
+}
+.s1-sub {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 22px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.9;
+  position: relative;
+  z-index: 1;
+}
+.s1-author {
+  font-family: 'Amiri', serif;
+  font-size: 24px;
+  color: #f0c040;
+  margin-top: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== SLIDE 2 ===== */
+.s2 { background: #0a1628; }
+.s2-ornament {
+  font-size: 28px;
+  color: rgba(255,210,100,0.5);
+  letter-spacing: 12px;
+  margin-bottom: 60px;
+}
+.s2-main {
+  font-family: 'Amiri', serif;
+  font-size: 72px;
+  color: white;
+  line-height: 1.5;
+  margin-bottom: 50px;
+}
+.s2-main span { color: #f0c040; }
+.s2-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 24px;
+  color: rgba(255,255,255,0.55);
+  line-height: 2.1;
+  max-width: 700px;
+}
+.s2-brand {
+  position: absolute;
+  bottom: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 3px;
+}
+
+/* ===== SLIDE 3 ===== */
+.s3 { background: linear-gradient(160deg, #f7faff 0%, #e8f2ff 100%); }
+.s3-tag {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: #1a6abf;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+.s3-title {
+  font-family: 'Amiri', serif;
+  font-size: 52px;
+  color: #0d2144;
+  margin-bottom: 60px;
+}
+.s3-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 820px;
+}
+.s3-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px 30px;
+  border: 1px solid rgba(26,106,191,0.1);
+  box-shadow: 0 4px 30px rgba(26,106,191,0.08);
+}
+.s3-icon { font-size: 48px; margin-bottom: 16px; }
+.s3-card-title {
+  font-family: 'Amiri', serif;
+  font-size: 32px;
+  color: #0d2144;
+  margin-bottom: 8px;
+}
+.s3-card-days {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: #1a6abf;
+}
+.s3-brand {
+  position: absolute;
+  bottom: 40px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 15px;
+  color: rgba(26,106,191,0.3);
+  letter-spacing: 2px;
+}
+
+/* ===== SLIDE 4 ===== */
+.s4 { background: #0d2144; }
+.s4-tag {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: rgba(255,210,100,0.7);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+.s4-title {
+  font-family: 'Amiri', serif;
+  font-size: 52px;
+  color: white;
+  margin-bottom: 50px;
+}
+.s4-list {
+  list-style: none;
+  width: 700px;
+}
+.s4-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 30px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  text-align: right;
+}
+.s4-item-icon {
+  width: 56px; height: 56px;
+  background: rgba(26,106,191,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.s4-item-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 22px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+.s4-item-text strong {
+  color: white;
+  display: block;
+  font-size: 20px;
+}
+.s4-brand {
+  position: absolute;
+  bottom: 40px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 2px;
+}
+
+/* ===== SLIDE 5 ===== */
+.s5 { background: linear-gradient(150deg, #0d2144 0%, #1a3a6b 60%, #0d2144 100%); }
+.s5-gift { font-size: 80px; margin-bottom: 30px; }
+.s5-title {
+  font-family: 'Amiri', serif;
+  font-size: 62px;
+  color: #f0c040;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.s5-line {
+  width: 100px; height: 1px;
+  background: rgba(255,210,100,0.4);
+  margin: 24px auto;
+}
+.s5-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 26px;
+  color: rgba(255,255,255,0.75);
+  line-height: 2;
+  max-width: 700px;
+  margin-bottom: 50px;
+}
+.s5-text strong { color: white; }
+.s5-price-box {
+  background: rgba(255,210,100,0.1);
+  border: 1px solid rgba(255,210,100,0.3);
+  border-radius: 20px;
+  padding: 24px 60px;
+  margin-bottom: 30px;
+}
+.s5-price {
+  font-family: 'Amiri', serif;
+  font-size: 52px;
+  color: #f0c040;
+}
+.s5-price-sub {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+}
+.s5-url {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 20px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: الإطلاق -->
+<div class="slide s1">
+  <div class="s1-badge">✦ &nbsp; إطلاق جديد &nbsp; ✦</div>
+  <div class="s1-title">٤٠ يوماً<br><span>لتتكامل مع نفسك</span></div>
+  <div class="s1-line"></div>
+  <div class="s1-sub">كرّاسة تأملية رقمية<br>رحلة من الجسد إلى العقل إلى المشاعر إلى الروح</div>
+  <div class="s1-author">اعزيزة السباعي · AZA HOUSE</div>
+</div>
+
+<!-- SLIDE 2: العاطفة -->
+<div class="slide s2">
+  <div class="s2-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <div class="s2-main">أخيراً<br><span>وصلت.</span></div>
+  <div class="s2-text">
+    ذلك الشيء الذي كنت تبحث عنه في الخارج<br>
+    كان هنا طوال الوقت، ينتظرك
+  </div>
+  <div class="s2-brand">AZIZASOUBAI.COM</div>
+</div>
+
+<!-- SLIDE 3: المحاور -->
+<div class="slide s3">
+  <div class="s3-tag">✦ المحاور الأربعة</div>
+  <div class="s3-title">رحلة كاملة في ٤٠ يوماً</div>
+  <div class="s3-grid">
+    <div class="s3-card">
+      <div class="s3-icon">🌿</div>
+      <div class="s3-card-title">الجسد</div>
+      <div class="s3-card-days">الأيام ١ – ١٠</div>
+    </div>
+    <div class="s3-card">
+      <div class="s3-icon">🧠</div>
+      <div class="s3-card-title">العقل</div>
+      <div class="s3-card-days">الأيام ١١ – ٢٠</div>
+    </div>
+    <div class="s3-card">
+      <div class="s3-icon">💙</div>
+      <div class="s3-card-title">المشاعر</div>
+      <div class="s3-card-days">الأيام ٢١ – ٣٠</div>
+    </div>
+    <div class="s3-card">
+      <div class="s3-icon">✨</div>
+      <div class="s3-card-title">الروح</div>
+      <div class="s3-card-days">الأيام ٣١ – ٤٠</div>
+    </div>
+  </div>
+  <div class="s3-brand">اعزيزة السباعي · AZA HOUSE</div>
+</div>
+
+<!-- SLIDE 4: ماذا ستجد -->
+<div class="slide s4">
+  <div class="s4-tag">✦ كل يوم</div>
+  <div class="s4-title">مصمّم بعناية لك</div>
+  <ul class="s4-list">
+    <li class="s4-item">
+      <div class="s4-item-icon">💬</div>
+      <div class="s4-item-text"><strong>اقتباس يلامس روحك</strong>يفتح اليوم بعمق وصدق</div>
+    </li>
+    <li class="s4-item">
+      <div class="s4-item-icon">❓</div>
+      <div class="s4-item-text"><strong>سؤال عميق</strong>يدفعك للتأمل والاكتشاف</div>
+    </li>
+    <li class="s4-item">
+      <div class="s4-item-icon">✍️</div>
+      <div class="s4-item-text"><strong>مساحة للكتابة</strong>لأن ما يُكتب يتحرر</div>
+    </li>
+    <li class="s4-item">
+      <div class="s4-item-icon">⚡</div>
+      <div class="s4-item-text"><strong>تمرين عملي</strong>١٥ دقيقة فقط يومياً</div>
+    </li>
+  </ul>
+  <div class="s4-brand">AZIZASOUBAI.COM</div>
+</div>
+
+<!-- SLIDE 5: المفاجأة والسعر -->
+<div class="slide s5">
+  <div class="s5-gift">🎁</div>
+  <div class="s5-title">مفاجأة لمن يكمل</div>
+  <div class="s5-line"></div>
+  <div class="s5-text">
+    كل من يكمل الـ٤٠ يوماً<br>
+    يحصل على <strong>تحليل شخصي شامل مني</strong><br>
+    لرحلته كاملة
+  </div>
+  <div class="s5-price-box">
+    <div class="s5-price">$6 فقط</div>
+    <div class="s5-price-sub">دفع مرة واحدة · تحميل فوري</div>
+  </div>
+  <div class="s5-url">azizasoubai.com/karasa</div>
+</div>
+
+</body>
+</html>

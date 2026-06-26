@@ -320,7 +320,24 @@ body {
 
 @media print {
   body { background: white; }
-  .page { border-bottom: none; margin: 0; width: 148mm; min-height: 210mm; }
+  .page {
+    border-bottom: none;
+    margin: 0;
+    width: 148mm;
+    height: 210mm;
+    min-height: unset;
+    overflow: hidden;
+    padding: 10mm 14mm 10mm;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .writing-lines { gap: 4.5mm; }
+  .writing-line { height: 4.5mm; }
+  .day-quote { padding: 2.5mm 3.5mm; margin-bottom: 3mm; font-size: 9.5pt; }
+  .day-question { font-size: 10.5pt; margin-bottom: 3mm; }
+  .day-exercise { padding: 2mm 3.5mm; }
+  .day-exercise-text { font-size: 8.5pt; }
+  .page-text { font-size: 9.5pt; margin-bottom: 3mm; line-height: 1.9; }
 }
 
 /* ======= COPYRIGHT FOOTER ON EVERY PAGE ======= */

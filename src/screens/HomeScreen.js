@@ -25,11 +25,11 @@ const MOOD_KEY = '@aza_mood';
 const CHALLENGE_GOAL = 5;
 
 const MOODS = [
-  { key: 'anxious', emoji: '😰', trackIds: ['3', '6'] },
-  { key: 'tired',   emoji: '😴', trackIds: ['9', '1'] },
-  { key: 'unfocused', emoji: '😵', trackIds: ['5', '8'] },
-  { key: 'sad',     emoji: '😔', trackIds: ['4', '2'] },
-  { key: 'calm',    emoji: '😌', trackIds: ['10', '7'] },
+  { key: 'anxious',   color: '#ef4444', trackIds: ['3', '6'] },
+  { key: 'tired',     color: '#64748b', trackIds: ['9', '1'] },
+  { key: 'unfocused', color: '#f97316', trackIds: ['5', '8'] },
+  { key: 'sad',       color: '#3b82f6', trackIds: ['4', '2'] },
+  { key: 'calm',      color: '#22c55e', trackIds: ['10', '7'] },
 ];
 
 const getGreeting = () => {
@@ -39,15 +39,11 @@ const getGreeting = () => {
   return 'goodEvening';
 };
 
-const getTimeRecommendations = () => {
+const getTimeRec = () => {
   const h = new Date().getHours();
-  if (h >= 5 && h < 12) {
-    return { labelKey: 'morningPicks', emoji: '☀️', tracks: TRACKS.filter((t) => t.timeOfDay === 'morning') };
-  }
-  if (h >= 12 && h < 18) {
-    return { labelKey: 'afternoonPicks', emoji: '🌤️', tracks: TRACKS.filter((t) => ['focus', 'balance', 'clear'].includes(t.category)) };
-  }
-  return { labelKey: 'nightPicks', emoji: '🌙', tracks: TRACKS.filter((t) => t.timeOfDay === 'night') };
+  if (h >= 5 && h < 12) return { labelKey: 'morningPicks', icon: 'sunny', tracks: TRACKS.filter((t) => t.timeOfDay === 'morning') };
+  if (h >= 12 && h < 18) return { labelKey: 'afternoonPicks', icon: 'partly-sunny', tracks: TRACKS.filter((t) => ['focus', 'balance', 'clear'].includes(t.category)) };
+  return { labelKey: 'nightPicks', icon: 'moon', tracks: TRACKS.filter((t) => t.timeOfDay === 'night') };
 };
 
 export default function HomeScreen() {
@@ -57,7 +53,7 @@ export default function HomeScreen() {
   const { streak, daysThisWeek } = useStats();
   const navigation = useNavigation();
 
-  const [todayMood, setTodayMood] = useState(null); // { key, emoji, trackIds, date }
+  const [todayMood, setTodayMood] = useState(null);
 
   useEffect(() => {
     AsyncStorage.getItem(MOOD_KEY).then((raw) => {
@@ -77,32 +73,29 @@ export default function HomeScreen() {
 
   const greeting = t[getGreeting()];
   const userName = user?.user_metadata?.full_name?.split(' ')[0] || t.hello;
-  const featuredTracks = TRACKS.slice(0, 4);
-  const timeRec = getTimeRecommendations();
+  const timeRec = getTimeRec();
+  const challengeProgress = Math.min(daysThisWeek, CHALLENGE_GOAL);
+  const challengeDone = challengeProgress >= CHALLENGE_GOAL;
+  const moodTracks = todayMood
+    ? todayMood.trackIds.map((id) => TRACKS.find((tr) => tr.id === id)).filter(Boolean)
+    : [];
 
   const handlePlay = (track) => {
     playTrack(track, TRACKS);
     navigation.navigate('FullPlayer');
   };
 
-  const moodRecommendedTracks = todayMood
-    ? todayMood.trackIds.map((id) => TRACKS.find((t) => t.id === id)).filter(Boolean)
-    : [];
-
-  const challengeProgress = Math.min(daysThisWeek, CHALLENGE_GOAL);
-  const challengeDone = challengeProgress >= CHALLENGE_GOAL;
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.background} />
       <ScrollView showsVerticalScrollIndicator={false}>
 
-        {/* Header */}
+        {/* ── Header ── */}
         <LinearGradient colors={['#1a0a2e', colors.background]} style={styles.header}>
           <View style={[styles.headerRow, isRTL && styles.rtlRow]}>
             <View style={{ flex: 1 }}>
               <Text style={[styles.greeting, isRTL && { textAlign: 'right' }]}>
-                {greeting}, {userName} 👋
+                {greeting}, {userName}
               </Text>
               <Text style={[styles.subtitle, isRTL && { textAlign: 'right' }]}>
                 {t.homeSubtitle}
@@ -111,7 +104,8 @@ export default function HomeScreen() {
             <View style={[styles.headerRight, isRTL && styles.rtlRow]}>
               {streak.current >= 2 && (
                 <View style={styles.streakBadge}>
-                  <Text style={styles.streakText}>🔥 {streak.current}</Text>
+                  <Ionicons name="flame" size={13} color={colors.accent} />
+                  <Text style={styles.streakText}>{streak.current}</Text>
                 </View>
               )}
               <TouchableOpacity
@@ -126,7 +120,7 @@ export default function HomeScreen() {
           </View>
         </LinearGradient>
 
-        {/* Mood Check-in */}
+        {/* ── Mood Check-in ── */}
         <View style={styles.moodCard}>
           <Text style={[styles.moodQuestion, isRTL && { textAlign: 'right' }]}>
             {t.howAreYou}
@@ -134,12 +128,8 @@ export default function HomeScreen() {
           {!todayMood ? (
             <View style={[styles.moodRow, isRTL && styles.rtlRow]}>
               {MOODS.map((m) => (
-                <TouchableOpacity
-                  key={m.key}
-                  style={styles.moodBtn}
-                  onPress={() => selectMood(m)}
-                >
-                  <Text style={styles.moodEmoji}>{m.emoji}</Text>
+                <TouchableOpacity key={m.key} style={styles.moodBtn} onPress={() => selectMood(m)}>
+                  <View style={[styles.moodDot, { backgroundColor: m.color }]} />
                   <Text style={styles.moodLabel}>{t[`mood${m.key.charAt(0).toUpperCase() + m.key.slice(1)}`]}</Text>
                 </TouchableOpacity>
               ))}
@@ -147,28 +137,19 @@ export default function HomeScreen() {
           ) : (
             <View>
               <View style={[styles.moodSelectedRow, isRTL && styles.rtlRow]}>
-                <Text style={styles.moodEmoji}>{todayMood.emoji}</Text>
-                <View style={{ flex: 1 }}>
-                  <Text style={[styles.moodRecLabel, isRTL && { textAlign: 'right' }]}>
-                    {t.moodRecommended}
+                <View style={[styles.moodDot, { backgroundColor: todayMood.color, width: 20, height: 20, borderRadius: 10 }]} />
+                <Text style={[styles.moodRecLabel, isRTL && { textAlign: 'right' }, { flex: 1 }]}>
+                  {t.moodRecommended}
+                </Text>
+                <TouchableOpacity onPress={() => setTodayMood(null)}>
+                  <Text style={styles.changeMoodText}>
+                    {language === 'ar' ? 'تغيير' : 'Change'}
                   </Text>
-                  <TouchableOpacity
-                    onPress={() => setTodayMood(null)}
-                    style={styles.changeMoodBtn}
-                  >
-                    <Text style={styles.changeMoodText}>
-                      {language === 'ar' ? 'تغيير' : 'Change'}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
               </View>
               <View style={[styles.moodTracks, isRTL && styles.rtlRow]}>
-                {moodRecommendedTracks.map((track) => (
-                  <TouchableOpacity
-                    key={track.id}
-                    style={styles.moodTrackCard}
-                    onPress={() => handlePlay(track)}
-                  >
+                {moodTracks.map((track) => (
+                  <TouchableOpacity key={track.id} style={styles.moodTrackCard} onPress={() => handlePlay(track)}>
                     <LinearGradient
                       colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || ['#1a1d38', '#14173a'])}
                       style={styles.moodTrackInner}
@@ -186,7 +167,38 @@ export default function HomeScreen() {
           )}
         </View>
 
-        {/* Weekly Challenge */}
+        {/* ── For You Right Now ── */}
+        <View style={[styles.sectionHeader, isRTL && styles.rtlRow]}>
+          <View style={[styles.sectionTitleRow, isRTL && styles.rtlRow]}>
+            <Ionicons name={timeRec.icon} size={20} color={colors.accent} />
+            <View style={isRTL && { alignItems: 'flex-end' }}>
+              <Text style={styles.sectionLabel}>{t.forYouNow}</Text>
+              <Text style={styles.sectionTitle}>{t[timeRec.labelKey]}</Text>
+            </View>
+          </View>
+        </View>
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hScroll}>
+          {timeRec.tracks.map((track) => (
+            <TouchableOpacity key={track.id} style={styles.recCard} onPress={() => handlePlay(track)} activeOpacity={0.85}>
+              <LinearGradient
+                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
+                style={styles.recCardInner}
+              >
+                <TrackSymbol category={track.category} size={38} />
+                <Text style={styles.recHz}>{track.hz}</Text>
+                <Text style={styles.recTitle} numberOfLines={1}>
+                  {language === 'ar' ? track.titleAr : track.title}
+                </Text>
+                {currentTrack?.id === track.id && isPlaying && (
+                  <View style={styles.playingDot} />
+                )}
+              </LinearGradient>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        {/* ── Weekly Challenge ── */}
         <View style={styles.challengeCard}>
           <LinearGradient
             colors={challengeDone ? gradients.gold : ['#1a1d38', '#14173a']}
@@ -214,111 +226,29 @@ export default function HomeScreen() {
               {Array.from({ length: CHALLENGE_GOAL }).map((_, i) => (
                 <View
                   key={i}
-                  style={[
-                    styles.dot,
-                    i < challengeProgress && (challengeDone ? styles.dotDone : styles.dotActive),
-                  ]}
+                  style={[styles.dot, i < challengeProgress && (challengeDone ? styles.dotDone : styles.dotActive)]}
                 />
               ))}
             </View>
           </LinearGradient>
         </View>
 
-        {/* For You Right Now */}
-        <View style={[styles.sectionHeader, isRTL && styles.rtlRow]}>
-          <View style={[styles.sectionTitleRow, isRTL && styles.rtlRow]}>
-            <Text style={styles.timeEmoji}>{timeRec.emoji}</Text>
-            <View>
-              <Text style={styles.sectionLabel}>{t.forYouNow}</Text>
-              <Text style={styles.sectionTitle}>{t[timeRec.labelKey]}</Text>
-            </View>
+        {/* ── Explore Library button ── */}
+        <TouchableOpacity
+          style={styles.exploreBtn}
+          onPress={() => navigation.navigate('Music')}
+          activeOpacity={0.8}
+        >
+          <View style={styles.exploreBtnInner}>
+            <Ionicons name="musical-notes" size={20} color={colors.primary} />
+            <Text style={[styles.exploreBtnText, isRTL && { textAlign: 'right' }]}>
+              {language === 'ar' ? 'استعرض كل المسارات' : 'Explore Full Library'}
+            </Text>
+            <Ionicons name={isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color={colors.textMuted} />
           </View>
-        </View>
+        </TouchableOpacity>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hScroll}>
-          {timeRec.tracks.map((track) => (
-            <TouchableOpacity key={track.id} style={styles.recCard} onPress={() => handlePlay(track)} activeOpacity={0.85}>
-              <LinearGradient
-                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
-                style={styles.recCardInner}
-              >
-                <TrackSymbol category={track.category} size={38} />
-                <Text style={styles.recHz}>{track.hz}</Text>
-                <Text style={styles.recTitle} numberOfLines={1}>
-                  {language === 'ar' ? track.titleAr : track.title}
-                </Text>
-                {currentTrack?.id === track.id && isPlaying && <View style={styles.playingDot} />}
-              </LinearGradient>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        {/* Featured Tracks */}
-        <View style={[styles.sectionHeader, isRTL && styles.rtlRow]}>
-          <Text style={styles.sectionTitle}>{t.featuredTracks}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Music')}>
-            <Text style={styles.seeAll}>{language === 'ar' ? 'عرض الكل ←' : 'See all →'}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hScroll}>
-          {featuredTracks.map((track) => (
-            <TouchableOpacity key={track.id} style={styles.trackCard} onPress={() => handlePlay(track)} activeOpacity={0.85}>
-              <LinearGradient
-                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || gradients.card)}
-                style={styles.trackCardInner}
-              >
-                <TrackSymbol category={track.category} size={46} />
-                <Text style={styles.trackTitle} numberOfLines={1}>
-                  {language === 'ar' ? track.titleAr : track.title}
-                </Text>
-                <Text style={styles.trackHz}>{track.hz}</Text>
-                {currentTrack?.id === track.id && isPlaying && <View style={styles.playingDot} />}
-              </LinearGradient>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        {/* All Tracks */}
-        <View style={[styles.sectionHeader, isRTL && styles.rtlRow]}>
-          <Text style={styles.sectionTitle}>{t.allTracks}</Text>
-        </View>
-
-        {TRACKS.map((track) => (
-          <TouchableOpacity
-            key={track.id}
-            style={[styles.listItem, currentTrack?.id === track.id && styles.listItemActive]}
-            onPress={() => handlePlay(track)}
-            activeOpacity={0.8}
-          >
-            <View style={[styles.listItemContent, isRTL && styles.rtlRow]}>
-              <LinearGradient
-                colors={currentTrack?.id === track.id ? gradients.primary : (track.trackColor || [colors.surfaceLight, colors.surfaceLight])}
-                style={styles.listEmoji}
-              >
-                <TrackSymbol category={track.category} size={28} color="rgba(255,255,255,0.88)" />
-              </LinearGradient>
-              <View style={[styles.listText, isRTL && { alignItems: 'flex-end' }]}>
-                <Text style={styles.listTitle}>
-                  {language === 'ar' ? track.titleAr : track.title}
-                </Text>
-                <Text style={[styles.listDesc, isRTL && { textAlign: 'right' }]} numberOfLines={1}>
-                  {language === 'ar' ? track.descriptionAr : track.description}
-                </Text>
-                <View style={[styles.hzBadge, isRTL && { alignSelf: 'flex-end' }]}>
-                  <Text style={styles.hzBadgeText}>{track.hz}</Text>
-                </View>
-              </View>
-              {currentTrack?.id === track.id && isPlaying ? (
-                <Ionicons name="pause-circle" size={32} color={colors.primary} />
-              ) : (
-                <Ionicons name="play-circle-outline" size={32} color={colors.textMuted} />
-              )}
-            </View>
-          </TouchableOpacity>
-        ))}
-
-        <View style={{ height: currentTrack ? 80 : 24 }} />
+        <View style={{ height: currentTrack ? 80 : 32 }} />
       </ScrollView>
 
       <MiniPlayer />
@@ -335,43 +265,50 @@ const styles = StyleSheet.create({
   subtitle: { color: colors.textSecondary, fontSize: 14 },
   headerRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   streakBadge: {
-    backgroundColor: `${colors.accent}22`,
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderWidth: 1,
-    borderColor: `${colors.accent}55`,
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    backgroundColor: `${colors.accent}22`, borderRadius: 20,
+    paddingHorizontal: 10, paddingVertical: 5,
+    borderWidth: 1, borderColor: `${colors.accent}44`,
   },
   streakText: { color: colors.accent, fontSize: 13, fontWeight: '800' },
   subBtn: { borderRadius: 20, overflow: 'hidden' },
   subBtnInner: { width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
 
-  // Mood card
+  // Mood
   moodCard: {
-    marginHorizontal: 20,
-    marginBottom: 16,
-    backgroundColor: colors.surface,
-    borderRadius: 20,
-    padding: 18,
-    borderWidth: 1,
-    borderColor: colors.border,
+    marginHorizontal: 20, marginBottom: 28,
+    backgroundColor: colors.surface, borderRadius: 20,
+    padding: 18, borderWidth: 1, borderColor: colors.border,
   },
-  moodQuestion: { color: colors.text, fontSize: 15, fontWeight: '700', marginBottom: 14 },
+  moodQuestion: { color: colors.text, fontSize: 15, fontWeight: '700', marginBottom: 16 },
   moodRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  moodBtn: { alignItems: 'center', flex: 1 },
-  moodEmoji: { fontSize: 28, marginBottom: 4 },
-  moodLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '600' },
-  moodSelectedRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 14 },
-  moodRecLabel: { color: colors.textSecondary, fontSize: 13, fontWeight: '600', marginBottom: 4 },
-  changeMoodBtn: {},
+  moodBtn: { alignItems: 'center', flex: 1, gap: 6 },
+  moodDot: { width: 14, height: 14, borderRadius: 7 },
+  moodLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '600', textAlign: 'center' },
+  moodSelectedRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 14 },
+  moodRecLabel: { color: colors.textSecondary, fontSize: 13, fontWeight: '600' },
   changeMoodText: { color: colors.primary, fontSize: 12, fontWeight: '600' },
   moodTracks: { flexDirection: 'row', gap: 12 },
   moodTrackCard: { flex: 1, borderRadius: 14, overflow: 'hidden' },
   moodTrackInner: { padding: 14, borderRadius: 14 },
-  moodTrackHz: { color: 'rgba(255,255,255,0.75)', fontSize: 10, fontWeight: '700', marginTop: 6, marginBottom: 4, letterSpacing: 1 },
+  moodTrackHz: { color: 'rgba(255,255,255,0.7)', fontSize: 10, fontWeight: '700', marginTop: 8, marginBottom: 4, letterSpacing: 1 },
   moodTrackTitle: { color: colors.text, fontSize: 12, fontWeight: '700' },
 
-  // Weekly Challenge
+  // Section
+  sectionHeader: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, marginBottom: 16 },
+  sectionTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  sectionLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '700', letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 2 },
+  sectionTitle: { color: colors.text, fontSize: 17, fontWeight: '700' },
+
+  // Rec cards
+  hScroll: { paddingHorizontal: 20, gap: 12, marginBottom: 28 },
+  recCard: { width: 130, borderRadius: 16, overflow: 'hidden' },
+  recCardInner: { padding: 14, minHeight: 124, justifyContent: 'space-between' },
+  recHz: { color: 'rgba(255,255,255,0.7)', fontSize: 10, fontWeight: '700', letterSpacing: 1, marginTop: 8, marginBottom: 2 },
+  recTitle: { color: colors.text, fontSize: 13, fontWeight: '700' },
+  playingDot: { width: 7, height: 7, borderRadius: 3.5, backgroundColor: colors.accent, position: 'absolute', top: 10, right: 10 },
+
+  // Challenge
   challengeCard: { marginHorizontal: 20, marginBottom: 24, borderRadius: 18, overflow: 'hidden' },
   challengeInner: { padding: 16, borderRadius: 18 },
   challengeHeader: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 },
@@ -379,39 +316,17 @@ const styles = StyleSheet.create({
   challengeGoalText: { color: colors.textSecondary, fontSize: 12, marginTop: 2 },
   challengeCount: { color: colors.accent, fontSize: 16, fontWeight: '900' },
   challengeDots: { flexDirection: 'row', gap: 8 },
-  dot: { flex: 1, height: 6, borderRadius: 3, backgroundColor: colors.border },
+  dot: { flex: 1, height: 5, borderRadius: 2.5, backgroundColor: colors.border },
   dotActive: { backgroundColor: colors.primary },
   dotDone: { backgroundColor: '#000' },
 
-  // Section headers
-  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, marginBottom: 16 },
-  sectionTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  timeEmoji: { fontSize: 24 },
-  sectionLabel: { color: colors.textMuted, fontSize: 11, fontWeight: '600', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 2 },
-  sectionTitle: { color: colors.text, fontSize: 18, fontWeight: '700' },
-  seeAll: { color: colors.primary, fontSize: 13, fontWeight: '600' },
-
-  // Horizontal scrolls
-  hScroll: { paddingHorizontal: 20, gap: 12, marginBottom: 28 },
-  recCard: { width: 130, borderRadius: 16, overflow: 'hidden' },
-  recCardInner: { padding: 14, minHeight: 120, justifyContent: 'space-between' },
-  recHz: { color: 'rgba(255,255,255,0.75)', fontSize: 11, fontWeight: '700', letterSpacing: 1, marginTop: 6, marginBottom: 2 },
-  recTitle: { color: colors.text, fontSize: 13, fontWeight: '700' },
-  trackCard: { width: 140, borderRadius: 16, overflow: 'hidden' },
-  trackCardInner: { padding: 16, minHeight: 130, justifyContent: 'space-between' },
-  trackTitle: { color: colors.text, fontSize: 14, fontWeight: '700' },
-  trackHz: { color: 'rgba(255,255,255,0.6)', fontSize: 10, fontWeight: '700', letterSpacing: 1, marginTop: 2 },
-  playingDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.accent, position: 'absolute', top: 12, right: 12 },
-
-  // List items
-  listItem: { marginHorizontal: 20, marginBottom: 10, backgroundColor: colors.surface, borderRadius: 16, borderWidth: 1, borderColor: colors.border },
-  listItemActive: { borderColor: colors.primary, backgroundColor: colors.surfaceLight },
-  listItemContent: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 14 },
-  listEmoji: { width: 50, height: 50, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
-  listEmojiText: { fontSize: 24 },
-  listText: { flex: 1 },
-  listTitle: { color: colors.text, fontSize: 15, fontWeight: '600', marginBottom: 2 },
-  listDesc: { color: colors.textMuted, fontSize: 11, lineHeight: 15, marginBottom: 5 },
-  hzBadge: { alignSelf: 'flex-start', backgroundColor: `${colors.accent}22`, borderRadius: 6, paddingHorizontal: 8, paddingVertical: 2, borderWidth: 1, borderColor: `${colors.accent}44` },
-  hzBadgeText: { color: colors.accent, fontSize: 10, fontWeight: '700', letterSpacing: 0.5 },
+  // Explore button
+  exploreBtn: { marginHorizontal: 20, borderRadius: 16, overflow: 'hidden' },
+  exploreBtnInner: {
+    flexDirection: 'row', alignItems: 'center', gap: 12,
+    backgroundColor: colors.surface, borderRadius: 16,
+    paddingHorizontal: 18, paddingVertical: 16,
+    borderWidth: 1, borderColor: colors.border,
+  },
+  exploreBtnText: { flex: 1, color: colors.text, fontSize: 15, fontWeight: '600' },
 });

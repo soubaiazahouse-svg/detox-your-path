@@ -222,26 +222,6 @@ export default function MeditateScreen() {
               ))}
             </View>
 
-            <View style={[styles.sectionHeader, isRTL && { alignItems: 'flex-end' }]}>
-              <Text style={styles.sectionTitle}>
-                {language === 'ar' ? 'مسارات هادئة' : 'Calm Tracks'}
-              </Text>
-            </View>
-            {calmTracks.map((track) => (
-              <TouchableOpacity
-                key={track.id}
-                style={[styles.calmTrack, isRTL && styles.rtlRow]}
-                onPress={() => { playTrack(track, calmTracks); navigation.navigate('FullPlayer'); }}
-              >
-                <Text style={styles.calmEmoji}>{track.emoji}</Text>
-                <View style={[styles.calmInfo, isRTL && { alignItems: 'flex-end' }]}>
-                  <Text style={styles.calmTitle}>{language === 'ar' ? track.titleAr : track.title}</Text>
-                  <Text style={styles.calmHz}>{track.hz}</Text>
-                </View>
-                <Ionicons name="play-circle-outline" size={30} color={colors.primary} />
-              </TouchableOpacity>
-            ))}
-
             <TouchableOpacity onPress={startSession} style={styles.startWrap}>
               <LinearGradient colors={gradients.primary} style={styles.startBtn}>
                 <Ionicons name="leaf" size={20} color={colors.text} />

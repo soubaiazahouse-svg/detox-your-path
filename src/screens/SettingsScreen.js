@@ -103,7 +103,8 @@ export default function SettingsScreen() {
             style={styles.upgradeBtn}
             onPress={() => navigation.navigate('Subscription')}
           >
-            <Text style={styles.upgradeText}>⭐ Pro</Text>
+            <Ionicons name="star" size={12} color={colors.accent} />
+            <Text style={styles.upgradeText}> Pro</Text>
           </TouchableOpacity>
         </View>
 
@@ -130,7 +131,9 @@ export default function SettingsScreen() {
             style={[styles.row, language === 'en' && styles.rowActive, isRTL && styles.rtlRow]}
             onPress={() => handleLanguage('en')}
           >
-            <Text style={styles.langFlag}>🇬🇧</Text>
+            <View style={[styles.langDot, { backgroundColor: '#3b5998' }]}>
+              <Text style={styles.langCode}>EN</Text>
+            </View>
             <Text style={[styles.rowLabel, { flex: 1 }, isRTL && { textAlign: 'right' }]}>
               {t.english}
             </Text>
@@ -143,7 +146,9 @@ export default function SettingsScreen() {
             style={[styles.row, language === 'ar' && styles.rowActive, isRTL && styles.rtlRow]}
             onPress={() => handleLanguage('ar')}
           >
-            <Text style={styles.langFlag}>🇸🇦</Text>
+            <View style={[styles.langDot, { backgroundColor: '#1a7a3c' }]}>
+              <Text style={styles.langCode}>ع</Text>
+            </View>
             <Text style={[styles.rowLabel, { flex: 1 }, isRTL && { textAlign: 'right' }]}>
               {t.arabic}
             </Text>
@@ -266,6 +271,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   upgradeBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: `${colors.accent}22`,
     borderWidth: 1,
     borderColor: colors.accent,
@@ -326,10 +333,18 @@ const styles = StyleSheet.create({
   rowLabelDanger: {
     color: colors.error,
   },
-  langFlag: {
-    fontSize: 22,
+  langDot: {
     width: 32,
-    textAlign: 'center',
+    height: 32,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  langCode: {
+    color: '#fff',
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 0.5,
   },
   divider: {
     height: 1,

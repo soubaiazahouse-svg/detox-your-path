@@ -6,11 +6,13 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAudio } from '../context/AudioContext';
 import { useLanguage } from '../context/LanguageContext';
-import { colors } from '../constants/colors';
+import TrackSymbol from './TrackSymbol';
+import { colors, gradients } from '../constants/colors';
 
 export default function MiniPlayer() {
   const { currentTrack, isPlaying, isLoading, progress, togglePlayPause, handleNext } = useAudio();
@@ -34,10 +36,13 @@ export default function MiniPlayer() {
       </View>
 
       <View style={[styles.content, isRTL && styles.rtl]}>
-        {/* Emoji */}
-        <View style={styles.emojiContainer}>
-          <Text style={styles.emoji}>{currentTrack.emoji}</Text>
-        </View>
+        {/* Track art */}
+        <LinearGradient
+          colors={currentTrack.trackColor || gradients.primary}
+          style={styles.artContainer}
+        >
+          <TrackSymbol category={currentTrack.category} size={26} color="rgba(255,255,255,0.9)" />
+        </LinearGradient>
 
         {/* Track info */}
         <View style={[styles.info, isRTL && { alignItems: 'flex-end' }]}>
@@ -95,16 +100,12 @@ const styles = StyleSheet.create({
   rtl: {
     flexDirection: 'row-reverse',
   },
-  emojiContainer: {
+  artContainer: {
     width: 44,
     height: 44,
-    backgroundColor: colors.surfaceLight,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  emoji: {
-    fontSize: 22,
   },
   info: {
     flex: 1,

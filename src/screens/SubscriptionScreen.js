@@ -39,9 +39,8 @@ export default function SubscriptionScreen() {
         {
           text: t.subscribe,
           onPress: async () => {
-            // Activate subscription (replace with real payment when ready)
             await activateSubscription();
-            Alert.alert('✅ Subscribed!', 'You now have full access to all AZA tracks.', [
+            Alert.alert(t.subscribe, 'You now have full access to all AZA tracks.', [
               { text: 'OK', onPress: () => navigation.goBack() },
             ]);
           },
@@ -66,7 +65,12 @@ export default function SubscriptionScreen() {
         {/* Crown */}
         <View style={styles.crownSection}>
           <LinearGradient colors={gradients.gold} style={styles.crownCircle}>
-            <Text style={styles.crownEmoji}>👑</Text>
+            <View style={styles.crownArt}>
+              <View style={styles.crownBase} />
+              <View style={styles.crownPeakL} />
+              <View style={styles.crownPeakC} />
+              <View style={styles.crownPeakR} />
+            </View>
           </LinearGradient>
           <Text style={styles.trialBadge}>{t.freeTrial}</Text>
         </View>
@@ -184,8 +188,47 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
-  crownEmoji: {
-    fontSize: 40,
+  crownArt: {
+    width: 44,
+    height: 32,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  crownBase: {
+    position: 'absolute',
+    bottom: 0,
+    width: 44,
+    height: 12,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    borderRadius: 3,
+  },
+  crownPeakL: {
+    position: 'absolute',
+    bottom: 10,
+    left: 2,
+    width: 10,
+    height: 18,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    borderRadius: 3,
+    transform: [{ rotate: '-20deg' }],
+  },
+  crownPeakC: {
+    position: 'absolute',
+    bottom: 10,
+    width: 10,
+    height: 24,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    borderRadius: 3,
+  },
+  crownPeakR: {
+    position: 'absolute',
+    bottom: 10,
+    right: 2,
+    width: 10,
+    height: 18,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    borderRadius: 3,
+    transform: [{ rotate: '20deg' }],
   },
   trialBadge: {
     backgroundColor: `${colors.accent}22`,

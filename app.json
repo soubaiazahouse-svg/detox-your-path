@@ -23,7 +23,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#080a1a"
+        "backgroundColor": "#7c3aed"
       },
       "package": "com.azahouse.aza",
       "versionCode": 1,

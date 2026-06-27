@@ -1,21 +1,35 @@
 import { Audio } from 'expo-av';
+import { AppState } from 'react-native';
 
-// ─── Audio Mode Setup ────────────────────────────────────────────────────────
-// CRITICAL for EAS APK: must call this before any Audio.Sound operations.
-// Without this, audio silently fails on Android production builds.
-export const initAudio = async () => {
+const AUDIO_MODE = {
+  allowsRecordingIOS: false,
+  staysActiveInBackground: true,
+  interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+  playsInSilentModeIOS: true,
+  interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+  shouldDuckAndroid: true,
+  playThroughEarpieceAndroid: false,
+};
+
+const applyAudioMode = async () => {
   try {
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      staysActiveInBackground: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: true,
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      shouldDuckAndroid: true,
-      playThroughEarpieceAndroid: false,
-    });
+    await Audio.setAudioModeAsync(AUDIO_MODE);
   } catch (err) {
     console.warn('[AudioService] setAudioModeAsync failed:', err);
+  }
+};
+
+let _appStateListener = null;
+
+// ─── Audio Mode Setup ─────────────────────────────────────────────────────────
+export const initAudio = async () => {
+  await applyAudioMode();
+
+  // Re-apply audio mode when app returns to foreground (Android battery killers)
+  if (!_appStateListener) {
+    _appStateListener = AppState.addEventListener('change', state => {
+      if (state === 'active') applyAudioMode();
+    });
   }
 };
 
@@ -38,6 +52,7 @@ export const unloadCurrentSound = async () => {
 // ─── Load & Play ─────────────────────────────────────────────────────────────
 export const loadAndPlayTrack = async (uri, onStatusUpdate) => {
   await unloadCurrentSound();
+  await applyAudioMode(); // ensure session active before every play
 
   const { sound } = await Audio.Sound.createAsync(
     { uri },

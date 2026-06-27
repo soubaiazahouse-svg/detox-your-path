@@ -28,7 +28,6 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired, 
   const [isPreviewEnded, setIsPreviewEnded] = useState(false);
   const [sleepTimerRemaining, setSleepTimerRemaining] = useState(null); // seconds remaining
 
-  const audioInitRef = useRef(false);
   const isSubscribedRef = useRef(isSubscribed);
   isSubscribedRef.current = isSubscribed;
   const sleepTimerRef = useRef(null);
@@ -40,10 +39,7 @@ export const AudioProvider = ({ children, isSubscribed, onSubscriptionRequired, 
   }, []);
 
   const ensureAudioInit = async () => {
-    if (!audioInitRef.current) {
-      await initAudio();
-      audioInitRef.current = true;
-    }
+    await initAudio();
   };
 
   const activateSleepTimer = useCallback((minutes) => {

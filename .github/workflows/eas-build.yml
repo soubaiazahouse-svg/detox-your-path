@@ -51,4 +51,4 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Done
-        run: echo "✅ Build queued! Check https://expo.dev/accounts/azasou86/projects"
+        run: echo "✅ Build queued! Check https://expo.dev/accounts/aza_house/projects"

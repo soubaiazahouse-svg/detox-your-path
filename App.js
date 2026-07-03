@@ -1,5 +1,9 @@
 import 'react-native-url-polyfill/auto';
+import TrackPlayer from 'react-native-track-player';
 import React, { useEffect, useRef } from 'react';
+
+// Register background service — must be at module level before React tree
+TrackPlayer.registerPlaybackService(() => require('./src/services/trackPlayerService'));
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';

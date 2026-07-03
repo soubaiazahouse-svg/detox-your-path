@@ -45,7 +45,8 @@
         {
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
-      ]
+      ],
+      "react-native-track-player"
     ],
     "owner": "aza_house"
   }

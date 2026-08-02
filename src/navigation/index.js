@@ -89,7 +89,7 @@ function MainTabs() {
 }
 
 export default function Navigation({ navRef }) {
-  const { user, loading } = useAuth();
+  const { user, loading, guestMode } = useAuth();
 
   if (loading) {
     return (
@@ -102,7 +102,7 @@ export default function Navigation({ navRef }) {
   return (
     <NavigationContainer ref={navRef}>
       <Stack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
-        {!user ? (
+        {!user && !guestMode ? (
           <>
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             <Stack.Screen name="Auth" component={AuthScreen} />

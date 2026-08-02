@@ -17,6 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { signIn, signUp } from '../services/supabase';
 import { supabase } from '../services/supabase';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth } from '../context/AuthContext';
 import { colors, gradients } from '../constants/colors';
 
 // ─── Email Confirmation Screen ────────────────────────────────────────────────
@@ -104,6 +105,7 @@ function ConfirmEmailScreen({ email, onBack, language }) {
 // ─── Main Auth Screen ─────────────────────────────────────────────────────────
 export default function AuthScreen() {
   const { t, isRTL, language } = useLanguage();
+  const { enterGuestMode } = useAuth();
   const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -308,6 +310,13 @@ export default function AuthScreen() {
           </View>
         </View>
 
+        {/* Guest mode */}
+        <TouchableOpacity style={styles.guestBtn} onPress={enterGuestMode}>
+          <Text style={styles.guestText}>
+            {language === 'ar' ? 'تجربة بدون حساب' : 'Try without account'}
+          </Text>
+        </TouchableOpacity>
+
         <Text style={styles.footer}>© AZA HOUSE COMPANY</Text>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -355,7 +364,9 @@ const styles = StyleSheet.create({
   switchRow: { flexDirection: 'row', justifyContent: 'center', gap: 6 },
   switchLabel: { color: colors.textMuted, fontSize: 13 },
   switchLink: { color: colors.primary, fontSize: 13, fontWeight: '700' },
-  footer: { color: colors.textMuted, fontSize: 11, textAlign: 'center', marginTop: 32 },
+  guestBtn: { alignItems: 'center', paddingVertical: 16, marginTop: 8 },
+  guestText: { color: colors.textSecondary, fontSize: 14, fontWeight: '500', textDecorationLine: 'underline' },
+  footer: { color: colors.textMuted, fontSize: 11, textAlign: 'center', marginTop: 16 },
 
   // Confirm email screen
   confirmContainer: { flex: 1, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center', padding: 28 },

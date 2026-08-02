@@ -22,7 +22,7 @@ import { APP_VERSION, SUPPORT_EMAIL } from '../constants/config';
 export default function SettingsScreen() {
   const navigation = useNavigation();
   const { t, language, switchLanguage, isRTL } = useLanguage();
-  const { user } = useAuth();
+  const { user, guestMode, exitGuestMode } = useAuth();
   const { stopAudio } = useAudio();
   const [notifications, setNotifications] = useState(true);
 
@@ -34,7 +34,11 @@ export default function SettingsScreen() {
         style: 'destructive',
         onPress: async () => {
           await stopAudio();
-          await signOut();
+          if (guestMode) {
+            await exitGuestMode();
+          } else {
+            await signOut();
+          }
         },
       },
     ]);
@@ -56,9 +60,9 @@ export default function SettingsScreen() {
     );
   };
 
-  const userName = user?.user_metadata?.full_name || 'User';
-  const userEmail = user?.email || '';
-  const initial = userName[0]?.toUpperCase() || 'U';
+  const userName = guestMode ? (language === 'ar' ? 'زائر' : 'Guest') : (user?.user_metadata?.full_name || 'User');
+  const userEmail = guestMode ? (language === 'ar' ? 'بدون حساب' : 'No account') : (user?.email || '');
+  const initial = userName[0]?.toUpperCase() || 'G';
 
   const SettingRow = ({ icon, label, onPress, right, danger }) => (
     <TouchableOpacity

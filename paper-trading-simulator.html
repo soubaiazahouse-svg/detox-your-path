@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاكي تداول تجريبي (Paper Trading) — تعليمي فقط</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --navy:#0f1f3d;
+  --navy2:#162947;
+  --blue:#1a56a0;
+  --blue2:#2171c7;
+  --sky:#4fa3e0;
+  --ice:#e8f4fd;
+  --white:#ffffff;
+  --cream:#f7f9fc;
+  --slate:#6b8cae;
+  --text:#0f1f3d;
+  --text-muted:#6b8cae;
+  --gold:#c8a84b;
+  --success:#2ebd8f;
+  --danger:#e05a6b;
+  --border:rgba(26,86,160,0.12);
+}
+
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  min-height:100vh;
+  padding:24px 16px 60px;
+}
+
+.wrap{max-width:960px;margin:0 auto;}
+
+header{
+  background:linear-gradient(145deg,var(--navy) 0%,var(--navy2) 60%,#1a3a6e 100%);
+  border-radius:20px;
+  padding:28px 24px;
+  color:var(--white);
+  margin-bottom:18px;
+}
+header h1{font-family:'Cormorant Garamond',serif;font-size:32px;margin-bottom:6px;}
+header h1 span{color:var(--sky);font-style:italic;}
+header p{color:#b8d0e8;font-size:14px;line-height:1.7;}
+
+.disclaimer{
+  background:#fff4f0;
+  border:2px solid var(--danger);
+  border-radius:14px;
+  padding:16px 18px;
+  margin-bottom:18px;
+  font-size:13.5px;
+  line-height:1.9;
+  color:#7a2130;
+}
+.disclaimer b{display:block;font-size:15px;margin-bottom:6px;color:var(--danger);}
+.disclaimer ul{margin:6px 0 0 0;padding-inline-start:20px;}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+}
+.card h2{font-size:16px;margin-bottom:14px;color:var(--navy);}
+
+.controls-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;}
+.field label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:5px;}
+.field select,.field input{
+  width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:9px;
+  font-family:inherit;font-size:14px;background:var(--cream);color:var(--text);
+}
+
+.toggle-row{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px;background:var(--ice);border-radius:10px;}
+.toggle-row input{width:18px;height:18px;}
+.toggle-row .warn{font-size:12px;color:var(--text-muted);}
+
+.btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+button{
+  font-family:inherit;font-size:14px;font-weight:500;border:none;border-radius:10px;
+  padding:11px 20px;cursor:pointer;transition:.15s;
+}
+.btn-primary{background:var(--blue2);color:#fff;}
+.btn-primary:hover{background:var(--blue);}
+.btn-primary:disabled{background:#a9c3de;cursor:not-allowed;}
+.btn-danger{background:var(--danger);color:#fff;}
+.btn-ghost{background:var(--ice);color:var(--navy);}
+
+.status-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 10px;border-radius:20px;background:var(--ice);color:var(--navy);}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--slate);}
+.dot.live{background:var(--success);}
+.dot.sim{background:var(--gold);}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+.stat{background:var(--cream);border-radius:12px;padding:14px;}
+.stat .label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.stat .value{font-size:20px;font-weight:600;color:var(--navy);}
+.stat .value.pos{color:var(--success);}
+.stat .value.neg{color:var(--danger);}
+
+canvas{width:100%;height:180px;display:block;border-radius:10px;background:var(--cream);}
+
+.signal-box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:var(--ice);margin-bottom:10px;flex-wrap:wrap;}
+.signal-tag{font-weight:600;padding:6px 14px;border-radius:20px;font-size:13px;}
+.signal-tag.buy{background:rgba(46,189,143,0.15);color:var(--success);}
+.signal-tag.sell{background:rgba(224,90,107,0.15);color:var(--danger);}
+.signal-tag.hold{background:rgba(107,140,174,0.15);color:var(--slate);}
+
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th,td{padding:8px 6px;text-align:right;border-bottom:1px solid var(--border);}
+th{color:var(--text-muted);font-weight:500;font-size:11px;text-transform:uppercase;}
+tbody tr:last-child td{border-bottom:none;}
+.log-empty{color:var(--text-muted);font-size:13px;padding:12px 0;text-align:center;}
+
+.footer-note{font-size:12px;color:var(--text-muted);text-align:center;margin-top:20px;line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>محاكي تداول <span>تجريبي</span></h1>
+    <p>أداة تعليمية لفهم كيف تعمل استراتيجية تداول آلية بسيطة (تقاطع متوسطات متحركة) — بأموال افتراضية بالكامل، وبدون أي وعود عوائد.</p>
+  </header>
+
+  <div class="disclaimer">
+    <b>⚠ اقرأ قبل الاستخدام</b>
+    <ul>
+      <li>هذه أداة <b>محاكاة تعليمية (Paper Trading)</b> فقط — لا يوجد اتصال بأي حساب وساطة أو محفظة حقيقية، ولا تُستخدم أموال حقيقية.</li>
+      <li>الأرقام والعائدات التي قد تظهر هنا <b>لا تمثل توصية استثمارية</b> ولا تضمن أي نتيجة مستقبلية. الأداء السابق لا يعني تكرار نفس النتيجة.</li>
+      <li>أي منشور يدّعي أن نظاماً آلياً حوّل مبلغاً صغيراً إلى مبلغ كبير "بين ليلة وضحاها" بثقة عالية وبدون مخاطرة — غالباً محتوى مبالغ فيه أو مُلفّق لأغراض ترويجية، وليس أداءً حقيقياً قابلاً للتكرار.</li>
+      <li>التداول الحقيقي بأموال فعلية يحمل مخاطر خسارة رأس المال، ويخضع لقوانين وتراخيص تختلف حسب دولتك — استشر جهة مختصة قبل أي قرار مالي حقيقي.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>الإعدادات</h2>
+    <div class="controls-grid">
+      <div class="field">
+        <label>الأصل</label>
+        <select id="asset">
+          <option value="bitcoin" data-base="65000">Bitcoin (BTC)</option>
+          <option value="ethereum" data-base="3200">Ethereum (ETH)</option>
+          <option value="solana" data-base="150">Solana (SOL)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>رصيد افتراضي بداية ($)</label>
+        <input type="number" id="startBalance" value="1000" min="10" step="10">
+      </div>
+      <div class="field">
+        <label>رسوم كل صفقة (%)</label>
+        <input type="number" id="feePct" value="0.1" min="0" step="0.05">
+      </div>
+      <div class="field">
+        <label>حجم الصفقة من الكاش (%)</label>
+        <input type="number" id="positionPct" value="20" min="1" max="100" step="1">
+      </div>
+      <div class="field">
+        <label>متوسط سريع (SMA)</label>
+        <input type="number" id="smaFast" value="5" min="2" step="1">
+      </div>
+      <div class="field">
+        <label>متوسط بطيء (SMA)</label>
+        <input type="number" id="smaSlow" value="20" min="3" step="1">
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <input type="checkbox" id="autoMode">
+      <div>
+        <div style="font-size:13px;font-weight:500;">تنفيذ تلقائي للصفقات</div>
+        <div class="warn">إذا كان مفعّلاً: كل إشارة شراء/بيع تُنفَّذ فوراً في المحفظة الافتراضية بدون سؤالك. إذا كان معطلاً (الوضع الافتراضي): ستظهر لك الإشارة وتوافق يدوياً قبل التنفيذ. في الحالتين، كل هذا داخل المحاكاة فقط ولا يمس أي مال حقيقي.</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="startBtn">▶ بدء المحاكاة</button>
+      <button class="btn-danger" id="stopBtn" disabled>⏸ إيقاف</button>
+      <button class="btn-ghost" id="resetBtn">↺ إعادة ضبط</button>
+      <span class="status-badge" id="sourceBadge"><span class="dot" id="sourceDot"></span><span id="sourceText">غير متصل</span></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>المحفظة الافتراضية</h2>
+    <div class="stats-grid">
+      <div class="stat"><div class="label">السعر الحالي</div><div class="value" id="statPrice">—</div></div>
+      <div class="stat"><div class="label">الكاش المتاح</div><div class="value" id="statCash">—</div></div>
+      <div class="stat"><div class="label">الكمية المملوكة</div><div class="value" id="statHoldings">—</div></div>
+      <div class="stat"><div class="label">القيمة الإجمالية</div><div class="value" id="statEquity">—</div></div>
+      <div class="stat"><div class="label">العائد الكلي</div><div class="value" id="statReturn">—</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>الإشارة الحالية</h2>
+    <div class="signal-box">
+      <div>
+        <div style="font-size:12px;color:var(--text-muted);">SMA سريع: <span id="smaFastVal">—</span> · SMA بطيء: <span id="smaSlowVal">—</span></div>
+      </div>
+      <div class="signal-tag hold" id="signalTag">في انتظار البيانات</div>
+    </div>
+    <div id="pendingConfirm" style="display:none;">
+      <div class="signal-box" style="background:#fff8ec;">
+        <div id="pendingText" style="font-size:13px;"></div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-primary" id="confirmBtn">تنفيذ</button>
+          <button class="btn-ghost" id="ignoreBtn">تجاهل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>منحنى قيمة المحفظة</h2>
+    <canvas id="equityChart" width="900" height="180"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>سجل الصفقات</h2>
+    <div id="logWrap">
+      <div class="log-empty">لا توجد صفقات بعد</div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    هذه صفحة تجريبية مستقلة داخل مشروع DETOX your Path، لأغراض تعليمية عن آلية التداول الآلي فقط.<br>
+    ليست أداة مالية حقيقية، وليست نصيحة استثمارية.
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const els = {
+    asset: document.getElementById('asset'),
+    startBalance: document.getElementById('startBalance'),
+    feePct: document.getElementById('feePct'),
+    positionPct: document.getElementById('positionPct'),
+    smaFast: document.getElementById('smaFast'),
+    smaSlow: document.getElementById('smaSlow'),
+    autoMode: document.getElementById('autoMode'),
+    startBtn: document.getElementById('startBtn'),
+    stopBtn: document.getElementById('stopBtn'),
+    resetBtn: document.getElementById('resetBtn'),
+    sourceDot: document.getElementById('sourceDot'),
+    sourceText: document.getElementById('sourceText'),
+    statPrice: document.getElementById('statPrice'),
+    statCash: document.getElementById('statCash'),
+    statHoldings: document.getElementById('statHoldings'),
+    statEquity: document.getElementById('statEquity'),
+    statReturn: document.getElementById('statReturn'),
+    smaFastVal: document.getElementById('smaFastVal'),
+    smaSlowVal: document.getElementById('smaSlowVal'),
+    signalTag: document.getElementById('signalTag'),
+    pendingConfirm: document.getElementById('pendingConfirm'),
+    pendingText: document.getElementById('pendingText'),
+    confirmBtn: document.getElementById('confirmBtn'),
+    ignoreBtn: document.getElementById('ignoreBtn'),
+    logWrap: document.getElementById('logWrap'),
+    chart: document.getElementById('equityChart'),
+  };
+
+  let state = null;
+  let timer = null;
+  const POLL_MS = 8000;
+
+  function fmt(n){ return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function fmtQty(n){ return n.toLocaleString('en-US',{minimumFractionDigits:6,maximumFractionDigits:6}); }
+
+  function freshState(){
+    const cash = parseFloat(els.startBalance.value) || 1000;
+    return {
+      cash,
+      holdings: 0,
+      prices: [],
+      equityHistory: [],
+      log: [],
+      dataSource: null, // 'live' | 'sim'
+      simPrice: null,
+      simTrend: 0,
+    };
+  }
+
+  async function fetchHistorical(coinId){
+    const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=2`;
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 6000);
+    try{
+      const res = await fetch(url, {signal: ctrl.signal});
+      clearTimeout(t);
+      if(!res.ok) throw new Error('bad response');
+      const data = await res.json();
+      const prices = (data.prices || []).map(p => p[1]);
+      if(!prices.length) throw new Error('empty');
+      return prices.slice(-60);
+    }catch(e){
+      clearTimeout(t);
+      return null;
+    }
+  }
+
+  async function fetchLivePrice(coinId){
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`;
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 6000);
+    try{
+      const res = await fetch(url, {signal: ctrl.signal});
+      clearTimeout(t);
+      if(!res.ok) throw new Error('bad response');
+      const data = await res.json();
+      const price = data[coinId] && data[coinId].usd;
+      if(typeof price !== 'number') throw new Error('no price');
+      return price;
+    }catch(e){
+      clearTimeout(t);
+      return null;
+    }
+  }
+
+  function nextSimPrice(){
+    if(state.simPrice == null){
+      const opt = els.asset.options[els.asset.selectedIndex];
+      state.simPrice = parseFloat(opt.dataset.base) || 100;
+    }
+    // simple bounded random walk, drift resets occasionally to avoid runaway trend
+    state.simTrend += (Math.random() - 0.5) * 0.02;
+    state.simTrend = Math.max(-0.05, Math.min(0.05, state.simTrend));
+    const shock = (Math.random() - 0.5) * 0.01;
+    state.simPrice = Math.max(0.01, state.simPrice * (1 + state.simTrend * 0.1 + shock));
+    return state.simPrice;
+  }
+
+  function setSourceBadge(source){
+    els.sourceDot.className = 'dot ' + (source === 'live' ? 'live' : source === 'sim' ? 'sim' : '');
+    els.sourceText.textContent = source === 'live' ? 'بيانات حية (CoinGecko)' : source === 'sim' ? 'محاكاة (لا يوجد اتصال بمصدر حقيقي)' : 'غير متصل';
+  }
+
+  function sma(arr, window){
+    if(arr.length < window) return null;
+    const slice = arr.slice(-window);
+    return slice.reduce((a,b)=>a+b,0) / window;
+  }
+
+  function currentSignal(){
+    const fastW = parseInt(els.smaFast.value) || 5;
+    const slowW = parseInt(els.smaSlow.value) || 20;
+    const fast = sma(state.prices, fastW);
+    const slow = sma(state.prices, slowW);
+    if(fast == null || slow == null) return {signal:'hold', fast, slow};
+
+    const prevPrices = state.prices.slice(0, -1);
+    const prevFast = sma(prevPrices, fastW);
+    const prevSlow = sma(prevPrices, slowW);
+
+    let signal = 'hold';
+    if(prevFast != null && prevSlow != null){
+      if(prevFast <= prevSlow && fast > slow) signal = 'buy';
+      else if(prevFast >= prevSlow && fast < slow) signal = 'sell';
+    }
+    return {signal, fast, slow};
+  }
+
+  function executeTrade(action, price){
+    const feePct = (parseFloat(els.feePct.value) || 0) / 100;
+    const posPct = (parseFloat(els.positionPct.value) || 0) / 100;
+
+    if(action === 'buy'){
+      const spend = state.cash * posPct;
+      if(spend < 1) return null;
+      const fee = spend * feePct;
+      const qty = (spend - fee) / price;
+      state.cash -= spend;
+      state.holdings += qty;
+      const entry = {time: new Date(), action:'شراء', price, qty, fee, cashAfter: state.cash};
+      state.log.unshift(entry);
+      return entry;
+    }
+    if(action === 'sell'){
+      if(state.holdings <= 0) return null;
+      const qty = state.holdings;
+      const proceeds = qty * price;
+      const fee = proceeds * feePct;
+      state.cash += (proceeds - fee);
+      state.holdings = 0;
+      const entry = {time: new Date(), action:'بيع', price, qty, fee, cashAfter: state.cash};
+      state.log.unshift(entry);
+      return entry;
+    }
+    return null;
+  }
+
+  function renderLog(){
+    if(!state.log.length){
+      els.logWrap.innerHTML = '<div class="log-empty">لا توجد صفقات بعد</div>';
+      return;
+    }
+    let html = '<table><thead><tr><th>الوقت</th><th>النوع</th><th>السعر</th><th>الكمية</th><th>الرسوم</th><th>الكاش بعد الصفقة</th></tr></thead><tbody>';
+    state.log.slice(0,50).forEach(e=>{
+      html += `<tr><td>${e.time.toLocaleTimeString('ar-EG')}</td><td>${e.action}</td><td>${fmt(e.price)}</td><td>${fmtQty(e.qty)}</td><td>${fmt(e.fee)}</td><td>${fmt(e.cashAfter)}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    els.logWrap.innerHTML = html;
+  }
+
+  function drawChart(){
+    const ctx = els.chart.getContext('2d');
+    const w = els.chart.width, h = els.chart.height;
+    ctx.clearRect(0,0,w,h);
+    const hist = state.equityHistory;
+    if(hist.length < 2){
+      ctx.fillStyle = '#6b8cae';
+      ctx.font = '13px Outfit, sans-serif';
+      ctx.fillText('بيانات غير كافية بعد لرسم المنحنى', 16, h/2);
+      return;
+    }
+    const min = Math.min(...hist), max = Math.max(...hist);
+    const range = (max - min) || 1;
+    ctx.beginPath();
+    hist.forEach((v,i)=>{
+      const x = (i/(hist.length-1)) * (w-20) + 10;
+      const y = h - 20 - ((v-min)/range) * (h-40);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.strokeStyle = '#2171c7';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  function updateStats(price){
+    const equity = state.cash + state.holdings * price;
+    const startBalance = parseFloat(els.startBalance.value) || 1000;
+    const ret = ((equity - startBalance) / startBalance) * 100;
+
+    els.statPrice.textContent = fmt(price);
+    els.statCash.textContent = fmt(state.cash);
+    els.statHoldings.textContent = fmtQty(state.holdings);
+    els.statEquity.textContent = fmt(equity);
+    els.statReturn.textContent = (ret>=0?'+':'') + ret.toFixed(2) + '%';
+    els.statReturn.className = 'value ' + (ret>0?'pos':ret<0?'neg':'');
+
+    state.equityHistory.push(equity);
+    if(state.equityHistory.length > 200) state.equityHistory.shift();
+    drawChart();
+  }
+
+  function showSignal(sigInfo){
+    els.smaFastVal.textContent = sigInfo.fast != null ? sigInfo.fast.toFixed(2) : '—';
+    els.smaSlowVal.textContent = sigInfo.slow != null ? sigInfo.slow.toFixed(2) : '—';
+    const tag = els.signalTag;
+    tag.className = 'signal-tag ' + sigInfo.signal;
+    tag.textContent = sigInfo.signal === 'buy' ? 'إشارة شراء' : sigInfo.signal === 'sell' ? 'إشارة بيع' : 'انتظار (لا إشارة)';
+  }
+
+  function handleSignal(sigInfo, price){
+    if(sigInfo.signal === 'hold') { els.pendingConfirm.style.display = 'none'; return; }
+
+    if(els.autoMode.checked){
+      executeTrade(sigInfo.signal, price);
+      renderLog();
+      els.pendingConfirm.style.display = 'none';
+      return;
+    }
+
+    els.pendingConfirm.style.display = 'block';
+    els.pendingText.textContent = (sigInfo.signal === 'buy' ? 'إشارة شراء' : 'إشارة بيع') + ` عند السعر ${fmt(price)} — هل تريد التنفيذ في المحفظة الافتراضية؟`;
+    els.confirmBtn.onclick = () => {
+      executeTrade(sigInfo.signal, price);
+      renderLog();
+      els.pendingConfirm.style.display = 'none';
+    };
+    els.ignoreBtn.onclick = () => { els.pendingConfirm.style.display = 'none'; };
+  }
+
+  async function tick(){
+    const coinId = els.asset.value;
+    let price = null;
+
+    if(state.dataSource !== 'sim'){
+      price = await fetchLivePrice(coinId);
+      if(price != null){
+        state.dataSource = 'live';
+      }
+    }
+    if(price == null){
+      state.dataSource = 'sim';
+      price = nextSimPrice();
+    }
+    setSourceBadge(state.dataSource);
+
+    state.prices.push(price);
+    if(state.prices.length > 300) state.prices.shift();
+
+    const sigInfo = currentSignal();
+    showSignal(sigInfo);
+    updateStats(price);
+    handleSignal(sigInfo, price);
+  }
+
+  async function start(){
+    els.startBtn.disabled = true;
+    els.stopBtn.disabled = false;
+    els.asset.disabled = true;
+    els.startBalance.disabled = true;
+
+    state = freshState();
+    setSourceBadge(null);
+
+    const coinId = els.asset.value;
+    const hist = await fetchHistorical(coinId);
+    if(hist){
+      state.prices = hist;
+      state.dataSource = 'live';
+    } else {
+      state.dataSource = 'sim';
+      const opt = els.asset.options[els.asset.selectedIndex];
+      const base = parseFloat(opt.dataset.base) || 100;
+      state.simPrice = base;
+      for(let i=0;i<25;i++) state.prices.push(nextSimPrice());
+    }
+
+    renderLog();
+    await tick();
+    timer = setInterval(tick, POLL_MS);
+  }
+
+  function stop(){
+    if(timer) clearInterval(timer);
+    timer = null;
+    els.startBtn.disabled = false;
+    els.stopBtn.disabled = true;
+    els.asset.disabled = false;
+    els.startBalance.disabled = false;
+  }
+
+  function reset(){
+    stop();
+    state = null;
+    setSourceBadge(null);
+    els.statPrice.textContent = '—';
+    els.statCash.textContent = '—';
+    els.statHoldings.textContent = '—';
+    els.statEquity.textContent = '—';
+    els.statReturn.textContent = '—';
+    els.statReturn.className = 'value';
+    els.smaFastVal.textContent = '—';
+    els.smaSlowVal.textContent = '—';
+    els.signalTag.className = 'signal-tag hold';
+    els.signalTag.textContent = 'في انتظار البيانات';
+    els.pendingConfirm.style.display = 'none';
+    els.logWrap.innerHTML = '<div class="log-empty">لا توجد صفقات بعد</div>';
+    const ctx = els.chart.getContext('2d');
+    ctx.clearRect(0,0,els.chart.width,els.chart.height);
+  }
+
+  els.startBtn.addEventListener('click', start);
+  els.stopBtn.addEventListener('click', stop);
+  els.resetBtn.addEventListener('click', reset);
+
+})();
+</script>
+</body>
+</html>

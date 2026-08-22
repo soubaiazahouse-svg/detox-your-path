@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منهج ممكنون — اعزيزة السباعي | الدورات والورش</title>
+<meta name="description" content="منهج ممكنون — مسار تحولي متكامل مع اعزيزة السباعي. دورات وورش في الوعي الذاتي والتحرر العاطفي وإعادة البناء">
+<link rel="canonical" href="https://azizasoubai.com/minhaj.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mid: #1a6abf;
+  --blue: #0d2144;
+  --gold: #f0c040;
+  --light-bg: #f0f6ff;
+  --text-muted: #4a6fa5;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  color: var(--blue);
+  direction: rtl;
+  background: #fff;
+  padding-top: 60px;
+}
+/* NAV */
+.site-nav { position:fixed;top:0;width:100%;z-index:1000;background:rgba(240,246,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,106,191,0.2);padding:14px 30px;display:flex;justify-content:space-between;align-items:center;box-sizing:border-box; }
+.site-nav-logo { font-family:'Amiri',serif;font-size:1.2rem;color:#0d2144;text-decoration:none; }
+.site-nav-links { display:flex;gap:20px;list-style:none;margin:0;padding:0; }
+.site-nav-links a { color:#1a3a6b;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:0.9rem;font-weight:500;transition:color 0.3s; }
+.site-nav-links a:hover { color:#1a6abf; }
+.site-nav-ham { display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px; }
+.site-nav-ham span { display:block;width:22px;height:2px;background:#0d2144;border-radius:2px;transition:all 0.3s; }
+.site-mob { display:none;position:fixed;inset:0;background:rgba(240,246,255,0.98);backdrop-filter:blur(16px);z-index:1050;flex-direction:column;align-items:center;justify-content:center; }
+.site-mob.open { display:flex; }
+.site-mob ul { list-style:none;padding:0;margin:0;text-align:center;width:100%; }
+.site-mob ul li { border-bottom:1px solid rgba(26,106,191,0.1); }
+.site-mob ul li a { display:block;padding:16px 30px;color:#0d2144;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:500; }
+.site-mob-close { position:absolute;top:18px;left:20px;background:none;border:none;font-size:1.4rem;color:#4a6fa5;cursor:pointer;font-family:'Tajawal',sans-serif; }
+@media(max-width:768px){ .site-nav-links{display:none;} .site-nav-ham{display:flex;} .site-nav{padding:12px 20px;} body { padding-top: 68px; } }
+
+/* HERO */
+.minhaj-hero {
+  background: linear-gradient(135deg, #0d2144 0%, #1a3a6b 50%, #1a6abf 100%);
+  padding: 90px 30px 80px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.minhaj-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(240,192,64,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
+  font-family: 'Tajawal', sans-serif;
+}
+.hero-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  color: #fff;
+  margin-bottom: 18px;
+  line-height: 1.25;
+}
+.hero-subtitle {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.78);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+}
+.hero-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #c8960a, #f0c040);
+  color: #0d2144;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 15px 46px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(200,150,10,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(200,150,10,0.5); }
+
+/* SECTION SHARED */
+.section-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--blue);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.section-title.light { color: #fff; }
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mid), var(--gold));
+  border-radius: 2px;
+  margin: 14px auto 0;
+}
+.section-title.light::after { background: linear-gradient(90deg, #7ab3ff, var(--gold)); }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+
+/* WHAT IS MUMKANOUN */
+.meaning-section {
+  background: var(--light-bg);
+  padding: 72px 30px;
+}
+.meaning-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.meaning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.meaning-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  border: 1.5px solid rgba(26,106,191,0.12);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.meaning-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(26,106,191,0.14); }
+.meaning-letter {
+  font-family: 'Amiri', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--mid);
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.meaning-word {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1rem;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.meaning-desc {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* PILLARS */
+.pillars-section {
+  background: linear-gradient(135deg, #e8f2ff 0%, #d6eaff 100%);
+  padding: 72px 30px;
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  margin: 48px auto 0;
+}
+.pillar-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px 22px;
+  text-align: center;
+  border-right: 4px solid var(--mid);
+  box-shadow: 0 4px 18px rgba(26,106,191,0.07);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.pillar-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(26,106,191,0.15); }
+.pillar-emoji { font-size: 2.4rem; display: block; margin-bottom: 14px; }
+.pillar-title { font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 1rem; color: var(--blue); margin-bottom: 8px; }
+.pillar-desc { font-family: 'Tajawal', sans-serif; font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+
+/* COURSES */
+.courses-section {
+  background: #fff;
+  padding: 72px 30px;
+}
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 48px auto 0;
+}
+.course-card {
+  border: 1.5px solid rgba(26,106,191,0.15);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  background: #fff;
+}
+.course-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(26,106,191,0.16); }
+.course-top-bar {
+  background: linear-gradient(135deg, var(--blue), var(--mid));
+  height: 6px;
+}
+.course-body { padding: 26px 22px; }
+.course-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.badge-free { background: rgba(40,167,100,0.12); color: #1a7a4a; }
+.badge-paid { background: rgba(26,106,191,0.1); color: var(--mid); }
+.course-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.course-price {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--mid);
+  margin-bottom: 18px;
+}
+.course-price.free-price { color: #1a7a4a; }
+.course-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--mid), #2a8ad4);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.course-btn:hover { opacity: 0.88; }
+
+/* PRODUCTS */
+.products-section {
+  background: var(--light-bg);
+  padding: 64px 30px;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 680px;
+  margin: 40px auto 0;
+}
+.product-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px 26px;
+  text-align: center;
+  border: 1.5px solid rgba(26,106,191,0.15);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(26,106,191,0.14); }
+.product-icon { font-size: 2.8rem; display: block; margin-bottom: 14px; }
+.product-name { font-family: 'Amiri', serif; font-size: 1.3rem; color: var(--blue); margin-bottom: 10px; }
+.product-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 28px 20px;
+  border-top: 1px solid rgba(26,106,191,0.1);
+}
+footer p { font-size: 0.8rem; color: #7a9abf; line-height: 1.7; font-family: 'Tajawal', sans-serif; }
+footer a { color: var(--mid); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="site-nav-logo">اعزيزة السباعي</a>
+  <ul class="site-nav-links">
+    <li><a href="/about.html">من أنا</a></li>
+    <li><a href="/minhaj.html">المنهج</a></li>
+    <li><a href="/articles.html">المقالات</a></li>
+    <li><a href="/book111.html">الكتاب</a></li>
+    <li><a href="/karasa">الكراسة</a></li>
+    <li><a href="/#contact">تواصل</a></li>
+  </ul>
+  <button class="site-nav-ham" id="snHam" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="site-mob" id="snMob">
+  <button class="site-mob-close" id="snClose">✕</button>
+  <ul>
+    <li><a href="/" onclick="snClose2()">الرئيسية</a></li>
+    <li><a href="/about.html" onclick="snClose2()">من أنا</a></li>
+    <li><a href="/minhaj.html" onclick="snClose2()">المنهج</a></li>
+    <li><a href="/articles.html" onclick="snClose2()">المقالات</a></li>
+    <li><a href="/book111.html" onclick="snClose2()">الكتاب</a></li>
+    <li><a href="/karasa" onclick="snClose2()">الكراسة</a></li>
+    <li><a href="/#contact" onclick="snClose2()">تواصل</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="minhaj-hero">
+  <div class="hero-badge">✦ المسار التحولي ✦</div>
+  <h1 class="hero-title">منهج <span style="color:#f0c040;">ممكنون</span></h1>
+  <p class="hero-subtitle">مسار تحولي متكامل مصمم بدقة ليوقظ النور الأصيل في أعماقك</p>
+  <a href="https://t.me/nourway" target="_blank" rel="noopener" class="hero-cta">ابدأ رحلتك</a>
+</section>
+
+<!-- WHAT IS MUMKANOUN -->
+<section class="meaning-section">
+  <div class="section-inner">
+    <h2 class="section-title">ما معنى ممكنون؟</h2>
+    <p class="meaning-intro">الاسم ليس مجرد كلمة — هو خارطة طريق. كل حرف يحمل بُعداً من أبعاد التحول الذي تسعى إليه.</p>
+    <div class="meaning-grid">
+      <div class="meaning-card">
+        <span class="meaning-letter">مُ</span>
+        <div class="meaning-word">مُستيقظ</div>
+        <div class="meaning-desc">واعٍ بنفسه وبوجوده</div>
+      </div>
+      <div class="meaning-card">
+        <span class="meaning-letter">مك</span>
+        <div class="meaning-word">مُتكامل</div>
+        <div class="meaning-desc">جسداً وعقلاً وروحاً</div>
+      </div>
+      <div class="meaning-card">
+        <span class="meaning-letter">نون</span>
+        <div class="meaning-word">نور</div>
+        <div class="meaning-desc">يشع من الداخل للخارج</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PILLARS -->
+<section class="pillars-section">
+  <div class="section-inner">
+    <h2 class="section-title">أركان المنهج الأربعة</h2>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <span class="pillar-emoji">🧠</span>
+        <div class="pillar-title">الوعي الذاتي</div>
+        <div class="pillar-desc">فهم الأنماط والمعتقدات</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-emoji">💚</span>
+        <div class="pillar-title">التحرر العاطفي</div>
+        <div class="pillar-desc">معالجة الجروح والمشاعر</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-emoji">✨</span>
+        <div class="pillar-title">إعادة البناء</div>
+        <div class="pillar-desc">ترسيخ الهوية الأصيلة</div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-emoji">🌱</span>
+        <div class="pillar-title">العيش بوعي</div>
+        <div class="pillar-desc">التطبيق اليومي والاستمرارية</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES GRID -->
+<section class="courses-section">
+  <div class="section-inner">
+    <h2 class="section-title">الدورات والورش</h2>
+    <div class="courses-grid">
+      <!-- 1 -->
+      <div class="course-card">
+        <div class="course-top-bar"></div>
+        <div class="course-body">
+          <span class="course-badge badge-free">مجانية</span>
+          <div class="course-title">ورشة أسرار التغيير الحقيقي</div>
+          <div class="course-price free-price">مجاناً</div>
+          <a href="https://t.me/nourway" target="_blank" rel="noopener" class="course-btn">اشترك الآن</a>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="course-card">
+        <div class="course-top-bar"></div>
+        <div class="course-body">
+          <span class="course-badge badge-paid">مدفوعة</span>
+          <div class="course-title">ورشة الوعي بالأنماط</div>
+          <div class="course-price">35$</div>
+          <a href="https://t.me/nourway" target="_blank" rel="noopener" class="course-btn">اشترك الآن</a>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="course-card">
+        <div class="course-top-bar"></div>
+        <div class="course-body">
+          <span class="course-badge badge-paid">مدفوعة</span>
+          <div class="course-title">دورة التحرر من الجروح العاطفية</div>
+          <div class="course-price">97$</div>
+          <a href="https://t.me/nourway" target="_blank" rel="noopener" class="course-btn">اشترك الآن</a>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="course-card">
+        <div class="course-top-bar"></div>
+        <div class="course-body">
+          <span class="course-badge badge-paid">مدفوعة</span>
+          <div class="course-title">ورشة الحدود والعلاقات</div>
+          <div class="course-price">45$</div>
+          <a href="https://t.me/nourway" target="_blank" rel="noopener" class="course-btn">اشترك الآن</a>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="course-card">
+        <div class="course-top-bar"></div>
+        <div class="course-body">
+          <span class="course-badge badge-paid">مدفوعة</span>
+          <div class="course-title">دورة الحضور والسكينة</div>
+          <div class="course-price">67$</div>
+          <a href="https://t.me/nourway" target="_blank" rel="noopener" class="course-btn">اشترك الآن</a>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="course-card">
+        <div class="course-top-bar"></div>
+        <div class="course-body">
+          <span class="course-badge badge-paid">مدفوعة</span>
+          <div class="course-title">دورة العلاج بالكتابة</div>
+          <div class="course-price">37$</div>
+          <a href="https://t.me/nourway" target="_blank" rel="noopener" class="course-btn">اشترك الآن</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="section-inner">
+    <h2 class="section-title">الإصدارات</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <span class="product-icon">📖</span>
+        <div class="product-name">الكتاب</div>
+        <p class="product-desc">١١١ رسالة نورانية — لحظة بلحظة نحو التحول الداخلي</p>
+        <a href="/book111.html" class="course-btn">اكتشف الكتاب</a>
+      </div>
+      <div class="product-card">
+        <span class="product-icon">📓</span>
+        <div class="product-name">الكرّاسة</div>
+        <p class="product-desc">٤٠ يوماً لتتكامل مع نفسك — رحلة يومية للوعي</p>
+        <a href="/karasa" class="course-btn">اكتشف الكراسة</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>المحتوى المقدّم هنا لأغراض تعليمية وتثقيفية فقط، ولا يُغني عن الاستشارة النفسية أو الطبية المتخصصة عند الحاجة.</p>
+  <p style="margin-top:8px;">© 2026 <a href="/">اعزيزة السباعي</a> · <a href="/about.html">من أنا</a> · <a href="/articles.html">المقالات</a> · <a href="/book111.html">الكتاب</a></p>
+</footer>
+
+<script>
+(function(){
+  var h=document.getElementById('snHam'),m=document.getElementById('snMob'),c=document.getElementById('snClose');
+  function snClose2(){m.classList.remove('open');document.body.style.overflow='';}
+  window.snClose2=snClose2;
+  if(h)h.addEventListener('click',function(){m.classList.contains('open')?snClose2():(m.classList.add('open'),document.body.style.overflow='hidden');});
+  if(c)c.addEventListener('click',snClose2);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')snClose2();});
+})();
+</script>
+</body>
+</html>

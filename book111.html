@@ -201,6 +201,23 @@ body {
   .book-info .quote { border-right: none; border-top: 3px solid var(--gold); padding-right: 0; padding-top: 12px; }
   .book-cover { width: 170px; }
 }
+
+/* BOOK PREVIEW + FAQ */
+.book-preview{max-width:700px;margin:0 auto;padding:60px 20px;}
+.book-preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;}
+.bprev-card{background:#fff;border:1px solid rgba(26,106,191,0.12);border-radius:16px;padding:22px 20px;position:relative;}
+.bprev-num{font-family:'Amiri',serif;font-size:2rem;color:rgba(184,134,11,0.2);font-weight:700;line-height:1;margin-bottom:8px;}
+.bprev-card h4{font-family:'Amiri',serif;font-size:1.05rem;color:#0d2144;margin-bottom:8px;}
+.bprev-card p{font-size:0.87rem;color:#5a7a9a;line-height:1.8;}
+.book-faq{max-width:700px;margin:0 auto;padding:0 20px 60px;}
+.book-faq-list{display:flex;flex-direction:column;gap:10px;margin-top:26px;}
+.book-faq-item{border:1px solid rgba(184,134,11,0.2);border-radius:14px;background:#fff;overflow:hidden;}
+.book-faq-item summary{padding:18px 24px;cursor:pointer;font-weight:600;color:#0d2144;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+.book-faq-item summary::after{content:'+';font-size:1.2rem;color:#b8860b;transition:transform 0.3s;}
+.book-faq-item[open] summary::after{content:'−';}
+.book-faq-item p{padding:0 24px 18px;color:#5a7a9a;font-size:0.9rem;line-height:1.9;}
+@media(max-width:480px){.book-preview-grid{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -234,6 +251,60 @@ body {
   <div class="divider-line"></div>
   <h2>اختر نسختك</h2>
   <p>النسخة الإلكترونية تصلك فوراً — النسخة المطبوعة تُشحن إليكِ أينما كنتِ</p>
+</div>
+
+
+<!-- INSIDE THE BOOK -->
+<div class="book-preview">
+  <div class="divider-line" style="margin-bottom:12px;"></div>
+  <h2 style="font-family:'Amiri',serif;font-size:clamp(1.6rem,4vw,2.2rem);color:#0d2144;text-align:center;margin-bottom:6px;">ماذا ستجد داخل الكتاب؟</h2>
+  <p style="text-align:center;color:#5a7a9a;font-size:14px;margin-bottom:0;">١١١ رسالة كتبتُها من القلب — كل رسالة عالَم مكتمل</p>
+  <div class="book-preview-grid">
+    <div class="bprev-card">
+      <div class="bprev-num">٠١</div>
+      <h4>رسائل البشرى</h4>
+      <p>كلمات تُذكّرك بأنك على المسار الصحيح حتى حين لا تشعر بذلك.</p>
+    </div>
+    <div class="bprev-card">
+      <div class="bprev-num">٠٢</div>
+      <h4>رسائل التنبيه</h4>
+      <p>إشارات تُوقفك قبل أن تتجاوز حدودك وتُرهق روحك دون أن تدري.</p>
+    </div>
+    <div class="bprev-card">
+      <div class="bprev-num">٠٣</div>
+      <h4>رسائل الإرشاد</h4>
+      <p>توجيهات عملية لخطوتك التالية عندما يُعمي عليك الضباب الطريق.</p>
+    </div>
+    <div class="bprev-card">
+      <div class="bprev-num">٠٤</div>
+      <h4>رسائل اللحظة</h4>
+      <p>اقرأ أي صفحة في أي وقت — الكتاب يلتقط لحظتك ويتحدث إليها مباشرة.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="book-faq">
+  <h2 style="font-family:'Amiri',serif;font-size:clamp(1.5rem,3.5vw,2rem);color:#0d2144;text-align:center;margin-bottom:6px;">أسئلة شائعة</h2>
+  <p style="text-align:center;color:#5a7a9a;font-size:14px;">كل ما تحتاج معرفته قبل الشراء</p>
+  <div class="book-faq-list">
+    <details class="book-faq-item">
+      <summary>كيف أستلم الكتاب بعد الشراء؟</summary>
+      <p>فور إتمام الدفع عبر Payhip أو Amazon ستصلك رسالة على بريدك الإلكتروني برابط التحميل أو معلومات الشحن. الكتاب الرقمي يصل فورياً.</p>
+    </details>
+    <details class="book-faq-item">
+      <summary>هل هو كتاب ورقي أم رقمي؟</summary>
+      <p>متوفر بكلا النسختين: رقمي PDF للتحميل الفوري، وورقي يمكن طلبه عبر Amazon. اختر ما يناسبك.</p>
+    </details>
+    <details class="book-faq-item">
+      <summary>كيف أستخدم الكتاب؟</summary>
+      <p>ببساطة: افتحه في أي لحظة دون تخطيط مسبق. الصفحة التي تقف عليها هي الرسالة التي تحتاجها. لا ترتيب إلزامي، لا قواعد.</p>
+    </details>
+    <details class="book-faq-item">
+      <summary>هل يناسبني إذا لم أكن في أزمة؟</summary>
+      <p>نعم — الكتاب لكل لحظة، ليس فقط لحظات الضيق. كثيرون يقرؤونه في الصباح كبداية يومهم، أو قبل النوم.</p>
+    </details>
+  </div>
 </div>
 
 <div class="buy-section">

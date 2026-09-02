@@ -1005,41 +1005,90 @@
   </div>
 </section>
 
-<!-- ===== WHERE TO START ===== -->
-<section id="start-path" style="padding:60px 20px;background:linear-gradient(135deg,#e8f2ff,#f0f6ff);">
+<!-- ===== ROADMAP ===== -->
+<section id="start-path" style="padding:70px 20px 80px;background:#ffffff;">
   <style>
-    .start-card { background:#fff;border-radius:16px;padding:28px 24px;border:1px solid rgba(26,106,191,0.15);border-right:4px solid #1a6abf;text-align:center;transition:transform 0.25s,box-shadow 0.25s; }
-    .start-card:hover { transform:translateY(-6px);box-shadow:0 12px 32px rgba(26,106,191,0.18); }
-    .start-card-emoji { font-size:2.5rem;margin-bottom:14px;display:block;line-height:1; }
+    .roadmap-wrap{max-width:920px;margin:0 auto;}
+    .roadmap-label{text-align:center;font-family:'Tajawal',sans-serif;font-size:11px;letter-spacing:.22em;font-weight:700;color:#1a6abf;margin-bottom:18px;text-transform:uppercase;}
+    .roadmap-title{font-family:'Amiri',serif;font-size:clamp(1.7rem,4vw,2.3rem);color:#0d2144;text-align:center;margin-bottom:10px;line-height:1.4;text-wrap:balance;}
+    .roadmap-sub{text-align:center;color:#4a6fa5;font-family:'Tajawal',sans-serif;font-size:1rem;margin-bottom:50px;line-height:1.8;}
+    .roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    @media(max-width:700px){.roadmap-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:440px){.roadmap-grid{grid-template-columns:1fr;}}
+    .rcard{
+      background:#f7faff;border-radius:18px;padding:30px 22px;
+      border:1.5px solid rgba(26,106,191,0.12);
+      text-align:center;text-decoration:none;
+      display:flex;flex-direction:column;align-items:center;
+      transition:transform .22s,box-shadow .22s,border-color .22s;
+      position:relative;
+    }
+    .rcard:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(26,106,191,0.14);border-color:rgba(26,106,191,0.35);}
+    .rcard-icon{font-size:2.2rem;margin-bottom:14px;line-height:1;}
+    .rcard-name{font-family:'Tajawal',sans-serif;font-weight:700;font-size:1.05rem;color:#0d2144;margin-bottom:8px;}
+    .rcard-desc{font-family:'Tajawal',sans-serif;font-size:.875rem;color:#5a7fa8;line-height:1.75;flex:1;}
+    .rcard-arrow{
+      display:inline-block;margin-top:18px;
+      font-family:'Tajawal',sans-serif;font-size:.82rem;font-weight:700;
+      color:#1a6abf;
+    }
+    .rcard.featured{
+      background:linear-gradient(135deg,#0d2144 0%,#1a4a8a 100%);
+      border-color:transparent;
+      grid-column:span 1;
+    }
+    .rcard.featured .rcard-name{color:#ffffff;}
+    .rcard.featured .rcard-desc{color:rgba(255,255,255,.65);}
+    .rcard.featured .rcard-arrow{color:#7ab3ff;}
   </style>
-  <div style="max-width:900px;margin:0 auto;">
-    <h2 style="font-family:'Amiri',serif;font-size:2rem;color:#0d2144;text-align:center;margin-bottom:12px;">من أين تبدأ؟</h2>
-    <p style="text-align:center;color:#4a6fa5;font-family:'Tajawal',sans-serif;font-size:1rem;margin-bottom:40px;">كل رحلة لها مدخلها المناسب. اختر ما يناسبك الآن:</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
-      <div class="start-card">
-        <span class="start-card-emoji">🌱</span>
-        <h3 style="font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;color:#0d2144;margin-bottom:8px;">أبدأ من الصفر</h3>
-        <p style="font-family:'Tajawal',sans-serif;font-size:0.88rem;color:#4a6fa5;margin-bottom:16px;line-height:1.7;">ابدأ بالورشة المجانية واكتشف المفاهيم الأساسية</p>
-        <a href="https://t.me/nourway/6616" target="_blank" style="display:inline-block;background:#1a6abf;color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:0.88rem;font-weight:600;">احصل عليها مجاناً ←</a>
-      </div>
-      <div class="start-card">
-        <span class="start-card-emoji">📓</span>
-        <h3 style="font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;color:#0d2144;margin-bottom:8px;">ممارسة يومية</h3>
-        <p style="font-family:'Tajawal',sans-serif;font-size:0.88rem;color:#4a6fa5;margin-bottom:16px;line-height:1.7;">كراسة الـ 40 يوماً — رحلة يومية للوعي الداخلي</p>
-        <a href="/karasa" style="display:inline-block;background:#1a6abf;color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:0.88rem;font-weight:600;">اكتشف الكراسة ←</a>
-      </div>
-      <div class="start-card">
-        <span class="start-card-emoji">📖</span>
-        <h3 style="font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;color:#0d2144;margin-bottom:8px;">رسائل وتأملات</h3>
-        <p style="font-family:'Tajawal',sans-serif;font-size:0.88rem;color:#4a6fa5;margin-bottom:16px;line-height:1.7;">كتاب 111 رسالة — لحظة بلحظة نحو النور</p>
-        <a href="/book111.html" style="display:inline-block;background:#1a6abf;color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:0.88rem;font-weight:600;">اعرف المزيد ←</a>
-      </div>
-      <div class="start-card">
-        <span class="start-card-emoji">🎮</span>
-        <h3 style="font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;color:#0d2144;margin-bottom:8px;">تجربة تفاعلية</h3>
-        <p style="font-family:'Tajawal',sans-serif;font-size:0.88rem;color:#4a6fa5;margin-bottom:16px;line-height:1.7;">ألعاب ممكنون — اكتشف نفسك بطريقة مختلفة</p>
-        <a href="/game.html" style="display:inline-block;background:#1a6abf;color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:0.88rem;font-weight:600;">ابدأ اللعب ←</a>
-      </div>
+  <div class="roadmap-wrap">
+    <div class="roadmap-label">✦ الخريطة الكاملة</div>
+    <h2 class="roadmap-title">من أين تريد أن تبدأ؟</h2>
+    <p class="roadmap-sub">خمسة مسارات، كل منها مدخل مختلف — اختر ما يناسبك الآن</p>
+    <div class="roadmap-grid">
+
+      <a href="/minhaj.html" class="rcard featured">
+        <span class="rcard-icon">🧭</span>
+        <div class="rcard-name">منهج ممكنون</div>
+        <div class="rcard-desc">المنهج الكامل للتحول — من الجذور إلى الحضور</div>
+        <span class="rcard-arrow">اكتشف المنهج ←</span>
+      </a>
+
+      <a href="/about.html" class="rcard">
+        <span class="rcard-icon">🌸</span>
+        <div class="rcard-name">من أنا</div>
+        <div class="rcard-desc">تعرّف على اعزيزة — رحلتها وما تحمله معك</div>
+        <span class="rcard-arrow">اعرفي أكثر ←</span>
+      </a>
+
+      <a href="/articles.html" class="rcard">
+        <span class="rcard-icon">📝</span>
+        <div class="rcard-name">المقالات</div>
+        <div class="rcard-desc">حكمة مكتوبة في مواضيع الوعي والعلاقات والنمو</div>
+        <span class="rcard-arrow">اقرأ المقالات ←</span>
+      </a>
+
+      <a href="/karasa" class="rcard">
+        <span class="rcard-icon">📓</span>
+        <div class="rcard-name">الكراسة</div>
+        <div class="rcard-desc">٤٠ يوماً من الكتابة اليومية لتتكامل مع نفسك</div>
+        <span class="rcard-arrow">اكتشف الكراسة ←</span>
+      </a>
+
+      <a href="/book111.html" class="rcard">
+        <span class="rcard-icon">📖</span>
+        <div class="rcard-name">الكتاب</div>
+        <div class="rcard-desc">١١١ رسالة من القلب — بشرى وتنبيه وإرشاد</div>
+        <span class="rcard-arrow">اعرف الكتاب ←</span>
+      </a>
+
+      <a href="/game.html" class="rcard">
+        <span class="rcard-icon">🎮</span>
+        <div class="rcard-name">اختبرني</div>
+        <div class="rcard-desc">اكتشف نفسك باختبارات تفاعلية — ابدأ باللعب</div>
+        <span class="rcard-arrow">ابدأ الاختبار ←</span>
+      </a>
+
     </div>
   </div>
 </section>
@@ -1641,7 +1690,6 @@
     <a href="https://azizasoubai.wordpress.com/" target="_blank">المدونة</a>
   </div>
   <p class="footer-copy">© 2026 اعزيزة السباعي — جميع الحقوق محفوظة | AZA HOUSE</p>
-  <p style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:10px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7;">المحتوى المقدّم هنا لأغراض تعليمية وتثقيفية فقط، ولا يُغني عن الاستشارة النفسية أو الطبية المتخصصة عند الحاجة.</p>
   <a href="/privacy.html" style="display:inline-block;margin-top:8px;font-size:0.78rem;color:rgba(255,255,255,0.45);text-decoration:none;">سياسة الخصوصية</a>
 </footer>
 

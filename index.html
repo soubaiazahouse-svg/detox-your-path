@@ -972,14 +972,14 @@
     <div class="hero-text">
       <div class="hero-badge">✦ منهج ممكنون ✦</div>
       <h1 class="hero-name">اعزيزة<br><span>السباعي</span></h1>
-      <p class="hero-title">معلمة وعي • مدربة • سلامية • صاحبة AZA HOUSE</p>
+      <p class="hero-title">معلمة وعي • مؤسسة AZA HOUSE</p>
       <p class="hero-desc">
-        رحلتك النورانية نحو التمكين الشامل — مسار تحولي متكامل مصمم بدقة ليوقظ النور الأصيل في أعماقك ويرشدك خطوة بخطوة لتتكامل مع وجودك الحق والفطرة الأصيلة التي خُلقت عليها
+        حكمة اكتسبتها على نفسي أولاً — ووجدت أثرها.<br>
+        أشاركها معك لأنني آمنت بها.
       </p>
       <div class="hero-btns">
-        <a href="#courses" class="btn-primary">اكتشف الدورات</a>
+        <a href="#roadmap" class="btn-primary">اكتشف من أين تبدأ</a>
         <a href="https://t.me/nourway" target="_blank" class="btn-outline">قناة طريق النور</a>
-        <a href="/game.html" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1a6abf,#2a8ad4);color:white;padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:0.95rem;box-shadow:0 4px 20px rgba(26,106,191,0.3);">🎮 العب تحديات ممكنون</a>
       </div>
     </div>
 
@@ -1006,91 +1006,110 @@
 </section>
 
 <!-- ===== ROADMAP ===== -->
-<section id="start-path" style="padding:70px 20px 80px;background:#ffffff;">
-  <style>
-    .roadmap-wrap{max-width:920px;margin:0 auto;}
-    .roadmap-label{text-align:center;font-family:'Tajawal',sans-serif;font-size:11px;letter-spacing:.22em;font-weight:700;color:#1a6abf;margin-bottom:18px;text-transform:uppercase;}
-    .roadmap-title{font-family:'Amiri',serif;font-size:clamp(1.7rem,4vw,2.3rem);color:#0d2144;text-align:center;margin-bottom:10px;line-height:1.4;text-wrap:balance;}
-    .roadmap-sub{text-align:center;color:#4a6fa5;font-family:'Tajawal',sans-serif;font-size:1rem;margin-bottom:50px;line-height:1.8;}
-    .roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-    @media(max-width:700px){.roadmap-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:440px){.roadmap-grid{grid-template-columns:1fr;}}
-    .rcard{
-      background:#f7faff;border-radius:18px;padding:30px 22px;
-      border:1.5px solid rgba(26,106,191,0.12);
-      text-align:center;text-decoration:none;
-      display:flex;flex-direction:column;align-items:center;
-      transition:transform .22s,box-shadow .22s,border-color .22s;
-      position:relative;
-    }
-    .rcard:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(26,106,191,0.14);border-color:rgba(26,106,191,0.35);}
-    .rcard-icon{font-size:2.2rem;margin-bottom:14px;line-height:1;}
-    .rcard-name{font-family:'Tajawal',sans-serif;font-weight:700;font-size:1.05rem;color:#0d2144;margin-bottom:8px;}
-    .rcard-desc{font-family:'Tajawal',sans-serif;font-size:.875rem;color:#5a7fa8;line-height:1.75;flex:1;}
-    .rcard-arrow{
-      display:inline-block;margin-top:18px;
-      font-family:'Tajawal',sans-serif;font-size:.82rem;font-weight:700;
-      color:#1a6abf;
-    }
-    .rcard.featured{
-      background:linear-gradient(135deg,#0d2144 0%,#1a4a8a 100%);
-      border-color:transparent;
-      grid-column:span 1;
-    }
-    .rcard.featured .rcard-name{color:#ffffff;}
-    .rcard.featured .rcard-desc{color:rgba(255,255,255,.65);}
-    .rcard.featured .rcard-arrow{color:#7ab3ff;}
-  </style>
-  <div class="roadmap-wrap">
-    <div class="roadmap-label">✦ الخريطة الكاملة</div>
-    <h2 class="roadmap-title">من أين تريد أن تبدأ؟</h2>
-    <p class="roadmap-sub">خمسة مسارات، كل منها مدخل مختلف — اختر ما يناسبك الآن</p>
-    <div class="roadmap-grid">
+<section id="roadmap" style="padding:80px 20px 90px;background:#ffffff;">
+<style>
+/* Roadmap section */
+.rm-wrap{max-width:960px;margin:0 auto;}
+.rm-eyebrow{text-align:center;font-size:11px;letter-spacing:.22em;font-weight:700;color:#1a6abf;margin-bottom:16px;font-family:'Tajawal',sans-serif;}
+.rm-title{font-family:'Amiri',serif;font-size:clamp(1.8rem,4.5vw,2.6rem);color:#0d2144;text-align:center;margin-bottom:14px;line-height:1.4;text-wrap:balance;}
+.rm-sub{text-align:center;color:#5a7fa8;font-family:'Tajawal',sans-serif;font-size:1rem;margin-bottom:56px;line-height:1.9;max-width:560px;margin-left:auto;margin-right:auto;}
 
-      <a href="/minhaj.html" class="rcard featured">
-        <span class="rcard-icon">🧭</span>
-        <div class="rcard-name">منهج ممكنون</div>
-        <div class="rcard-desc">المنهج الكامل للتحول — من الجذور إلى الحضور</div>
-        <span class="rcard-arrow">اكتشف المنهج ←</span>
-      </a>
+/* Top row: 3 cards */
+.rm-row1{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px;}
+/* Bottom row: 3 cards */
+.rm-row2{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 
-      <a href="/about.html" class="rcard">
-        <span class="rcard-icon">🌸</span>
-        <div class="rcard-name">من أنا</div>
-        <div class="rcard-desc">تعرّف على اعزيزة — رحلتها وما تحمله معك</div>
-        <span class="rcard-arrow">اعرفي أكثر ←</span>
-      </a>
+@media(max-width:720px){
+  .rm-row1,.rm-row2{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:440px){
+  .rm-row1,.rm-row2{grid-template-columns:1fr;}
+}
 
-      <a href="/articles.html" class="rcard">
-        <span class="rcard-icon">📝</span>
-        <div class="rcard-name">المقالات</div>
-        <div class="rcard-desc">حكمة مكتوبة في مواضيع الوعي والعلاقات والنمو</div>
-        <span class="rcard-arrow">اقرأ المقالات ←</span>
-      </a>
+.rmc{
+  border-radius:20px;padding:32px 26px;
+  border:1.5px solid rgba(26,106,191,0.12);
+  text-decoration:none;display:flex;flex-direction:column;
+  transition:transform .22s,box-shadow .22s,border-color .22s;
+  background:#f7faff;
+}
+.rmc:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(26,106,191,0.13);border-color:rgba(26,106,191,0.32);}
+.rmc.featured{
+  background:linear-gradient(145deg,#0d2144 0%,#1a4a8a 100%);
+  border-color:transparent;
+}
+.rmc.featured .rmc-icon-wrap{background:rgba(255,255,255,0.1);}
+.rmc.featured .rmc-name{color:#fff;}
+.rmc.featured .rmc-desc{color:rgba(255,255,255,0.62);}
+.rmc.featured .rmc-arrow{color:#7ab3ff;}
 
-      <a href="/karasa" class="rcard">
-        <span class="rcard-icon">📓</span>
-        <div class="rcard-name">الكراسة</div>
-        <div class="rcard-desc">٤٠ يوماً من الكتابة اليومية لتتكامل مع نفسك</div>
-        <span class="rcard-arrow">اكتشف الكراسة ←</span>
-      </a>
+.rmc-icon-wrap{
+  width:50px;height:50px;border-radius:14px;
+  background:rgba(26,106,191,0.09);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:18px;flex-shrink:0;
+}
+.rmc-name{
+  font-family:'Tajawal',sans-serif;font-weight:700;
+  font-size:1.08rem;color:#0d2144;margin-bottom:9px;
+}
+.rmc-desc{
+  font-family:'Tajawal',sans-serif;font-size:.875rem;
+  color:#5a7fa8;line-height:1.8;flex:1;
+}
+.rmc-arrow{
+  display:inline-block;margin-top:20px;
+  font-family:'Tajawal',sans-serif;font-size:.82rem;
+  font-weight:700;color:#1a6abf;
+}
+</style>
+<div class="rm-wrap">
+  <div class="rm-eyebrow">✦ الخريطة الكاملة</div>
+  <h2 class="rm-title">من أين تريد أن تبدأ؟</h2>
+  <p class="rm-sub">كل مسار هو مدخل مختلف إلى نفس الوجهة — اختر ما يناسبك الآن وانطلق</p>
 
-      <a href="/book111.html" class="rcard">
-        <span class="rcard-icon">📖</span>
-        <div class="rcard-name">الكتاب</div>
-        <div class="rcard-desc">١١١ رسالة من القلب — بشرى وتنبيه وإرشاد</div>
-        <span class="rcard-arrow">اعرف الكتاب ←</span>
-      </a>
-
-      <a href="/game.html" class="rcard">
-        <span class="rcard-icon">🎮</span>
-        <div class="rcard-name">اختبرني</div>
-        <div class="rcard-desc">اكتشف نفسك باختبارات تفاعلية — ابدأ باللعب</div>
-        <span class="rcard-arrow">ابدأ الاختبار ←</span>
-      </a>
-
-    </div>
+  <div class="rm-row1">
+    <a href="/minhaj.html" class="rmc featured">
+      <div class="rmc-icon-wrap">🧭</div>
+      <div class="rmc-name">منهج ممكنون</div>
+      <div class="rmc-desc">المسار الكامل للتحول — برنامج متكامل من الجذور إلى الحضور</div>
+      <span class="rmc-arrow">اكتشف المنهج ←</span>
+    </a>
+    <a href="/about.html" class="rmc">
+      <div class="rmc-icon-wrap">🌸</div>
+      <div class="rmc-name">من أنا</div>
+      <div class="rmc-desc">تعرّف على اعزيزة — رحلتها، ما تحمله، ولماذا هذا العمل</div>
+      <span class="rmc-arrow">اعرفي أكثر ←</span>
+    </a>
+    <a href="/articles.html" class="rmc">
+      <div class="rmc-icon-wrap">📝</div>
+      <div class="rmc-name">المقالات</div>
+      <div class="rmc-desc">حكمة مكتوبة في الوعي، العلاقات، والنمو الشخصي — ابدأ بالقراءة</div>
+      <span class="rmc-arrow">اقرأ المقالات ←</span>
+    </a>
   </div>
+
+  <div class="rm-row2">
+    <a href="/karasa" class="rmc">
+      <div class="rmc-icon-wrap">📓</div>
+      <div class="rmc-name">كراسة ٤٠ يوماً</div>
+      <div class="rmc-desc">رحلة كتابة يومية تأخذك نحو التكامل مع نفسك — يوماً بعد يوم</div>
+      <span class="rmc-arrow">اكتشف الكراسة ←</span>
+    </a>
+    <a href="/book111.html" class="rmc">
+      <div class="rmc-icon-wrap">📖</div>
+      <div class="rmc-name">كتاب ١١١ رسالة</div>
+      <div class="rmc-desc">رسائل من القلب — بشرى وتنبيه وإرشاد في كل لحظة تحتاجها</div>
+      <span class="rmc-arrow">اعرف الكتاب ←</span>
+    </a>
+    <a href="/innerchild.html" class="rmc">
+      <div class="rmc-icon-wrap">🌱</div>
+      <div class="rmc-name">اختبر طفلك الداخلي</div>
+      <div class="rmc-desc">١٠ أسئلة تكشف القانون الخفي الذي يحكم علاقاتك وحياتك اليوم</div>
+      <span class="rmc-arrow">ابدأ الاختبار ←</span>
+    </a>
+  </div>
+</div>
 </section>
 
 <!-- ABOUT -->

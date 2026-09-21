@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>من أنت في الكون؟ — اعزيزة السباعي</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3632866301435842" crossorigin="anonymous"></script>
+<meta name="description" content="١٢ سؤال يكشف عنصرك الكوني — من أي طينة صُنعت؟ اكتشف طبيعتك الداخلية العميقة">
+<meta property="og:title" content="من أنت في الكون؟ — اعزيزة السباعي">
+<meta property="og:description" content="١٢ سؤال يكشف عنصرك الكوني — من أي طينة صُنعت؟">
+<meta property="og:url" content="https://azizasoubai.com/cosmos.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://azizasoubai.com/cosmos.html">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f6ff;
+  --blue: #1a6abf;
+  --navy: #0d2144;
+  --text: #0d2144;
+  --text2: #3a5a8a;
+  --text3: #5a7fa8;
+  --border: rgba(26,106,191,0.15);
+  --card: #ffffff;
+
+  /* Element colors */
+  --wood: #2d7a3a;
+  --wood-bg: #f0faf2;
+  --fire: #c94a1a;
+  --fire-bg: #fff6f2;
+  --earth: #a07820;
+  --earth-bg: #fdf8ef;
+  --metal: #4a6a8a;
+  --metal-bg: #f2f6fa;
+  --water: #1a4a8a;
+  --water-bg: #f0f4ff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: linear-gradient(160deg, #e8f2ff 0%, #f0f6ff 60%, #e4eeff 100%);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACK */
+.back-btn {
+  position: fixed; top: 20px; left: 20px; z-index: 100;
+  background: white; border: 1px solid var(--border);
+  color: var(--blue); padding: 10px 20px; border-radius: 50px;
+  font-family: 'Tajawal', sans-serif; font-size: 14px;
+  cursor: pointer; text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 2px 12px rgba(26,106,191,0.1); transition: all 0.3s;
+}
+.back-btn:hover { background: var(--bg); }
+
+/* HERO */
+.hero {
+  text-align: center; padding: 90px 20px 50px;
+}
+.hero-icon { font-size: 72px; margin-bottom: 20px; display: block; animation: float 4s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.hero-badge {
+  display: inline-block; background: rgba(26,106,191,0.08);
+  color: var(--blue); padding: 6px 20px; border-radius: 50px;
+  font-size: 12px; font-weight: 700; letter-spacing: .15em;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Amiri', serif; font-size: clamp(2rem,6vw,3.2rem);
+  color: var(--navy); margin-bottom: 16px; line-height: 1.3;
+}
+.hero p {
+  color: var(--text3); font-size: 1.05rem; line-height: 1.9;
+  max-width: 480px; margin: 0 auto 40px;
+}
+.start-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--blue), #2a8ad4);
+  color: white; padding: 16px 44px; border-radius: 50px;
+  font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 1.05rem;
+  text-decoration: none; cursor: pointer; border: none;
+  box-shadow: 0 6px 24px rgba(26,106,191,0.3); transition: all 0.3s;
+}
+.start-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(26,106,191,0.4); }
+
+/* GAME AREA */
+.game-wrap { max-width: 680px; margin: 0 auto; padding: 0 20px 80px; display: none; }
+
+/* PROGRESS */
+.progress-bar-wrap {
+  background: rgba(26,106,191,0.1); border-radius: 50px;
+  height: 6px; margin-bottom: 10px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 50px;
+  background: linear-gradient(90deg, var(--blue), #2a8ad4);
+  transition: width 0.5s ease;
+}
+.progress-text {
+  text-align: center; font-size: 13px; color: var(--text3);
+  margin-bottom: 32px;
+}
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border-radius: 24px;
+  padding: 40px 36px; box-shadow: 0 8px 40px rgba(26,106,191,0.1);
+  border: 1px solid var(--border);
+  animation: fadeIn .35s ease;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.q-num { font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing:.15em; margin-bottom: 14px; }
+.q-text {
+  font-family: 'Amiri', serif; font-size: clamp(1.2rem,3.5vw,1.55rem);
+  color: var(--navy); line-height: 1.6; margin-bottom: 30px;
+}
+
+/* OPTIONS */
+.options { display: flex; flex-direction: column; gap: 12px; }
+.opt {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg); border: 2px solid transparent;
+  border-radius: 16px; padding: 16px 20px; cursor: pointer;
+  transition: all 0.22s; font-family: 'Tajawal', sans-serif;
+  font-size: 0.97rem; color: var(--text2); text-align: right;
+}
+.opt:hover { background: white; border-color: rgba(26,106,191,0.25); transform: translateX(-4px); }
+.opt.selected { background: white; border-color: var(--blue); color: var(--navy); }
+.opt-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+/* NEXT BTN */
+.next-wrap { text-align: center; margin-top: 28px; }
+.next-btn {
+  background: linear-gradient(135deg, var(--blue), #2a8ad4);
+  color: white; border: none; padding: 14px 40px; border-radius: 50px;
+  font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 1rem;
+  cursor: pointer; box-shadow: 0 4px 18px rgba(26,106,191,0.3);
+  transition: all 0.25s; opacity: 0.4; pointer-events: none;
+}
+.next-btn.active { opacity: 1; pointer-events: all; }
+.next-btn.active:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(26,106,191,0.4); }
+
+/* RESULT */
+.result-wrap {
+  display: none; max-width: 680px; margin: 0 auto; padding: 20px 20px 80px;
+  animation: fadeIn .5s ease;
+}
+.result-card {
+  border-radius: 28px; padding: 48px 40px; text-align: center;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.12); position: relative; overflow: hidden;
+}
+.result-card::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.result-emoji { font-size: 80px; margin-bottom: 20px; display: block; }
+.result-label {
+  font-size: 13px; font-weight: 700; letter-spacing: .2em;
+  opacity: .7; margin-bottom: 10px;
+}
+.result-title {
+  font-family: 'Amiri', serif; font-size: clamp(1.8rem,5vw,2.6rem);
+  font-weight: 700; margin-bottom: 24px; line-height: 1.3;
+}
+.result-tagline {
+  font-family: 'Amiri', serif; font-size: 1.2rem;
+  font-style: italic; opacity: .85; margin-bottom: 28px; line-height: 1.7;
+  max-width: 460px; margin-left: auto; margin-right: auto;
+}
+.result-divider { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin: 0 auto 28px; }
+.result-desc {
+  font-size: 1rem; line-height: 2; opacity: .88;
+  max-width: 500px; margin: 0 auto;
+}
+.result-traits {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center; margin-top: 28px;
+}
+.trait {
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px; padding: 8px 18px; font-size: 0.88rem; font-weight: 600;
+}
+
+/* RESULT ACTIONS */
+.result-actions { display: flex; gap: 14px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+.action-btn {
+  padding: 14px 28px; border-radius: 50px; font-family: 'Tajawal', sans-serif;
+  font-weight: 700; font-size: 0.95rem; cursor: pointer; border: none;
+  transition: all 0.25s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-share { background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.5); }
+.btn-share:hover { background: rgba(255,255,255,0.3); }
+.btn-retry { background: white; color: var(--navy); }
+.btn-retry:hover { transform: translateY(-2px); }
+.btn-minhaj { background: var(--navy); color: white; }
+.btn-minhaj:hover { transform: translateY(-2px); }
+
+/* Wood */
+.el-wood { background: linear-gradient(145deg, #1a5c28, #2d8a40); color: white; }
+.el-wood .result-label { color: rgba(255,255,255,0.8); }
+
+/* Fire */
+.el-fire { background: linear-gradient(145deg, #8b2500, #c94a1a); color: white; }
+
+/* Earth */
+.el-earth { background: linear-gradient(145deg, #6b4f10, #a07820); color: white; }
+
+/* Metal */
+.el-metal { background: linear-gradient(145deg, #2a4060, #4a6a8a); color: white; }
+
+/* Water */
+.el-water { background: linear-gradient(145deg, #0a2a5a, #1a4a8a); color: white; }
+
+/* Distribution bars */
+.dist-wrap { margin-top: 44px; background: rgba(0,0,0,0.15); border-radius: 20px; padding: 28px 28px; }
+.dist-title { font-size: 13px; font-weight: 700; letter-spacing: .15em; opacity: .7; margin-bottom: 20px; }
+.dist-row { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; }
+.dist-label { font-size: 13px; font-weight: 700; width: 70px; flex-shrink: 0; opacity: .85; }
+.dist-track { flex: 1; background: rgba(255,255,255,0.15); border-radius: 50px; height: 8px; overflow: hidden; }
+.dist-fill { height: 100%; border-radius: 50px; background: rgba(255,255,255,0.6); transition: width 1s ease; }
+.dist-pct { font-size: 12px; opacity: .7; width: 32px; text-align: left; flex-shrink: 0; }
+
+/* CTA after result */
+.after-card {
+  background: white; border-radius: 20px; padding: 32px 28px; text-align: center;
+  margin-top: 20px; border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(26,106,191,0.08);
+}
+.after-card h3 { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; }
+.after-card p { color: var(--text3); font-size: .95rem; line-height: 1.8; margin-bottom: 20px; }
+.cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-a {
+  padding: 12px 24px; border-radius: 50px; font-family: 'Tajawal',sans-serif;
+  font-weight: 700; font-size: .9rem; text-decoration: none; transition: all .25s;
+}
+.cta-primary { background: linear-gradient(135deg,var(--blue),#2a8ad4); color: white; box-shadow: 0 4px 14px rgba(26,106,191,0.3); }
+.cta-primary:hover { transform: translateY(-2px); }
+.cta-outline { border: 2px solid var(--blue); color: var(--blue); }
+.cta-outline:hover { background: var(--blue); color: white; }
+
+/* COPY TOAST */
+.toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #0d2144; color: white; padding: 12px 28px; border-radius: 50px;
+  font-size: 14px; opacity: 0; pointer-events: none; transition: all .35s; z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media(max-width:480px){
+  .q-card { padding: 28px 20px; }
+  .result-card { padding: 36px 24px; }
+  .result-actions { flex-direction: column; align-items: center; }
+  .dist-label { width: 56px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<a href="/game.html" class="back-btn">← العودة للتحديات</a>
+
+<!-- HERO -->
+<div class="hero" id="heroSection">
+  <span class="hero-icon">🌌</span>
+  <div class="hero-badge">✦ تحدي ممكنون ✦</div>
+  <h1>من أنت في الكون؟</h1>
+  <p>١٢ سؤال يكشف من أي طينة صُنعت — وما هو عنصرك الكوني الذي يُشكّل روحك وطاقتك</p>
+  <button class="start-btn" onclick="startGame()">✨ ابدأ الرحلة</button>
+</div>
+
+<!-- GAME -->
+<div class="game-wrap" id="gameWrap">
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+  <div class="progress-text" id="progressText">سؤال ١ من ١٢</div>
+  <div id="questionArea"></div>
+  <div class="next-wrap">
+    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">التالي ←</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result-wrap" id="resultWrap"></div>
+
+<div class="toast" id="toast">✓ تم النسخ</div>
+
+<script>
+const QUESTIONS = [
+  {
+    text: "لو كان بإمكانك العيش في مكان واحد في الطبيعة، أين تختار؟",
+    opts: [
+      { icon: "🌲", text: "غابة خضراء كثيفة هادئة", el: "W" },
+      { icon: "🌋", text: "قمة جبل مشمسة وعالية", el: "F" },
+      { icon: "🌾", text: "حقل واسع ومنبسط تحت السماء", el: "E" },
+      { icon: "🏔️", text: "صحراء بيضاء فارغة وصافية", el: "M" },
+      { icon: "🌊", text: "عمق بحر لا نهاية له", el: "Wa" }
+    ]
+  },
+  {
+    text: "أي وقت في اليوم تشعر فيه أنك أكثر حياة؟",
+    opts: [
+      { icon: "🌅", text: "الفجر — حيث كل شيء يبدأ من جديد", el: "W" },
+      { icon: "☀️", text: "الضحى — حيث الشمس في أوجها", el: "F" },
+      { icon: "🌇", text: "المساء — حيث يلتقي النهار بالليل", el: "E" },
+      { icon: "🌆", text: "الغروب — حيث تنسحب الشمس بصمت", el: "M" },
+      { icon: "🌙", text: "منتصف الليل — حيث يسكت العالم", el: "Wa" }
+    ]
+  },
+  {
+    text: "لو كانت مشاعرك لوناً، أي لون يكون؟",
+    opts: [
+      { icon: "💚", text: "أخضر حي يتنفس", el: "W" },
+      { icon: "🧡", text: "برتقالي مشتعل دافئ", el: "F" },
+      { icon: "💛", text: "أصفر ذهبي هادئ", el: "E" },
+      { icon: "🩶", text: "فضي نقي وصافٍ", el: "M" },
+      { icon: "💙", text: "أزرق عميق غامض", el: "Wa" }
+    ]
+  },
+  {
+    text: "أي صوت يجعلك تشعر بالسلام الحقيقي؟",
+    opts: [
+      { icon: "🐦", text: "أصوات الطيور عند الفجر", el: "W" },
+      { icon: "🔥", text: "صوت نار تحترق ببطء", el: "F" },
+      { icon: "🎵", text: "موسيقى هادئة منتظمة الإيقاع", el: "E" },
+      { icon: "🤫", text: "صمت تام مطلق لا شيء فيه", el: "M" },
+      { icon: "🌧️", text: "صوت المطر أو أمواج البحر", el: "Wa" }
+    ]
+  },
+  {
+    text: "أي فصل يشبه روحك أكثر من غيره؟",
+    opts: [
+      { icon: "🌸", text: "الربيع — كل شيء يبدأ وينمو", el: "W" },
+      { icon: "🏖️", text: "الصيف — كل شيء يتقد ويشتعل", el: "F" },
+      { icon: "🌻", text: "آخر الصيف — ملء وامتنان وثمار", el: "E" },
+      { icon: "🍂", text: "الخريف — صفاء وتخلٍّ وتحرر", el: "M" },
+      { icon: "❄️", text: "الشتاء — عمق وصمت وهدوء", el: "Wa" }
+    ]
+  },
+  {
+    text: "كيف تتخذ قراراتك عادةً؟",
+    opts: [
+      { icon: "🚀", text: "بالحدس والرغبة في التقدم", el: "W" },
+      { icon: "❤️", text: "بالحماس وما يشعر به قلبي", el: "F" },
+      { icon: "⚖️", text: "بالتأمل والرجوع للأساسيات", el: "E" },
+      { icon: "🧠", text: "بالمنطق والتحليل الدقيق", el: "M" },
+      { icon: "🌊", text: "بالانتظار حتى يتضح الأمر وحده", el: "Wa" }
+    ]
+  },
+  {
+    text: "في لحظة صعبة — ماذا تفعل؟",
+    opts: [
+      { icon: "⚡", text: "أتحرك فوراً وأبحث عن حل", el: "W" },
+      { icon: "💬", text: "أتحدث وأشارك ما أشعر به", el: "F" },
+      { icon: "🏠", text: "أعود لروتيني لأجد الاستقرار", el: "E" },
+      { icon: "🚪", text: "أنعزل وأفكر وحيداً بهدوء", el: "M" },
+      { icon: "🌫️", text: "أصمت وأنتظر حتى يمر", el: "Wa" }
+    ]
+  },
+  {
+    text: "أي مشهد يسحر عينيك دون سبب واضح؟",
+    opts: [
+      { icon: "🌿", text: "أشجار تتمدد نحو السماء بلا توقف", el: "W" },
+      { icon: "🕯️", text: "نار مشتعلة في ليلة باردة", el: "F" },
+      { icon: "🌱", text: "أرض خصبة بعد المطر مباشرة", el: "E" },
+      { icon: "🌕", text: "قمر كامل في سماء صافية تماماً", el: "M" },
+      { icon: "🌌", text: "أفق بحر لا نهاية له في الظلام", el: "Wa" }
+    ]
+  },
+  {
+    text: "كيف يصفك من يعرفك جيداً؟",
+    opts: [
+      { icon: "🌱", text: "طموح ومليء بالأفكار دائماً", el: "W" },
+      { icon: "✨", text: "دافئ ومضيء يملأ المكان بحضوره", el: "F" },
+      { icon: "🤝", text: "موثوق وثابت يُعتمد عليه دائماً", el: "E" },
+      { icon: "🔍", text: "دقيق وعميق يرى ما لا يراه غيره", el: "M" },
+      { icon: "🌊", text: "هادئ وغامض يخفي أكثر مما يُظهر", el: "Wa" }
+    ]
+  },
+  {
+    text: "ما الذي يستنزفك ويسرق طاقتك أكثر؟",
+    opts: [
+      { icon: "😤", text: "الركود وعدم التقدم", el: "W" },
+      { icon: "🥶", text: "البرود العاطفي والعزلة", el: "F" },
+      { icon: "🌀", text: "الفوضى وعدم الاستقرار", el: "E" },
+      { icon: "📢", text: "الضوضاء والأشياء غير المرتبة", el: "M" },
+      { icon: "💨", text: "السطحية والعجلة وعدم التعمق", el: "Wa" }
+    ]
+  },
+  {
+    text: "ما الذي تبحث عنه في الحياة فوق كل شيء؟",
+    opts: [
+      { icon: "📈", text: "النمو والتطور المستمر", el: "W" },
+      { icon: "🎉", text: "الفرح والتواصل الحقيقي مع الناس", el: "F" },
+      { icon: "🏡", text: "الاستقرار والأمان والجذور", el: "E" },
+      { icon: "💎", text: "الكمال والوضوح والدقة", el: "M" },
+      { icon: "🌊", text: "الحكمة والفهم العميق للأشياء", el: "Wa" }
+    ]
+  },
+  {
+    text: "أي شجرة تشعر أنها تشبهك؟",
+    opts: [
+      { icon: "🎋", text: "البامبو — يتمدد بسرعة لكنه مرن لا يكسر", el: "W" },
+      { icon: "🌻", text: "دوار الشمس — دائماً يتجه نحو الضوء", el: "F" },
+      { icon: "🌳", text: "البلوط — جذور عميقة وظل يحمي الجميع", el: "E" },
+      { icon: "🌲", text: "الصنوبر — يبقى أخضر في كل الفصول", el: "M" },
+      { icon: "🌾", text: "الصفصاف — ينحني مع الريح ولا يكسر أبداً", el: "Wa" }
+    ]
+  }
+];
+
+const RESULTS = {
+  W: {
+    emoji: "🌳",
+    label: "عنصر الخشب",
+    title: "روح النمو",
+    tagline: "أنت نبضة الحياة التي لا تعرف التوقف",
+    desc: "كالخشب الذي يشق الأرض الصلبة بحثاً عن الضوء، روحك مدفوعة دائماً نحو الأمام. تحمل داخلك بذرة لا تعرف الاستسلام — ترى الإمكانات حيث يرى غيرك جداراً. طاقتك هي طاقة البداية، وكل يوم جديد هو فرصة لم تكن موجودة بالأمس.",
+    traits: ["طموح بلا حدود", "مبادر بفطرته", "لا يرضى بالركود", "يصنع الطرق"],
+    color: "el-wood"
+  },
+  F: {
+    emoji: "🔥",
+    label: "عنصر النار",
+    title: "روح الحضور",
+    tagline: "أنت الضوء الذي يملأ المكان قبل أن تتكلم",
+    desc: "كالنار التي لا تضيء نفسها فحسب بل تضيء كل من حولها، طاقتك هدية لمن يحظى بها. قلبك هو بوصلتك وهو نادراً ما يخطئ. الناس يشعرون بالدفء بجوارك حتى لو لم تقل كلمة واحدة — وهذا ليس صدفة.",
+    traits: ["دافئ بالفطرة", "حاضر تماماً", "يُلهم بحضوره", "قلبه بوصلته"],
+    color: "el-fire"
+  },
+  E: {
+    emoji: "⛰️",
+    label: "عنصر التراب",
+    title: "روح الثبات",
+    tagline: "أنت الأرض التي يرتكز عليها الآخرون دون أن يعرفوا",
+    desc: "كالتراب الخصيب الذي يحمل الجذور ويطعم الثمار دون ضجة، قوتك في صمتك وعمقك. الناس يشعرون بالأمان بجوارك بشكل لا يستطيعون تفسيره. هذا الثبات الذي تحمله ليس ضعفاً — هو أندر ما يبحث عنه الناس في هذا العالم المتسارع.",
+    traits: ["ثابت لا يتزعزع", "موثوق دائماً", "يزرع الأمان", "عميق الجذور"],
+    color: "el-earth"
+  },
+  M: {
+    emoji: "💎",
+    label: "عنصر المعدن",
+    title: "روح الصفاء",
+    tagline: "أنت الوضوح في وسط الضجيج",
+    desc: "كالمعدن الذي يُصقل تحت الضغط ليصبح أكثر بريقاً، عقلك يرى ما لا يراه غيرك. دقتك وعمقك ليسا برودة — بل هما عظمتك. تعيش في طبقة من الوعي لا يصلها كثيرون، وهذا ما يجعل وجودك في حياة أي شخص استثناءً لا قاعدة.",
+    traits: ["دقيق ومتأمل", "لا يقبل السطحية", "يرى بعمق", "صفاء داخلي"],
+    color: "el-metal"
+  },
+  Wa: {
+    emoji: "🌊",
+    label: "عنصر الماء",
+    title: "روح العمق",
+    tagline: "أنت أعمق بكثير مما يظن من يراك",
+    desc: "كالماء الذي يجد طريقه في أضيق الشقوق ويملأ أي فضاء بهدوء، حكمتك تأتي من عمق لا يصله كثيرون. صمتك ليس غياباً بل هو حضور من نوع آخر. وأكثر ما تقوله لا يخرج بالكلام — بل يُحسّ.",
+    traits: ["عميق لا قرار له", "حكيم بالفطرة", "يفهم دون كلام", "يتكيف كالماء"],
+    color: "el-water"
+  }
+};
+
+let answers = [];
+let current = 0;
+let selected = null;
+
+function startGame() {
+  document.getElementById('heroSection').style.display = 'none';
+  document.getElementById('gameWrap').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  selected = null;
+  const btn = document.getElementById('nextBtn');
+  btn.classList.remove('active');
+
+  const q = QUESTIONS[current];
+  const pct = Math.round((current / QUESTIONS.length) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'سؤال ' + (current + 1) + ' من ' + QUESTIONS.length;
+
+  let html = '<div class="q-card">';
+  html += '<div class="q-num">السؤال ' + (current + 1) + '</div>';
+  html += '<div class="q-text">' + q.text + '</div>';
+  html += '<div class="options">';
+  q.opts.forEach((o, i) => {
+    html += '<div class="opt" onclick="selectOpt(this,' + i + ')" data-idx="' + i + '">';
+    html += '<span class="opt-icon">' + o.icon + '</span>';
+    html += '<span>' + o.text + '</span>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+  document.getElementById('questionArea').innerHTML = html;
+  window.scrollTo({top: document.getElementById('gameWrap').offsetTop - 20, behavior: 'smooth'});
+}
+
+function selectOpt(el, idx) {
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selected = idx;
+  document.getElementById('nextBtn').classList.add('active');
+}
+
+function nextQuestion() {
+  if (selected === null) return;
+  answers.push(QUESTIONS[current].opts[selected].el);
+  current++;
+  if (current < QUESTIONS.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('gameWrap').style.display = 'none';
+  const counts = { W: 0, F: 0, E: 0, M: 0, Wa: 0 };
+  answers.forEach(a => counts[a]++);
+  const winner = Object.entries(counts).sort((a,b) => b[1]-a[1])[0][0];
+  const r = RESULTS[winner];
+  const total = QUESTIONS.length;
+
+  let distHTML = '';
+  const labels = { W: '🌳 خشب', F: '🔥 نار', E: '⛰️ تراب', M: '💎 معدن', Wa: '🌊 ماء' };
+  Object.entries(counts).forEach(([k,v]) => {
+    const pct = Math.round((v/total)*100);
+    distHTML += '<div class="dist-row">';
+    distHTML += '<div class="dist-label">' + labels[k] + '</div>';
+    distHTML += '<div class="dist-track"><div class="dist-fill" style="width:' + pct + '%"></div></div>';
+    distHTML += '<div class="dist-pct">' + pct + '%</div>';
+    distHTML += '</div>';
+  });
+
+  const shareText = '🌌 اكتشفت أنني روح "' + r.title + '" في اختبار من أنت في الكون؟\n\n"' + r.tagline + '"\n\naكتشف عنصرك: azizasoubai.com/cosmos.html';
+
+  let html = '<div class="result-card ' + r.color + '">';
+  html += '<span class="result-emoji">' + r.emoji + '</span>';
+  html += '<div class="result-label">' + r.label + '</div>';
+  html += '<div class="result-title">' + r.title + '</div>';
+  html += '<div class="result-tagline">"' + r.tagline + '"</div>';
+  html += '<div class="result-divider"></div>';
+  html += '<div class="result-desc">' + r.desc + '</div>';
+  html += '<div class="result-traits">';
+  r.traits.forEach(t => { html += '<span class="trait">' + t + '</span>'; });
+  html += '</div>';
+  html += '<div class="dist-wrap"><div class="dist-title">توزيع عناصرك</div>' + distHTML + '</div>';
+  html += '<div class="result-actions">';
+  html += '<button class="action-btn btn-share" onclick="copyResult(`' + shareText.replace(/`/g,'\\`') + '`)">📋 انسخ نتيجتك</button>';
+  html += '<button class="action-btn btn-retry" onclick="retryGame()">🔄 أعد الاختبار</button>';
+  html += '</div>';
+  html += '</div>';
+
+  html += '<div class="after-card">';
+  html += '<h3>اكتشفت عنصرك — ماذا بعد؟</h3>';
+  html += '<p>منهج ممكنون يأخذك أعمق — من معرفة من أنت إلى العيش بكامل طاقتك الحقيقية</p>';
+  html += '<div class="cta-row">';
+  html += '<a href="/minhaj.html" class="cta-a cta-primary">اكتشف المنهج</a>';
+  html += '<a href="/game.html" class="cta-a cta-outline">تحديات أخرى</a>';
+  html += '</div></div>';
+
+  const wrap = document.getElementById('resultWrap');
+  wrap.innerHTML = html;
+  wrap.style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function copyResult(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  });
+}
+
+function retryGame() {
+  answers = []; current = 0; selected = null;
+  document.getElementById('resultWrap').style.display = 'none';
+  document.getElementById('gameWrap').style.display = 'block';
+  renderQuestion();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
